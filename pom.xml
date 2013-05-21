@@ -22,6 +22,7 @@
 		<module>spreadsheets-connector</module>
 		<module>tasks-connector</module>
 		<module>gmail-connector</module>
+                <module>drive-connector</module>
 	</modules>
 
 	<properties>
