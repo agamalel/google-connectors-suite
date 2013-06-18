@@ -37,6 +37,10 @@
 	    <entry key="numCalendars" value="5" />
 	</util:map>
 	
+	<util:map id="batchInsertCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="numCalendars" value="5" />
+	</util:map>
+	
 	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
 		<property name="summary" value="This is a summary of the calendar" />	    
     </bean>
