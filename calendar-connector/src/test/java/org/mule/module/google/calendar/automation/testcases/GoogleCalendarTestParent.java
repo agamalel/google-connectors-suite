@@ -35,7 +35,7 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
     @Rule
     public Timeout globalTimeout = new Timeout(600000);
     
-	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
+	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml","HelperSpringBeans.xml" };
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 
@@ -64,11 +64,28 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	 * Helper methods below
 	 */
 	
+	protected Calendar insertCalendar(Calendar calendar) throws Exception {
+		testObjects.put("calendarRef", calendar);
+		MessageProcessor flow = lookupFlowConstruct("create-calendar");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Calendar) response.getMessage().getPayload();
+	}
+	
 	protected BatchResponse<Calendar> insertCalendars(List<Calendar> calendars) throws Exception {
 		testObjects.put("calendarsRef", calendars);
 		MessageProcessor flow = lookupFlowConstruct("batch-insert-calendar");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (BatchResponse<Calendar>) response.getMessage().getPayload();
+	}
+	
+	protected void deleteCalendar(Calendar calendar) throws Exception {
+		deleteCalendar(calendar.getId());
+	}
+	
+	protected void deleteCalendar(String id) throws Exception {
+		testObjects.put("id", id);
+		MessageProcessor flow = lookupFlowConstruct("delete-calendar");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
 	
 	protected void deleteCalendars(List<Calendar> calendars) throws Exception {
