@@ -46,7 +46,7 @@ public class FindEventByIdTestCases extends GoogleCalendarTestParent {
 	
 	@Category({SmokeTests.class, SanityTests.class})	
 	@Test
-	public void testInsertEvent() {
+	public void testFindEventById() {
 		try {
 			Event originalEvent = (Event) testObjects.get("event");
 			
