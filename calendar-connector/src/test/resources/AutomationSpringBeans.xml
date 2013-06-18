@@ -28,8 +28,12 @@
 	    <!-- used to create the calendar. use the returned Calendar ID to delete. -->
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	</util:map>
+	
+	<util:map id="getCalendarById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef" value-ref="calendarBean" />
+	</util:map>
 
-	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" >
+	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
 		<property name="description" value="This is a calendar description" />	    
 		<property name="summary" value="This is a summary of the calendar "/>	    
     </bean>

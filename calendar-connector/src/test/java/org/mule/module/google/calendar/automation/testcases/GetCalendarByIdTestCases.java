@@ -39,7 +39,7 @@ public class GetCalendarByIdTestCases extends GoogleCalendarTestParent {
 	public void testGetCalendarById() {
 		try {
 			
-			Calendar createdCalendar = (Calendar) testObjects.get("calendarRef");
+			String createdCalendarId = testObjects.get("id").toString();
 			
 			MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
@@ -47,7 +47,7 @@ public class GetCalendarByIdTestCases extends GoogleCalendarTestParent {
 			// Assertions on equality
 			Calendar returnedCalendar = (Calendar) response.getMessage().getPayload();
 			assertTrue(returnedCalendar != null);
-			assertTrue(returnedCalendar.getId().equals(createdCalendar.getId()));
+			assertTrue(returnedCalendar.getId().equals(createdCalendarId));
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
