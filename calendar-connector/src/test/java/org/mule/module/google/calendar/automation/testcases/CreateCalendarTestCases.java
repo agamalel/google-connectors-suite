@@ -27,7 +27,13 @@ public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
-		testObjects = (Map<String, Object>) context.getBean("createCalendar");
+		try {
+			testObjects = (Map<String, Object>) context.getBean("createCalendar");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 	
 	
