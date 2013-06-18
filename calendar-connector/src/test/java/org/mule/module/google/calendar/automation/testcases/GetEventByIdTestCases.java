@@ -15,12 +15,12 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 
-public class FindEventByIdTestCases extends GoogleCalendarTestParent {
+public class GetEventByIdTestCases extends GoogleCalendarTestParent {
 
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("findEventById");
+			testObjects = (Map<String, Object>) context.getBean("getEventById");
 			
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
@@ -46,12 +46,12 @@ public class FindEventByIdTestCases extends GoogleCalendarTestParent {
 	
 	@Category({SmokeTests.class, SanityTests.class})	
 	@Test
-	public void testFindEventById() {
+	public void testGetEventById() {
 		try {
 			Event originalEvent = (Event) testObjects.get("event");
 			
 			// Find the event based on previously set ID
-			MessageProcessor flow = lookupFlowConstruct("find-event-by-id");
+			MessageProcessor flow = lookupFlowConstruct("get-event-by-id");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			// Perform assertions			

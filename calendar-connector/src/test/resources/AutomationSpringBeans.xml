@@ -50,7 +50,12 @@
 	    <entry key="calendarEventRef" value-ref="eventBean" />
 	</util:map>
 	
-	<util:map id="findEventById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="getEventById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef" value-ref="calendarBean" />
+	    <entry key="calendarEventRef" value-ref="eventBean" />
+	</util:map>
+	
+	<util:map id="deleteEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="calendarEventRef" value-ref="eventBean" />
 	</util:map>

@@ -45,8 +45,12 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:insert-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" calendarEvent-ref="#[payload.calendarEventRef]" accessTokenId="accessTokenId"/>
 	</flow>
 	
-	<flow name="find-event-by-id" doc:name="find-event-by-id">
-	    <google-calendars:find-event-by-id config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	<flow name="get-event-by-id" doc:name="find-event-by-id">
+	    <google-calendars:get-event-by-id config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="delete-event" doc:name="delete-event">
+	    <google-calendars:delete-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
 	
 </mule>
