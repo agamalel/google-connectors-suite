@@ -37,9 +37,12 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 
 			// Insert calendars and record their IDs
 			BatchResponse<Calendar> response = insertCalendars(calendars);			
+			assertTrue(response.getErrors() == null || response.getErrors().size() == 0);
+			
 			for (Calendar calendar : response.getSuccessful()) {
 				insertedCalendars.add(calendar);
-			}						
+			}					
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
