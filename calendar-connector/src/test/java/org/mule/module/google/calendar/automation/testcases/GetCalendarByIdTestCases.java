@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -12,15 +13,13 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 
-import com.google.api.client.googleapis.json.GoogleJsonResponseException;
-
-public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
+public class GetCalendarByIdTestCases extends GoogleCalendarTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("deleteCalendar");
+			testObjects = (Map<String, Object>) context.getBean("getCalendarById");
 
 			// Create the calendar
 			MessageProcessor flow = lookupFlowConstruct("create-calendar");
@@ -37,32 +36,35 @@ public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
 	
 	@Category({SmokeTests.class, SanityTests.class})
 	@Test
-	public void testDeleteCalendar() {
+	public void testGetCalendarById() {
 		try {
-			// Delete the calendar
-			MessageProcessor flow = lookupFlowConstruct("delete-calendar");
+			
+			Calendar createdCalendar = (Calendar) testObjects.get("calendarRef");
+			
+			MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 
+			// Assertions on equality
+			Calendar returnedCalendar = (Calendar) response.getMessage().getPayload();
+			assertTrue(returnedCalendar != null);
+			assertTrue(returnedCalendar.getId().equals(createdCalendar.getId()));
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 			fail();
 		}
-			
-		// Get the calendar, should throw an exception
+	}
+	
+	@After
+	public void tearDown() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");			
+			// Delete the calendar
+			MessageProcessor flow = lookupFlowConstruct("delete-calendar");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 		}
 		catch (Exception e) {
-			if (e.getCause() instanceof GoogleJsonResponseException) {
-				GoogleJsonResponseException googleException = (GoogleJsonResponseException) e.getCause();
-				 // Not found
-				assertTrue(googleException.getStatusCode() == 404);
-				assertTrue(googleException.getStatusMessage().equals("Not Found"));
-			}
-			else fail();
+			e.printStackTrace();
+			fail();
 		}
 	}
-	
 }

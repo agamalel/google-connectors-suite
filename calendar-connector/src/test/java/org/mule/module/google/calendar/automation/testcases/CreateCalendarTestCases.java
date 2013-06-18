@@ -18,6 +18,7 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
@@ -36,7 +37,7 @@ public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 		}
 	}
 	
-	
+	@Category({SmokeTests.class, SanityTests.class})
 	@Test
 	public void testCreateCalendar() {
 		try {
