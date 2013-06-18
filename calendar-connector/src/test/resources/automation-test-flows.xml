@@ -29,4 +29,16 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:get-calendar-by-id id="#[payload.id]" accessTokenId="accessTokenId" config-ref="Google_Calendars" />
 	</flow>
 	
+	<flow name="get-calendar-list" doc:name="get-calendar-list">
+	    <google-calendars:get-calendar-list config-ref="Google_Calendars" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="batch-insert-calendar" doc:name="batch-insert-calendar">
+	    <google-calendars:batch-insert-calendar config-ref="Google_Calendars" calendars-ref="#[payload.calendarsRef]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="batch-delete-calendar" doc:name="batch-delete-calendar">
+	    <google-calendars:batch-delete-calendar config-ref="Google_Calendars" calendars-ref="#[payload.calendarsRef]" accessTokenId="accessTokenId" />
+	</flow>
+	
 </mule>
