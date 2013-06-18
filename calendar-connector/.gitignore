@@ -2,3 +2,8 @@
 /.settings
 /.project
 target/*
+.settings
+.classpath
+.project
+.idea
+.DS_Store
