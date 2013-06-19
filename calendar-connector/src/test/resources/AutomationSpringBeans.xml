@@ -17,7 +17,6 @@
 
 	<bean id="connectorOAuthState" class="org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState">
 		<property name="accessToken" value="${google.calendars.accessToken}" />
-		<property name="refreshToken" value="${google.calendars.refreshToken}" />
 	</bean>
 	
 	<util:map id="createCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
