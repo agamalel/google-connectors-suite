@@ -97,7 +97,57 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		MessageProcessor flow = lookupFlowConstruct("batch-delete-calendar");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
-		
+	
+	protected Event insertEvent(Calendar calendar, Event event) throws Exception {
+		return insertEvent(calendar.getId(), event);
+	}
+	
+	protected Event insertEvent(String calendarId, Event event) throws Exception {
+		testObjects.put("calendarId", calendarId);
+		testObjects.put("calendarEventRef", event);
+		MessageProcessor flow = lookupFlowConstruct("insert-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Event) response.getMessage().getPayload();
+	}
+	
+	protected BatchResponse<Event> insertEvents(Calendar calendar, List<Event> events) throws Exception {
+		return insertEvents(calendar.getId(), events);
+	}
+	
+	protected BatchResponse<Event> insertEvents(String calendarId, List<Event> events) throws Exception {
+		testObjects.put("calendarId", calendarId);
+		testObjects.put("calendarEventsRef", events);
+		MessageProcessor flow = lookupFlowConstruct("batch-insert-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (BatchResponse<Event>) response.getMessage().getPayload();
+	}
+	
+	protected void deleteEvent(String calendarId, Event event) throws Exception {
+		deleteEvent(calendarId, event.getId());
+	}
+	
+	protected void deleteEvent(Calendar calendar, Event event) throws Exception {
+		deleteEvent(calendar.getId(), event.getId());
+	}
+	
+	protected void deleteEvent(String calendarId, String eventId) throws Exception {
+		testObjects.put("calendarId", calendarId);
+		testObjects.put("eventId", eventId);
+		MessageProcessor flow = lookupFlowConstruct("delete-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+	}
+	
+	protected void deleteEvents(Calendar calendar, List<Event> events) throws Exception {
+		deleteEvents(calendar.getId(), events);
+	}
+	
+	protected void deleteEvents(String calendarId, List<Event> events) throws Exception {
+		testObjects.put("calendarId", calendarId);
+		testObjects.put("calendarEventsRef", events);
+		MessageProcessor flow = lookupFlowConstruct("batch-delete-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+	}
+	
 	protected Calendar getCalendar(String summary) {
 		Calendar calendar = new Calendar();
 		calendar.setSummary(summary);

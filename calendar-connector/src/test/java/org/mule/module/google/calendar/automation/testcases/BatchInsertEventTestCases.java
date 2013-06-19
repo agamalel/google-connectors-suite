@@ -58,6 +58,7 @@ public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 			EventDateTime eventStartTime = (EventDateTime) context.getBean("eventStartTime");
 			EventDateTime eventEndTime = (EventDateTime) context.getBean("eventEndTime");			
 			int numEvents = Integer.parseInt(testObjects.get("numEvents").toString());
+			String calendarId = testObjects.get("calendarId").toString();
 			
 			// Instantiate the events that we want to batch insert
 			List<Event> events = new ArrayList<Event>();
@@ -65,15 +66,9 @@ public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 				Event event = getEvent("Test Event", eventStartTime, eventEndTime);
 				events.add(event);
 			}
-			
-			testObjects.put("calendarEventsRef", events);
-			
+		
 			// Batch insert the events
-			MessageProcessor flow = lookupFlowConstruct("batch-insert-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			// Assert that there are no errors
-			BatchResponse<Event> batchResponse = (BatchResponse<Event>) response.getMessage().getPayload();
+			BatchResponse<Event> batchResponse = insertEvents(calendarId, events);
 			assertTrue(batchResponse.getErrors() == null || batchResponse.getErrors().size() == 0);
 			
 		}
