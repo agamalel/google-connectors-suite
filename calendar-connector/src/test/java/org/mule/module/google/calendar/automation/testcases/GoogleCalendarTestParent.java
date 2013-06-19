@@ -10,6 +10,7 @@
 
 package org.mule.module.google.calendar.automation.testcases;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,11 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.module.google.calendar.model.Event;
+import org.mule.module.google.calendar.model.EventDateTime;
 import org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.google.api.datetime.DateTime;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -77,7 +81,7 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (BatchResponse<Calendar>) response.getMessage().getPayload();
 	}
-	
+		
 	protected void deleteCalendar(Calendar calendar) throws Exception {
 		deleteCalendar(calendar.getId());
 	}
@@ -93,11 +97,52 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		MessageProcessor flow = lookupFlowConstruct("batch-delete-calendar");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
-	
+		
 	protected Calendar getCalendar(String summary) {
 		Calendar calendar = new Calendar();
 		calendar.setSummary(summary);
 		return calendar;
+	}
+	
+	protected Event getEvent(String title) {
+		Event event = new Event();
+		event.setSummary(title);
+		return event;
+	}
+
+	protected Event getEvent(String title, Date startTime, Date endTime) {
+		Event event = getEvent(title);
+		
+		EventDateTime start = new EventDateTime();
+		start.setDateTime(new DateTime(startTime));
+		
+		EventDateTime end = new EventDateTime();
+		end.setDateTime(new DateTime(endTime));
+		
+		event.setStart(start);
+		event.setEnd(end);
+		return event;
+	}
+	
+	protected Event getEvent(String title, String startTime, String endTime) {
+		Event event = getEvent(title);
+		
+		EventDateTime start = new EventDateTime();
+		start.setDate(startTime);
+		
+		EventDateTime end = new EventDateTime();
+		end.setDate(endTime);
+		
+		event.setStart(start);
+		event.setEnd(end);
+		return event;
+	}
+	
+	protected Event getEvent(String title, EventDateTime startTime, EventDateTime endTime) {
+		Event event = getEvent(title);
+		event.setStart(startTime);
+		event.setEnd(endTime);
+		return event;
 	}
 	
 }

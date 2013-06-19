@@ -57,4 +57,8 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:quick-add-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" text="#[payload.text]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="batch-insert-event" doc:name="batch-insert-event">
+	    <google-calendars:batch-insert-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" calendarEvents-ref="#[payload.calendarEventsRef]" accessTokenId="accessTokenId"/>
+	</flow>
+	
 </mule>

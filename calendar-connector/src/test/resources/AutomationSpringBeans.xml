@@ -64,6 +64,11 @@
 	    <entry key="text" value="Sample text for event" />
 	</util:map>
 	
+	<util:map id="batchInsertEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef" value-ref="calendarBean" />
+	    <entry key="numEvents" value="5" />
+	</util:map>
+	
 	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
 		<property name="summary" value="Sample title for calendar" />	    
     </bean>
@@ -71,17 +76,15 @@
 	<bean id="eventBean" class="org.mule.module.google.calendar.model.Event" scope="prototype">
 		<property name="location" value="America" />
 		<property name="summary" value="This is a summary about the event" />
-		<property name="start">
-		    <bean class="org.mule.module.google.calendar.model.EventDateTime">
-		        <property name="date" value="2012-12-16" />
-		    </bean>
-		</property>	
-		<property name="end">
-		    <bean class="org.mule.module.google.calendar.model.EventDateTime">
-		        <property name="date" value="2016-2-16" />
-		    </bean>
-		</property>	
+		<property name="start" ref="eventStartTime" />
+		<property name="end" ref="eventEndTime" />
 	</bean>
 	
+	<bean id="eventStartTime" class="org.mule.module.google.calendar.model.EventDateTime">
+	    <property name="date" value="2012-12-16" />
+	</bean>
     
+	<bean id="eventEndTime" class="org.mule.module.google.calendar.model.EventDateTime">
+		<property name="date" value="2016-2-16" />
+	</bean>
 </beans>
