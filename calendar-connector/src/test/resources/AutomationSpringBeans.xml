@@ -68,7 +68,7 @@
 		<property name="summary" value="This is a summary about the event" />
 		<property name="start">
 		    <bean class="org.mule.module.google.calendar.model.EventDateTime">
-		        <property name="date" value="2015-12-16" />
+		        <property name="date" value="2012-12-16" />
 		    </bean>
 		</property>	
 		<property name="end">

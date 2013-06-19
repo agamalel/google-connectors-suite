@@ -31,12 +31,12 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 			testObjects.put("calendarId", calendar.getId());
 			
 			MessageProcessor flow = lookupFlowConstruct("insert-event");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
+			MuleEvent response = flow.process(getTestEvent(testObjects));
 
 			// Place the returned event and its ID into testObjects for later access
-			Event returnedEvent = (Event) event.getMessage().getPayload();
+			Event returnedEvent = (Event) response.getMessage().getPayload();
 			testObjects.put("event", returnedEvent);
-			testObjects.put("eventId", event.getId());
+			testObjects.put("eventId", returnedEvent.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -50,29 +50,18 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 		try {			
 			// Delete the event
 			MessageProcessor flow = lookupFlowConstruct("delete-event");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-		
-		try {
-			// Try and look for the event after deleting it
-			MessageProcessor flow = lookupFlowConstruct("get-event-by-id");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+	
+			// Try and look for the event after cancelling it
+			flow = lookupFlowConstruct("get-event-by-id");
+			response = flow.process(getTestEvent(testObjects));
 			
-			// Fail the test if it reaches here, it should throw an exception
-			fail();
+			Event returnedEvent = (Event) response.getMessage().getPayload();
+			assertTrue(returnedEvent.getStatus().equals("cancelled"));
+			
 		}
 		catch (Exception e) {
-			if (e.getCause() instanceof GoogleJsonResponseException) {
-				// Catch the exception thrown by Google (event not found)
-				GoogleJsonResponseException googleException = (GoogleJsonResponseException) e.getCause();
-				assertTrue(googleException.getStatusCode() == 404); // Not found
-				assertTrue(googleException.getStatusMessage().equals("Not Found"));
-			}
-			else fail();
+			fail();
 		}
 	}
 	
