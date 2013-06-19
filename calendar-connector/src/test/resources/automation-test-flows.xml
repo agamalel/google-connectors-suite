@@ -53,4 +53,8 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:delete-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="quick-add-event" doc:name="quick-add-event">
+	    <google-calendars:quick-add-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" text="#[payload.text]" accessTokenId="accessTokenId" />
+	</flow>
+	
 </mule>
