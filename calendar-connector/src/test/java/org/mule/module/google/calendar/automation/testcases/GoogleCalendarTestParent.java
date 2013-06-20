@@ -98,6 +98,18 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
 	
+	protected Event quickAddEvent(Calendar calendar, String eventSummary) throws Exception {
+		return quickAddEvent(calendar.getId(), eventSummary);
+	}
+	
+	protected Event quickAddEvent(String calendarId, String eventSummary) throws Exception {
+		testObjects.put("calendarId", calendarId);
+		testObjects.put("text", eventSummary);
+		MessageProcessor flow = lookupFlowConstruct("quick-add-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Event) response.getMessage().getPayload();
+	}
+	
 	protected Event insertEvent(Calendar calendar, Event event) throws Exception {
 		return insertEvent(calendar.getId(), event);
 	}
