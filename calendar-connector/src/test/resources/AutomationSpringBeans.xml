@@ -8,11 +8,11 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
-
+ 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
 			<value>automation-credentials.properties</value>
-		</property>
+		</property>  
 	</bean>
 
 	<bean id="connectorOAuthState" class="org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState">
@@ -85,6 +85,13 @@
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="numEvents" value="5" />
 	</util:map>
+	
+	<util:map id="insertAclRule" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="calendarRef" value-ref="calendarBean" />
+		<entry key="scope" value="ricston.com"/>
+		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
+		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
+	</util:map>
 			
 	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
 		<property name="summary" value="Sample title for calendar" />	    
@@ -104,4 +111,5 @@
 	<bean id="eventEndTime" class="org.mule.module.google.calendar.model.EventDateTime">
 		<property name="date" value="2016-2-16" />
 	</bean>
+	
 </beans>

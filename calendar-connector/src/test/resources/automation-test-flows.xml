@@ -73,4 +73,7 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 		<google-calendars:update-calendar config-ref="Google_Calendars" id="#[payload.id]" calendar-ref="#[payload.calendarRef]" accessTokenId="accessTokenId" />	
 	</flow>
 	
+	<flow name="insert-acl-rule" doc:name="insert-acl-rule">
+		<google-calendars:insert-acl-rule config-ref="Google_Calendars" calendarId="#[payload.calendarId]" scope="#[payload.scope]" scopeType="#[payload.scopeType]" role="#[payload.role]"  accessTokenId="accessTokenId" />
+	</flow>
 </mule>
