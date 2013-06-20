@@ -113,6 +113,28 @@
 	    <entry key="query" value="Hosting an event" />
 	    <entry key="eventTitle" value="Hosting an event at a location" />
 	</util:map>
+	
+	<util:map id="getFreeTime" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef" value-ref="calendarBean" />
+	    <entry key="event">
+	        <bean class="org.mule.module.google.calendar.model.Event">
+	            <property name="location" value="Ontario" />
+	        	<property name="summary" value="Concert meetup" />
+	            <property name="start">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2013-12-16" />
+					</bean>
+	            </property>
+	            <property name="end">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2013-12-20" />
+					</bean>
+	            </property>
+	        </bean>
+	    </entry>
+	    <!-- RFC3399 -->
+	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
+	</util:map>
 			
 	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
 		<property name="summary" value="Sample title for calendar" />	    

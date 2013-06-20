@@ -1,10 +1,12 @@
 package org.mule.module.google.calendar.automation.testcases;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Map;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,10 +41,21 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 	public void testInsertEvent() {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("insert-event");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
+			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			Event returnedEvent = (Event) event.getMessage().getPayload();
-			assertNotNull(returnedEvent);
+			Event event = (Event) response.getMessage().getPayload();
+			assertNotNull(event);
+			
+			testObjects.put("event", event);
+			testObjects.put("eventId", event.getId());
+			
+			flow = lookupFlowConstruct("get-event-by-id");
+			response = flow.process(getTestEvent(testObjects));
+			
+			Event returnedEvent = (Event) response.getMessage().getPayload();
+			
+			assertTrue(event.getId().equals(returnedEvent.getId()));
+			assertTrue(EqualsBuilder.reflectionEquals(event, returnedEvent));
 		
 		}
 		catch (Exception e) {
