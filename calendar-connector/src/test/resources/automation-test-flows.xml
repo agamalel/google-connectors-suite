@@ -73,4 +73,12 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 		<google-calendars:update-calendar config-ref="Google_Calendars" id="#[payload.id]" calendar-ref="#[payload.calendarRef]" accessTokenId="accessTokenId" />	
 	</flow>
 	
+	<flow name="get-events" doc:name="get-events">
+	    <google-calendars:get-events config-ref="Google_Calendars" maxResults="#[payload.maxResults]" calendarId="#[payload.calendarId]" showDeleted="#[payload.showDeleted]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-events-using-query" doc:name="get-events-using-query">
+	    <google-calendars:get-events config-ref="Google_Calendars" calendarId="#[payload.calendarId]" accessTokenId="accessTokenId" query="#[payload.query]" />
+	</flow>
+	
 </mule>
