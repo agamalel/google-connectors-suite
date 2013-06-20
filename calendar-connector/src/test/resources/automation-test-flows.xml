@@ -72,11 +72,19 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	<flow name="update-calendar" doc:name="update-calendar">
 		<google-calendars:update-calendar config-ref="Google_Calendars" id="#[payload.id]" calendar-ref="#[payload.calendarRef]" accessTokenId="accessTokenId" />	
 	</flow>
-	
+
 	<flow name="get-free-time" doc:name="get-free-time">
 	    <google-calendars:get-free-time config-ref="Google_Calendars" timeMin="#[payload.timeMin]" timeMax="#[payload.timeMax]" datetimeFormat="#[payload.datetimeFormat]" accessTokenId="accessTokenId"  />
 	</flow>
 	
+	<flow name="insert-acl-rule" doc:name="insert-acl-rule">
+		<google-calendars:insert-acl-rule config-ref="Google_Calendars" calendarId="#[payload.calendarId]" scope="#[payload.scope]" scopeType="#[payload.scopeType]" role="#[payload.role]"  accessTokenId="accessTokenId" />
+	</flow>
+		
+	<flow name="get-acl-rule-by-id" doc:name="get-acl-rule-by-id">
+		<google-calendars:get-acl-rule-by-id config-ref="Google_Calendars" calendarId="#[payload.calendarId]" ruleId="#[payload.ruleId]" accessTokenId="accessTokenId" />		
+	</flow>
+		
 	<flow name="get-events" doc:name="get-events">
 	    <google-calendars:get-events config-ref="Google_Calendars" maxResults="#[payload.maxResults]" calendarId="#[payload.calendarId]" showDeleted="#[payload.showDeleted]" accessTokenId="accessTokenId" />
 	</flow>
