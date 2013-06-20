@@ -75,6 +75,12 @@
 		<entry key="summaryAfter" value="This is the title after update" />
 	</util:map>
 	
+	<util:map id="updateCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="calendarRef" value-ref="calendarBean" />
+		<entry key="summaryBefore" value="This is the summary before update" />
+		<entry key="summaryAfter" value="This is the summary after update" />
+	</util:map>
+	
 	<util:map id="batchDeleteEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="numEvents" value="5" />

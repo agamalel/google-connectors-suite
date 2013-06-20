@@ -69,4 +69,8 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:batch-delete-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" calendarEvents-ref="#[payload.calendarEventsRef]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="update-calendar" doc:name="update-calendar">
+		<google-calendars:update-calendar config-ref="Google_Calendars" id="#[payload.id]" calendar-ref="#[payload.calendarRef]" accessTokenId="accessTokenId" />	
+	</flow>
+	
 </mule>
