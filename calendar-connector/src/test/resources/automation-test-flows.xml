@@ -82,7 +82,7 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	</flow>
 	
 	<flow name="update-acl-rule" doc:name="update-acl-rule">
-		<google-calendars:update-acl-rule config-ref="Google_Calendars" calendarId="#[payload.calendarId]" ruleId="#[payload.ruleId]" accessTokenId="accessTokenId" />
+		<google-calendars:update-acl-rule config-ref="Google_Calendars" calendarId="#[payload.calendarId]" ruleId="#[payload.ruleId]" aclRule-ref="#[payload.aclRuleRef]" accessTokenId="accessTokenId" />
 	</flow>
 	
 	<flow name="get-events" doc:name="get-events">
