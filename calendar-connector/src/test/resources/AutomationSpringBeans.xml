@@ -93,6 +93,12 @@
 		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</util:map>
 
+	<util:map id="updateAclRule" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="calendarRef" value-ref="calendarBean" />
+		<entry key="roleBefore" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
+		<entry key="roleAfter" value="#{T(org.mule.module.google.calendar.ScopeRole).writer}" />
+	</util:map>
+
 	<util:map id="getEvents" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="numEvents" value="20" />

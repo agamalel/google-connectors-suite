@@ -1,10 +1,12 @@
 package org.mule.module.google.calendar.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.Map;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,21 +41,30 @@ public class InsertAclRuleTestCases  extends GoogleCalendarTestParent {
 	@Test
 	public void testInsertAclRule(){
 		try {
+			
 			MessageProcessor flow = lookupFlowConstruct("insert-acl-rule");
 			MuleEvent event = flow.process(getTestEvent(testObjects));
 			
 			AclRule returnedAclRule = (AclRule) event.getMessage().getPayload();
-			assertNotNull(returnedAclRule);
+			String ruleId = returnedAclRule.getId();
 		
+			testObjects.put("ruleId", ruleId);
+			
+			flow = lookupFlowConstruct("get-acl-rule-by-id");
+			event = flow.process(getTestEvent(testObjects));
+			
+			AclRule afterProc = (AclRule) event.getMessage().getPayload();
+			String ruleIdAfter = afterProc.getId();
+			
+			assertEquals(ruleId,ruleIdAfter);
+			EqualsBuilder.reflectionEquals(returnedAclRule, afterProc);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}		
 	}
-	
-	
-	
+		
 	@After
 	public void tearDown() {
 		try {
