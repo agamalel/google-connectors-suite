@@ -78,8 +78,14 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 	
 	@After
 	public void tearDown() {
-		String calendarId = testObjects.get("calendarId").toString();
-		deleteCalendar(calendarId);
+		try {
+			String calendarId = testObjects.get("calendarId").toString();
+			deleteCalendar(calendarId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 	
 }
