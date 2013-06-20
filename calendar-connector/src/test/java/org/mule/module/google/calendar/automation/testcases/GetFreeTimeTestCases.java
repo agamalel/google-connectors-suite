@@ -2,21 +2,19 @@ package org.mule.module.google.calendar.automation.testcases;
 
 import static org.junit.Assert.fail;
 
-import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
-import org.mule.module.google.calendar.model.EventDateTime;
 import org.mule.module.google.calendar.model.FreeBusy;
-import org.mule.modules.google.api.datetime.DateTimeUtils;
 
 import com.google.api.services.calendar.model.FreeBusyCalendar;
 import com.google.api.services.calendar.model.TimePeriod;
@@ -44,7 +42,8 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 			fail();
 		}
 	}
-	
+
+	@Category({SmokeTests.class, SanityTests.class})	
 	@Test
 	public void testGetFreeTime() {
 		try {
@@ -75,6 +74,12 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 			e.printStackTrace();
 			fail();
 		}
+	}
+	
+	@After
+	public void tearDown() {
+		String calendarId = testObjects.get("calendarId").toString();
+		deleteCalendar(calendarId);
 	}
 	
 }
