@@ -44,6 +44,12 @@
 	    <entry key="numCalendars" value="5" />
 	</util:map>
 	
+	<util:map id="batchUpdateCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="numCalendars" value="#{5}"/>
+	    <entry key="summaryBefore" value="Calendar title before" />
+	    <entry key="summaryAfter" value="Calendar title after" />
+	</util:map>
+	
 	<util:map id="insertEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="calendarEventRef" value-ref="eventBean" />
