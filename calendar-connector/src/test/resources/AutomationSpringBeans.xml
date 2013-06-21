@@ -69,6 +69,35 @@
 	    <entry key="numEvents" value="5" />
 	</util:map>
 	
+	<util:map id="moveEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="sourceCalendarRef">
+	        <bean class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
+				<property name="summary" value="This is the source calendar" />	    
+    		</bean>
+	    </entry>
+	    <entry key="targetCalendarRef">
+	        <bean class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
+				<property name="summary" value="This is the target calendar" />	    
+    		</bean>
+	    </entry>
+	    <entry key="event">
+	        <bean class="org.mule.module.google.calendar.model.Event">
+	            <property name="location" value="New York" />
+	        	<property name="summary" value="Business trip" />
+	            <property name="start">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2014-2-10" />
+					</bean>
+	            </property>
+	            <property name="end">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2014-2-13" />
+					</bean>
+	            </property>
+	        </bean>
+	    </entry>
+	</util:map>
+	
 	<util:map id="updateEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="calendarRef" value-ref="calendarBean" />
 		<entry key="summaryBefore" value="This is the title before update" />
@@ -132,7 +161,6 @@
 	            </property>
 	        </bean>
 	    </entry>
-	    <!-- RFC3399 -->
 	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
 	</util:map>
 			

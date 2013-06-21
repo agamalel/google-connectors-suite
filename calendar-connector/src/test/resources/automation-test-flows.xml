@@ -61,6 +61,10 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:batch-insert-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" calendarEvents-ref="#[payload.calendarEventsRef]" accessTokenId="accessTokenId"/>
 	</flow>
 	
+	<flow name="move-event" doc:name="move-event">
+	    <google-calendars:move-event config-ref="Google_Calendars" eventId="#[payload.eventId]" sourceCalendarId="#[payload.sourceCalendarId]" targetCalendarId="#[payload.targetCalendarId]" accessTokenId="accessTokenId"  />
+	</flow>
+	
 	<flow name="update-event" doc:name="update-event">
 	    <google-calendars:update-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" calendarEvent-ref="#[payload.calendarEventRef]" accessTokenId="accessTokenId"/>
 	</flow>
