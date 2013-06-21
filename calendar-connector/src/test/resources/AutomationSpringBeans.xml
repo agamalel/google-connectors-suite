@@ -28,6 +28,31 @@
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	</util:map>
 	
+	<util:map id="clearCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef">
+	        <bean class="org.mule.module.google.calendar.model.Calendar">
+	            <property name="summary" value="Test calendar to clear" />
+	        </bean>
+	    </entry>
+	    <entry key="numEvents" value="#{10}" />
+		<entry key="sampleEvent">
+	        <bean class="org.mule.module.google.calendar.model.Event">
+	            <property name="location" value="New York" />
+	        	<property name="summary" value="Business event" />
+	            <property name="start">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2014-2-10" />
+					</bean>
+	            </property>
+	            <property name="end">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2014-2-13" />
+					</bean>
+	            </property>
+	        </bean>
+	    </entry>	
+	</util:map>
+	
 	<util:map id="getCalendarById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	</util:map>
