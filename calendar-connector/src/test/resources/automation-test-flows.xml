@@ -77,6 +77,10 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:update-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" calendarEvent-ref="#[payload.calendarEventRef]" accessTokenId="accessTokenId"/>
 	</flow>
 	
+	<flow name="import-event" doc:name="import-event">
+	    <google-calendars:import-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" calendarEvent-ref="#[payload.calendarEventRef]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="batch-delete-event" doc:name="batch-delete-event">
 	    <google-calendars:batch-delete-event config-ref="Google_Calendars" calendarId="#[payload.calendarId]" calendarEvents-ref="#[payload.calendarEventsRef]" accessTokenId="accessTokenId" />
 	</flow>
