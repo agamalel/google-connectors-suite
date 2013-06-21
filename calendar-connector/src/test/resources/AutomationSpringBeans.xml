@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8"?> 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
@@ -28,6 +27,31 @@
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	</util:map>
 	
+	<util:map id="clearCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef">
+	        <bean class="org.mule.module.google.calendar.model.Calendar">
+	            <property name="summary" value="Test calendar to clear" />
+	        </bean>
+	    </entry>
+	    <entry key="numEvents" value="#{10}" />
+		<entry key="sampleEvent">
+	        <bean class="org.mule.module.google.calendar.model.Event">
+	            <property name="location" value="New York" />
+	        	<property name="summary" value="Business event" />
+	            <property name="start">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2014-2-10" />
+					</bean>
+	            </property>
+	            <property name="end">
+					<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2014-2-13" />
+					</bean>
+	            </property>
+	        </bean>
+	    </entry>	
+	</util:map>
+	
 	<util:map id="getCalendarById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	</util:map>
@@ -42,6 +66,12 @@
 	
 	<util:map id="batchDeleteCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="numCalendars" value="5" />
+	</util:map>
+	
+	<util:map id="batchUpdateCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="numCalendars" value="#{5}"/>
+	    <entry key="summaryBefore" value="Calendar title before" />
+	    <entry key="summaryAfter" value="Calendar title after" />
 	</util:map>
 	
 	<util:map id="insertEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -67,6 +97,23 @@
 	<util:map id="batchInsertEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="numEvents" value="5" />
+	</util:map>
+	
+	<util:map id="batchUpdateEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef" value-ref="calendarBean" />
+	    <entry key="numEvents" value="#{10}" />
+	    <entry key="summaryBefore" value="Ice skating in Alaska" />
+	    <entry key="summaryAfter" value="Trip to Disneyland" />
+	    <entry key="eventStart">
+			<bean class="org.mule.module.google.calendar.model.EventDateTime">
+				<property name="date" value="2014-2-10" />
+			</bean>
+	    </entry>
+	    <entry key="eventEnd">
+			<bean class="org.mule.module.google.calendar.model.EventDateTime">
+				<property name="date" value="2014-2-10" />
+			</bean>
+	    </entry>
 	</util:map>
 	
 	<util:map id="moveEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -149,7 +196,6 @@
 		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</util:map>
 
-
 	<util:map id="getEvents" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="numEvents" value="20" />
@@ -198,5 +244,13 @@
 	<bean id="eventEndTime" class="org.mule.module.google.calendar.model.EventDateTime">
 		<property name="date" value="2016-2-16" />
 	</bean>
-		
+	
+	<bean id="aclBean" class="org.mule.module.google.calendar.model.AclRule" scope="prototype">
+		<property name="scope" value="ricston.com"/> 
+		<property name="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
+		<property name="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
+	</bean>
+	
 </beans>
+
+
