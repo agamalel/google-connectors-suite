@@ -117,6 +117,10 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:get-events config-ref="Google_Calendars" maxResults="#[payload.maxResults]" calendarId="#[payload.calendarId]" showDeleted="#[payload.showDeleted]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="get-all-acl-rules" doc:name="get-all-acl-rules">
+		<google-calendars:get-all-acl-rules config-ref="Google_Calendars" calendarId="#[payload.calendarId]" accessTokenId="accessTokenId"/>
+	</flow>
+	
 	<flow name="get-all-events" doc:name="get-all-events">
 	    <google-calendars:get-events config-ref="Google_Calendars" calendarId="#[payload.calendarId]" accessTokenId="accessTokenId" />
 	</flow>
@@ -126,3 +130,4 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	</flow>
 	
 </mule>
+
