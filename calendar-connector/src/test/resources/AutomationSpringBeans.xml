@@ -104,6 +104,14 @@
 	<util:map id="getAclRuleById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	   <entry key="calendarRef" value-ref="calendarBean" />
 	</util:map>
+	
+	
+	<util:map id="deleteAclRule" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="calendarRef" value-ref="calendarBean"/>
+		<entry key="scope" value="ricston.com"/>
+		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
+		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
+	</util:map>
 
 	<util:map id="getEvents" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
@@ -153,6 +161,12 @@
     
 	<bean id="eventEndTime" class="org.mule.module.google.calendar.model.EventDateTime">
 		<property name="date" value="2016-2-16" />
+	</bean>
+	
+	<bean id="aclBean" class="org.mule.module.google.calendar.model.AclRule" scope="prototype">
+		<property name="scope" value="ricston.com"/> 
+		<property name="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
+		<property name="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</bean>
 	
 </beans>
