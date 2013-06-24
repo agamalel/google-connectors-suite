@@ -41,6 +41,10 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 		<google-calendars:get-calendar-list-by-id config-ref="Google_Calendars" id="#[payload.id]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="update-calendar-list" doc:name="update-calendar-list">
+		<google-calendars:update-calendar-list config-ref="Google_Calendars" calendarList-ref="#[payload.calendarListRef]"  id="#[payload.id]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="batch-insert-calendar" doc:name="batch-insert-calendar">
 	    <google-calendars:batch-insert-calendar config-ref="Google_Calendars" calendars-ref="#[payload.calendarsRef]" accessTokenId="accessTokenId" />
 	</flow>
