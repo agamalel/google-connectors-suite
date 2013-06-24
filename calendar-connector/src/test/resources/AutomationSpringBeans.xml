@@ -70,6 +70,10 @@
 		<entry key="colorAfter" value="13" />
 	</util:map>
 	
+	<util:map id="deleteCalendarList" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="calendarRef" value-ref="calendarBean"/>
+	</util:map>
+	
 	<util:map id="batchInsertCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="numCalendars" value="5" />
 	</util:map>

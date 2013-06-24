@@ -1,6 +1,6 @@
 package org.mule.module.google.calendar.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Map;
@@ -14,13 +14,15 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
 
-public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+
+public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 	
 	
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("updateCalendarList");
+			testObjects = (Map<String, Object>) context.getBean("deleteCalendarList");
 	
 			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
 						
@@ -33,6 +35,8 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 			CalendarList returnedCalendarList = (CalendarList) response.getMessage().getPayload();
 			
 			testObjects.put("calendarList", returnedCalendarList);
+			testObjects.put("color", returnedCalendarList.getColorId());
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -43,28 +47,34 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 	
 	@Category({SmokeTests.class, SanityTests.class})
 	@Test
-	public void testUpdateCalendarList() {
+	public void testDeleteCalendarList() {
 		try {
-			String colorAfter = testObjects.get("colorAfter").toString();
-			
-			CalendarList returnedCalendarList = (CalendarList) testObjects.get("calendarList");
-			
-			returnedCalendarList.setColorId(colorAfter);
-			testObjects.put("calendarListRef", returnedCalendarList);
-						
-			MessageProcessor flow = lookupFlowConstruct("update-calendar-list");
+									
+			MessageProcessor flow = lookupFlowConstruct("delete-calendar-list");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			CalendarList afterUpdate = (CalendarList) response.getMessage().getPayload();
-			String afterColorId = afterUpdate.getColorId();
-			assertEquals(afterColorId, colorAfter);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (Exception ex) {
+			ex.printStackTrace();
 			fail();
 		}
+				
+		// Get the calendar list, should throw an exception
+		try {
+			MessageProcessor flow = lookupFlowConstruct("get-calendar-list-by-id");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+		}
+		catch (Exception e) {
+			if (e.getCause() instanceof GoogleJsonResponseException) {
+				GoogleJsonResponseException googleException = (GoogleJsonResponseException) e.getCause();
+				 // Not found
+				assertTrue(googleException.getStatusCode() == 404);
+				assertTrue(googleException.getStatusMessage().equals("Not Found"));
+			}
+			else fail();
+		}
 	}
-	
+		
 	@After
 	public void tearDown() {
 		try {
@@ -76,6 +86,5 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 			fail();
 		}
 	}
-	
 
 }

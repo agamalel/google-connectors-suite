@@ -45,6 +45,10 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 		<google-calendars:update-calendar-list config-ref="Google_Calendars" calendarList-ref="#[payload.calendarListRef]"  id="#[payload.id]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="delete-calendar-list" doc:name="delete-calendar-list">
+		<google-calendars:delete-calendar-list config-ref="Google_Calendars" id="#[payload.id]" accessTokenId="accessTokenId"/>
+	</flow>
+	
 	<flow name="batch-insert-calendar" doc:name="batch-insert-calendar">
 	    <google-calendars:batch-insert-calendar config-ref="Google_Calendars" calendars-ref="#[payload.calendarsRef]" accessTokenId="accessTokenId" />
 	</flow>
@@ -136,6 +140,6 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	<flow name="get-events-using-query" doc:name="get-events-using-query">
 	    <google-calendars:get-events config-ref="Google_Calendars" calendarId="#[payload.calendarId]" accessTokenId="accessTokenId" query="#[payload.query]" />
 	</flow>
-	
+		
 </mule>
 
