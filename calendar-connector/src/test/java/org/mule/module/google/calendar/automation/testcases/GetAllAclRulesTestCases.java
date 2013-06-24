@@ -58,7 +58,7 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 	
 	@Category({SmokeTests.class, SanityTests.class})
 	@Test
-	public void testGetCalendarList() {
+	public void testGetAllAclRules() {
 		try {
 			MessageProcessor flow = lookupFlowConstruct("get-all-acl-rules");
 			MuleEvent response = flow.process(getTestEvent(testObjects));

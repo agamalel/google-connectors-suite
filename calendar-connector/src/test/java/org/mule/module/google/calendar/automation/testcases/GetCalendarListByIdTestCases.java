@@ -38,7 +38,7 @@ public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 	
 	@Category({SmokeTests.class, SanityTests.class})
 	@Test
-	public void testGetCalendarById() {
+	public void testGetCalendarListById() {
 		try {
 			
 			Calendar originalCalendar = (Calendar) testObjects.get("calendar");
