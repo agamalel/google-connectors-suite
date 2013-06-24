@@ -141,5 +141,8 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	    <google-calendars:get-events config-ref="Google_Calendars" calendarId="#[payload.calendarId]" accessTokenId="accessTokenId" query="#[payload.query]" />
 	</flow>
 		
+	<flow name="get-instances" doc:name="get-instances">
+		<google-calendars:get-instances config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" maxAttendess="#[payload.maxAttendess]" maxResults="#[payload.maxResults]" showDeleted="#[payload.showDeleted]" timezone="#[payload.timezone]" originalStart="#[payload.originalStart]"/>
+	</flow>
 </mule>
 

@@ -122,6 +122,16 @@
 	    <entry key="calendarEventRef" value-ref="eventBean" />
 	</util:map>
 	
+	<util:map id="getInstances" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="calendarRef" value-ref="calendarBean" />
+	    <entry key="calendarEventRef" value-ref="eventBean" />
+	    <entry key="maxAttendess" value="#{5}"/>
+	    <entry key="maxResults" value="#{5}"/>
+	    <entry key="showDeleted" value="false"/>
+	    <entry key="timezone" value="UTC"/>
+	    <entry key="originalStart" value="2013-06-24T13:18:55.680Z"/>
+	</util:map>
+	
 	<util:map id="deleteEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="calendarEventRef" value-ref="eventBean" />
