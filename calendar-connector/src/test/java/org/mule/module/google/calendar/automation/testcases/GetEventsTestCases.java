@@ -61,12 +61,9 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_AllEvents() {
 		try {
 			List<Event> insertedEvents = (List<Event>) testObjects.get("events");
-			
-			// We do not want any limit on the number of results we receive
-			testObjects.put("maxResults", Integer.MAX_VALUE);
-			
+						
 			// Get the events
-			MessageProcessor flow = lookupFlowConstruct("get-events");
+			MessageProcessor flow = lookupFlowConstruct("get-all-events");
 			MuleEvent response = flow.process(getTestEvent(testObjects));			
 			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
 			
