@@ -1,3 +1,13 @@
+/**
+ * Mule Google Calendars Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.module.google.calendar.automation.testcases;
 
 import static org.junit.Assert.assertTrue;
@@ -23,7 +33,7 @@ public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("batchInsertCalendar");
 			
-			int numCalendars = Integer.parseInt(testObjects.get("numCalendars").toString());
+			int numCalendars = (Integer) testObjects.get("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -31,11 +41,12 @@ public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 				calendars.add(getCalendar("This is a title"));
 			}
 	
-			// Insert calendar
+			// Insert calendars
 			BatchResponse<Calendar> response = insertCalendars(calendars);			
 			
 			// Assert that no errors exist in the response
 			assertTrue(response.getErrors() == null || response.getErrors().size() == 0);
+			assertTrue(response.getSuccessful().size() == numCalendars);
 			
 			// Add them to a global variable so that we can drop them in the tearDown method
 			for (Calendar calendar : response.getSuccessful()) {

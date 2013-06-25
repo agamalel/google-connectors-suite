@@ -1,5 +1,16 @@
+/**
+ * Mule Google Calendars Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.module.google.calendar.automation.testcases;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -55,16 +66,19 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 			
 			testObjects.put("timeMin", timeMin);
 			testObjects.put("timeMax", timeMax);
-			
+
 			MessageProcessor flow = lookupFlowConstruct("get-free-time");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			FreeBusy freeBusy =(FreeBusy) response.getMessage().getPayload();
-			
+								
 			// We should only be working with the calendar created specifically for this test
 			FreeBusyCalendar freeBusyCalendar = freeBusy.getCalendars().get(calendarId);
 			
 			List<TimePeriod> busyTimePeriods = freeBusyCalendar.getBusy();
+			assertTrue(busyTimePeriods.size() == 1);
+			
+			TimePeriod busyTimePeriod = busyTimePeriods.get(0);
 			
 			System.out.println(ToStringBuilder.reflectionToString(busyTimePeriods));
 			

@@ -28,12 +28,9 @@
 	</util:map>
 	
 	<util:map id="clearCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="calendarRef">
-	        <bean class="org.mule.module.google.calendar.model.Calendar">
-	            <property name="summary" value="Test calendar to clear" />
-	        </bean>
-	    </entry>
-	    <entry key="numEvents" value="#{10}" />
+	    <!-- clear-calendar only works for primary calendars. The ID of a primary calendar is the enail of who owns the calendar (or simply "primary") -->
+		<entry key="id" value="primary" />
+	    <entry key="numEvents" value="#{15}" />
 		<entry key="sampleEvent">
 	        <bean class="org.mule.module.google.calendar.model.Event">
 	            <property name="location" value="New York" />
@@ -57,7 +54,7 @@
 	</util:map>
 	
 	<util:map id="getCalendarList" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="5" />
+	    <entry key="numCalendars" value="#{3}" />
 	</util:map>
 	
 	<util:map id="getCalendarListById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -75,15 +72,15 @@
 	</util:map>
 	
 	<util:map id="batchInsertCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="5" />
+	    <entry key="numCalendars" value="#{3}" />
 	</util:map>
 	
 	<util:map id="batchDeleteCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="5" />
+	    <entry key="numCalendars" value="#{3}" />
 	</util:map>
 	
 	<util:map id="batchUpdateCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="#{5}"/>
+	    <entry key="numCalendars" value="#{3}"/>
 	    <entry key="summaryBefore" value="Calendar title before" />
 	    <entry key="summaryAfter" value="Calendar title after" />
 	</util:map>
@@ -125,11 +122,6 @@
 	<util:map id="getInstances" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef" value-ref="calendarBean" />
 	    <entry key="calendarEventRef" value-ref="eventBean" />
-	    <entry key="maxAttendess" value="#{5}"/>
-	    <entry key="maxResults" value="#{5}"/>
-	    <entry key="showDeleted" value="false"/>
-	    <entry key="timezone" value="UTC"/>
-	    <entry key="originalStart" value="2013-06-24T13:18:55.680Z"/>
 	</util:map>
 	
 	<util:map id="deleteEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -272,6 +264,7 @@
 	        </bean>
 	    </entry>
 	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
+	    <entry key="timezone" value="UTC+1" />
 	</util:map>
 			
 	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">

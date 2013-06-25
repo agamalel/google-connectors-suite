@@ -1,3 +1,13 @@
+/**
+ * Mule Google Calendars Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.module.google.calendar.automation.testcases;
 
 import static org.junit.Assert.assertTrue;
@@ -61,12 +71,9 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_AllEvents() {
 		try {
 			List<Event> insertedEvents = (List<Event>) testObjects.get("events");
-			
-			// We do not want any limit on the number of results we receive
-			testObjects.put("maxResults", Integer.MAX_VALUE);
-			
+						
 			// Get the events
-			MessageProcessor flow = lookupFlowConstruct("get-events");
+			MessageProcessor flow = lookupFlowConstruct("get-all-events");
 			MuleEvent response = flow.process(getTestEvent(testObjects));			
 			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
 			
@@ -74,7 +81,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			boolean listsSame = EqualsBuilder.reflectionEquals(insertedEvents, returnedEvents);
 			assertTrue(listsSame);
 			for (Event event : insertedEvents) {
-				assertTrue(existsInList(returnedEvents, event));
+				assertTrue(isEventInList(returnedEvents, event));
 			}			
 		}
 		catch (Exception e) {
@@ -133,8 +140,8 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			assertTrue(returnedEvents.size() == events.size());
 			// Every event in the list should have been deleted, so check that the status is so
 			for (Event event : returnedEvents) {
-				assertTrue(event.getStatus().equals("cancelled"));				
-				assertTrue(existsInList(events, event));
+				assertTrue(event.getStatus().equals("cancelled"));	
+				assertTrue(isEventInList(events, event));
 			}
 			
 		}
@@ -171,19 +178,6 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			e.printStackTrace();
 			fail();
 		}
-	}
-	
-	private boolean existsInList(List<Event> events, Event event) {
-		return existsInList(events, event.getId());
-	}
-	
-	private boolean existsInList(List<Event> events, String eventId) {
-		for (Event event : events) {
-			if (event.getId().equals(eventId)) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	@After

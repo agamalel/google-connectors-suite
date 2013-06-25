@@ -1,3 +1,13 @@
+/**
+ * Mule Google Calendars Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.module.google.calendar.automation.testcases;
 
 import static org.junit.Assert.assertTrue;
@@ -75,7 +85,7 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 			List<Event> successfulEvents = returnedEvents.getSuccessful();
 			assertTrue(successfulEvents.size() == events.size());
 			for (Event successfulEvent : successfulEvents) {
-				assertTrue(existsInList(events, successfulEvent));
+				assertTrue(isEventInList(events, successfulEvent));
 			}
 			
 			assertTrue(EqualsBuilder.reflectionEquals(successfulEvents, events));
@@ -86,20 +96,7 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 			fail();
 		}
 	}
-	
-	private boolean existsInList(List<Event> events, Event event) {
-		return existsInList(events, event.getId());
-	}
-	
-	private boolean existsInList(List<Event> events, String id) {
-		for (Event event : events) {
-			if (event.getId().equals(id)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
+
 	@After
 	public void tearDown() {
 		try {

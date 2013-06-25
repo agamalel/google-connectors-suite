@@ -23,7 +23,9 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.module.google.calendar.model.CalendarList;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
 import org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState;
@@ -205,6 +207,33 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		event.setStart(startTime);
 		event.setEnd(endTime);
 		return event;
+	}
+	
+	protected boolean isCalendarInList(List<CalendarList> list, Calendar toSearch) {
+		for (CalendarList calendar : list) {
+			if (calendar.getId().equals(toSearch.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected boolean isAclRuleInList(List<AclRule> list, AclRule toSearch) {
+		for (AclRule aclRule : list) {
+			if (aclRule.getId().equals(toSearch.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected boolean isEventInList(List<Event> events, Event event) {
+		for (Event e : events) {
+			if (event.getId().equals(e)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

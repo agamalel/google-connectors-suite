@@ -1,3 +1,13 @@
+/**
+ * Mule Google Calendars Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.module.google.calendar.automation.testcases;
 
 import static org.junit.Assert.assertFalse;
@@ -27,7 +37,7 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("batchDeleteCalendar");
 			
-			int numCalendars = Integer.parseInt(testObjects.get("numCalendars").toString());
+			int numCalendars = (Integer) testObjects.get("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -51,16 +61,7 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 			fail();
 		}		
 	}
-	
-	private boolean calendarExistsInList(List<CalendarList> list, Calendar toSearch) {
-		for (CalendarList calendar : list) {
-			if (calendar.getId().equals(toSearch.getId())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
+		
 	@Category({SmokeTests.class, SanityTests.class})
 	@Test
 	public void testBatchDeleteCalendar() {
@@ -72,7 +73,7 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 			
 			List<CalendarList> calendarList = (List<CalendarList>)response.getMessage().getPayload();
 			for (Calendar calendar : insertedCalendars) {
-				assertFalse(calendarExistsInList(calendarList, calendar));
+				assertFalse(isCalendarInList(calendarList, calendar));
 			}
 			
 		}

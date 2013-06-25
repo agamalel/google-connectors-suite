@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	
 	<google-calendars:config-with-oauth	name="Google_Calendars" consumerKey="${google.calendars.consumer.key}"
 		consumerSecret="${google.calendars.consumer.secret}" doc:name="Google Calendars" applicationName="${google.calendars.application.name}">
-		<google-calendars:oauth-callback-config domain="${google.calendars.domain}" localPort="${google.calendars.localPort}" remotePort="${google.calendars.remotePort}"/>
+		<google-calendars:oauth-callback-config domain="${google.calendars.domain}" localPort="${google.calendars.localPort}" remotePort="${google.calendars.remotePort}" path="${google.calendars.path}}" />
 	</google-calendars:config-with-oauth>
 
 	<flow name="create-calendar" doc:name="create-calendar">
@@ -106,7 +106,7 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	</flow>
 
 	<flow name="get-free-time" doc:name="get-free-time">
-	    <google-calendars:get-free-time config-ref="Google_Calendars" timeMin="#[payload.timeMin]" timeMax="#[payload.timeMax]" datetimeFormat="#[payload.datetimeFormat]" accessTokenId="accessTokenId"  />
+	    <google-calendars:get-free-time config-ref="Google_Calendars" timeMin="#[payload.timeMin]" timeMax="#[payload.timeMax]" datetimeFormat="#[payload.datetimeFormat]" timezone="#[payload.timezone]" accessTokenId="accessTokenId"  />
 	</flow>
 	
 	<flow name="insert-acl-rule" doc:name="insert-acl-rule">
@@ -140,9 +140,9 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	<flow name="get-events-using-query" doc:name="get-events-using-query">
 	    <google-calendars:get-events config-ref="Google_Calendars" calendarId="#[payload.calendarId]" accessTokenId="accessTokenId" query="#[payload.query]" />
 	</flow>
-		
+	
 	<flow name="get-instances" doc:name="get-instances">
-		<google-calendars:get-instances config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" maxAttendess="#[payload.maxAttendess]" maxResults="#[payload.maxResults]" showDeleted="#[payload.showDeleted]" timezone="#[payload.timezone]" originalStart="#[payload.originalStart]"/>
+		<google-calendars:get-instances config-ref="Google_Calendars" calendarId="#[payload.calendarId]" eventId="#[payload.eventId]" accessTokenId="accessTokenId" />
 	</flow>
 </mule>
 
