@@ -26,7 +26,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 
-public class QuickAddEvent extends GoogleCalendarTestParent {
+public class QuickAddEventTestCases extends GoogleCalendarTestParent {
 
 	@Before
 	public void setUp() {
@@ -46,7 +46,7 @@ public class QuickAddEvent extends GoogleCalendarTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, SanityTests.class})	
+	@Category({SmokeTests.class, RegressionTests.class})	
 	@Test
 	public void testQuickAddEvent() {
 		try {

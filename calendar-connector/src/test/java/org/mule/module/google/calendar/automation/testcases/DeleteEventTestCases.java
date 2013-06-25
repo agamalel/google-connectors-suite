@@ -54,7 +54,7 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, SanityTests.class})	
+	@Category({SmokeTests.class, RegressionTests.class})	
 	@Test
 	public void testDeleteEvent() {
 		try {			
