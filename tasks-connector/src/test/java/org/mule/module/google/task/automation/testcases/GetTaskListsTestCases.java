@@ -36,14 +36,8 @@ public class GetTaskListsTestCases extends GoogleTaskTestParent {
 	
 	@After
 	public void tearDown() {
-		try {
-			int numOfListsDeleted = deleteAllListsByTaskListTitle(((TaskList) testObjects.get("taskListRef")).getTitle());
-			assertTrue(numOfListsDeleted == NUMBER_OF_TASK_LISTS);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		int numOfListsDeleted = deleteAllListsByTaskListTitle(((TaskList) testObjects.get("taskListRef")).getTitle());
+		assertTrue(numOfListsDeleted == NUMBER_OF_TASK_LISTS);
 	}
 	
 	@SuppressWarnings("unchecked")

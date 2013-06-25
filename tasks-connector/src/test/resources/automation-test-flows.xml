@@ -53,6 +53,11 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 			accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="get-tasks">
+		<google-tasks:get-tasks config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="get-task-by-id">
 		<google-tasks:get-task-by-id config-ref="Google_Tasks"
 			accessTokenId="accessTokenId" taskListId="#[payload.taskListId]"

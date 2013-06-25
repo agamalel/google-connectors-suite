@@ -56,8 +56,6 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 		this.testObjects = testObjects;
 	}
 	
-	
-	
 	@SuppressWarnings("unchecked")
 	/**
 	 * All tasks lists which have the title taskListTitle will be deleted. The method returns the number of
