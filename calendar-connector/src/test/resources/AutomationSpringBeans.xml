@@ -54,7 +54,7 @@
 	</util:map>
 	
 	<util:map id="getCalendarList" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="5" />
+	    <entry key="numCalendars" value="#{3}" />
 	</util:map>
 	
 	<util:map id="getCalendarListById" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

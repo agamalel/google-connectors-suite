@@ -27,7 +27,7 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("getCalendarList");
 			
-			int numCalendars = Integer.parseInt(testObjects.get("numCalendars").toString());
+			int numCalendars = (Integer) testObjects.get("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -36,7 +36,7 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 			}
 
 			// Insert calendars and record their IDs
-			BatchResponse<Calendar> response = insertCalendars(calendars);			
+			BatchResponse<Calendar> response = insertCalendars(calendars);	
 			assertTrue(response.getErrors() == null || response.getErrors().size() == 0);
 			
 			for (Calendar calendar : response.getSuccessful()) {
