@@ -27,18 +27,35 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 
 	<flow name="insert-task">
 		<google-tasks:insert-task accessTokenId="accessTokenId"
-			config-ref="Google_Tasks" task-ref="#[payload.taskRef]" taskListId="#[payload.taskListId]"/>
+			config-ref="Google_Tasks" task-ref="#[payload.taskRef]" taskListId="#[payload.taskListId]" />
 	</flow>
-	
+
 	<flow name="insert-task-list">
-		<google-tasks:insert-task-list config-ref="Google_Tasks" taskList-ref="#[payload.taskListRef]" accessTokenId="accessTokenId" />
+		<google-tasks:insert-task-list
+			config-ref="Google_Tasks" taskList-ref="#[payload.taskListRef]"
+			accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-task-list-by-id">
-		<google-tasks:get-task-list-by-id config-ref="Google_Tasks" taskListId="#[payload.taskListId]" accessTokenId="accessTokenId" />
+		<google-tasks:get-task-list-by-id
+			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
+			accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="delete-task-list">
-		<google-tasks:delete-task-list taskListId="#[payload.taskListId]" accessTokenId="accessTokenId" />
+		<google-tasks:delete-task-list
+			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-task-lists">
+		<google-tasks:get-task-lists config-ref="Google_Tasks"
+			accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-task-by-id">
+		<google-tasks:get-task-by-id config-ref="Google_Tasks"
+			accessTokenId="accessTokenId" taskListId="#[payload.taskListId]"
+			taskId="#[payload.taskId]" />
 	</flow>
 </mule>

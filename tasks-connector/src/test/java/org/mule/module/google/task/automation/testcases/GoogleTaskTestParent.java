@@ -1,15 +1,20 @@
 package org.mule.module.google.task.automation.testcases;
 
+import static org.junit.Assert.fail;
+
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
+import org.mule.api.MuleEvent;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.module.google.task.model.TaskList;
 import org.mule.module.google.task.oauth.GoogleTasksConnectorOAuthState;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.springframework.context.ApplicationContext;
@@ -25,6 +30,7 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
 	public void init() throws ObjectStoreException {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
@@ -49,5 +55,42 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 	protected void setTestObjects(Map<String, Object> testObjects) {
 		this.testObjects = testObjects;
 	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	/**
+	 * All tasks lists which have the title taskListTitle will be deleted. The method returns the number of
+	 * lists deleted.
+	 * 
+	 * @param taskListTitle the task title
+	 * @return the number of lists deleted
+	 */
+	protected int deleteAllListsByTaskTitle(String taskListTitle) {
+		if(taskListTitle == null) {
+			return 0;
+		}
+		
+		MuleEvent getTaskListResponse = null;
+		int count = 0;
+		try {
+			getTaskListResponse = lookupFlowConstruct("get-task-lists").process(getTestEvent(testObjects));
+			List<TaskList> tasks = (List<TaskList>) getTaskListResponse.getMessage().getPayload();
+			
+			for(TaskList task : tasks) {
+				if(taskListTitle.equals(task.getTitle())) {
+					testObjects.put("taskListId", task.getId());
+					lookupFlowConstruct("delete-task-list").process(getTestEvent(testObjects));
+					count++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		return count;
+	}
+
 	
 }

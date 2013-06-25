@@ -29,9 +29,37 @@
 	    </entry>
 	</util:map>
 
+	<!-- get task list by id -->
+	<util:map id="getTaskListById" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+<!-- 		For creating the list to get -->
+	    <entry key="taskListRef">
+	    	<bean class="org.mule.module.google.task.model.TaskList">
+	    		<property name="title" value="Task title" />
+	    	</bean>
+	    </entry>
+	</util:map>
+
+	<!-- delete task list -->
+	<util:map id="deleteTaskList" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+<!-- 		For creating the list to delete -->
+	    <entry key="taskListRef">
+	    	<bean class="org.mule.module.google.task.model.TaskList">
+	    		<property name="title" value="Task title" />
+	    	</bean>
+	    </entry>
+	</util:map>
+
 	<!-- insert task -->
 	<util:map id="insertTask" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+<!-- 		For creating the list to insert the task in -->
+	    <entry key="taskListRef">
+	    	<bean class="org.mule.module.google.task.model.TaskList">
+	    		<property name="title" value="Task title" />
+	    	</bean>
+	    </entry>
 	    <entry key="taskRef">
 	    	<bean class="org.mule.module.google.task.model.Task">
 	    		<property name="notes" value="Task notes" />
