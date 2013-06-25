@@ -66,7 +66,7 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 			List<AclRule> aclRuleList = (List<AclRule>) response.getMessage().getPayload();
 			
 			for (AclRule insertedAclRule : insertedAclRules) {
-				assertTrue(aclRulesExistsInList(aclRuleList, insertedAclRule));
+				assertTrue(isAclRuleInList(aclRuleList, insertedAclRule));
 			}
 			
 		}
@@ -76,15 +76,6 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 		}
 	}	
 	
-	private boolean aclRulesExistsInList(List<AclRule> list, AclRule toSearch) {
-		for (AclRule aclRule : list) {
-			if (aclRule.getId().equals(toSearch.getId())) {
-				return true;
-			}
-		}
-		return false;
-	}	
-
 	@After
 	public void tearDown() {
 		try {

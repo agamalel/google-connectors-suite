@@ -60,7 +60,7 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 			List<CalendarList> calendarList = (List<CalendarList>) response.getMessage().getPayload();
 			
 			for (Calendar insertedCalendar : insertedCalendars) {
-				assertTrue(calendarExistsInList(calendarList, insertedCalendar));
+				assertTrue(isCalendarInList(calendarList, insertedCalendar));
 			}
 			
 		}
@@ -68,15 +68,6 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 			ex.printStackTrace();
 			fail();
 		}
-	}
-	
-	private boolean calendarExistsInList(List<CalendarList> list, Calendar toSearch) {
-		for (CalendarList calendar : list) {
-			if (calendar.getId().equals(toSearch.getId())) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	@After

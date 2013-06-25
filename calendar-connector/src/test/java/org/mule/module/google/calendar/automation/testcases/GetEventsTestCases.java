@@ -71,7 +71,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			boolean listsSame = EqualsBuilder.reflectionEquals(insertedEvents, returnedEvents);
 			assertTrue(listsSame);
 			for (Event event : insertedEvents) {
-				assertTrue(existsInList(returnedEvents, event));
+				assertTrue(isEventInList(returnedEvents, event));
 			}			
 		}
 		catch (Exception e) {
@@ -130,8 +130,8 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			assertTrue(returnedEvents.size() == events.size());
 			// Every event in the list should have been deleted, so check that the status is so
 			for (Event event : returnedEvents) {
-				assertTrue(event.getStatus().equals("cancelled"));				
-				assertTrue(existsInList(events, event));
+				assertTrue(event.getStatus().equals("cancelled"));	
+				assertTrue(isEventInList(events, event));
 			}
 			
 		}
@@ -168,19 +168,6 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			e.printStackTrace();
 			fail();
 		}
-	}
-	
-	private boolean existsInList(List<Event> events, Event event) {
-		return existsInList(events, event.getId());
-	}
-	
-	private boolean existsInList(List<Event> events, String eventId) {
-		for (Event event : events) {
-			if (event.getId().equals(eventId)) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	@After

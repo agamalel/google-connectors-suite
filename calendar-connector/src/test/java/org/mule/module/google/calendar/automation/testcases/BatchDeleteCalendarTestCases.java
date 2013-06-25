@@ -51,16 +51,7 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 			fail();
 		}		
 	}
-	
-	private boolean calendarExistsInList(List<CalendarList> list, Calendar toSearch) {
-		for (CalendarList calendar : list) {
-			if (calendar.getId().equals(toSearch.getId())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
+		
 	@Category({SmokeTests.class, SanityTests.class})
 	@Test
 	public void testBatchDeleteCalendar() {
@@ -72,7 +63,7 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 			
 			List<CalendarList> calendarList = (List<CalendarList>)response.getMessage().getPayload();
 			for (Calendar calendar : insertedCalendars) {
-				assertFalse(calendarExistsInList(calendarList, calendar));
+				assertFalse(isCalendarInList(calendarList, calendar));
 			}
 			
 		}
