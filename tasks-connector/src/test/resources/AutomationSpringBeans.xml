@@ -29,6 +29,17 @@
 	    </entry>
 	</util:map>
 
+	<!-- get task list by id -->
+	<util:map id="getTaskListById" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+<!-- 		For creating the list to get -->
+	    <entry key="taskListRef">
+	    	<bean class="org.mule.module.google.task.model.TaskList">
+	    		<property name="title" value="Task title" />
+	    	</bean>
+	    </entry>
+	</util:map>
+
 	<!-- delete task list -->
 	<util:map id="deleteTaskList" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
