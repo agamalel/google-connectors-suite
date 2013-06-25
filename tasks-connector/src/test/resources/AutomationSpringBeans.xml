@@ -54,6 +54,12 @@
 	<!-- insert task -->
 	<util:map id="insertTask" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+<!-- 		For creating the list to insert the task in -->
+	    <entry key="taskListRef">
+	    	<bean class="org.mule.module.google.task.model.TaskList">
+	    		<property name="title" value="Task title" />
+	    	</bean>
+	    </entry>
 	    <entry key="taskRef">
 	    	<bean class="org.mule.module.google.task.model.Task">
 	    		<property name="notes" value="Task notes" />
