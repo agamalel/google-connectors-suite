@@ -27,7 +27,7 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("batchDeleteCalendar");
 			
-			int numCalendars = Integer.parseInt(testObjects.get("numCalendars").toString());
+			int numCalendars = (Integer) testObjects.get("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();

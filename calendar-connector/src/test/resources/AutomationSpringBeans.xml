@@ -72,11 +72,11 @@
 	</util:map>
 	
 	<util:map id="batchInsertCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="5" />
+	    <entry key="numCalendars" value="#{5}" />
 	</util:map>
 	
 	<util:map id="batchDeleteCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="numCalendars" value="5" />
+	    <entry key="numCalendars" value="#{5}" />
 	</util:map>
 	
 	<util:map id="batchUpdateCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
