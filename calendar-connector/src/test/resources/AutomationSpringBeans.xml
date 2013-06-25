@@ -28,12 +28,9 @@
 	</util:map>
 	
 	<util:map id="clearCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-	    <entry key="calendarRef">
-	        <bean class="org.mule.module.google.calendar.model.Calendar">
-	            <property name="summary" value="Test calendar to clear" />
-	        </bean>
-	    </entry>
-	    <entry key="numEvents" value="#{10}" />
+	    <!-- clear-calendar only works for primary calendars. The ID of a primary calendar is the enail of who owns the calendar (or simply "primary") -->
+		<entry key="id" value="primary" />
+	    <entry key="numEvents" value="#{15}" />
 		<entry key="sampleEvent">
 	        <bean class="org.mule.module.google.calendar.model.Event">
 	            <property name="location" value="New York" />
@@ -267,6 +264,7 @@
 	        </bean>
 	    </entry>
 	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
+	    <entry key="timezone" value="UTC+1" />
 	</util:map>
 			
 	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">

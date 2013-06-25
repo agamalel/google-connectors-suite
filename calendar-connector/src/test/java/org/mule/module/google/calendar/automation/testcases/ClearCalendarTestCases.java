@@ -24,24 +24,19 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 	public void setUp() {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("clearCalendar");
-			
-			// Insert the calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
-			
-			testObjects.put("calendar", calendar);
-			testObjects.put("calendarId", calendar.getId());
-			
+						
+			String primaryCalendarId = testObjects.get("id").toString();
 			Event sampleEvent = (Event) testObjects.get("sampleEvent");
 			int numEvents = (Integer) testObjects.get("numEvents");
-			
+
 			// Instantiate the event objects
 			List<Event> events = new ArrayList<Event>();
 			for (int i = 0; i < numEvents; i++) {
 				events.add(getEvent(sampleEvent.getSummary(), sampleEvent.getStart(), sampleEvent.getEnd()));
 			}
-			
+					
 			// Batch insert the events
-			BatchResponse<Event> batchResponse = insertEvents(calendar, events);
+			BatchResponse<Event> batchResponse = insertEvents(primaryCalendarId, events);
 			List<Event> successfulEvents = batchResponse.getSuccessful();
 			
 			testObjects.put("events", successfulEvents);
@@ -56,14 +51,14 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testClearCalendar() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();			
-			testObjects.put("id", calendarId);
+			String primaryCalendarId = testObjects.get("id").toString();			
 			
 			// Clear the calendar
 			MessageProcessor flow = lookupFlowConstruct("clear-calendar");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
 			// Get all events
+			testObjects.put("calendarId", primaryCalendarId);
 			flow = lookupFlowConstruct("get-all-events");
 			response = flow.process(getTestEvent(testObjects));
 			
@@ -76,17 +71,5 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 			fail();
 		}
 	}
-	
-	@After
-	public void tearDown() {
-		try {
-			// Delete the calendar
-			Calendar calendar = (Calendar) testObjects.get("calendar");
-			deleteCalendar(calendar);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
+
 }
