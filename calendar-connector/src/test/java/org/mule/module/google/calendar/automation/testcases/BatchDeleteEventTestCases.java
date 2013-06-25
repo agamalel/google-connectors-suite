@@ -1,5 +1,6 @@
 package org.mule.module.google.calendar.automation.testcases;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.api.MuleEvent;
+import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
@@ -58,12 +61,16 @@ public class BatchDeleteEventTestCases extends GoogleCalendarTestParent {
 	public void testBatchDeleteEvent() {
 		try {			
 						
-			Calendar calendar = (Calendar) testObjects.get("calendar");
+			Calendar calendar = (Calendar) testObjects.get("calendarRef");
 			List<Event> succcessful = (List<Event>) testObjects.get("calendarEventsRef");
-			
+			 
 			deleteEvents(calendar, succcessful);
 			
-			fail("Test not done yet");
+			MessageProcessor flow = lookupFlowConstruct("get-all-events");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+			
+			List<Event> events = (List<Event>) response.getMessage().getPayload();
+			assertTrue(events.isEmpty());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
