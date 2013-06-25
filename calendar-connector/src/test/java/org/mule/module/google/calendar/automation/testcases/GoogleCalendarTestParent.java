@@ -229,7 +229,7 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	
 	protected boolean isEventInList(List<Event> events, Event event) {
 		for (Event e : events) {
-			if (event.getId().equals(e)) {
+			if (event.getId().equals(e.getId())) {
 				return true;
 			}
 		}
