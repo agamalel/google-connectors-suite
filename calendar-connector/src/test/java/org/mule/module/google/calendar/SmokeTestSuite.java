@@ -28,7 +28,7 @@ import org.mule.module.google.calendar.automation.testcases.ImportEventTestCases
 import org.mule.module.google.calendar.automation.testcases.InsertAclRuleTestCases;
 import org.mule.module.google.calendar.automation.testcases.InsertEventTestCases;
 import org.mule.module.google.calendar.automation.testcases.MoveEventTestCases;
-import org.mule.module.google.calendar.automation.testcases.QuickAddEvent;
+import org.mule.module.google.calendar.automation.testcases.QuickAddEventTestCases;
 import org.mule.module.google.calendar.automation.testcases.SmokeTests;
 import org.mule.module.google.calendar.automation.testcases.UpdateAclRuleTestCases;
 import org.mule.module.google.calendar.automation.testcases.UpdateCalendarListTestCases;
@@ -50,7 +50,7 @@ import org.mule.module.google.calendar.automation.testcases.UpdateEventTestCases
 	GetFreeTimeTestCases.class, GetInstancesTestCases.class,
 	ImportEventTestCases.class, InsertAclRuleTestCases.class,
 	InsertEventTestCases.class, MoveEventTestCases.class,
-	QuickAddEvent.class, UpdateAclRuleTestCases.class,
+	QuickAddEventTestCases.class, UpdateAclRuleTestCases.class,
 	UpdateCalendarListTestCases.class, UpdateCalendarTestCases.class,
 	UpdateEventTestCases.class
 })

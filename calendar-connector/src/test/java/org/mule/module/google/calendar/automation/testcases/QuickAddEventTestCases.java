@@ -26,7 +26,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 
-public class QuickAddEvent extends GoogleCalendarTestParent {
+public class QuickAddEventTestCases extends GoogleCalendarTestParent {
 
 	@Before
 	public void setUp() {
