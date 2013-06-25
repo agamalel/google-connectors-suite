@@ -8,6 +8,19 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
+	<util:map id="commonValues" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="taskList">
+	    	<bean class="org.mule.module.google.task.model.TaskList">
+	    		<property name="title" value="Task Title" />
+	    	</bean>
+    	</entry>
+    	<entry key="task">
+	    	<bean class="org.mule.module.google.task.model.Task">
+	    		<property name="notes" value="Task notes" />
+	    	</bean>
+    	</entry>
+	</util:map>
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
@@ -21,75 +34,45 @@
 	
 	<!-- insert task list -->
 	<util:map id="insertTaskList" map-class="java.util.HashMap"
-		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
-	    <entry key="taskListRef">
-	    	<bean class="org.mule.module.google.task.model.TaskList">
-	    		<property name="title" value="Task title" />
-	    	</bean>
-	    </entry>
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
 	</util:map>
 
 	<!-- get task list by id -->
 	<util:map id="getTaskListById" map-class="java.util.HashMap"
-		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 <!-- 		For creating the list to get -->
-	    <entry key="taskListRef">
-	    	<bean class="org.mule.module.google.task.model.TaskList">
-	    		<property name="title" value="Task title" />
-	    	</bean>
-	    </entry>
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
 	</util:map>
 
 	<!-- delete task list -->
 	<util:map id="deleteTaskList" map-class="java.util.HashMap"
-		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 <!-- 		For creating the list to delete -->
-	    <entry key="taskListRef">
-	    	<bean class="org.mule.module.google.task.model.TaskList">
-	    		<property name="title" value="Task title" />
-	    	</bean>
-	    </entry>
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
 	</util:map>
 
 	<!-- insert task -->
 	<util:map id="insertTask" map-class="java.util.HashMap"
-		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 <!-- 		For creating the list to insert the task in -->
-	    <entry key="taskListRef">
-	    	<bean class="org.mule.module.google.task.model.TaskList">
-	    		<property name="title" value="Task title" />
-	    	</bean>
-	    </entry>
-	    <entry key="taskRef">
-	    	<bean class="org.mule.module.google.task.model.Task">
-	    		<property name="notes" value="Task notes" />
-	    	</bean>
-	    </entry>
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="taskRef" value="#{commonValues.get('task')}" />
 	</util:map>
 	
 	<!-- get task by id -->
 	<util:map id="getTaskById" map-class="java.util.HashMap"
-		key-type="java.lang.String" value-type="java.lang.String" scope="prototype">
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 <!-- 		For creating the list to insert the task in -->
-	    <entry key="taskListRef">
-	    	<bean class="org.mule.module.google.task.model.TaskList">
-	    		<property name="title" value="Task title" />
-	    	</bean>
-	    </entry>
-	    <entry key="taskRef">
-	    	<bean class="org.mule.module.google.task.model.Task">
-	    		<property name="notes" value="Task notes" />
-	    	</bean>
-	    </entry>
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="taskRef" value="#{commonValues.get('task')}" />
 	</util:map>
 
-<!-- 	flow name="insert-task-list"> -->
-<!-- 		<google-tasks:insert-task-list config-ref="Google_Tasks" taskList="#[payload.taskList]" accessTokenId="accessTokenId" /> -->
-<!-- 	</flow> -->
-	
-	
-<!-- 	<flow name="insert-task"> -->
-<!-- 		<google-tasks:insert-task accessTokenId="accessTokenId" -->
-<!-- 			config-ref="Google_Tasks" task-ref="#[payload.taskRef]" taskListId="#[payload.taskListId]"/> -->
-<!-- 	</flow> -->
+	<!-- get task lists -->
+	<util:map id="getTaskLists" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+<!-- 		A list of TaskList objects to insert and get -->
+		<entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	</util:map>
+
 </beans>

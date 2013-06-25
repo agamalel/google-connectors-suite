@@ -66,7 +66,7 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 	 * @param taskListTitle the task title
 	 * @return the number of lists deleted
 	 */
-	protected int deleteAllListsByTaskTitle(String taskListTitle) {
+	protected int deleteAllListsByTaskListTitle(String taskListTitle) {
 		if(taskListTitle == null) {
 			return 0;
 		}

@@ -43,7 +43,7 @@ public class GetTaskListByIdTestCases extends GoogleTaskTestParent {
 		try {
 			getTaskListByIdResponse = lookupFlowConstruct("get-task-list-by-id")
 					.process(getTestEvent(testObjects));
-			assertEquals("get-task-lisg-by-id should return the task inserted in the setUp",
+			assertEquals("get-task-list-by-id should return the task inserted in the setUp",
 					((TaskList) testObjects.get("taskListRef")).getTitle(),
 					((TaskList) getTaskListByIdResponse.getMessage()
 							.getPayload()).getTitle());
