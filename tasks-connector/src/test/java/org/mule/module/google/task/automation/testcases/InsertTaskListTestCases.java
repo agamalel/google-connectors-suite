@@ -17,12 +17,7 @@ public class InsertTaskListTestCases extends GoogleTaskTestParent {
 	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
-		try {
-			testObjects = (HashMap<String, Object>) context.getBean("insertTaskList");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
-		}
+		testObjects = (HashMap<String, Object>) context.getBean("insertTaskList");
 	}
 	
 	@After
@@ -35,11 +30,8 @@ public class InsertTaskListTestCases extends GoogleTaskTestParent {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testInsertTaskList() {
-		testObjects = (HashMap<String, Object>) context.getBean("insertTaskList");
-
 		MuleEvent insertTaskListResponse = null;
 		try {
 			insertTaskListResponse = lookupFlowConstruct("insert-task-list").process(getTestEvent(testObjects));
