@@ -26,6 +26,7 @@ public class InsertTaskTestCases extends GoogleTaskTestParent {
 					.getMessage().getPayload()).getId());
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 

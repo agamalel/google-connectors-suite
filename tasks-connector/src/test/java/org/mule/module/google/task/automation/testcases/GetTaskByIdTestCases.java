@@ -29,6 +29,7 @@ public class GetTaskByIdTestCases extends GoogleTaskTestParent {
 			testObjects.put("taskId", ((Task) insertTaskResponse.getMessage().getPayload()).getId());
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -52,8 +53,8 @@ public class GetTaskByIdTestCases extends GoogleTaskTestParent {
 			fail();
 		}
 
-		Task task2 = (Task) getTaskByIdResponse.getMessage().getPayload();
+		Task task = (Task) getTaskByIdResponse.getMessage().getPayload();
 		assertEquals("Make sure that the Task obtained from get-task-by-id has the right value for its notes", 
-				((Task) testObjects.get("taskRef")).getNotes(), task2.getNotes());
+				((Task) testObjects.get("taskRef")).getNotes(), task.getNotes());
 	}
 }

@@ -18,13 +18,6 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 			remotePort="${google.tasks.remotePort}" />
 	</google-tasks:config-with-oauth>
 
-	<!-- <google-calendars:config-with-oauth name="Google_Calendars" consumerKey="${google.calendars.consumer.key}" -->
-	<!-- consumerSecret="${google.calendars.consumer.secret}" doc:name="Google 
-		Calendars" applicationName="${google.calendars.application.name}"> -->
-	<!-- <google-calendars:oauth-callback-config domain="${google.calendars.domain}" 
-		localPort="${google.calendars.localPort}" remotePort="${google.calendars.remotePort}"/> -->
-	<!-- </google-calendars:config-with-oauth> -->
-
 	<flow name="insert-task">
 		<google-tasks:insert-task accessTokenId="accessTokenId"
 			config-ref="Google_Tasks" task-ref="#[payload.taskRef]" taskListId="#[payload.taskListId]" />
@@ -42,6 +35,12 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 			accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="delete-task">
+		<google-tasks:delete-task config-ref="Google_Tasks"
+			taskListId="#[payload.taskListId]" taskId="#[payload.taskId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="delete-task-list">
 		<google-tasks:delete-task-list
 			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
@@ -54,8 +53,8 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 	</flow>
 
 	<flow name="get-tasks">
-		<google-tasks:get-tasks config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
-			accessTokenId="accessTokenId" />
+		<google-tasks:get-tasks config-ref="Google_Tasks"
+			taskListId="#[payload.taskListId]" accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-task-by-id">

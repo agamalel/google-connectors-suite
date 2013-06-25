@@ -34,6 +34,7 @@ public class DeleteTaskListTestCases extends GoogleTaskTestParent {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 

@@ -45,6 +45,14 @@
 	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
 	</util:map>
 
+	<!-- delete task -->
+	<util:map id="deleteTask" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+<!-- 		For creating the list to delete -->
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="taskRef" value="#{commonValues.get('task')}" />
+	</util:map>
+
 	<!-- delete task list -->
 	<util:map id="deleteTaskList" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
