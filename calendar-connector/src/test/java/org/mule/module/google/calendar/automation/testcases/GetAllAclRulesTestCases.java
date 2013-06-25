@@ -66,7 +66,7 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, SanityTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetAllAclRules() {
 		try {

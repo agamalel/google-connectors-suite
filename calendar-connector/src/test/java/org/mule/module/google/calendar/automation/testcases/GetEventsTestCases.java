@@ -66,7 +66,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Category({SmokeTests.class, SanityTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetEvents_AllEvents() {
 		try {
@@ -91,7 +91,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Category({SmokeTests.class, SanityTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetEvents_MaxResults() {
 		try {
@@ -114,7 +114,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Category({SmokeTests.class, SanityTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetEvents_ShowDeleted() {
 		try {
@@ -152,7 +152,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Category({SmokeTests.class, SanityTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetEvents_UsingQuery() {
 		try {

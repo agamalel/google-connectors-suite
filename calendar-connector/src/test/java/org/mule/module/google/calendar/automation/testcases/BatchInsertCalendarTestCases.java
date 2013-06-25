@@ -27,7 +27,7 @@ public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 
 	protected List<Calendar> insertedCalendars = new ArrayList<Calendar>();
 	
-	@Category({SmokeTests.class, SanityTests.class})
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testBatchInsertCalendar() {
 		try {
