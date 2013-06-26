@@ -62,4 +62,14 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 			accessTokenId="accessTokenId" taskListId="#[payload.taskListId]"
 			taskId="#[payload.taskId]" />
 	</flow>
+
+	<flow name="clear-tasks">
+		<google-tasks:clear-tasks config-ref="Google_Tasks"
+			taskListId="#[payload.taskListId]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="update-task">
+		<google-tasks:update-task config-ref="Google_Tasks"
+			taskListId="#[payload.taskListId]" taskId="#[payload.taskId]" task-ref="#[payload.taskRef]" accessTokenId="accessTokenId" />
+	</flow>
 </mule>
