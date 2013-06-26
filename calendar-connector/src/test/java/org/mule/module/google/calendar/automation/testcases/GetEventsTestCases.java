@@ -161,7 +161,8 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_UsingQuery() {
 		try {
 			
-			String eventTitle = testObjects.get("eventTitle").toString();
+			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			String eventTitle = sampleEvent.getSummary();
 			List<Event> insertedEvents = (List<Event>) testObjects.get("events");
 			
 			// Get the events
