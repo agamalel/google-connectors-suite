@@ -41,12 +41,16 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			testObjects.put("calendar", calendar);
 			testObjects.put("calendarId", calendar.getId());
 
+			// Get the sample event
+			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			
 			// Get start and end time beans.
-			EventDateTime eventStartTime = (EventDateTime) context.getBean("eventStartTime");
-			EventDateTime eventEndTime = (EventDateTime) context.getBean("eventEndTime");			
-			int numEvents = Integer.parseInt(testObjects.get("numEvents").toString());
-			String eventTitle = testObjects.get("eventTitle").toString();
-						
+			String eventTitle = sampleEvent.getSummary();
+			EventDateTime eventStartTime = sampleEvent.getStart();
+			EventDateTime eventEndTime = sampleEvent.getEnd();
+
+			int numEvents = (Integer) testObjects.get("numEvents");
+			
 			// Create the test events
 			List<Event> events = new ArrayList<Event>();			
 			for (int i = 0; i < numEvents; i++) {
@@ -96,7 +100,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_MaxResults() {
 		try {
 
-			int maxResults = Integer.parseInt(testObjects.get("maxResults").toString());
+			int maxResults = (Integer) testObjects.get("maxResults");
 						
 			// Get the events
 			MessageProcessor flow = lookupFlowConstruct("get-events");
@@ -157,7 +161,8 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_UsingQuery() {
 		try {
 			
-			String eventTitle = testObjects.get("eventTitle").toString();
+			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			String eventTitle = sampleEvent.getSummary();
 			List<Event> insertedEvents = (List<Event>) testObjects.get("events");
 			
 			// Get the events
