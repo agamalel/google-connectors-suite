@@ -119,8 +119,16 @@
 	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
 				<property name="location" value="America" />
 				<property name="summary" value="This is a summary about the event" />
-				<property name="start" ref="eventStartTime" />
-				<property name="end" ref="eventEndTime" />
+				<property name="start">
+			    	<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2012-12-16" />
+					</bean>
+			    </property>
+				<property name="end">
+				    <bean class="org.mule.module.google.calendar.model.EventDateTime">
+						<property name="date" value="2016-2-20" />
+					</bean>
+				</property>
 			</bean>
 	    </entry>
 	</util:map>
@@ -159,8 +167,16 @@
 	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
 				<property name="location" value="America" />
 				<property name="summary" value="This is a summary about the event" />
-				<property name="start" ref="eventStartTime" />
-				<property name="end" ref="eventEndTime" />
+				<property name="start">
+			    	<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2012-12-16" />
+					</bean>
+			    </property>
+				<property name="end">
+				    <bean class="org.mule.module.google.calendar.model.EventDateTime">
+						<property name="date" value="2016-2-20" />
+					</bean>
+				</property>
 			</bean>
 	    </entry>
 	</util:map>
@@ -175,8 +191,16 @@
 	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
 				<property name="location" value="America" />
 				<property name="summary" value="This is a summary about the event" />
-				<property name="start" ref="eventStartTime" />
-				<property name="end" ref="eventEndTime" />
+				<property name="start">
+			    	<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2012-12-16" />
+					</bean>
+			    </property>
+				<property name="end">
+				    <bean class="org.mule.module.google.calendar.model.EventDateTime">
+						<property name="date" value="2016-2-20" />
+					</bean>
+				</property>
 			</bean>
 	    </entry>
 	</util:map>
@@ -191,8 +215,16 @@
 	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
 				<property name="location" value="America" />
 				<property name="summary" value="This is a summary about the event" />
-				<property name="start" ref="eventStartTime" />
-				<property name="end" ref="eventEndTime" />
+				<property name="start">
+			    	<bean class="org.mule.module.google.calendar.model.EventDateTime">
+					    <property name="date" value="2012-12-16" />
+					</bean>
+			    </property>
+				<property name="end">
+				    <bean class="org.mule.module.google.calendar.model.EventDateTime">
+						<property name="date" value="2016-2-20" />
+					</bean>
+				</property>
 			</bean>
 	    </entry>
 	</util:map>
@@ -432,7 +464,7 @@
 	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
 	    <entry key="timezone" value="UTC+1" />
 	</util:map>
-				
+
 </beans>
 
 
