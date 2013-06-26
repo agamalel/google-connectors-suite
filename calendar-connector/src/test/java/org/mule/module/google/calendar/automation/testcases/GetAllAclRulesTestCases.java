@@ -41,23 +41,18 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 			// Replace old calendar instance with new instance
 			testObjects.put("calendarRef", calendar);
 			testObjects.put("calendarId", calendar.getId());
-			
-			//Creating the first Acl rule 
+
 			MessageProcessor flow = lookupFlowConstruct("insert-acl-rule");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
+			List<String> scopes = (List<String>) testObjects.get("scopes");
 			
-			AclRule aclRule = (AclRule) event.getMessage().getPayload();
-			insertedAclRules.add(aclRule);
-			
-			//Changing the scope
-			testObjects.put("scope", "andre.schembris@ricston.com");
-			
-			//Creating the second Acl rule
-			flow = lookupFlowConstruct("insert-acl-rule");
-			event = flow.process(getTestEvent(testObjects));
-			
-			aclRule = (AclRule) event.getMessage().getPayload();
-			insertedAclRules.add(aclRule);
+			// Insert the different scopes
+			for (String scope : scopes) {
+				testObjects.put("scope", scope);
+				MuleEvent response = flow.process(getTestEvent(testObjects));
+				
+				AclRule aclRule = (AclRule) response.getMessage().getPayload();
+				insertedAclRules.add(aclRule);
+			}
 				
 		}
 		catch (Exception e) {
