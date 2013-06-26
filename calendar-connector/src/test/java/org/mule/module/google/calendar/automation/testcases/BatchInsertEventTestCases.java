@@ -21,8 +21,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
@@ -64,16 +62,20 @@ public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testBatchInsertEvent() {
 		try {			
+			
+			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			
 			// Get start and end time beans.
-			EventDateTime eventStartTime = (EventDateTime) context.getBean("eventStartTime");
-			EventDateTime eventEndTime = (EventDateTime) context.getBean("eventEndTime");			
-			int numEvents = Integer.parseInt(testObjects.get("numEvents").toString());
+			String eventSummary = sampleEvent.getSummary();
+			EventDateTime eventStartTime = sampleEvent.getStart();
+			EventDateTime eventEndTime = sampleEvent.getEnd();			
+			int numEvents = (Integer) testObjects.get("numEvents");
 			String calendarId = testObjects.get("calendarId").toString();
 			
 			// Instantiate the events that we want to batch insert
 			List<Event> events = new ArrayList<Event>();
 			for (int i = 0; i < numEvents; i++) {
-				Event event = getEvent("Test Event", eventStartTime, eventEndTime);
+				Event event = getEvent(eventSummary, eventStartTime, eventEndTime);
 				events.add(event);
 			}
 		

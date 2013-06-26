@@ -43,10 +43,13 @@ public class BatchDeleteEventTestCases extends GoogleCalendarTestParent {
 			testObjects.put("calendarRef", calendar);
 			testObjects.put("calendarId", calendar.getId());			
 
+			// Get the sample event
+			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			
 			// Get start and end time beans.
-			EventDateTime eventStartTime = (EventDateTime) context.getBean("eventStartTime");
-			EventDateTime eventEndTime = (EventDateTime) context.getBean("eventEndTime");			
-			int numEvents = Integer.parseInt(testObjects.get("numEvents").toString());
+			EventDateTime eventStartTime = sampleEvent.getStart();
+			EventDateTime eventEndTime = sampleEvent.getEnd();
+			int numEvents = (Integer) testObjects.get("numEvents");
 			
 			// Instantiate the events that we want to batch insert
 			List<Event> events = new ArrayList<Event>();
