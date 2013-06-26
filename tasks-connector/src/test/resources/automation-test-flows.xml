@@ -54,7 +54,9 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 
 	<flow name="get-tasks">
 		<google-tasks:get-tasks config-ref="Google_Tasks"
-			taskListId="#[payload.taskListId]" accessTokenId="accessTokenId" />
+			taskListId="#[payload.taskListId]" accessTokenId="accessTokenId"
+			showcompleted="#[payload.showcompleted]" 
+			showHidden="#[payload.showHidden]" />
 	</flow>
 
 	<flow name="get-task-by-id">
