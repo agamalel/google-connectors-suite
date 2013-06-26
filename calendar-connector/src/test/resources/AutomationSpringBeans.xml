@@ -115,7 +115,14 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 		</entry>
-	    <entry key="calendarEventRef" value-ref="eventBean" />
+	    <entry key="calendarEventRef">
+	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
+				<property name="location" value="America" />
+				<property name="summary" value="This is a summary about the event" />
+				<property name="start" ref="eventStartTime" />
+				<property name="end" ref="eventEndTime" />
+			</bean>
+	    </entry>
 	</util:map>
 	
 	<util:map id="importEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -148,7 +155,14 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-	    <entry key="calendarEventRef" value-ref="eventBean" />
+	    <entry key="calendarEventRef">
+	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
+				<property name="location" value="America" />
+				<property name="summary" value="This is a summary about the event" />
+				<property name="start" ref="eventStartTime" />
+				<property name="end" ref="eventEndTime" />
+			</bean>
+	    </entry>
 	</util:map>
 	
 	<util:map id="getInstances" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -157,7 +171,14 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-	    <entry key="calendarEventRef" value-ref="eventBean" />
+	    <entry key="calendarEventRef">
+	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
+				<property name="location" value="America" />
+				<property name="summary" value="This is a summary about the event" />
+				<property name="start" ref="eventStartTime" />
+				<property name="end" ref="eventEndTime" />
+			</bean>
+	    </entry>
 	</util:map>
 	
 	<util:map id="deleteEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -166,7 +187,14 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-	    <entry key="calendarEventRef" value-ref="eventBean" />
+	    <entry key="calendarEventRef">
+	      	<bean class="org.mule.module.google.calendar.model.Event" scope="prototype">
+				<property name="location" value="America" />
+				<property name="summary" value="This is a summary about the event" />
+				<property name="start" ref="eventStartTime" />
+				<property name="end" ref="eventEndTime" />
+			</bean>
+	    </entry>
 	</util:map>
 	
 	<util:map id="quickAddEvent" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -358,17 +386,6 @@
 	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
 	    <entry key="timezone" value="UTC+1" />
 	</util:map>
-			
-	<bean id="calendarBean" class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
-		<property name="summary" value="Sample title for calendar" />	    
-    </bean>
-    
-	<bean id="eventBean" class="org.mule.module.google.calendar.model.Event" scope="prototype">
-		<property name="location" value="America" />
-		<property name="summary" value="This is a summary about the event" />
-		<property name="start" ref="eventStartTime" />
-		<property name="end" ref="eventEndTime" />
-	</bean>
 	
 	<bean id="eventStartTime" class="org.mule.module.google.calendar.model.EventDateTime">
 	    <property name="date" value="2012-12-16" />
