@@ -14,6 +14,7 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.module.google.task.model.Task;
 import org.mule.module.google.task.model.TaskList;
 import org.mule.module.google.task.oauth.GoogleTasksConnectorOAuthState;
 import org.mule.tck.junit4.FunctionalTestCase;
@@ -89,6 +90,18 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 		
 		return count;
 	}
+	
+	protected Task insertTask(Task task, TaskList taskList) throws Exception {
+		return insertTask(task, taskList.getId());
+	}
 
+	protected Task insertTask(Task task, String taskListId) throws Exception {
+		testObjects.put("taskRef", task);
+		testObjects.put("taskListId", taskListId);
+		
+		MessageProcessor flow = lookupFlowConstruct("insert-task");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Task) response.getMessage().getPayload();
+	}
 	
 }

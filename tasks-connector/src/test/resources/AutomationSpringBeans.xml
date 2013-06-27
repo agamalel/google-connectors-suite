@@ -53,6 +53,22 @@
 	    <entry key="taskRef" value="#{commonValues.get('task')}" />
 	</util:map>
 
+	<util:map id="moveTask" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="firstTask">
+	        <bean class="org.mule.module.google.task.model.Task">
+	            <property name="title" value="First Task" />
+	    		<property name="notes" value="This is the first task to be" />
+	    	</bean>
+	    </entry>
+	    <entry key="secondTask">
+	        <bean class="org.mule.module.google.task.model.Task">
+	            <property name="title" value="Second Task" />
+	    		<property name="notes" value="This is the second task to be" />
+	    	</bean>
+	    </entry>
+	</util:map>
+	
 	<!-- delete task list -->
 	<util:map id="deleteTaskList" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

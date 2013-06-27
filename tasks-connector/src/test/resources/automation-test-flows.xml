@@ -41,6 +41,16 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 			accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="move-task-parent">
+		<google-tasks:move config-ref="Google_Tasks"
+			taskListId="#[payload.taskListId]" taskId="#[payload.taskId]" parentId="#[payload.parentId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="move-task-reorder">
+	    <google-tasks:move config-ref="Google_Tasks" taskListId="#[payload.taskListId]" taskId="#[payload.taskId]" previousId="#[payload.previousId]" accessTokenId="accessTokenId" />
+	</flow>
+
 	<flow name="delete-task-list">
 		<google-tasks:delete-task-list
 			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
