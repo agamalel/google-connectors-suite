@@ -1,4 +1,4 @@
-package org.mule.module.google.calendar;
+package org.mule.module.google.calendar.automation;
 
 import org.junit.experimental.categories.Categories;
 import org.junit.experimental.categories.Categories.IncludeCategory;
@@ -30,14 +30,14 @@ import org.mule.module.google.calendar.automation.testcases.InsertAclRuleTestCas
 import org.mule.module.google.calendar.automation.testcases.InsertEventTestCases;
 import org.mule.module.google.calendar.automation.testcases.MoveEventTestCases;
 import org.mule.module.google.calendar.automation.testcases.QuickAddEventTestCases;
-import org.mule.module.google.calendar.automation.testcases.RegressionTests;
+import org.mule.module.google.calendar.automation.testcases.SmokeTests;
 import org.mule.module.google.calendar.automation.testcases.UpdateAclRuleTestCases;
 import org.mule.module.google.calendar.automation.testcases.UpdateCalendarListTestCases;
 import org.mule.module.google.calendar.automation.testcases.UpdateCalendarTestCases;
 import org.mule.module.google.calendar.automation.testcases.UpdateEventTestCases;
 
 @RunWith(Categories.class)
-@IncludeCategory(RegressionTests.class)
+@IncludeCategory(SmokeTests.class)
 @SuiteClasses({
 	BatchDeleteCalendarTestCases.class, BatchDeleteEventTestCases.class,
 	BatchInsertCalendarTestCases.class, BatchInsertEventTestCases.class,
@@ -55,6 +55,5 @@ import org.mule.module.google.calendar.automation.testcases.UpdateEventTestCases
 	UpdateCalendarListTestCases.class, UpdateCalendarTestCases.class,
 	UpdateEventTestCases.class, CreateCalendarTestCases.class
 })
-public class RegressionTestSuite {
-
+public class SmokeTestSuite {
 }

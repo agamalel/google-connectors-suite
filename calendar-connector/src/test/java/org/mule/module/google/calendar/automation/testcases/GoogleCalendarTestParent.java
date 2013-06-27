@@ -41,7 +41,7 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
     @Rule
     public Timeout globalTimeout = new Timeout(600000);
     
-	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml","HelperSpringBeans.xml" };
+	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 
