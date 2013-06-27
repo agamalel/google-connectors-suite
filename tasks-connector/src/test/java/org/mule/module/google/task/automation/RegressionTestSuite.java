@@ -15,6 +15,7 @@ import org.mule.module.google.task.automation.testcases.InsertTaskListTestCases;
 import org.mule.module.google.task.automation.testcases.InsertTaskTestCases;
 import org.mule.module.google.task.automation.testcases.MoveTaskTestCases;
 import org.mule.module.google.task.automation.testcases.RegressionTests;
+import org.mule.module.google.task.automation.testcases.UpdateTaskListTestCases;
 import org.mule.module.google.task.automation.testcases.UpdateTaskTestCases;
 
 @RunWith(Categories.class)
@@ -25,7 +26,7 @@ import org.mule.module.google.task.automation.testcases.UpdateTaskTestCases;
 	GetTaskListByIdTestCases.class, GetTasksTestCases.class,
 	GetTaskListsTestCases.class, InsertTaskListTestCases.class,
 	InsertTaskTestCases.class, MoveTaskTestCases.class,
-	UpdateTaskTestCases.class
+	UpdateTaskTestCases.class, UpdateTaskListTestCases.class
 })
 public class RegressionTestSuite {
 
