@@ -11,6 +11,7 @@ import org.mule.module.google.calendar.automation.testcases.BatchInsertEventTest
 import org.mule.module.google.calendar.automation.testcases.BatchUpdateCalendarTestCases;
 import org.mule.module.google.calendar.automation.testcases.BatchUpdateEventTestCases;
 import org.mule.module.google.calendar.automation.testcases.ClearCalendarTestCases;
+import org.mule.module.google.calendar.automation.testcases.CreateCalendarTestCases;
 import org.mule.module.google.calendar.automation.testcases.DeleteAclRuleTestCases;
 import org.mule.module.google.calendar.automation.testcases.DeleteCalendarListTestCases;
 import org.mule.module.google.calendar.automation.testcases.DeleteCalendarTestCases;
@@ -52,7 +53,7 @@ import org.mule.module.google.calendar.automation.testcases.UpdateEventTestCases
 	InsertEventTestCases.class, MoveEventTestCases.class,
 	QuickAddEventTestCases.class, UpdateAclRuleTestCases.class,
 	UpdateCalendarListTestCases.class, UpdateCalendarTestCases.class,
-	UpdateEventTestCases.class
+	UpdateEventTestCases.class, CreateCalendarTestCases.class
 })
 public class RegressionTestSuite {
 
