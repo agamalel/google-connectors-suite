@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.module.google.task.model.Task;
 import org.mule.module.google.task.model.TaskList;
@@ -43,6 +44,7 @@ public class GetTaskByIdTestCases extends GoogleTaskTestParent {
 		}
 	}
 	
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testInsertTask() {
 		MuleEvent getTaskByIdResponse = null;
