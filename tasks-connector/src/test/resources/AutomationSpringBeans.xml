@@ -97,6 +97,8 @@
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 <!-- 		A list of TaskList objects to insert and get -->
 		<entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="showHidden" value="false" />
+	    <entry key="showcompleted" value="false" />
 	</util:map>
 
 	<!-- get tasks -->
@@ -105,6 +107,23 @@
 <!-- 		A list of TaskList objects to insert and get -->
 		<entry key="taskListRef" value="#{commonValues.get('taskList')}" />
 	    <entry key="taskRef" value="#{commonValues.get('task')}" />
+	    <entry key="showHidden" value="false" />
+	    <entry key="showcompleted" value="false" />
 	</util:map>
 
+	<!-- clear tasks -->
+	<util:map id="clearTasks" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="taskRef" value="#{commonValues.get('task')}" />
+	    <entry key="showcompleted" value="true" />
+	    <entry key="showHidden" value="false" />
+	</util:map>
+
+	<!-- update task -->
+	<util:map id="updateTask" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="taskListRef" value="#{commonValues.get('taskList')}" />
+	    <entry key="taskRef" value="#{commonValues.get('task')}" />
+	</util:map>
 </beans>
