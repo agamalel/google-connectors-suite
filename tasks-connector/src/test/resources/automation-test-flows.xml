@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 		consumerKey="${google.tasks.consumer.key}" consumerSecret="${google.tasks.consumer.secret}"
 		applicationName="${google.tasks.application.name}" doc:name="Google Tasks">
 		<google-tasks:oauth-callback-config
-			domain="${google.tasks.domain}" localPort="${google.tasks.localPort}"
+			domain="${google.tasks.domain}" localPort="${google.tasks.localPort}" path="${google.tasks.path}"
 			remotePort="${google.tasks.remotePort}" />
 	</google-tasks:config-with-oauth>
 
