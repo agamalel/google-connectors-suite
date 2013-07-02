@@ -691,7 +691,6 @@ public class GoogleCalendarConnector extends AbstractGoogleOAuthConnector {
     	com.google.api.services.calendar.model.Events instances = this.client.events().instances(calendarId, eventId)
     			.setMaxAttendees(maxAttendess)
     			.setMaxResults(maxResults)
-    			.setPageToken(eventId)
     			.setOriginalStart(originalStart)
     			.setShowDeleted(showDeleted)
     			.setTimeZone(timezone)
