@@ -16,7 +16,16 @@
 
 	<bean id="connectorOAuthState" class="org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState">
 		<property name="accessToken" value="${google.calendars.accessToken}" />
+		<property name="refreshToken" value="${google.calendars.refreshToken} "/>
 	</bean>
+	
+	<util:map id="mainCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	    <entry key="mainCalendarRef">
+	        <bean class="org.mule.module.google.calendar.model.Calendar" scope="prototype">
+	            <property name="summary" value="This is the main calendar" />
+	        </bean>
+	    </entry>
+	</util:map>
 	
 	<util:map id="createCalendar" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="calendarRef">	
@@ -387,6 +396,9 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
+		<entry key="scope" value="mulesoft.com"/>
+		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
+		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</util:map>
 		
 	<util:map id="deleteAclRule" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">

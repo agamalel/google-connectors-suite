@@ -31,7 +31,7 @@ public class GetAclRuleByIdTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("insertAclRule");
+			testObjects = (Map<String, Object>) context.getBean("getAclRuleById");
 			
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
