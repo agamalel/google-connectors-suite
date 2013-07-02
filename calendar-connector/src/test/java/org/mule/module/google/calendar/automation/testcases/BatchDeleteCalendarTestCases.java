@@ -48,9 +48,6 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 			// Insert calendar
 			BatchResponse<Calendar> response = insertCalendars(calendars);			
 			
-			// Assert that no errors exist in the response
-			assertTrue(response.getErrors() == null || response.getErrors().size() == 0);
-			
 			// Add them to a global variable so that we can drop them in the tearDown method
 			for (Calendar calendar : response.getSuccessful()) {
 				insertedCalendars.add(calendar);
