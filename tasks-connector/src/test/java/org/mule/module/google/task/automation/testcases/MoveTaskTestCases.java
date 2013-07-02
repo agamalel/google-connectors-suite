@@ -55,7 +55,7 @@ public class MoveTaskTestCases extends GoogleTaskTestParent {
 		}
 	}
 
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
 	public void testMoveTask_Parent() {
 		try {

@@ -60,7 +60,7 @@ public class UpdateTaskListTestCases extends GoogleTaskTestParent {
 		}
 	}
 
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
 	public void testUpdateTaskList() {
 		TaskList taskList = (TaskList) testObjects.get("taskListRef");

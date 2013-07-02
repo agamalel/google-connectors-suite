@@ -67,7 +67,7 @@ public class DeleteTaskTestCases extends GoogleTaskTestParent {
 		}
 	}
 
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
 	public void testDeleteTask() {
 		MuleEvent getTaskByIdResponse = null;

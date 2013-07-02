@@ -62,7 +62,7 @@ public class UpdateTaskTestCases extends GoogleTaskTestParent {
 		}
 	}
 
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
 	public void testUpdateTask() {
 		Task task = (Task) testObjects.get("taskRef");

@@ -58,7 +58,7 @@ public class GetTasksTestCases extends GoogleTaskTestParent {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
 	public void testGetTasks() {
 		MuleEvent getTasksResponse = null;
