@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
 import org.mule.modules.google.api.client.batch.BatchResponse;
@@ -42,7 +43,7 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
 			for (int i = 0; i < numCalendars; i++) {
-				calendars.add(getCalendar("This is a title"));
+				calendars.add(CalendarUtils.getCalendar("This is a title"));
 			}
 
 			// Insert calendars and record their IDs
@@ -69,7 +70,7 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 			List<CalendarList> calendarList = (List<CalendarList>) response.getMessage().getPayload();
 			
 			for (Calendar insertedCalendar : insertedCalendars) {
-				assertTrue(isCalendarInList(calendarList, insertedCalendar));
+				assertTrue(CalendarUtils.isCalendarInList(calendarList, insertedCalendar));
 			}
 			
 		}

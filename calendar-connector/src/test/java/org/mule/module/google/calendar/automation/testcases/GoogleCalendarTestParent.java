@@ -11,9 +11,12 @@
 package org.mule.module.google.calendar.automation.testcases;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -44,7 +47,13 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
+	
+//	protected Calendar mainCalendar;
 
+	public GoogleCalendarTestParent() {
+		setDisposeContextPerClass(true);
+	}
+	
 	@Override
 	protected String getConfigResources() {
 		return "automation-test-flows.xml";
@@ -56,10 +65,22 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	}
 	
 	@Before
-	public void init() throws ObjectStoreException {
+	public void init() throws ObjectStoreException, Exception {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
 		objectStore.store("accessTokenId", (GoogleCalendarConnectorOAuthState)context.getBean("connectorOAuthState"));
+		
+//		if (mainCalendar == null) {
+//			System.out.println("Creating main calendar");
+//			testObjects = (HashMap<String, Object>) context.getBean("mainCalendar");
+//			Calendar calendar = (Calendar) testObjects.get("mainCalendarRef");
+//			mainCalendar = insertCalendar(calendar);
+//		}
 	}
+	
+//	@After
+//	public void tearDown() throws Exception {
+//		deleteCalendar(mainCalendar);
+//	}
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -160,80 +181,6 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		testObjects.put("calendarEventsRef", events);
 		MessageProcessor flow = lookupFlowConstruct("batch-delete-event");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
-	}
-	
-	protected Calendar getCalendar(String summary) {
-		Calendar calendar = new Calendar();
-		calendar.setSummary(summary);
-		return calendar;
-	}
-	
-	protected Event getEvent(String title) {
-		Event event = new Event();
-		event.setSummary(title);
-		return event;
-	}
-
-	protected Event getEvent(String title, Date startTime, Date endTime) {
-		Event event = getEvent(title);
-		
-		EventDateTime start = new EventDateTime();
-		start.setDateTime(new DateTime(startTime));
-		
-		EventDateTime end = new EventDateTime();
-		end.setDateTime(new DateTime(endTime));
-		
-		event.setStart(start);
-		event.setEnd(end);
-		return event;
-	}
-	
-	protected Event getEvent(String title, String startTime, String endTime) {
-		Event event = getEvent(title);
-		
-		EventDateTime start = new EventDateTime();
-		start.setDate(startTime);
-		
-		EventDateTime end = new EventDateTime();
-		end.setDate(endTime);
-		
-		event.setStart(start);
-		event.setEnd(end);
-		return event;
-	}
-	
-	protected Event getEvent(String title, EventDateTime startTime, EventDateTime endTime) {
-		Event event = getEvent(title);
-		event.setStart(startTime);
-		event.setEnd(endTime);
-		return event;
-	}
-	
-	protected boolean isCalendarInList(List<CalendarList> list, Calendar toSearch) {
-		for (CalendarList calendar : list) {
-			if (calendar.getId().equals(toSearch.getId())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	protected boolean isAclRuleInList(List<AclRule> list, AclRule toSearch) {
-		for (AclRule aclRule : list) {
-			if (aclRule.getId().equals(toSearch.getId())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	protected boolean isEventInList(List<Event> events, Event event) {
-		for (Event e : events) {
-			if (event.getId().equals(e.getId())) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 }

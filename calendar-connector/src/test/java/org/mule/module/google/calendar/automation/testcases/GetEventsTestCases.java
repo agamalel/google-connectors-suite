@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
@@ -54,7 +55,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			// Create the test events
 			List<Event> events = new ArrayList<Event>();			
 			for (int i = 0; i < numEvents; i++) {
-				Event event = getEvent(eventTitle, eventStartTime, eventEndTime);
+				Event event = CalendarUtils.getEvent(eventTitle, eventStartTime, eventEndTime);
 				events.add(event);
 			}
 			
@@ -85,7 +86,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			boolean listsSame = EqualsBuilder.reflectionEquals(insertedEvents, returnedEvents);
 			assertTrue(listsSame);
 			for (Event event : insertedEvents) {
-				assertTrue(isEventInList(returnedEvents, event));
+				assertTrue(CalendarUtils.isEventInList(returnedEvents, event));
 			}			
 		}
 		catch (Exception e) {
@@ -145,7 +146,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			// Every event in the list should have been deleted, so check that the status is so
 			for (Event event : returnedEvents) {
 				assertTrue(event.getStatus().equals("cancelled"));	
-				assertTrue(isEventInList(events, event));
+				assertTrue(CalendarUtils.isEventInList(events, event));
 			}
 			
 		}

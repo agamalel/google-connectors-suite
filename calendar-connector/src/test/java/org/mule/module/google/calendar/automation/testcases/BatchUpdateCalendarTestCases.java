@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.modules.google.api.client.batch.BatchResponse;
 
@@ -39,7 +40,7 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 			
 			List<Calendar> calendars = new ArrayList<Calendar>();
 			for (int i = 0; i < numCalendars; i++) {
-				Calendar calendar = getCalendar(summaryBefore);
+				Calendar calendar = CalendarUtils.getCalendar(summaryBefore);
 				calendars.add(calendar);
 			}
 			

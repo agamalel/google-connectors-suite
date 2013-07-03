@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
@@ -47,7 +48,7 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 			
 			List<Event> events = new ArrayList<Event>();
 			for (int i = 0; i < numEvents; i++) {
-				Event event = getEvent(summaryBefore, eventTimeStart, eventTimeEnd);
+				Event event = CalendarUtils.getEvent(summaryBefore, eventTimeStart, eventTimeEnd);
 				events.add(event);
 			}
 			
@@ -85,7 +86,7 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 			List<Event> successfulEvents = returnedEvents.getSuccessful();
 			assertTrue(successfulEvents.size() == events.size());
 			for (Event successfulEvent : successfulEvents) {
-				assertTrue(isEventInList(events, successfulEvent));
+				assertTrue(CalendarUtils.isEventInList(events, successfulEvent));
 			}
 			
 			assertTrue(EqualsBuilder.reflectionEquals(successfulEvents, events));

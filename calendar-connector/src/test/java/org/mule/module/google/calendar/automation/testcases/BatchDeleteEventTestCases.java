@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
@@ -54,7 +55,7 @@ public class BatchDeleteEventTestCases extends GoogleCalendarTestParent {
 			// Instantiate the events that we want to batch insert
 			List<Event> events = new ArrayList<Event>();
 			for (int i = 0; i < numEvents; i++) {
-				Event event = getEvent("Test Event", eventStartTime, eventEndTime);
+				Event event = CalendarUtils.getEvent("Test Event", eventStartTime, eventEndTime);
 				events.add(event);
 			}
 			

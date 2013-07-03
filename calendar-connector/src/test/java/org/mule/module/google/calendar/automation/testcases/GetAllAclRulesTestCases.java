@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
 
@@ -71,7 +72,7 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 			List<AclRule> aclRuleList = (List<AclRule>) response.getMessage().getPayload();
 			
 			for (AclRule insertedAclRule : insertedAclRules) {
-				assertTrue(isAclRuleInList(aclRuleList, insertedAclRule));
+				assertTrue(CalendarUtils.isAclRuleInList(aclRuleList, insertedAclRule));
 			}
 			
 		}

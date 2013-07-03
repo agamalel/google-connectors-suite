@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.modules.google.api.client.batch.BatchResponse;
@@ -42,7 +43,7 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 			// Instantiate the event objects
 			List<Event> events = new ArrayList<Event>();
 			for (int i = 0; i < numEvents; i++) {
-				events.add(getEvent(sampleEvent.getSummary(), sampleEvent.getStart(), sampleEvent.getEnd()));
+				events.add(CalendarUtils.getEvent(sampleEvent.getSummary(), sampleEvent.getStart(), sampleEvent.getEnd()));
 			}
 					
 			// Batch insert the events

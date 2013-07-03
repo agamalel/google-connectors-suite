@@ -20,6 +20,7 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.modules.google.api.client.batch.BatchResponse;
 
@@ -38,7 +39,7 @@ public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
 			for (int i = 0; i < numCalendars; i++) {
-				calendars.add(getCalendar("This is a title"));
+				calendars.add(CalendarUtils.getCalendar("This is a title"));
 			}
 	
 			// Insert calendars
