@@ -14,6 +14,7 @@
 package org.mule.module.google.calendar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,6 +61,7 @@ import com.google.api.services.calendar.Calendar.Calendars;
 import com.google.api.services.calendar.Calendar.Events;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.FreeBusyRequest;
+import com.google.api.services.calendar.model.FreeBusyRequestItem;
 
 /**
  * Google Calendars Cloud connector.
@@ -760,6 +762,7 @@ public class GoogleCalendarConnector extends AbstractGoogleOAuthConnector {
      * 
      * @param timeMin The start of the interval for the query
      * @param timeMax The end of the interval for the query
+     * @param ids List of calendars and/or groups identifiers to query.
      * @param maxCalendarExpansion Maximal number of calendars for which FreeBusy information is to be provided
      * @param timezone Time zone used in the response
      * @param datetimeFormat the format to be used to parse timeMin and timeMax
@@ -772,14 +775,20 @@ public class GoogleCalendarConnector extends AbstractGoogleOAuthConnector {
     public FreeBusy getFreeTime(
     		String timeMin,
 			String timeMax,
+			@Optional @Default("#[payload]") List<String> ids,
 			@Optional @Default("UTC") String timezone,
 			@Optional @Default(DateTimeConstants.RFC3339) String datetimeFormat,
 			@Optional Integer maxCalendarExpansion) throws IOException {
     	
     	FreeBusyRequest query = new FreeBusyRequest();
 
-		query.setTimeMin(DateTimeUtils.parseDateTime(timeMin, datetimeFormat, timezone));
-		query.setTimeMax(DateTimeUtils.parseDateTime(timeMax, datetimeFormat, timezone));
+    	List<FreeBusyRequestItem> items=new ArrayList<FreeBusyRequestItem>();
+    	for(String calendarOrGroupId: ids){
+    		items.add(new FreeBusyRequestItem().setId(calendarOrGroupId));
+    	}
+    	query.setItems(items);
+    	query.setTimeMin(DateTimeUtils.parseDateTime(timeMin, datetimeFormat, timezone));
+    	query.setTimeMax(DateTimeUtils.parseDateTime(timeMax, datetimeFormat, timezone));
     	query.setTimeZone(timezone);
     	query.setCalendarExpansionMax(maxCalendarExpansion);
 
