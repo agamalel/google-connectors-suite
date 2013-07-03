@@ -48,10 +48,6 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 	
-	public GoogleCalendarTestParent() {
-		setDisposeContextPerClass(true);
-	}
-	
 	@Override
 	protected String getConfigResources() {
 		return "automation-test-flows.xml";
@@ -86,6 +82,16 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (Calendar) response.getMessage().getPayload();
+	}
+	
+	protected void clearPrimaryCalendar() throws Exception {
+		clearCalendar("primary");
+	}
+	
+	protected void clearCalendar(String id) throws Exception {
+		testObjects.put("id", id);
+		MessageProcessor flow = lookupFlowConstruct("clear-calendar");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
 	
 	protected Calendar insertCalendar(Calendar calendar) throws Exception {
