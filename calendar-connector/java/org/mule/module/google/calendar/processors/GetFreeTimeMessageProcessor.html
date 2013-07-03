@@ -597,7 +597,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>GetFreeTimeMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/module/google/calendar/GoogleCalendarConnector.html#getFreeTime(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)">getFreeTime(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)</a></code> method in <code><a href="../../../../../../../java/org/mule/module/google/calendar/GoogleCalendarConnector.html">GoogleCalendarConnector</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>GetFreeTimeMessageProcessor invokes the <code><a href="../../../../../../../java/org/mule/module/google/calendar/GoogleCalendarConnector.html#getFreeTime(java.lang.String, java.lang.String, java.util.List<java.lang.String>, java.lang.String, java.lang.String, java.lang.Integer)">getFreeTime(java.lang.String, java.lang.String, java.util.List, java.lang.String, java.lang.String, java.lang.Integer)</a></code> method in <code><a href="../../../../../../../java/org/mule/module/google/calendar/GoogleCalendarConnector.html">GoogleCalendarConnector</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -817,13 +817,24 @@ org.mule.api.lifecycle.Stoppable
           protected
           
           
+          List&lt;String&gt;</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/calendar/processors/GetFreeTimeMessageProcessor.html#_idsType">_idsType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
           Integer</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/calendar/processors/GetFreeTimeMessageProcessor.html#_maxCalendarExpansionType">_maxCalendarExpansionType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -834,7 +845,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -845,7 +856,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -856,13 +867,24 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
           
           Object</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/calendar/processors/GetFreeTimeMessageProcessor.html#datetimeFormat">datetimeFormat</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/calendar/processors/GetFreeTimeMessageProcessor.html#ids">ids</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1226,6 +1248,24 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/processors/GetFreeTimeMessageProcessor.html#setIds(java.lang.Object)">setIds</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets ids</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/processors/GetFreeTimeMessageProcessor.html#setMaxCalendarExpansion(java.lang.Object)">setMaxCalendarExpansion</a></span>(Object value)</nobr>
         
         <div class="jd-descrdiv">Sets maxCalendarExpansion</div>
@@ -1234,7 +1274,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1252,7 +1292,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1270,7 +1310,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1288,7 +1328,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1306,7 +1346,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1322,7 +1362,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2417,6 +2457,36 @@ From interface
 
 
 
+<A NAME="_idsType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        List&lt;String&gt;
+      </span>
+        _idsType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="_maxCalendarExpansionType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2548,6 +2618,36 @@ From interface
         Object
       </span>
         datetimeFormat
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="ids"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        ids
     </h4>
       <div class="api-level">
         
@@ -3006,6 +3106,47 @@ From interface
         <tr>
           <th>flowConstruct</td>
           <td>Flow construct to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setIds(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setIds</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets ids</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
 </td>
         </tr>
       </table>
