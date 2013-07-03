@@ -33,9 +33,9 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 		try {
 			testObjects = (Map<String, Object>) context.getBean("insertEvent");
 			
-			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
-			
+			// Get the user's primary calendar
+			Calendar calendar = getPrimaryCalendar();
+						
 			// Replace old calendar instance with new instance
 			testObjects.put("calendarRef", calendar);
 			testObjects.put("calendarId", calendar.getId());
@@ -77,8 +77,9 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
+			// Clear the primary calendar
 			String calendarId = testObjects.get("calendarId").toString();
-			deleteCalendar(calendarId);
+			clearCalendar(calendarId);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
