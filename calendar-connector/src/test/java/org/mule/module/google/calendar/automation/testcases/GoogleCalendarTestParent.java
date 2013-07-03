@@ -48,8 +48,6 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 	
-//	protected Calendar mainCalendar;
-
 	public GoogleCalendarTestParent() {
 		setDisposeContextPerClass(true);
 	}
@@ -68,20 +66,8 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	public void init() throws ObjectStoreException, Exception {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
 		objectStore.store("accessTokenId", (GoogleCalendarConnectorOAuthState)context.getBean("connectorOAuthState"));
-		
-//		if (mainCalendar == null) {
-//			System.out.println("Creating main calendar");
-//			testObjects = (HashMap<String, Object>) context.getBean("mainCalendar");
-//			Calendar calendar = (Calendar) testObjects.get("mainCalendarRef");
-//			mainCalendar = insertCalendar(calendar);
-//		}
 	}
 	
-//	@After
-//	public void tearDown() throws Exception {
-//		deleteCalendar(mainCalendar);
-//	}
-
 	@BeforeClass
 	public static void beforeClass() {
 		context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
@@ -90,6 +76,17 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	/*
 	 * Helper methods below
 	 */
+	
+	protected Calendar getPrimaryCalendar() throws Exception {
+		return getCalendar("primary");
+	}
+	
+	protected Calendar getCalendar(String id) throws Exception {
+		testObjects.put("id", id);
+		MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (Calendar) response.getMessage().getPayload();
+	}
 	
 	protected Calendar insertCalendar(Calendar calendar) throws Exception {
 		testObjects.put("calendarRef", calendar);
