@@ -88,12 +88,16 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		clearCalendar("primary");
 	}
 	
+	protected void clearCalendar(Calendar calendar) throws Exception {
+		clearCalendar(calendar.getId());
+	}
+	
 	protected void clearCalendar(String id) throws Exception {
 		testObjects.put("id", id);
 		MessageProcessor flow = lookupFlowConstruct("clear-calendar");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
-	
+		
 	protected Calendar insertCalendar(Calendar calendar) throws Exception {
 		testObjects.put("calendarRef", calendar);
 		MessageProcessor flow = lookupFlowConstruct("create-calendar");
