@@ -417,11 +417,17 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
+	    <!-- 
+	    
+	    You must change these scopes if you are using a MuleSoft account
+	    Change @ricston.com to @mulesoft.com
+	    
+	     -->
 	    <entry key="scopes">
 	        <list>
-	            <value>a-mulesoft-email@mulesoft.com</value>
-	            <value>another-mulesoft-email@mulesoft.com</value>
-	            <value>some.user.which.does.not.exist@mulesoft.com</value>
+	            <value>a-ricston-email@ricston.com</value>
+	            <value>another-ricston-email@ricston.com</value>
+	            <value>some.user.which.does.not.exist@ricston.com</value>
 	        </list>
 	    </entry>
 		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).USER}" />
