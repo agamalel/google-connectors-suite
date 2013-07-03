@@ -372,7 +372,7 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-		<entry key="scope" value="mulesoft.com"/>
+		<entry key="scope" value="ricston.com"/>
 		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
 		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</util:map>
@@ -383,7 +383,7 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-		<entry key="scope" value="mulesoft.com"/>
+		<entry key="scope" value="ricston.com"/>
 		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
 		<entry key="roleBefore" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 		<entry key="roleAfter" value="#{T(org.mule.module.google.calendar.ScopeRole).writer}" />
@@ -395,7 +395,7 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-		<entry key="scope" value="mulesoft.com"/>
+		<entry key="scope" value="ricston.com"/>
 		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
 		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</util:map>
@@ -406,7 +406,7 @@
 				<property name="summary" value="Sample title for calendar" />	    
 	    	</bean>
 	    </entry>
-		<entry key="scope" value="mulesoft.com"/>
+		<entry key="scope" value="ricston.com"/>
 		<entry key="scopeType" value="#{T(org.mule.module.google.calendar.ScopeType).DOMAIN}" />
 		<entry key="role" value="#{T(org.mule.module.google.calendar.ScopeRole).owner}" />
 	</util:map>
