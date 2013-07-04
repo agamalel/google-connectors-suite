@@ -26,7 +26,6 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.FreeBusy;
-import org.mule.modules.google.api.datetime.DateTime;
 
 import com.google.api.services.calendar.model.FreeBusyCalendar;
 import com.google.api.services.calendar.model.TimePeriod;
