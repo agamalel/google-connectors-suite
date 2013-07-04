@@ -10,13 +10,10 @@
 
 package org.mule.module.google.calendar.automation.testcases;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -28,12 +25,9 @@ import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
-import org.mule.module.google.calendar.model.CalendarList;
 import org.mule.module.google.calendar.model.Event;
-import org.mule.module.google.calendar.model.EventDateTime;
 import org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState;
 import org.mule.modules.google.api.client.batch.BatchResponse;
-import org.mule.modules.google.api.datetime.DateTime;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -47,6 +41,8 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	protected static final String[] SPRING_CONFIG_FILES = new String[] { "AutomationSpringBeans.xml" };
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
+	
+//	protected Calendar mainCalendar;
 	
 	@Override
 	protected String getConfigResources() {
@@ -62,13 +58,20 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	public void init() throws ObjectStoreException, Exception {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
 		objectStore.store("accessTokenId", (GoogleCalendarConnectorOAuthState)context.getBean("connectorOAuthState"));
+
+//		if (mainCalendar != null) {
+//			// mainCalendar has not been initialised yet - first test
+//			testObjects = (HashMap<String, Object>) context.getBean("mainCalendar");
+//			Calendar calendar = (Calendar) testObjects.get("mainCalendarRef");
+//			mainCalendar = insertCalendar(calendar);
+//		}
 	}
 	
 	@BeforeClass
 	public static void beforeClass() {
 		context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
 	}
-	
+		
 	/*
 	 * Helper methods below
 	 */
@@ -187,6 +190,17 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 		testObjects.put("calendarId", calendarId);
 		testObjects.put("calendarEventsRef", events);
 		MessageProcessor flow = lookupFlowConstruct("batch-delete-event");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+	}
+	
+	protected void deleteAclRule(Calendar calendar, AclRule aclRule) throws Exception {
+		deleteAclRule(calendar.getId(), aclRule.getId());
+	}
+	
+	protected void deleteAclRule(String calendarId, String ruleId) throws Exception {
+		testObjects.put("calendarId", calendarId);
+		testObjects.put("ruleId", ruleId);
+		MessageProcessor flow = lookupFlowConstruct("delete-acl-rule");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
 	
