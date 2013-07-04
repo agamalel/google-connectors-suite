@@ -13,10 +13,10 @@ package org.mule.module.google.calendar.automation.testcases;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +26,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.FreeBusy;
+import org.mule.modules.google.api.datetime.DateTime;
 
 import com.google.api.services.calendar.model.FreeBusyCalendar;
 import com.google.api.services.calendar.model.TimePeriod;
@@ -61,12 +62,11 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 			String calendarId = testObjects.get("calendarId").toString();
 			Event event = (Event) testObjects.get("event");
 			
-			String timeMin = event.getStart().getDate();
-			String timeMax = event.getEnd().getDate();
+			List<String> calendarIds = new ArrayList<String>();
+			calendarIds.add(calendarId);
 			
-			testObjects.put("timeMin", timeMin);
-			testObjects.put("timeMax", timeMax);
-
+			testObjects.put("ids", calendarIds);
+			
 			MessageProcessor flow = lookupFlowConstruct("get-free-time");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
@@ -79,10 +79,8 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 			assertTrue(busyTimePeriods.size() == 1);
 			
 			TimePeriod busyTimePeriod = busyTimePeriods.get(0);
-			
-			System.out.println(ToStringBuilder.reflectionToString(busyTimePeriods));
-			
-			fail("This test is broken");
+			assertTrue(busyTimePeriod.getStart().equals(event.getStart().getDateTime().getWrapped()));
+			assertTrue(busyTimePeriod.getEnd().equals(event.getEnd().getDateTime().getWrapped()));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

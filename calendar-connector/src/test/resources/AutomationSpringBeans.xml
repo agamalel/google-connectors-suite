@@ -473,17 +473,27 @@
 	        	<property name="summary" value="Concert meetup" />
 	            <property name="start">
 					<bean class="org.mule.module.google.calendar.model.EventDateTime">
-					    <property name="date" value="2013-12-16" />
+					    <property name="dateTime">
+							<bean class="org.mule.modules.google.api.datetime.DateTime">
+								<constructor-arg value="#{T(com.google.api.client.util.DateTime).parseRfc3339('2013-12-16T00:00:00Z')}" />								
+							</bean>
+						</property>
 					</bean>
 	            </property>
 	            <property name="end">
 					<bean class="org.mule.module.google.calendar.model.EventDateTime">
-					    <property name="date" value="2013-12-20" />
+					    <property name="dateTime">
+							<bean class="org.mule.modules.google.api.datetime.DateTime">
+								<constructor-arg value="#{T(com.google.api.client.util.DateTime).parseRfc3339('2013-12-20T00:00:00Z')}" />								
+							</bean>
+						</property>
 					</bean>
 	            </property>
 	        </bean>
 	    </entry>
-	    <entry key="datetimeFormat" value="yyyy-MM-dd" />
+	    <entry key="timeMin" value="2013-12-10T00:00:00Z" />
+	    <entry key="timeMax" value="2013-12-25T00:00:00Z" />
+	    <entry key="datetimeFormat" value="yyyy-MM-dd'T'HH:mm:ss'Z'" />
 	    <entry key="timezone" value="UTC+1" />
 	</util:map>
 

@@ -106,7 +106,9 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	</flow>
 
 	<flow name="get-free-time" doc:name="get-free-time">
-	    <google-calendars:get-free-time config-ref="Google_Calendars" timeMin="#[payload.timeMin]" timeMax="#[payload.timeMax]" datetimeFormat="#[payload.datetimeFormat]" timezone="#[payload.timezone]" accessTokenId="accessTokenId"  />
+	    <google-calendars:get-free-time config-ref="Google_Calendars" timeMin="#[payload.timeMin]" timeMax="#[payload.timeMax]" datetimeFormat="#[payload.datetimeFormat]" timezone="#[payload.timezone]" accessTokenId="accessTokenId">
+	    	<google-calendars:ids ref="#[payload.ids]"/>
+	    </google-calendars:get-free-time>
 	</flow>
 	
 	<flow name="insert-acl-rule" doc:name="insert-acl-rule">
