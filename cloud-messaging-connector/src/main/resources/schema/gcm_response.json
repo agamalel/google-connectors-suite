@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "multicast_id": {
+          "type": "integer"
+        },
+        "success": {
+          "type": "integer"
+        },
+        "failure": {
+          "type": "integer"
+        },
+        "canonical_ids": {
+          "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "gcm_result.json"
+          }
+        }
+    }
+}

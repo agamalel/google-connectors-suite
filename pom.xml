@@ -23,6 +23,7 @@
 		<module>tasks-connector</module>
 		<module>gmail-connector</module>
                 <module>drive-connector</module>
+                <module>cloud-messaging-connector</module>
 	</modules>
 
 	<properties>
