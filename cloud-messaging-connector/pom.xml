@@ -16,7 +16,7 @@
 
     <properties>
         <github.merge>true</github.merge>
-        <devkit.studio.package.skip>true</devkit.studio.package.skip>
+        <devkit.studio.package.skip>false</devkit.studio.package.skip>
     </properties>
 
     <dependencies>

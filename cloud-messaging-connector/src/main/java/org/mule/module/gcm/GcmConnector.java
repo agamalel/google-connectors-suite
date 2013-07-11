@@ -9,6 +9,7 @@ package org.mule.module.gcm;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -36,6 +37,8 @@ import org.mule.util.NumberUtils;
 
 /**
  * Mule connector for Google Cloud Messaging (GCM / CCS).
+ * <p/>
+ * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:config}
  * 
  * @author MuleSoft, Inc.
  */
@@ -65,19 +68,45 @@ public class GcmConnector implements MuleContextAware
 
     private MuleContext muleContext;
 
+    /**
+     * Send a message using the HTTP API.
+     * <p/>
+     * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:send-message-no-data}
+     * <p/>
+     * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:send-message-with-data}
+     * 
+     * @param registrationIds the list of devices (registration IDs) receiving the message.
+     * @param notificationKey a string that maps a single user to multiple registration IDs
+     *            associated with that user.
+     * @param notificationKeyName a name or identifier that is unique to a given user.
+     * @param collapseKey an arbitrary string that is used to collapse a group of like messages when
+     *            the device is offline, so that only the last message gets sent to the client.
+     * @param data the key-value pairs of the message's payload data.
+     * @param delayWhileIdle indicates that the message should not be sent immediately if the device
+     *            is idle.
+     * @param timeToLiveSeconds how long (in seconds) the message should be kept on GCM storage if
+     *            the device is offline.
+     * @param restrictedPackageName a string containing the package name of your application.
+     * @param dryRun allows developers to test their request without actually sending a message.
+     * @param muleEvent the {@link MuleEvent} being processed.
+     * @return a {@link GcmResponse} instance.
+     * @throws Exception thrown in case anything goes wrong when sending the message.
+     */
     @Processor
     @Inject
-    public GcmResponse notify(final String notificationKey,
-                              final String notificationKeyName,
-                              @Optional final String collapseKey,
-                              @Optional final Map<String, Object> data,
-                              @Optional @Default("false") final boolean delayWhileIdle,
-                              @Optional @Default("2419200") final int timeToLiveSeconds,
-                              @Optional final String restrictedPackageName,
-                              @Optional @Default("false") final boolean dryRun,
-                              final MuleEvent muleEvent) throws Exception
+    public GcmResponse sendMessage(final List<String> registrationIds,
+                                   @Optional final String notificationKey,
+                                   @Optional final String notificationKeyName,
+                                   @Optional final String collapseKey,
+                                   @Optional final Map<String, Object> data,
+                                   @Optional @Default("false") final boolean delayWhileIdle,
+                                   @Optional @Default("2419200") final int timeToLiveSeconds,
+                                   @Optional final String restrictedPackageName,
+                                   @Optional @Default("false") final boolean dryRun,
+                                   final MuleEvent muleEvent) throws Exception
     {
         final GcmRequest gcmRequest = new GcmRequest();
+        gcmRequest.getRegistrationIds().addAll(registrationIds);
         gcmRequest.setNotificationKey(notificationKeyName);
         gcmRequest.setNotificationKeyName(notificationKeyName);
         gcmRequest.setCollapseKey(collapseKey);
