@@ -21,3 +21,26 @@
 </gcm:send-message>
 <!-- END_INCLUDE(gcm:send-message-with-data) -->
 
+<!-- BEGIN_INCLUDE(gcm:create-notification-key) -->
+<gcm:create-notification-key notificationKeyName="a-key-name">
+    <gcm:registration-ids>
+        <gcm:registration-id>a-reg-id</gcm:registration-id>
+    </gcm:registration-ids>
+</gcm:create-notification-key>
+<!-- END_INCLUDE(gcm:create-notification-key) -->
+
+<!-- BEGIN_INCLUDE(gcm:add-notification-registrations) -->
+<gcm:add-notification-registrations notificationKey="a-key" notificationKeyName="a-key-name">
+    <gcm:registration-ids>
+        <gcm:registration-id>a-reg-id</gcm:registration-id>
+    </gcm:registration-ids>
+</gcm:add-notification-registrations>
+<!-- END_INCLUDE(gcm:add-notification-registrations) -->
+
+<!-- BEGIN_INCLUDE(gcm:remove-notification-registrations) -->
+<gcm:remove-notification-registrations notificationKey="a-key" notificationKeyName="a-key-name">
+    <gcm:registration-ids>
+        <gcm:registration-id>a-reg-id</gcm:registration-id>
+    </gcm:registration-ids>
+</gcm:remove-notification-registrations>
+<!-- END_INCLUDE(gcm:remove-notification-registrations) -->

@@ -105,7 +105,7 @@ public class GcmConnector implements MuleContextAware
      * @param registrationIds the list of devices (registration IDs) receiving the message.
      * @param notificationKey a string that maps a single user to multiple registration IDs
      *            associated with that user.
-     * @param notificationKeyName a name or identifier that is unique to a given user.
+     * @param notificationKeyName a name that is unique to a given user.
      * @param collapseKey an arbitrary string that is used to collapse a group of like messages when
      *            the device is offline, so that only the last message gets sent to the client.
      * @param data the key-value pairs of the message's payload data.
@@ -153,23 +153,90 @@ public class GcmConnector implements MuleContextAware
         return httpPostJson(gcmRequest, uri, GCM_RESPONSE_TYPE_REFERENCE, muleEvent);
     }
 
+    /**
+     * Create a new notification key.
+     * <p/>
+     * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:create-notification-key}
+     * 
+     * @param notificationKeyName a name that is unique to a given user.
+     * @param registrationIds the list of devices (registration IDs) to associate with the key.
+     * @param muleEvent the {@link MuleEvent} being processed.
+     * @return the created notification key as a {@link String}.
+     * @throws Exception thrown in case anything goes wrong when sending the message.
+     */
     @Processor
     @Inject
-    public NotificationResponse createNotificationKey(final String notificationKeyName,
-                                                      final List<String> registrationIds,
-                                                      final MuleEvent muleEvent) throws Exception
+    public String createNotificationKey(final String notificationKeyName,
+                                        final List<String> registrationIds,
+                                        final MuleEvent muleEvent) throws Exception
+    {
+        return runNotificationRegistrationsAction(Operation.CREATE, null, notificationKeyName,
+            registrationIds, muleEvent);
+    }
+
+    /**
+     * Add registrations to an existing key.
+     * <p/>
+     * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:add-notification-registrations}
+     * 
+     * @param notificationKey a string that maps a single user to multiple registration IDs
+     *            associated with that user.
+     * @param notificationKeyName a name that is unique to a given user.
+     * @param registrationIds the list of devices (registration IDs) to associate with the key.
+     * @param muleEvent the {@link MuleEvent} being processed.
+     * @throws Exception thrown in case anything goes wrong when sending the message.
+     */
+    @Processor
+    @Inject
+    public void addNotificationRegistrations(final String notificationKey,
+                                             final String notificationKeyName,
+                                             final List<String> registrationIds,
+                                             final MuleEvent muleEvent) throws Exception
+    {
+        runNotificationRegistrationsAction(Operation.ADD, notificationKey, notificationKeyName,
+            registrationIds, muleEvent);
+    }
+
+    /**
+     * Remove registrations from an existing key.
+     * <p/>
+     * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:remove-notification-registrations}
+     * 
+     * @param notificationKey a string that maps a single user to multiple registration IDs
+     *            associated with that user.
+     * @param notificationKeyName a name that is unique to a given user.
+     * @param registrationIds the list of devices (registration IDs) to associate with the key.
+     * @param muleEvent the {@link MuleEvent} being processed.
+     * @throws Exception thrown in case anything goes wrong when sending the message.
+     */
+    @Processor
+    @Inject
+    public void removeNotificationRegistrations(final String notificationKey,
+                                                final String notificationKeyName,
+                                                final List<String> registrationIds,
+                                                final MuleEvent muleEvent) throws Exception
+    {
+        runNotificationRegistrationsAction(Operation.REMOVE, notificationKey, notificationKeyName,
+            registrationIds, muleEvent);
+    }
+
+    public String runNotificationRegistrationsAction(final Operation operation,
+                                                     final String notificationKey,
+                                                     final String notificationKeyName,
+                                                     final List<String> registrationIds,
+                                                     final MuleEvent muleEvent) throws Exception
     {
         final NotificationRequest notificationRequest = new NotificationRequest();
-        notificationRequest.setOperation(Operation.CREATE);
+        notificationRequest.setOperation(operation);
+        notificationRequest.setNotificationKeyName(notificationKey);
         notificationRequest.setNotificationKeyName(notificationKeyName);
         notificationRequest.getRegistrationIds().addAll(registrationIds);
 
-        return httpPostJson(notificationRequest, GCM_NOTIFICATION_URI, NOTIFICATION_RESPONSE_TYPE_REFERENCE,
-            muleEvent);
-    }
+        final NotificationResponse notificationResponse = httpPostJson(notificationRequest,
+            GCM_NOTIFICATION_URI, NOTIFICATION_RESPONSE_TYPE_REFERENCE, muleEvent);
 
-    // TODO addNotificationRegistrations
-    // TODO removeNotificationRegistrations
+        return notificationResponse.getNotificationKey();
+    }
 
     private String serializeEntityToJson(final Object entity) throws MuleException
     {
