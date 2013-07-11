@@ -3,7 +3,8 @@
     "additionalProperties": false,
     "properties": {
         "multicast_id": {
-          "type": "integer"
+          "javaType": "java.lang.Long",
+          "type": "object"
         },
         "success": {
           "type": "integer"

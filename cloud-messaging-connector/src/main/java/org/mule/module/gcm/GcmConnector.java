@@ -45,10 +45,10 @@ import org.mule.util.NumberUtils;
 @Module(name = "gcm", schemaVersion = "1.0", friendlyName = "Google Cloud Messaging", minMuleVersion = "3.4", description = "Google Cloud Messaging Connector")
 public class GcmConnector implements MuleContextAware
 {
-    // TODO support User Notif https://developer.android.com/google/gcm/notifications.html
     // TODO support CCS (XMPP)
 
     public static final String GCM_SEND_URI = "https://android.googleapis.com/gcm/send";
+    public static final String GCM_NOTIFICATION_URI = "https://android.googleapis.com/gcm/notification";
 
     /**
      * The Google APIs key.
