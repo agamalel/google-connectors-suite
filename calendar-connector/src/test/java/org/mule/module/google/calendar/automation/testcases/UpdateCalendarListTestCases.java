@@ -51,7 +51,7 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 	}
 	
 	
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({RegressionTests.class})
 	@Test
 	public void testUpdateCalendarList() {
 		try {

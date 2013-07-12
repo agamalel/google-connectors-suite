@@ -59,7 +59,7 @@ public class UpdateAclRuleTestCases extends GoogleCalendarTestParent {
 	}
 	
 	
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({ RegressionTests.class})
 	@Test
 	public void testUpdateAclRule() {
 		try {

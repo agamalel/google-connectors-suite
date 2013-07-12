@@ -46,7 +46,7 @@ public class QuickAddEventTestCases extends GoogleCalendarTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, RegressionTests.class})	
+	@Category({RegressionTests.class})	
 	@Test
 	public void testQuickAddEvent() {
 		try {

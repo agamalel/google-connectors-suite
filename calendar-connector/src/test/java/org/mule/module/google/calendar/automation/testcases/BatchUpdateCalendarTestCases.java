@@ -56,7 +56,7 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, RegressionTests.class})	
+	@Category({ RegressionTests.class})	
 	@Test
 	public void testBatchUpdateCalendar() {
 		try {

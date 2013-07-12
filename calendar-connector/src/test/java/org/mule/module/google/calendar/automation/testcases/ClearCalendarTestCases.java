@@ -58,7 +58,7 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 		}
 	}
 	
-	@Category({SmokeTests.class, RegressionTests.class})
+	@Category({ RegressionTests.class})
 	@Test
 	public void testClearCalendar() {
 		try {
