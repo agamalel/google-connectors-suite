@@ -7,19 +7,13 @@
 
 package org.mule.module.gcm;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-import org.mule.api.DefaultMuleException;
 import org.mule.api.MessagingException;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
@@ -41,23 +35,20 @@ import org.mule.module.gcm.model.NotificationResponse;
 import org.mule.transformer.types.MimeTypes;
 import org.mule.transport.http.HttpConnector;
 import org.mule.transport.http.HttpConstants;
-import org.mule.util.IOUtils;
 import org.mule.util.MapUtils;
 import org.mule.util.NumberUtils;
 import org.mule.util.StringUtils;
 
 /**
- * Mule connector for Google Cloud Messaging (GCM / CCS).
+ * Mule connector for Google Cloud Messaging (HTTP API).
  * <p/>
  * {@sample.xml ../../../doc/gcm-connector.xml.sample gcm:config}
  * 
  * @author MuleSoft, Inc.
  */
-@Module(name = "gcm", schemaVersion = "1.0", friendlyName = "Google Cloud Messaging", minMuleVersion = "3.4", description = "Google Cloud Messaging Connector")
-public class GcmConnector implements MuleContextAware
+@Module(name = "gcm", schemaVersion = "1.0", friendlyName = "GCM (HTTP)", minMuleVersion = "3.4", description = "Google Cloud Messaging Connector")
+public class GcmConnector extends AbstractGcmConnector implements MuleContextAware
 {
-    // TODO support CCS (XMPP)
-
     public static final String GCM_SEND_URI = "https://android.googleapis.com/gcm/send";
     public static final String GCM_NOTIFICATION_URI = "https://android.googleapis.com/gcm/notification";
 
@@ -69,12 +60,6 @@ public class GcmConnector implements MuleContextAware
     {
         // NOOP
     };
-
-    /**
-     * The Google APIs key.
-     */
-    @Configurable
-    private String apiKey;
 
     /**
      * The project ID.
@@ -89,9 +74,6 @@ public class GcmConnector implements MuleContextAware
     @Configurable
     @Optional
     private org.mule.api.transport.Connector connector;
-
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final Log LOGGER = LogFactory.getLog(GcmConnector.class);
 
     private MuleContext muleContext;
 
@@ -238,49 +220,6 @@ public class GcmConnector implements MuleContextAware
         return notificationResponse.getNotificationKey();
     }
 
-    private String serializeEntityToJson(final Object entity) throws MuleException
-    {
-        if (entity == null)
-        {
-            return null;
-        }
-
-        try
-        {
-            return OBJECT_MAPPER.writeValueAsString(entity);
-        }
-        catch (final IOException ioe)
-        {
-            throw new DefaultMuleException("Failed to serialize to JSON: " + entity, ioe);
-        }
-    }
-
-    private <T> T deserializeJsonToEntity(final TypeReference<T> responseType, final MuleMessage response)
-        throws MuleException
-    {
-        try
-        {
-            T entity;
-
-            if (LOGGER.isDebugEnabled())
-            {
-                response.setPayload(IOUtils.toByteArray((InputStream) response.getPayload()));
-                entity = OBJECT_MAPPER.<T> readValue((byte[]) response.getPayload(), responseType);
-            }
-            else
-            {
-                entity = OBJECT_MAPPER.<T> readValue((InputStream) response.getPayload(), responseType);
-            }
-
-            return entity;
-        }
-        catch (final IOException ioe)
-        {
-            throw new DefaultMuleException("Failed to deserialize to: " + responseType.getType() + " from: "
-                                           + renderMessageAsString(response), ioe);
-        }
-    }
-
     private <T> T httpPostJson(final Object requestEntity,
                                final String uri,
                                final TypeReference<T> responseTypeReference,
@@ -290,10 +229,10 @@ public class GcmConnector implements MuleContextAware
 
         final Map<String, Object> requestProperties = new HashMap<String, Object>();
         requestProperties.put(HttpConstants.HEADER_CONTENT_TYPE, MimeTypes.JSON);
-        requestProperties.put(HttpConstants.HEADER_AUTHORIZATION, "key=" + apiKey);
-        if (StringUtils.isNotBlank(projectId))
+        requestProperties.put(HttpConstants.HEADER_AUTHORIZATION, "key=" + getApiKey());
+        if (StringUtils.isNotBlank(getProjectId()))
         {
-            requestProperties.put("project_id", projectId);
+            requestProperties.put("project_id", getProjectId());
         }
 
         final MuleMessage response = muleContext.getClient().send(uri, requestJson, requestProperties,
@@ -312,42 +251,10 @@ public class GcmConnector implements MuleContextAware
         return deserializeJsonToEntity(responseTypeReference, response);
     }
 
-    private static String renderMessageAsString(final MuleMessage message)
-    {
-        try
-        {
-            return message.getPayloadAsString();
-        }
-        catch (final Exception e)
-        {
-            return message.toString();
-        }
-    }
-
     @Override
     public void setMuleContext(final MuleContext muleContext)
     {
         this.muleContext = muleContext;
-    }
-
-    public String getApiKey()
-    {
-        return apiKey;
-    }
-
-    public void setApiKey(final String apiKey)
-    {
-        this.apiKey = apiKey;
-    }
-
-    public String getProjectId()
-    {
-        return projectId;
-    }
-
-    public void setProjectId(final String projectId)
-    {
-        this.projectId = projectId;
     }
 
     public org.mule.api.transport.Connector getConnector()
@@ -358,5 +265,15 @@ public class GcmConnector implements MuleContextAware
     public void setConnector(final org.mule.api.transport.Connector connector)
     {
         this.connector = connector;
+    }
+
+    public String getProjectId()
+    {
+        return projectId;
+    }
+
+    public void setProjectId(final String projectId)
+    {
+        this.projectId = projectId;
     }
 }

@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "extends": {
+      "$ref": "ccs_message_base.json"
+    },
+    "additionalProperties": false,
+    "properties": {
+        "from": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+    }
+}
