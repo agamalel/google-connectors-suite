@@ -80,6 +80,20 @@ public abstract class AbstractGcmConnector
         }
     }
 
+    protected <T> T deserializeJsonToEntity(final TypeReference<T> responseType, final String response)
+        throws MuleException
+    {
+        try
+        {
+            return OBJECT_MAPPER.<T> readValue(response, responseType);
+        }
+        catch (final IOException ioe)
+        {
+            throw new DefaultMuleException("Failed to deserialize to: " + responseType.getType() + " from: "
+                                           + response, ioe);
+        }
+    }
+
     protected String renderMessageAsString(final MuleMessage message)
     {
         try

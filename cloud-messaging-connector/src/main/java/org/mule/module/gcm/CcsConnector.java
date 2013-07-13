@@ -7,16 +7,23 @@
 
 package org.mule.module.gcm;
 
+import java.io.StringReader;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.codehaus.jackson.type.TypeReference;
+import org.dom4j.Document;
+import org.dom4j.io.SAXReader;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -30,10 +37,13 @@ import org.mule.api.annotations.ConnectionIdentifier;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Disconnect;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.Source;
 import org.mule.api.annotations.ValidateConnection;
 import org.mule.api.annotations.param.ConnectionKey;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.callback.SourceCallback;
+import org.mule.module.gcm.model.CcsMessageBase.MessageType;
 import org.mule.module.gcm.model.CcsRequest;
 import org.mule.module.gcm.model.CcsResponse;
 import org.mule.module.gcm.model.Data;
@@ -50,6 +60,9 @@ import org.mule.util.StringUtils;
 @Connector(name = "ccs", schemaVersion = "1.0", friendlyName = "CCS (XMPP)", minMuleVersion = "3.4", description = "Cloud Connection Server Connector")
 public class CcsConnector extends AbstractGcmConnector
 {
+    private static final String GCM_EXTENSION_NAMESPACE = "google:mobile:data";
+    private static final String GCM_EXTENSION_ELEMENT_NAME = "gcm";
+
     private static class GcmPacketExtension implements PacketExtension
     {
         private final String xml;
@@ -71,13 +84,13 @@ public class CcsConnector extends AbstractGcmConnector
         @Override
         public String getElementName()
         {
-            return "gcm";
+            return GCM_EXTENSION_ELEMENT_NAME;
         }
 
         @Override
         public String getNamespace()
         {
-            return "google:mobile:data";
+            return GCM_EXTENSION_NAMESPACE;
         }
 
         @Override
@@ -101,10 +114,26 @@ public class CcsConnector extends AbstractGcmConnector
     @Default("false")
     private boolean deliverAckNackMessages;
 
+    /**
+     * If set to true, the connector will automatically acknowledge messages. If set to false,
+     * messages will have to be acknowledged manually.
+     */
+    @Configurable
+    @Optional
+    @Default("false")
+    private boolean autoAckMessages;
+
     private String projectId;
     private XMPPConnection xmppConnection;
     private Chat chat;
+    private volatile SourceCallback sourceCallback;
 
+    /**
+     * Connect and authenticate to the CSS server.
+     * 
+     * @param projectId The project ID (aka sender ID).
+     * @throws ConnectionException throw in case connecting to the CCS server fails.
+     */
     @Connect
     public void connect(@ConnectionKey final String projectId) throws ConnectionException
     {
@@ -118,6 +147,23 @@ public class CcsConnector extends AbstractGcmConnector
             config.setSocketFactory(SSLSocketFactory.getDefault());
             xmppConnection = new XMPPConnection(config);
             xmppConnection.connect();
+
+            if (!xmppConnection.isConnected())
+            {
+                throw new ConnectionException(ConnectionExceptionCode.CANNOT_REACH, null,
+                    "XMPP connection failed to: "
+                                    + ToStringBuilder.reflectionToString(config,
+                                        ToStringStyle.SHORT_PREFIX_STYLE));
+            }
+        }
+        catch (final XMPPException xmppe)
+        {
+            throw new ConnectionException(ConnectionExceptionCode.CANNOT_REACH, null, xmppe.getMessage(),
+                xmppe);
+        }
+
+        try
+        {
             xmppConnection.login(getLoginUser(), getApiKey());
             xmppConnection.getChatManager().addChatListener(new ChatManagerListener()
             {
@@ -127,11 +173,24 @@ public class CcsConnector extends AbstractGcmConnector
                     if (!createdLocally)
                     {
                         CcsConnector.this.chat = chat;
-                        chat.addMessageListener(new CcsMessageListener());
+                        chat.addMessageListener(new MessageListener()
+                        {
+                            @Override
+                            public void processMessage(final Chat chat, final Message message)
+                            {
+                                try
+                                {
+                                    handleInboundMessage(message);
+                                }
+                                catch (final Exception e)
+                                {
+                                    logger.error("Failed to handle inbound message: " + message, e);
+                                }
+                            }
+                        });
                     }
                 }
             });
-
         }
         catch (final XMPPException xmppe)
         {
@@ -146,9 +205,11 @@ public class CcsConnector extends AbstractGcmConnector
         if (xmppConnection != null)
         {
             xmppConnection.disconnect();
-            xmppConnection = null;
-            chat = null;
         }
+
+        xmppConnection = null;
+        chat = null;
+        sourceCallback = null;
     }
 
     @ConnectionIdentifier
@@ -163,6 +224,23 @@ public class CcsConnector extends AbstractGcmConnector
         return xmppConnection != null && xmppConnection.isConnected() && chat != null;
     }
 
+    /**
+     * Dispatch a message to a device.
+     * <p/>
+     * {@sample.xml ../../../doc/ccs-connector.xml.sample ccs:dispatch-message-no-data}
+     * <p/>
+     * {@sample.xml ../../../doc/ccs-connector.xml.sample ccs:dispatch-message-with-data}
+     * 
+     * @param registrationId the device registration ID.
+     * @param messageId the unique ID of the message. If left blank, one will be generated with
+     *            {@link UUID#randomUUID()}.
+     * @param data the key-value pairs of the message's payload data.
+     * @param delayWhileIdle indicates that the message should not be sent immediately if the device
+     *            is idle.
+     * @param timeToLiveSeconds how long (in seconds) the message should be kept on GCM storage if
+     *            the device is offline.
+     * @throws Exception thrown in case anything goes wrong with the operation.
+     */
     @Processor
     public void dispatchMessage(final String registrationId,
                                 @Optional final String messageId,
@@ -194,14 +272,38 @@ public class CcsConnector extends AbstractGcmConnector
         xmppSend(ccsRequest);
     }
 
+    /**
+     * Manually acknowledge a message.
+     * <p/>
+     * {@sample.xml ../../../doc/ccs-connector.xml.sample ccs:acknowledge-message}
+     * 
+     * @param registrationId the device registration ID.
+     * @param messageId the unique ID of the message.
+     * @throws Exception thrown in case anything goes wrong with the operation.
+     */
     @Processor
-    public void ackMessage(final String registrationId, final String messageId) throws Exception
+    public void acknowledgeMessage(final String registrationId, final String messageId) throws Exception
     {
         final CcsRequest ccsRequest = new CcsRequest();
         ccsRequest.setTo(registrationId);
         ccsRequest.setMessageId(messageId);
 
         xmppSend(ccsRequest);
+    }
+
+    /**
+     * Source that receives inbound messages.
+     * <p/>
+     * {@sample.xml ../../../doc/ccs-connector.xml.sample ccs:receive}
+     * 
+     * @param sourceCallback the {@link SourceCallback} called to deliver the message.
+     */
+    @Source
+    public void receive(final SourceCallback sourceCallback)
+    {
+        Validate.isTrue(this.sourceCallback == null, "This connector supports only a single message source");
+
+        this.sourceCallback = sourceCallback;
     }
 
     private void xmppSend(final CcsRequest ccsRequest) throws MuleException, XMPPException
@@ -212,7 +314,51 @@ public class CcsConnector extends AbstractGcmConnector
         chat.sendMessage(xmppMessage);
     }
 
-    // TODO add @Source
+    private void handleInboundMessage(final Message message) throws Exception
+    {
+        final PacketExtension extension = message.getExtension(GCM_EXTENSION_ELEMENT_NAME,
+            GCM_EXTENSION_NAMESPACE);
+
+        if (extension == null)
+        {
+            logger.info("Dropping unsupported message: " + message.toXML());
+        }
+
+        final String gcmXml = extension.toXML();
+        final Document document = new SAXReader().read(new StringReader(gcmXml));
+        final String jsonResponse = document.getRootElement().getTextTrim();
+
+        final CcsResponse ccsResponse = deserializeJsonToEntity(CCS_RESPONSE_TYPE_REFERENCE, jsonResponse);
+
+        if (isAckOrNackMessage(ccsResponse))
+        {
+            if (!isDeliverAckNackMessages())
+            {
+                if (logger.isDebugEnabled())
+                {
+                    logger.debug("Dropping ack/nack message: " + ccsResponse);
+                }
+                return;
+            }
+        }
+        else if (isAutoAckMessages())
+        {
+            acknowledgeMessage(ccsResponse.getFrom(), ccsResponse.getMessageId());
+        }
+
+        if (sourceCallback == null)
+        {
+            logger.error("Dropping undeliverable message: " + ccsResponse);
+        }
+
+        sourceCallback.process(ccsResponse);
+    }
+
+    private boolean isAckOrNackMessage(final CcsResponse ccsResponse)
+    {
+        return ccsResponse.getMessageType() == MessageType.ACK
+               || ccsResponse.getMessageType() == MessageType.NACK;
+    }
 
     public boolean isDeliverAckNackMessages()
     {
@@ -222,5 +368,15 @@ public class CcsConnector extends AbstractGcmConnector
     public void setDeliverAckNackMessages(final boolean deliverAckNackMessages)
     {
         this.deliverAckNackMessages = deliverAckNackMessages;
+    }
+
+    public boolean isAutoAckMessages()
+    {
+        return autoAckMessages;
+    }
+
+    public void setAutoAckMessages(final boolean autoAckMessages)
+    {
+        this.autoAckMessages = autoAckMessages;
     }
 }

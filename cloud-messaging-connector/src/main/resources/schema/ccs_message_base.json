@@ -5,7 +5,7 @@
         "message_id": {
           "type": "string"
         },
-        "operation": {
+        "message_type": {
           "type": "string",
           "enum": ["ack", "nack"]
         }

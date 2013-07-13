@@ -62,7 +62,7 @@ public class GcmConnector extends AbstractGcmConnector implements MuleContextAwa
     };
 
     /**
-     * The project ID.
+     * The project ID (aka sender ID).
      */
     @Configurable
     private String projectId;
@@ -99,7 +99,7 @@ public class GcmConnector extends AbstractGcmConnector implements MuleContextAwa
      * @param dryRun allows developers to test their request without actually sending a message.
      * @param muleEvent the {@link MuleEvent} being processed.
      * @return a {@link GcmResponse} instance.
-     * @throws Exception thrown in case anything goes wrong when sending the message.
+     * @throws Exception thrown in case anything goes wrong with the operation.
      */
     @Processor
     @Inject
@@ -144,7 +144,7 @@ public class GcmConnector extends AbstractGcmConnector implements MuleContextAwa
      * @param registrationIds the list of devices (registration IDs) to associate with the key.
      * @param muleEvent the {@link MuleEvent} being processed.
      * @return the created notification key as a {@link String}.
-     * @throws Exception thrown in case anything goes wrong when sending the message.
+     * @throws Exception thrown in case anything goes wrong with the operation.
      */
     @Processor
     @Inject
@@ -166,7 +166,7 @@ public class GcmConnector extends AbstractGcmConnector implements MuleContextAwa
      * @param notificationKeyName a name that is unique to a given user.
      * @param registrationIds the list of devices (registration IDs) to associate with the key.
      * @param muleEvent the {@link MuleEvent} being processed.
-     * @throws Exception thrown in case anything goes wrong when sending the message.
+     * @throws Exception thrown in case anything goes wrong with the operation.
      */
     @Processor
     @Inject
@@ -189,7 +189,7 @@ public class GcmConnector extends AbstractGcmConnector implements MuleContextAwa
      * @param notificationKeyName a name that is unique to a given user.
      * @param registrationIds the list of devices (registration IDs) to associate with the key.
      * @param muleEvent the {@link MuleEvent} being processed.
-     * @throws Exception thrown in case anything goes wrong when sending the message.
+     * @throws Exception thrown in case anything goes wrong with the operation.
      */
     @Processor
     @Inject
