@@ -29,19 +29,6 @@
 		</repository>
 
 		<repository>
-			<id>mulesoft-releases</id>
-			<name>MuleSoft Repository</name>
-			<url>https://repository.mulesoft.org/releases/</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>mulesoft-snapshots</id>
-			<name>MuleSoft Snapshot Repository</name>
-			<url>https://repository.mulesoft.org/snapshots/</url>
-			<layout>default</layout>
-		</repository>
-
-		<repository>
 			<id>codehaus-repo</id>
 			<name>Codehaus Repository</name>
 			<url>http://dist.codehaus.org/mule/dependencies/maven2</url>
