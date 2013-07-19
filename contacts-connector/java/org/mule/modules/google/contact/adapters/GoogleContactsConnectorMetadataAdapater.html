@@ -427,7 +427,7 @@ Summary:
   
       implements 
       
-        <a href="../../../../../../../java/org/mule/modules/google/contact/basic/MetadataAware.html">MetadataAware</a> 
+        MetadataAware 
       
   
   
@@ -634,12 +634,19 @@ Summary:
     
     <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">String</td>
-        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#MODULE_NAME">MODULE_NAME</a></td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#MIN_MULE_VERSION">MIN_MULE_VERSION</a></td>
         <td class="jd-descrcol" width="100%"></td>
     </tr>
     
     
     <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#MODULE_NAME">MODULE_NAME</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">String</td>
         <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#MODULE_VERSION">MODULE_VERSION</a></td>
         <td class="jd-descrcol" width="100%"></td>
@@ -1025,9 +1032,6 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
-</div>
-  
   </td></tr>
 
 
@@ -1044,9 +1048,6 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
-</div>
-  
   </td></tr>
 
 
@@ -1061,11 +1062,8 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#getMinMuleVersion()">getMinMuleVersion</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the user-friendly name of this module
-</div>
-  
   </td></tr>
 
 
@@ -1080,11 +1078,24 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorMetadataAdapater.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the version of this module
-</div>
-  
   </td></tr>
 
 
@@ -1133,7 +1144,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.modules.google.contact.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../../java/org/mule/modules/google/contact/basic/Capability.html">Capability</a> capability)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/adapters/GoogleContactsConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.api.devkit.capability.ModuleCapability)">isCapableOf</a></span>(ModuleCapability capability)</nobr>
         
         <div class="jd-descrdiv">Returns true if this module implements such capability
  
@@ -2186,19 +2197,125 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.google.contact.basic.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.google.contact.basic.Capabilities-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.MetadataAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.MetadataAware-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  <a href="../../../../../../../org/mule/modules/google/contact/basic/Capabilities.html">org.mule.modules.google.contact.basic.Capabilities</a>
+  org.mule.api.MetadataAware
 
-<div id="inherited-methods-org.mule.modules.google.contact.basic.Capabilities">
-  <div id="inherited-methods-org.mule.modules.google.contact.basic.Capabilities-list"
+<div id="inherited-methods-org.mule.api.MetadataAware">
+  <div id="inherited-methods-org.mule.api.MetadataAware-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.modules.google.contact.basic.Capabilities-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.api.MetadataAware-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDevkitBuild</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDevkitVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getMinMuleVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getModuleName</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getModuleVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.devkit.capability.Capabilities" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.devkit.capability.Capabilities-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.devkit.capability.Capabilities
+
+<div id="inherited-methods-org.mule.api.devkit.capability.Capabilities">
+  <div id="inherited-methods-org.mule.api.devkit.capability.Capabilities-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.devkit.capability.Capabilities-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -2214,113 +2331,8 @@ From interface
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/basic/Capabilities.html#isCapableOf(org.mule.modules.google.contact.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../../java/org/mule/modules/google/contact/basic/Capability.html">Capability</a> capability)</nobr>
+        <span class="sympad">isCapableOf</span>(ModuleCapability arg0)</nobr>
         
-        <div class="jd-descrdiv">Returns true if this module implements such
- capability</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.google.contact.basic.MetadataAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.google.contact.basic.MetadataAware-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  <a href="../../../../../../../org/mule/modules/google/contact/basic/MetadataAware.html">org.mule.modules.google.contact.basic.MetadataAware</a>
-
-<div id="inherited-methods-org.mule.modules.google.contact.basic.MetadataAware">
-  <div id="inherited-methods-org.mule.modules.google.contact.basic.MetadataAware-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.modules.google.contact.basic.MetadataAware-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/basic/MetadataAware.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/basic/MetadataAware.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/basic/MetadataAware.html#getModuleName()">getModuleName</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the user-friendly name of this module
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/basic/MetadataAware.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the version of this module
-</div>
-  
   </td></tr>
 
 
@@ -2388,7 +2400,7 @@ From interface
         <span class="jd-tagtitle">Constant Value: </span>
         <span>
             
-                "UNKNOWN_BUILDNUMBER"
+                "master.1683.96401dc"
             
         </span>
         </div>
@@ -2427,7 +2439,46 @@ From interface
         <span class="jd-tagtitle">Constant Value: </span>
         <span>
             
-                "3.4.0"
+                "3.5.0-andes"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="MIN_MULE_VERSION"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+        final 
+        String
+      </span>
+        MIN_MULE_VERSION
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "3.4"
             
         </span>
         </div>
@@ -2598,8 +2649,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns the build of the DevKit used to create this module
-</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
@@ -2630,8 +2680,38 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns the version of the DevKit used to create this module
-</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getMinMuleVersion()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getMinMuleVersion</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
@@ -2662,8 +2742,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns the user-friendly name of this module
-</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
@@ -2694,8 +2773,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns the version of this module
-</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>

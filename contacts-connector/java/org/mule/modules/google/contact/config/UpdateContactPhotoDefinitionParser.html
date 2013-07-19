@@ -275,6 +275,8 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/GoogleContactsConnectorConfigDefinitionParser.html">GoogleContactsConnectorConfigDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/GoogleContactsNamespaceHandler.html">GoogleContactsNamespaceHandler</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/InsertContactDefinitionParser.html">InsertContactDefinitionParser</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/RestoreAccessTokenCallbackFactoryBean.html">RestoreAccessTokenCallbackFactoryBean</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/SaveAccessTokenCallbackFactoryBean.html">SaveAccessTokenCallbackFactoryBean</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/UnauthorizeDefinitionParser.html">UnauthorizeDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/UpdateContactDefinitionParser.html">UpdateContactDefinitionParser</a></li>
           <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/modules/google/contact/config/UpdateContactPhotoDefinitionParser.html">UpdateContactPhotoDefinitionParser</a></li>
@@ -405,7 +407,7 @@ Summary:
   
 
   
-    extends <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.html">AbstractDefinitionParser</a><br/>
+    extends AbstractDevkitBasedDefinitionParser<br/>
   
   
   
@@ -433,7 +435,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.html">org.mule.modules.google.contact.config.AbstractDefinitionParser</a></td>
+        <td colspan="2" class="jd-inheritance-class-cell">org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser</td>
     </tr>
     
 
@@ -513,16 +515,16 @@ Summary:
 <tr class="api apilevel-" >
 <td colspan="12">
 
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.modules.google.contact.config.AbstractDefinitionParser" class="jd-expando-trigger closed"
-          ><img id="inherited-fields-org.mule.modules.google.contact.config.AbstractDefinitionParser-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>From class
-<a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html">org.mule.modules.google.contact.config.AbstractDefinitionParser</a>
-<div id="inherited-fields-org.mule.modules.google.contact.config.AbstractDefinitionParser">
-  <div id="inherited-fields-org.mule.modules.google.contact.config.AbstractDefinitionParser-list"
+org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
+<div id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser">
+  <div id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-fields-org.mule.modules.google.contact.config.AbstractDefinitionParser-summary" style="display: none;">
+  <div id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -533,10 +535,8 @@ Summary:
           
           
           TemplateParser.PatternInfo</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#patternInfo">patternInfo</a></td>
-          <td class="jd-descrcol" width="100%">Mule Pattern Info
- 
-</td>
+          <td class="jd-linkcol">patternInfo</td>
+          <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
@@ -622,19 +622,19 @@ Summary:
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.google.contact.config.AbstractDefinitionParser" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.google.contact.config.AbstractDefinitionParser-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From class
 
-  <a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html">org.mule.modules.google.contact.config.AbstractDefinitionParser</a>
+  org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
 
-<div id="inherited-methods-org.mule.modules.google.contact.config.AbstractDefinitionParser">
-  <div id="inherited-methods-org.mule.modules.google.contact.config.AbstractDefinitionParser-list"
+<div id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser">
+  <div id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.modules.google.contact.config.AbstractDefinitionParser-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -650,7 +650,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#attachProcessorDefinition(org.springframework.beans.factory.xml.ParserContext, org.springframework.beans.factory.config.BeanDefinition)">attachProcessorDefinition</a></span>(ParserContext parserContext, BeanDefinition definition)</nobr>
+        <span class="sympad">attachProcessorDefinition</span>(ParserContext arg0, BeanDefinition arg1)</nobr>
         
   </td></tr>
 
@@ -666,7 +666,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#attachSourceDefinition(org.springframework.beans.factory.xml.ParserContext, org.springframework.beans.factory.config.BeanDefinition)">attachSourceDefinition</a></span>(ParserContext parserContext, BeanDefinition definition)</nobr>
+        <span class="sympad">attachSourceDefinition</span>(ParserContext arg0, BeanDefinition arg1)</nobr>
         
   </td></tr>
 
@@ -682,7 +682,7 @@ From class
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#generateChildBeanName(org.w3c.dom.Element)">generateChildBeanName</a></span>(Element element)</nobr>
+        <span class="sympad">generateChildBeanName</span>(Element arg0)</nobr>
         
   </td></tr>
 
@@ -698,7 +698,7 @@ From class
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#getAttributeValue(org.w3c.dom.Element, java.lang.String)">getAttributeValue</a></span>(Element element, String attributeName)</nobr>
+        <span class="sympad">getAttributeValue</span>(Element arg0, String arg1)</nobr>
         
   </td></tr>
 
@@ -714,7 +714,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#hasAttribute(org.w3c.dom.Element, java.lang.String)">hasAttribute</a></span>(Element element, String attributeName)</nobr>
+        <span class="sympad">hasAttribute</span>(Element arg0, String arg1)</nobr>
         
   </td></tr>
 
@@ -730,7 +730,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#isMuleExpression(java.lang.String)">isMuleExpression</a></span>(String value)</nobr>
+        <span class="sympad">isMuleExpression</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -746,7 +746,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseConfigName(org.w3c.dom.Element)">parseConfigName</a></span>(Element element)</nobr>
+        <span class="sympad">parseConfigName</span>(Element arg0)</nobr>
         
   </td></tr>
 
@@ -762,7 +762,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseConfigRef(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder)">parseConfigRef</a></span>(Element element, BeanDefinitionBuilder builder)</nobr>
+        <span class="sympad">parseConfigRef</span>(Element arg0, BeanDefinitionBuilder arg1)</nobr>
         
   </td></tr>
 
@@ -778,7 +778,7 @@ From class
             ManagedList</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseList(org.w3c.dom.Element, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseList</a></span>(Element element, String childElementName, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseList</span>(Element arg0, String arg1, ParseDelegate arg2)</nobr>
         
   </td></tr>
 
@@ -794,7 +794,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseListAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseListAndSetProperty</a></span>(Element element, BeanDefinitionBuilder builder, String fieldName, String parentElementName, String childElementName, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseListAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, ParseDelegate arg5)</nobr>
         
   </td></tr>
 
@@ -810,7 +810,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseListWithDefaultAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseListWithDefaultAndSetProperty</a></span>(Element element, BeanDefinitionBuilder builder, String fieldName, String parentElementName, String childElementName, String defaultValue, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseListWithDefaultAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, String arg5, ParseDelegate arg6)</nobr>
         
   </td></tr>
 
@@ -826,7 +826,7 @@ From class
             ManagedMap</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseMap(org.w3c.dom.Element, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseMap</a></span>(Element element, String childElementName, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseMap</span>(Element arg0, String arg1, ParseDelegate arg2)</nobr>
         
   </td></tr>
 
@@ -842,7 +842,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseMapAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseMapAndSetProperty</a></span>(Element element, BeanDefinitionBuilder builder, String fieldName, String parentElementName, String childElementName, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseMapAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, ParseDelegate arg5)</nobr>
         
   </td></tr>
 
@@ -858,7 +858,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseMapWithDefaultAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseMapWithDefaultAndSetProperty</a></span>(Element element, BeanDefinitionBuilder builder, String fieldName, String parentElementName, String childElementName, String defaultValue, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseMapWithDefaultAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, String arg5, ParseDelegate arg6)</nobr>
         
   </td></tr>
 
@@ -874,7 +874,7 @@ From class
             BeanDefinition</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNestedProcessor(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, java.lang.Class)">parseNestedProcessor</a></span>(Element element, ParserContext parserContext, Class factory)</nobr>
+        <span class="sympad">parseNestedProcessor</span>(Element arg0, ParserContext arg1, Class arg2)</nobr>
         
   </td></tr>
 
@@ -890,7 +890,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNestedProcessorAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, java.lang.Class, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String)">parseNestedProcessorAndSetProperty</a></span>(Element element, ParserContext parserContext, Class factory, BeanDefinitionBuilder builder, String propertyName)</nobr>
+        <span class="sympad">parseNestedProcessorAndSetProperty</span>(Element arg0, ParserContext arg1, Class arg2, BeanDefinitionBuilder arg3, String arg4)</nobr>
         
   </td></tr>
 
@@ -906,7 +906,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNestedProcessorAndSetProperty(org.w3c.dom.Element, java.lang.String, org.springframework.beans.factory.xml.ParserContext, java.lang.Class, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String)">parseNestedProcessorAndSetProperty</a></span>(Element element, String childElementName, ParserContext parserContext, Class factory, BeanDefinitionBuilder builder, String propertyName)</nobr>
+        <span class="sympad">parseNestedProcessorAndSetProperty</span>(Element arg0, String arg1, ParserContext arg2, Class arg3, BeanDefinitionBuilder arg4, String arg5)</nobr>
         
   </td></tr>
 
@@ -922,7 +922,7 @@ From class
             List</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNestedProcessorAsList(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, java.lang.Class)">parseNestedProcessorAsList</a></span>(Element element, ParserContext parserContext, Class factory)</nobr>
+        <span class="sympad">parseNestedProcessorAsList</span>(Element arg0, ParserContext arg1, Class arg2)</nobr>
         
   </td></tr>
 
@@ -938,7 +938,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNestedProcessorAsListAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, java.lang.Class, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String)">parseNestedProcessorAsListAndSetProperty</a></span>(Element element, ParserContext parserContext, Class factory, BeanDefinitionBuilder builder, String propertyName)</nobr>
+        <span class="sympad">parseNestedProcessorAsListAndSetProperty</span>(Element arg0, ParserContext arg1, Class arg2, BeanDefinitionBuilder arg3, String arg4)</nobr>
         
   </td></tr>
 
@@ -954,7 +954,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNestedProcessorAsListAndSetProperty(org.w3c.dom.Element, java.lang.String, org.springframework.beans.factory.xml.ParserContext, java.lang.Class, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String)">parseNestedProcessorAsListAndSetProperty</a></span>(Element element, String childElementName, ParserContext parserContext, Class factory, BeanDefinitionBuilder builder, String propertyName)</nobr>
+        <span class="sympad">parseNestedProcessorAsListAndSetProperty</span>(Element arg0, String arg1, ParserContext arg2, Class arg3, BeanDefinitionBuilder arg4, String arg5)</nobr>
         
   </td></tr>
 
@@ -970,7 +970,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNoExprObjectRef(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String)">parseNoExprObjectRef</a></span>(Element element, BeanDefinitionBuilder builder, String elementName, String propertyName)</nobr>
+        <span class="sympad">parseNoExprObjectRef</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3)</nobr>
         
   </td></tr>
 
@@ -986,7 +986,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseNoExprObjectRefWithDefault(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String)">parseNoExprObjectRefWithDefault</a></span>(Element element, BeanDefinitionBuilder builder, String elementName, String propertyName, String defaultValue)</nobr>
+        <span class="sympad">parseNoExprObjectRefWithDefault</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4)</nobr>
         
   </td></tr>
 
@@ -1002,7 +1002,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseObjectRef(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String)">parseObjectRef</a></span>(Element element, BeanDefinitionBuilder builder, String elementName, String propertyName)</nobr>
+        <span class="sympad">parseObjectRef</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3)</nobr>
         
   </td></tr>
 
@@ -1018,7 +1018,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseObjectRefWithDefault(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String)">parseObjectRefWithDefault</a></span>(Element element, BeanDefinitionBuilder builder, String elementName, String propertyName, String defaultValue)</nobr>
+        <span class="sympad">parseObjectRefWithDefault</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4)</nobr>
         
   </td></tr>
 
@@ -1034,7 +1034,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseProperty(org.springframework.beans.factory.support.BeanDefinitionBuilder, org.w3c.dom.Element, java.lang.String)">parseProperty</a></span>(BeanDefinitionBuilder builder, Element element, String propertyName)</nobr>
+        <span class="sympad">parseProperty</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2)</nobr>
         
   </td></tr>
 
@@ -1050,7 +1050,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseProperty(org.springframework.beans.factory.support.BeanDefinitionBuilder, org.w3c.dom.Element, java.lang.String, java.lang.String)">parseProperty</a></span>(BeanDefinitionBuilder builder, Element element, String attributeName, String propertyName)</nobr>
+        <span class="sympad">parseProperty</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2, String arg3)</nobr>
         
   </td></tr>
 
@@ -1066,7 +1066,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parsePropertyRef(org.springframework.beans.factory.support.BeanDefinitionBuilder, org.w3c.dom.Element, java.lang.String)">parsePropertyRef</a></span>(BeanDefinitionBuilder builder, Element element, String propertyName)</nobr>
+        <span class="sympad">parsePropertyRef</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2)</nobr>
         
   </td></tr>
 
@@ -1082,7 +1082,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parsePropertyRef(org.springframework.beans.factory.support.BeanDefinitionBuilder, org.w3c.dom.Element, java.lang.String, java.lang.String)">parsePropertyRef</a></span>(BeanDefinitionBuilder builder, Element element, String attributeName, String propertyName)</nobr>
+        <span class="sympad">parsePropertyRef</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2, String arg3)</nobr>
         
   </td></tr>
 
@@ -1098,7 +1098,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseRetryPolicyTemplate(java.lang.String, org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, org.springframework.beans.factory.support.BeanDefinitionBuilder, org.springframework.beans.factory.config.BeanDefinition)">parseRetryPolicyTemplate</a></span>(String elementName, Element element, ParserContext parserContext, BeanDefinitionBuilder builder, BeanDefinition definition)</nobr>
+        <span class="sympad">parseRetryPolicyTemplate</span>(String arg0, Element arg1, ParserContext arg2, BeanDefinitionBuilder arg3, BeanDefinition arg4)</nobr>
         
   </td></tr>
 
@@ -1114,7 +1114,7 @@ From class
             ManagedSet</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseSet(org.w3c.dom.Element, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseSet</a></span>(Element element, String childElementName, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseSet</span>(Element arg0, String arg1, ParseDelegate arg2)</nobr>
         
   </td></tr>
 
@@ -1130,7 +1130,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseSetAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseSetAndSetProperty</a></span>(Element element, BeanDefinitionBuilder builder, String fieldName, String parentElementName, String childElementName, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseSetAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, ParseDelegate arg5)</nobr>
         
   </td></tr>
 
@@ -1146,7 +1146,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseSetWithDefaultAndSetProperty(org.w3c.dom.Element, org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.google.contact.config.AbstractDefinitionParser.ParseDelegate)">parseSetWithDefaultAndSetProperty</a></span>(Element element, BeanDefinitionBuilder builder, String fieldName, String parentElementName, String childElementName, String defaultValue, <a href="../../../../../../../java/org/mule/modules/google/contact/config/AbstractDefinitionParser.ParseDelegate.html">ParseDelegate</a> parserDelegate)</nobr>
+        <span class="sympad">parseSetWithDefaultAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, String arg5, ParseDelegate arg6)</nobr>
         
   </td></tr>
 
@@ -1162,7 +1162,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#parseTextProperty(org.springframework.beans.factory.support.BeanDefinitionBuilder, org.w3c.dom.Element, java.lang.String, java.lang.String)">parseTextProperty</a></span>(BeanDefinitionBuilder builder, Element element, String elementName, String propertyName)</nobr>
+        <span class="sympad">parseTextProperty</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2, String arg3)</nobr>
         
   </td></tr>
 
@@ -1178,7 +1178,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#setDestroyMethodIfNeeded(org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.Class)">setDestroyMethodIfNeeded</a></span>(BeanDefinitionBuilder builder, Class clazz)</nobr>
+        <span class="sympad">setDestroyMethodIfNeeded</span>(BeanDefinitionBuilder arg0, Class arg1)</nobr>
         
   </td></tr>
 
@@ -1194,7 +1194,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#setInitMethodIfNeeded(org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.Class)">setInitMethodIfNeeded</a></span>(BeanDefinitionBuilder builder, Class clazz)</nobr>
+        <span class="sympad">setInitMethodIfNeeded</span>(BeanDefinitionBuilder arg0, Class arg1)</nobr>
         
   </td></tr>
 
@@ -1210,7 +1210,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#setNoRecurseOnDefinition(org.springframework.beans.factory.config.BeanDefinition)">setNoRecurseOnDefinition</a></span>(BeanDefinition definition)</nobr>
+        <span class="sympad">setNoRecurseOnDefinition</span>(BeanDefinition arg0)</nobr>
         
   </td></tr>
 
@@ -1226,7 +1226,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/config/AbstractDefinitionParser.html#setRef(org.springframework.beans.factory.support.BeanDefinitionBuilder, java.lang.String, java.lang.String)">setRef</a></span>(BeanDefinitionBuilder builder, String propertyName, String ref)</nobr>
+        <span class="sympad">setRef</span>(BeanDefinitionBuilder arg0, String arg1, String arg2)</nobr>
         
   </td></tr>
 
