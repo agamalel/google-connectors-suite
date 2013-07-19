@@ -348,6 +348,39 @@
   
 
   
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+  
    
   
   
@@ -386,13 +419,6 @@
   
   
    
-  
-  
-  
-
-  
-   
-  
   
   
   
@@ -520,15 +546,9 @@ Summary:
   
       implements 
       
-        MuleContextAware 
+        OAuth2Adapter 
       
-        Initialisable 
-      
-        Startable 
-      
-        Stoppable 
-      
-        <a href="../../../../../../../java/org/mule/module/google/task/oauth/OAuth2Adapter.html">OAuth2Adapter</a> 
+        OAuth2Connector 
       
   
   
@@ -746,12 +766,19 @@ Summary:
     
     <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">String</td>
-        <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#MODULE_NAME">MODULE_NAME</a></td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#MIN_MULE_VERSION">MIN_MULE_VERSION</a></td>
         <td class="jd-descrcol" width="100%"></td>
     </tr>
     
     
     <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#MODULE_NAME">MODULE_NAME</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">String</td>
         <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#MODULE_VERSION">MODULE_VERSION</a></td>
         <td class="jd-descrcol" width="100%"></td>
@@ -826,6 +853,16 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
   </div>
 </div>
 </td></tr>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -964,8 +1001,6 @@ org.mule.api.lifecycle.Stoppable
 
 
 
-
-
 </table>
 
 
@@ -1058,8 +1093,8 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          MuleContext</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#muleContext">muleContext</a></td>
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#name">name</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1069,8 +1104,8 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          <a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#oauthRestoreAccessToken">oauthRestoreAccessToken</a></td>
+          OAuth2Manager&lt;OAuth2Adapter&gt;</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#oauthManager">oauthManager</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1080,8 +1115,8 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          <a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#oauthSaveAccessToken">oauthSaveAccessToken</a></td>
+          RestoreAccessTokenCallback</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#oauthRestoreAccessToken">oauthRestoreAccessToken</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1091,8 +1126,30 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
+          SaveAccessTokenCallback</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#oauthSaveAccessToken">oauthSaveAccessToken</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#oauthVerifier">oauthVerifier</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          OnNoTokenPolicy</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#onNoTokenPolicy">onNoTokenPolicy</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1302,6 +1359,14 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
 
 
 
+
+
+
+
+
+
+
+
 </table>
 
 
@@ -1323,7 +1388,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#GoogleTasksConnectorOAuth2Adapter()">GoogleTasksConnectorOAuth2Adapter</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#GoogleTasksConnectorOAuth2Adapter(org.mule.security.oauth.OAuth2Manager<org.mule.security.oauth.OAuth2Adapter>)">GoogleTasksConnectorOAuth2Adapter</a></span>(OAuth2Manager&lt;OAuth2Adapter&gt; oauthManager)</nobr>
         
   </td></tr>
 
@@ -1354,8 +1419,6 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#authorize(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String)">authorize</a></span>(Map&lt;String,&nbsp;String&gt; extraParameters, String authorizationUrl, String redirectUri)</nobr>
         
-        <div class="jd-descrdiv">Build authorization URL and create the inbound endpoint for the callback</div>
-  
   </td></tr>
 
 
@@ -1370,10 +1433,44 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#fetchAccessToken(java.lang.String, java.lang.String)">fetchAccessToken</a></span>(String accessTokenUrl, String redirectUri)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#fetchAccessToken(java.lang.String)">fetchAccessToken</a></span>(String redirectUri)</nobr>
         
-        <div class="jd-descrdiv">Acquire access token and secret</div>
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Pattern</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getAccessCodePattern()">getAccessCodePattern</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves ACCESS_CODE_PATTERN
+ 
+</div>
   
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getAccessTokenRegex()">getAccessTokenRegex</a></span>()</nobr>
+        
   </td></tr>
 
 
@@ -1405,12 +1502,84 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             
             
             
+            Set&lt;AuthorizationParameter&lt;?&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getAuthorizationParameters()">getAuthorizationParameters</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getAuthorizationUrl()">getAuthorizationUrl</a></span>()</nobr>
         
         <div class="jd-descrdiv">Retrieves authorizationUrl
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getExpirationRegex()">getExpirationRegex</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Pattern</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getExpirationTimePattern()">getExpirationTimePattern</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves EXPIRATION_TIME_PATTERN
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getName()">getName</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves name
  
 </div>
   
@@ -1425,7 +1594,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             
             
             
-            <a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></nobr>
+            RestoreAccessTokenCallback</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getOauthRestoreAccessToken()">getOauthRestoreAccessToken</a></span>()</nobr>
@@ -1445,7 +1614,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             
             
             
-            <a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></nobr>
+            SaveAccessTokenCallback</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getOauthSaveAccessToken()">getOauthSaveAccessToken</a></span>()</nobr>
@@ -1484,8 +1653,28 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             
             
             
+            
+            OnNoTokenPolicy</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getOnNoTokenPolicy()">getOnNoTokenPolicy</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves onNoTokenPolicy
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
             &lt;P&gt;
-            <a href="../../../../../../../java/org/mule/module/google/task/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../../java/org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html">GoogleTasksConnectorCapabilitiesAdapter</a>&gt;</nobr>
+            ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../../java/org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html">GoogleTasksConnectorCapabilitiesAdapter</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
@@ -1494,7 +1683,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1510,6 +1699,58 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
  
 </div>
   
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Pattern</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getRefreshTokenPattern()">getRefreshTokenPattern</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves REFRESH_TOKEN_PATTERN
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getRefreshTokenRegex()">getRefreshTokenRegex</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#getVerifierRegex()">getVerifierRegex</a></span>()</nobr>
+        
   </td></tr>
 
 
@@ -1572,7 +1813,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#refreshAccessToken(java.lang.String)">refreshAccessToken</a></span>(String accessTokenUrl)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#refreshAccessToken()">refreshAccessToken</a></span>()</nobr>
         
   </td></tr>
 
@@ -1674,9 +1915,9 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setName(java.lang.String)">setName</a></span>(String value)</nobr>
         
-        <div class="jd-descrdiv">Sets muleContext</div>
+        <div class="jd-descrdiv">Sets name</div>
   
   </td></tr>
 
@@ -1692,7 +1933,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setOauthRestoreAccessToken(org.mule.module.google.task.oauth.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(<a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a> value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setOauthRestoreAccessToken(org.mule.security.oauth.callback.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(RestoreAccessTokenCallback value)</nobr>
         
         <div class="jd-descrdiv">Sets oauthRestoreAccessToken</div>
   
@@ -1710,7 +1951,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setOauthSaveAccessToken(org.mule.module.google.task.oauth.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(<a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a> value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setOauthSaveAccessToken(org.mule.security.oauth.callback.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(SaveAccessTokenCallback value)</nobr>
         
         <div class="jd-descrdiv">Sets oauthSaveAccessToken</div>
   
@@ -1737,6 +1978,24 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
 
 	 
     <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorOAuth2Adapter.html#setOnNoTokenPolicy(org.mule.security.oauth.OnNoTokenPolicy)">setOnNoTokenPolicy</a></span>(OnNoTokenPolicy value)</nobr>
+        
+        <div class="jd-descrdiv">Sets onNoTokenPolicy</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1795,7 +2054,7 @@ From class
             
             
             &lt;P&gt;
-            <a href="../../../../../../../java/org/mule/module/google/task/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../../java/org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html">GoogleTasksConnectorCapabilitiesAdapter</a>&gt;</nobr>
+            ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../../java/org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html">GoogleTasksConnectorCapabilitiesAdapter</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorProcessAdapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
@@ -1932,9 +2191,6 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
-</div>
-  
   </td></tr>
 
 
@@ -1951,9 +2207,6 @@ From class
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
-</div>
-  
   </td></tr>
 
 
@@ -1968,11 +2221,8 @@ From class
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#getMinMuleVersion()">getMinMuleVersion</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the user-friendly name of this module
-</div>
-  
   </td></tr>
 
 
@@ -1987,11 +2237,24 @@ From class
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#getModuleName()">getModuleName</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorMetadataAdapater.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Returns the version of this module
-</div>
-  
   </td></tr>
 
 
@@ -2032,7 +2295,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.module.google.task.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../../java/org/mule/module/google/task/basic/Capability.html">Capability</a> capability)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html#isCapableOf(org.mule.api.devkit.capability.ModuleCapability)">isCapableOf</a></span>(ModuleCapability capability)</nobr>
         
         <div class="jd-descrdiv">Returns true if this module implements such capability
  
@@ -2794,21 +3057,129 @@ From class
 
 
 
+
+
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.context.MuleContextAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.context.MuleContextAware-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.MetadataAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.MetadataAware-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.context.MuleContextAware
+  org.mule.api.MetadataAware
 
-<div id="inherited-methods-org.mule.api.context.MuleContextAware">
-  <div id="inherited-methods-org.mule.api.context.MuleContextAware-list"
+<div id="inherited-methods-org.mule.api.MetadataAware">
+  <div id="inherited-methods-org.mule.api.MetadataAware-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.context.MuleContextAware-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.api.MetadataAware-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDevkitBuild</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDevkitVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getMinMuleVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getModuleName</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getModuleVersion</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.NameableObject" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.NameableObject-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.NameableObject
+
+<div id="inherited-methods-org.mule.api.NameableObject">
+  <div id="inherited-methods-org.mule.api.NameableObject-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.NameableObject-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -2824,7 +3195,133 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setMuleContext</span>(MuleContext arg0)</nobr>
+        <span class="sympad">setName</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.NamedObject" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.NamedObject-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.NamedObject
+
+<div id="inherited-methods-org.mule.api.NamedObject">
+  <div id="inherited-methods-org.mule.api.NamedObject-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.NamedObject-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getName</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.devkit.ProcessAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.devkit.ProcessAdapter-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.devkit.ProcessAdapter
+
+<div id="inherited-methods-org.mule.api.devkit.ProcessAdapter">
+  <div id="inherited-methods-org.mule.api.devkit.ProcessAdapter-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.devkit.ProcessAdapter-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            &lt;T&gt;
+            ProcessTemplate&lt;T,&nbsp;O&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getProcessTemplate</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.devkit.capability.Capabilities" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.api.devkit.capability.Capabilities-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.api.devkit.capability.Capabilities
+
+<div id="inherited-methods-org.mule.api.devkit.capability.Capabilities">
+  <div id="inherited-methods-org.mule.api.devkit.capability.Capabilities-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.api.devkit.capability.Capabilities-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">isCapableOf</span>(ModuleCapability arg0)</nobr>
         
   </td></tr>
 
@@ -3006,64 +3503,19 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.google.task.basic.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.google.task.basic.Capabilities-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.OAuth2Adapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.security.oauth.OAuth2Adapter-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  <a href="../../../../../../../org/mule/module/google/task/basic/Capabilities.html">org.mule.module.google.task.basic.Capabilities</a>
+  org.mule.security.oauth.OAuth2Adapter
 
-<div id="inherited-methods-org.mule.module.google.task.basic.Capabilities">
-  <div id="inherited-methods-org.mule.module.google.task.basic.Capabilities-list"
+<div id="inherited-methods-org.mule.security.oauth.OAuth2Adapter">
+  <div id="inherited-methods-org.mule.security.oauth.OAuth2Adapter-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.module.google.task.basic.Capabilities-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/basic/Capabilities.html#isCapableOf(org.mule.module.google.task.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../../../java/org/mule/module/google/task/basic/Capability.html">Capability</a> capability)</nobr>
-        
-        <div class="jd-descrdiv">Returns true if this module implements such
- capability</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.google.task.basic.MetadataAware" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.google.task.basic.MetadataAware-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  <a href="../../../../../../../org/mule/module/google/task/basic/MetadataAware.html">org.mule.module.google.task.basic.MetadataAware</a>
-
-<div id="inherited-methods-org.mule.module.google.task.basic.MetadataAware">
-  <div id="inherited-methods-org.mule.module.google.task.basic.MetadataAware-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.module.google.task.basic.MetadataAware-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.security.oauth.OAuth2Adapter-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -3079,112 +3531,8 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/basic/MetadataAware.html#getDevkitBuild()">getDevkitBuild</a></span>()</nobr>
+        <span class="sympad">authorize</span>(Map&lt;String,&nbsp;String&gt; arg0, String arg1, String arg2)</nobr>
         
-        <div class="jd-descrdiv">Returns the build of the DevKit used to create this module
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/basic/MetadataAware.html#getDevkitVersion()">getDevkitVersion</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the version of the DevKit used to create this module
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/basic/MetadataAware.html#getModuleName()">getModuleName</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the user-friendly name of this module
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/basic/MetadataAware.html#getModuleVersion()">getModuleVersion</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Returns the version of this module
-</div>
-  
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.google.task.oauth.OAuth2Adapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.google.task.oauth.OAuth2Adapter-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  <a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html">org.mule.module.google.task.oauth.OAuth2Adapter</a>
-
-<div id="inherited-methods-org.mule.module.google.task.oauth.OAuth2Adapter">
-  <div id="inherited-methods-org.mule.module.google.task.oauth.OAuth2Adapter-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.module.google.task.oauth.OAuth2Adapter-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html#authorize(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String)">authorize</a></span>(Map&lt;String,&nbsp;String&gt; extraParameters, String accessTokenUrl, String redirectUri)</nobr>
-        
-        <div class="jd-descrdiv">Build authorization URL and create the inbound endpoint for the callback</div>
-  
   </td></tr>
 
 
@@ -3199,10 +3547,8 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html#fetchAccessToken(java.lang.String, java.lang.String)">fetchAccessToken</a></span>(String accessTokenUrl, String redirectUri)</nobr>
+        <span class="sympad">fetchAccessToken</span>(String arg0)</nobr>
         
-        <div class="jd-descrdiv">Acquire access token and secret</div>
-  
   </td></tr>
 
 
@@ -3214,10 +3560,74 @@ From interface
             
             
             
+            Pattern</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getAccessCodePattern</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html#getRefreshToken()">getRefreshToken</a></span>()</nobr>
+        <span class="sympad">getAccessToken</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Pattern</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getExpirationTimePattern</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getRefreshToken</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Pattern</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getRefreshTokenPattern</span>()</nobr>
         
   </td></tr>
 
@@ -3233,7 +3643,7 @@ From interface
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html#hasTokenExpired()">hasTokenExpired</a></span>()</nobr>
+        <span class="sympad">hasTokenExpired</span>()</nobr>
         
   </td></tr>
 
@@ -3249,7 +3659,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html#refreshAccessToken(java.lang.String)">refreshAccessToken</a></span>(String accessTokenUrl)</nobr>
+        <span class="sympad">refreshAccessToken</span>()</nobr>
         
   </td></tr>
 
@@ -3265,7 +3675,55 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuth2Adapter.html#setExpiration(java.util.Date)">setExpiration</a></span>(Date value)</nobr>
+        <span class="sympad">setConsumerKey</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setConsumerSecret</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setExpiration</span>(Date arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setRefreshToken</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -3279,19 +3737,19 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.google.task.oauth.OAuthAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.google.task.oauth.OAuthAdapter-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.OAuth2Connector" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.security.oauth.OAuth2Connector-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  <a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html">org.mule.module.google.task.oauth.OAuthAdapter</a>
+  org.mule.security.oauth.OAuth2Connector
 
-<div id="inherited-methods-org.mule.module.google.task.oauth.OAuthAdapter">
-  <div id="inherited-methods-org.mule.module.google.task.oauth.OAuthAdapter-list"
+<div id="inherited-methods-org.mule.security.oauth.OAuth2Connector">
+  <div id="inherited-methods-org.mule.security.oauth.OAuth2Connector-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.module.google.task.oauth.OAuthAdapter-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.security.oauth.OAuth2Connector-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -3307,50 +3765,8 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#getAccessToken()">getAccessToken</a></span>()</nobr>
+        <span class="sympad">getAccessToken</span>()</nobr>
         
-        <div class="jd-descrdiv">Retrieve access token
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#getOauthRestoreAccessToken()">getOauthRestoreAccessToken</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Get the callback to be called when the access token and secret need to be restored
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            <a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#getOauthSaveAccessToken()">getOauthSaveAccessToken</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Get the callback to be called when the access token and secret need to be saved for
- later restoration
-</div>
-  
   </td></tr>
 
 
@@ -3365,10 +3781,8 @@ From interface
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#getOauthVerifier()">getOauthVerifier</a></span>()</nobr>
+        <span class="sympad">getAccessTokenRegex</span>()</nobr>
         
-        <div class="jd-descrdiv">Retrieve OAuth verifier</div>
-  
   </td></tr>
 
 
@@ -3380,10 +3794,138 @@ From interface
             
             
             
-            void</nobr>
+            String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#hasBeenAuthorized()">hasBeenAuthorized</a></span>()</nobr>
+        <span class="sympad">getAccessTokenUrl</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Set&lt;AuthorizationParameter&lt;?&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getAuthorizationParameters</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getAuthorizationUrl</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getConsumerKey</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getConsumerSecret</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getExpirationRegex</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getRefreshTokenRegex</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getScope</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getVerifierRegex</span>()</nobr>
         
   </td></tr>
 
@@ -3399,65 +3941,8 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#setAccessToken(java.lang.String)">setAccessToken</a></span>(String value)</nobr>
+        <span class="sympad">postAuth</span>()</nobr>
         
-        <div class="jd-descrdiv">Set access token</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#setOauthRestoreAccessToken(org.mule.module.google.task.oauth.RestoreAccessTokenCallback)">setOauthRestoreAccessToken</a></span>(<a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a> restoreCallback)</nobr>
-        
-        <div class="jd-descrdiv">Set the callback to be called when the access token and secret need to be restored</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#setOauthSaveAccessToken(org.mule.module.google.task.oauth.SaveAccessTokenCallback)">setOauthSaveAccessToken</a></span>(<a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a> saveCallback)</nobr>
-        
-        <div class="jd-descrdiv">Set the callback to be called when the access token and secret need to be saved for
- later restoration</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/OAuthAdapter.html#setOauthVerifier(java.lang.String)">setOauthVerifier</a></span>(String value)</nobr>
-        
-        <div class="jd-descrdiv">Set OAuth verifier</div>
-  
   </td></tr>
 
 
@@ -3470,19 +3955,19 @@ From interface
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.module.google.task.process.ProcessAdapter" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.module.google.task.process.ProcessAdapter-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.OAuthAdapter" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.security.oauth.OAuthAdapter-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  <a href="../../../../../../../org/mule/module/google/task/process/ProcessAdapter.html">org.mule.module.google.task.process.ProcessAdapter</a>
+  org.mule.security.oauth.OAuthAdapter
 
-<div id="inherited-methods-org.mule.module.google.task.process.ProcessAdapter">
-  <div id="inherited-methods-org.mule.module.google.task.process.ProcessAdapter-list"
+<div id="inherited-methods-org.mule.security.oauth.OAuthAdapter">
+  <div id="inherited-methods-org.mule.security.oauth.OAuthAdapter-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.module.google.task.process.ProcessAdapter-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.security.oauth.OAuthAdapter-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -3494,11 +3979,213 @@ From interface
             
             
             
-            &lt;T&gt;
-            <a href="../../../../../../../java/org/mule/module/google/task/process/ProcessTemplate.html">ProcessTemplate</a>&lt;T,&nbsp;O&gt;</nobr>
+            
+            RestoreAccessTokenCallback</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/process/ProcessAdapter.html#getProcessTemplate()">getProcessTemplate</a></span>()</nobr>
+        <span class="sympad">getOauthRestoreAccessToken</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            SaveAccessTokenCallback</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getOauthSaveAccessToken</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getOauthVerifier</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">hasBeenAuthorized</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setAccessToken</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setAccessTokenUrl</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setAuthorizationUrl</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setOauthRestoreAccessToken</span>(RestoreAccessTokenCallback arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setOauthSaveAccessToken</span>(SaveAccessTokenCallback arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setOauthVerifier</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.OnNoTokenPolicyAware" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.security.oauth.OnNoTokenPolicyAware-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  org.mule.security.oauth.OnNoTokenPolicyAware
+
+<div id="inherited-methods-org.mule.security.oauth.OnNoTokenPolicyAware">
+  <div id="inherited-methods-org.mule.security.oauth.OnNoTokenPolicyAware-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.security.oauth.OnNoTokenPolicyAware-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            OnNoTokenPolicy</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getOnNoTokenPolicy</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setOnNoTokenPolicy</span>(OnNoTokenPolicy arg0)</nobr>
         
   </td></tr>
 
@@ -3751,7 +4438,7 @@ From interface
 
 
 
-<A NAME="muleContext"></A>
+<A NAME="name"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3759,9 +4446,39 @@ From interface
         private 
          
          
-        MuleContext
+        String
       </span>
-        muleContext
+        name
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="oauthManager"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        OAuth2Manager&lt;OAuth2Adapter&gt;
+      </span>
+        oauthManager
     </h4>
       <div class="api-level">
         
@@ -3789,7 +4506,7 @@ From interface
         private 
          
          
-        <a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a>
+        RestoreAccessTokenCallback
       </span>
         oauthRestoreAccessToken
     </h4>
@@ -3819,7 +4536,7 @@ From interface
         private 
          
          
-        <a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a>
+        SaveAccessTokenCallback
       </span>
         oauthSaveAccessToken
     </h4>
@@ -3852,6 +4569,36 @@ From interface
         String
       </span>
         oauthVerifier
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="onNoTokenPolicy"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        OnNoTokenPolicy
+      </span>
+        onNoTokenPolicy
     </h4>
       <div class="api-level">
         
@@ -3940,7 +4687,7 @@ From interface
 
 
 
-<A NAME="GoogleTasksConnectorOAuth2Adapter()"></A>
+<A NAME="GoogleTasksConnectorOAuth2Adapter(org.mule.security.oauth.OAuth2Manager<org.mule.security.oauth.OAuth2Adapter>)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3953,7 +4700,7 @@ From interface
         
       </span>
       <span class="sympad">GoogleTasksConnectorOAuth2Adapter</span>
-      <span class="normal">()</span>
+      <span class="normal">(OAuth2Manager&lt;OAuth2Adapter&gt; oauthManager)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3966,6 +4713,15 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>oauthManager</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>
@@ -4011,13 +4767,13 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Build authorization URL and create the inbound endpoint for the callback</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
           <th>extraParameters</td>
-          <td>Extra query string parameters that should be added to the authorization URL</td>
+          <td></td>
         </tr>
         <tr>
           <th>authorizationUrl</td>
@@ -4029,17 +4785,12 @@ From interface
         </tr>
       </table>
   </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The authorization URL
-</li></ul>
-  </div>
 
     </div>
 </div>
 
 
-<A NAME="fetchAccessToken(java.lang.String, java.lang.String)"></A>
+<A NAME="fetchAccessToken(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4052,7 +4803,7 @@ From interface
         void
       </span>
       <span class="sympad">fetchAccessToken</span>
-      <span class="normal">(String accessTokenUrl, String redirectUri)</span>
+      <span class="normal">(String redirectUri)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4064,14 +4815,10 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Acquire access token and secret</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
-        <tr>
-          <th>accessTokenUrl</td>
-          <td></td>
-        </tr>
         <tr>
           <th>redirectUri</td>
           <td></td>
@@ -4082,11 +4829,75 @@ From interface
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
         <tr>
-            <th><a href="../../../../../../../java/org/mule/module/google/task/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></td>
+            <th>UnableToAcquireAccessTokenException</td>
             <td></td>
         </tr>
       </table>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="getAccessCodePattern()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Pattern
+      </span>
+      <span class="sympad">getAccessCodePattern</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves ACCESS_CODE_PATTERN
+ 
+</p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getAccessTokenRegex()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getAccessTokenRegex</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
@@ -4125,6 +4936,37 @@ From interface
 </div>
 
 
+<A NAME="getAuthorizationParameters()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Set&lt;AuthorizationParameter&lt;?&gt;&gt;
+      </span>
+      <span class="sympad">getAuthorizationParameters</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
 <A NAME="getAuthorizationUrl()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4158,6 +5000,103 @@ From interface
 </div>
 
 
+<A NAME="getExpirationRegex()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getExpirationRegex</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getExpirationTimePattern()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Pattern
+      </span>
+      <span class="sympad">getExpirationTimePattern</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves EXPIRATION_TIME_PATTERN
+ 
+</p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getName()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getName</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves name
+ 
+</p></div>
+
+    </div>
+</div>
+
+
 <A NAME="getOauthRestoreAccessToken()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4168,7 +5107,7 @@ From interface
          
          
          
-        <a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a>
+        RestoreAccessTokenCallback
       </span>
       <span class="sympad">getOauthRestoreAccessToken</span>
       <span class="normal">()</span>
@@ -4201,7 +5140,7 @@ From interface
          
          
          
-        <a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a>
+        SaveAccessTokenCallback
       </span>
       <span class="sympad">getOauthSaveAccessToken</span>
       <span class="normal">()</span>
@@ -4252,11 +5191,39 @@ From interface
   <div class="jd-tagdata jd-tagdescr"><p>Retrieves oauthVerifier
  
 </p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A String representing the OAuth verifier
-</li></ul>
-  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getOnNoTokenPolicy()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        OnNoTokenPolicy
+      </span>
+      <span class="sympad">getOnNoTokenPolicy</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves onNoTokenPolicy
+ 
+</p></div>
 
     </div>
 </div>
@@ -4272,7 +5239,7 @@ From interface
          
          
          
-        <a href="../../../../../../../java/org/mule/module/google/task/process/ProcessTemplate.html">ProcessTemplate</a>&lt;P,&nbsp;<a href="../../../../../../../java/org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html">GoogleTasksConnectorCapabilitiesAdapter</a>&gt;
+        ProcessTemplate&lt;P,&nbsp;<a href="../../../../../../../java/org/mule/module/google/task/adapters/GoogleTasksConnectorCapabilitiesAdapter.html">GoogleTasksConnectorCapabilitiesAdapter</a>&gt;
       </span>
       <span class="sympad">getProcessTemplate</span>
       <span class="normal">()</span>
@@ -4326,6 +5293,101 @@ From interface
 </div>
 
 
+<A NAME="getRefreshTokenPattern()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Pattern
+      </span>
+      <span class="sympad">getRefreshTokenPattern</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves REFRESH_TOKEN_PATTERN
+ 
+</p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getRefreshTokenRegex()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getRefreshTokenRegex</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getVerifierRegex()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getVerifierRegex</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
 <A NAME="hasBeenAuthorized()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4356,7 +5418,7 @@ From interface
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
         <tr>
-            <th><a href="../../../../../../../java/org/mule/module/google/task/oauth/NotAuthorizedException.html">NotAuthorizedException</a></td>
+            <th>NotAuthorizedException</td>
             <td></td>
         </tr>
       </table>
@@ -4437,7 +5499,7 @@ From interface
 </div>
 
 
-<A NAME="refreshAccessToken(java.lang.String)"></A>
+<A NAME="refreshAccessToken()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4450,7 +5512,7 @@ From interface
         void
       </span>
       <span class="sympad">refreshAccessToken</span>
-      <span class="normal">(String accessTokenUrl)</span>
+      <span class="normal">()</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4464,19 +5526,10 @@ From interface
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>accessTokenUrl</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
         <tr>
-            <th><a href="../../../../../../../java/org/mule/module/google/task/oauth/UnableToAcquireAccessTokenException.html">UnableToAcquireAccessTokenException</a></td>
+            <th>UnableToAcquireAccessTokenException</td>
             <td></td>
         </tr>
       </table>
@@ -4671,7 +5724,7 @@ From interface
 </div>
 
 
-<A NAME="setMuleContext(org.mule.api.MuleContext)"></A>
+<A NAME="setName(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4683,8 +5736,8 @@ From interface
          
         void
       </span>
-      <span class="sympad">setMuleContext</span>
-      <span class="normal">(MuleContext value)</span>
+      <span class="sympad">setName</span>
+      <span class="normal">(String value)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4696,7 +5749,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Sets muleContext</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Sets name</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
@@ -4712,7 +5765,7 @@ From interface
 </div>
 
 
-<A NAME="setOauthRestoreAccessToken(org.mule.module.google.task.oauth.RestoreAccessTokenCallback)"></A>
+<A NAME="setOauthRestoreAccessToken(org.mule.security.oauth.callback.RestoreAccessTokenCallback)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4725,7 +5778,7 @@ From interface
         void
       </span>
       <span class="sympad">setOauthRestoreAccessToken</span>
-      <span class="normal">(<a href="../../../../../../../java/org/mule/module/google/task/oauth/RestoreAccessTokenCallback.html">RestoreAccessTokenCallback</a> value)</span>
+      <span class="normal">(RestoreAccessTokenCallback value)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4753,7 +5806,7 @@ From interface
 </div>
 
 
-<A NAME="setOauthSaveAccessToken(org.mule.module.google.task.oauth.SaveAccessTokenCallback)"></A>
+<A NAME="setOauthSaveAccessToken(org.mule.security.oauth.callback.SaveAccessTokenCallback)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -4766,7 +5819,7 @@ From interface
         void
       </span>
       <span class="sympad">setOauthSaveAccessToken</span>
-      <span class="normal">(<a href="../../../../../../../java/org/mule/module/google/task/oauth/SaveAccessTokenCallback.html">SaveAccessTokenCallback</a> value)</span>
+      <span class="normal">(SaveAccessTokenCallback value)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -4820,6 +5873,47 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets oauthVerifier</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setOnNoTokenPolicy(org.mule.security.oauth.OnNoTokenPolicy)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setOnNoTokenPolicy</span>
+      <span class="normal">(OnNoTokenPolicy value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets onNoTokenPolicy</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
