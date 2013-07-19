@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.mule.tools.devkit</groupId>
 		<artifactId>mule-devkit-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.5.0-andes</version>
 	</parent>
 
 	<modules>
@@ -18,12 +18,12 @@
 		<module>api-gdata</module>
 		<module>calendar-connector</module>
 		<module>contacts-connector</module>
-		<module>prediction-connector</module>
+		<!--<module>prediction-connector</module>-->
 		<module>spreadsheets-connector</module>
 		<module>tasks-connector</module>
-		<module>gmail-connector</module>
-                <module>drive-connector</module>
-                <module>cloud-messaging-connector</module>
+		<!--<module>gmail-connector</module>-->
+		<!--<module>drive-connector</module>-->
+		<!--<module>cloud-messaging-connector</module>-->
 	</modules>
 
 	<properties>
