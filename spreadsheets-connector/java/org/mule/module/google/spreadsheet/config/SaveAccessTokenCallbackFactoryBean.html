@@ -74,7 +74,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../../favicon.ico" />
 <title>
 
-  GetAllCellsDefinitionParser
+  SaveAccessTokenCallbackFactoryBean
 
 
 | Mule Google Spreadsheet Cloud Connector
@@ -254,7 +254,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/CreateWorksheetDefinitionParser.html">CreateWorksheetDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/DeleteWorksheetDefinitionParser.html">DeleteWorksheetDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GetAllCellsAsCsvDefinitionParser.html">GetAllCellsAsCsvDefinitionParser</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GetAllCellsDefinitionParser.html">GetAllCellsDefinitionParser</a></li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GetAllCellsDefinitionParser.html">GetAllCellsDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GetAllSpreadsheetsDefinitionParser.html">GetAllSpreadsheetsDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GetAllWorksheetsDefinitionParser.html">GetAllWorksheetsDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GetAuthorsDefinitionParser.html">GetAuthorsDefinitionParser</a></li>
@@ -267,7 +267,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/GoogleSpreadsheetsNamespaceHandler.html">GoogleSpreadsheetsNamespaceHandler</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/PurgeWorksheetDefinitionParser.html">PurgeWorksheetDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/RestoreAccessTokenCallbackFactoryBean.html">RestoreAccessTokenCallbackFactoryBean</a></li>
-          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/SaveAccessTokenCallbackFactoryBean.html">SaveAccessTokenCallbackFactoryBean</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/SaveAccessTokenCallbackFactoryBean.html">SaveAccessTokenCallbackFactoryBean</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/SearchDefinitionParser.html">SearchDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/SetCsvValuesDefinitionParser.html">SetCsvValuesDefinitionParser</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/spreadsheet/config/SetRowValuesDefinitionParser.html">SetRowValuesDefinitionParser</a></li>
@@ -390,7 +390,7 @@ Summary:
      
     
     class
-<h1>GetAllCellsDefinitionParser</h1>
+<h1>SaveAccessTokenCallbackFactoryBean</h1>
 
 
 
@@ -399,7 +399,7 @@ Summary:
   
 
   
-    extends AbstractDevkitBasedDefinitionParser<br/>
+    extends MessageProcessorChainFactoryBean<br/>
   
   
   
@@ -427,7 +427,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="2" class="jd-inheritance-class-cell">org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser</td>
+        <td colspan="2" class="jd-inheritance-class-cell">org.mule.config.spring.factories.MessageProcessorChainFactoryBean</td>
     </tr>
     
 
@@ -437,7 +437,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.module.google.spreadsheet.config.GetAllCellsDefinitionParser</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.module.google.spreadsheet.config.SaveAccessTokenCallbackFactoryBean</td>
     </tr>
     
 
@@ -507,27 +507,38 @@ Summary:
 <tr class="api apilevel-" >
 <td colspan="12">
 
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser" class="jd-expando-trigger closed"
-          ><img id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.config.spring.factories.MessageProcessorChainFactoryBean" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-org.mule.config.spring.factories.MessageProcessorChainFactoryBean-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>From class
-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
-<div id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser">
-  <div id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-list"
+org.mule.config.spring.factories.MessageProcessorChainFactoryBean
+<div id="inherited-fields-org.mule.config.spring.factories.MessageProcessorChainFactoryBean">
+  <div id="inherited-fields-org.mule.config.spring.factories.MessageProcessorChainFactoryBean-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-fields-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-summary" style="display: none;">
+  <div id="inherited-fields-org.mule.config.spring.factories.MessageProcessorChainFactoryBean-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
     
       <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
-          private
+          protected
           
           
-          TemplateParser.PatternInfo</nobr></td>
-          <td class="jd-linkcol">patternInfo</td>
+          String</nobr></td>
+          <td class="jd-linkcol">name</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          List</nobr></td>
+          <td class="jd-linkcol">processors</td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -563,7 +574,7 @@ org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/spreadsheet/config/GetAllCellsDefinitionParser.html#GetAllCellsDefinitionParser()">GetAllCellsDefinitionParser</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/spreadsheet/config/SaveAccessTokenCallbackFactoryBean.html#SaveAccessTokenCallbackFactoryBean()">SaveAccessTokenCallbackFactoryBean</a></span>()</nobr>
         
   </td></tr>
 
@@ -589,10 +600,26 @@ org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
             
             
             
-            BeanDefinition</nobr>
+            Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/spreadsheet/config/GetAllCellsDefinitionParser.html#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)">parse</a></span>(Element element, ParserContext parserContext)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/spreadsheet/config/SaveAccessTokenCallbackFactoryBean.html#getObject()">getObject</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Class</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/spreadsheet/config/SaveAccessTokenCallbackFactoryBean.html#getObjectType()">getObjectType</a></span>()</nobr>
         
   </td></tr>
 
@@ -614,19 +641,19 @@ org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.config.spring.factories.MessageProcessorChainFactoryBean" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.config.spring.factories.MessageProcessorChainFactoryBean-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From class
 
-  org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser
+  org.mule.config.spring.factories.MessageProcessorChainFactoryBean
 
-<div id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser">
-  <div id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-list"
+<div id="inherited-methods-org.mule.config.spring.factories.MessageProcessorChainFactoryBean">
+  <div id="inherited-methods-org.mule.config.spring.factories.MessageProcessorChainFactoryBean-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.security.oauth.config.AbstractDevkitBasedDefinitionParser-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.config.spring.factories.MessageProcessorChainFactoryBean-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -639,10 +666,10 @@ From class
             
             
             
-            void</nobr>
+            MessageProcessorChainBuilder</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">attachProcessorDefinition</span>(ParserContext arg0, BeanDefinition arg1)</nobr>
+        <span class="sympad">getBuilderInstance</span>()</nobr>
         
   </td></tr>
 
@@ -655,10 +682,10 @@ From class
             
             
             
-            void</nobr>
+            Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">attachSourceDefinition</span>(ParserContext arg0, BeanDefinition arg1)</nobr>
+        <span class="sympad">getObject</span>()</nobr>
         
   </td></tr>
 
@@ -671,42 +698,10 @@ From class
             
             
             
-            String</nobr>
+            Class</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">generateChildBeanName</span>(Element arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">getAttributeValue</span>(Element arg0, String arg1)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">hasAttribute</span>(Element arg0, String arg1)</nobr>
+        <span class="sympad">getObjectType</span>()</nobr>
         
   </td></tr>
 
@@ -722,7 +717,7 @@ From class
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">isMuleExpression</span>(String arg0)</nobr>
+        <span class="sympad">isSingleton</span>()</nobr>
         
   </td></tr>
 
@@ -738,7 +733,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseConfigName</span>(Element arg0)</nobr>
+        <span class="sympad">setMessageProcessors</span>(List arg0)</nobr>
         
   </td></tr>
 
@@ -754,471 +749,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseConfigRef</span>(Element arg0, BeanDefinitionBuilder arg1)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            ManagedList</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseList</span>(Element arg0, String arg1, ParseDelegate arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseListAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, ParseDelegate arg5)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseListWithDefaultAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, String arg5, ParseDelegate arg6)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            ManagedMap</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseMap</span>(Element arg0, String arg1, ParseDelegate arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseMapAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, ParseDelegate arg5)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseMapWithDefaultAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, String arg5, ParseDelegate arg6)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            BeanDefinition</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNestedProcessor</span>(Element arg0, ParserContext arg1, Class arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNestedProcessorAndSetProperty</span>(Element arg0, ParserContext arg1, Class arg2, BeanDefinitionBuilder arg3, String arg4)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNestedProcessorAndSetProperty</span>(Element arg0, String arg1, ParserContext arg2, Class arg3, BeanDefinitionBuilder arg4, String arg5)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNestedProcessorAsList</span>(Element arg0, ParserContext arg1, Class arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNestedProcessorAsListAndSetProperty</span>(Element arg0, ParserContext arg1, Class arg2, BeanDefinitionBuilder arg3, String arg4)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNestedProcessorAsListAndSetProperty</span>(Element arg0, String arg1, ParserContext arg2, Class arg3, BeanDefinitionBuilder arg4, String arg5)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNoExprObjectRef</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseNoExprObjectRefWithDefault</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseObjectRef</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            boolean</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseObjectRefWithDefault</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseProperty</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseProperty</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2, String arg3)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parsePropertyRef</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parsePropertyRef</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2, String arg3)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseRetryPolicyTemplate</span>(String arg0, Element arg1, ParserContext arg2, BeanDefinitionBuilder arg3, BeanDefinition arg4)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            ManagedSet</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseSet</span>(Element arg0, String arg1, ParseDelegate arg2)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseSetAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, ParseDelegate arg5)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseSetWithDefaultAndSetProperty</span>(Element arg0, BeanDefinitionBuilder arg1, String arg2, String arg3, String arg4, String arg5, ParseDelegate arg6)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parseTextProperty</span>(BeanDefinitionBuilder arg0, Element arg1, String arg2, String arg3)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setDestroyMethodIfNeeded</span>(BeanDefinitionBuilder arg0, Class arg1)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setInitMethodIfNeeded</span>(BeanDefinitionBuilder arg0, Class arg1)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setNoRecurseOnDefinition</span>(BeanDefinition arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setRef</span>(BeanDefinitionBuilder arg0, String arg1, String arg2)</nobr>
+        <span class="sympad">setName</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -1434,19 +965,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.springframework.beans.factory.FactoryBean" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.springframework.beans.factory.FactoryBean-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.springframework.beans.factory.xml.BeanDefinitionParser
+  org.springframework.beans.factory.FactoryBean
 
-<div id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser">
-  <div id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser-list"
+<div id="inherited-methods-org.springframework.beans.factory.FactoryBean">
+  <div id="inherited-methods-org.springframework.beans.factory.FactoryBean-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.springframework.beans.factory.xml.BeanDefinitionParser-summary" style="display: none;">
+  <div id="inherited-methods-org.springframework.beans.factory.FactoryBean-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -1459,10 +990,42 @@ From interface
             
             
             
-            BeanDefinition</nobr>
+            T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">parse</span>(Element arg0, ParserContext arg1)</nobr>
+        <span class="sympad">getObject</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Class&lt;?&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getObjectType</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">isSingleton</span>()</nobr>
         
   </td></tr>
 
@@ -1507,7 +1070,7 @@ From interface
 
 
 
-<A NAME="GetAllCellsDefinitionParser()"></A>
+<A NAME="SaveAccessTokenCallbackFactoryBean()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1519,7 +1082,7 @@ From interface
          
         
       </span>
-      <span class="sympad">GetAllCellsDefinitionParser</span>
+      <span class="sympad">SaveAccessTokenCallbackFactoryBean</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -1553,7 +1116,7 @@ From interface
 
 
 
-<A NAME="parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)"></A>
+<A NAME="getObject()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1563,10 +1126,10 @@ From interface
          
          
          
-        BeanDefinition
+        Object
       </span>
-      <span class="sympad">parse</span>
-      <span class="normal">(Element element, ParserContext parserContext)</span>
+      <span class="sympad">getObject</span>
+      <span class="normal">()</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1580,18 +1143,45 @@ From interface
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
         <tr>
-          <th>element</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>parserContext</td>
-          <td></td>
+            <th>Exception</td>
+            <td></td>
         </tr>
       </table>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="getObjectType()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Class
+      </span>
+      <span class="sympad">getObjectType</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
