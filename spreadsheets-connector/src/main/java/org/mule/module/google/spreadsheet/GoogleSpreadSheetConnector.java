@@ -74,7 +74,7 @@ import com.google.gdata.util.ServiceException;
  *
  * @author mariano.gonzalez@mulesoft.com
  */
-@Connector(name="google-spreadsheets", schemaVersion="1.0", friendlyName="Google Spreadsheets", minMuleVersion="3.4", configElementName="config-with-oauth")
+@Connector(name="google-spreadsheets", schemaVersion="1.0", friendlyName="Google Spreadsheets", minMuleVersion="3.5", configElementName="config-with-oauth")
 @OAuth2(
 		authorizationUrl = "https://accounts.google.com/o/oauth2/auth",
 		accessTokenUrl = "https://accounts.google.com/o/oauth2/token",

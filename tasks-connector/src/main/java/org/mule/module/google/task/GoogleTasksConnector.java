@@ -56,7 +56,7 @@ import com.google.api.services.tasks.model.TaskLists;
  * @author MuleSoft, Inc.
  * @author mariano.gonzalez@mulesoft.com
  */
-@Connector(name="google-tasks", schemaVersion="1.0", friendlyName="Google Tasks", minMuleVersion="3.4", configElementName="config-with-oauth")
+@Connector(name="google-tasks", schemaVersion="1.0", friendlyName="Google Tasks", minMuleVersion="3.5", configElementName="config-with-oauth")
 @OAuth2(
 		authorizationUrl = "https://accounts.google.com/o/oauth2/auth",
 		accessTokenUrl = "https://accounts.google.com/o/oauth2/token",

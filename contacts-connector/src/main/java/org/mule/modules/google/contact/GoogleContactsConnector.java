@@ -80,7 +80,7 @@ import com.google.gdata.util.ServiceException;
  *
  * @author mariano.gonzalez@mulesoft.com
  */
-@Connector(name="google-contacts", schemaVersion="1.7.4", friendlyName="Google Contacts", minMuleVersion="3.4", configElementName="config-with-oauth")
+@Connector(name="google-contacts", schemaVersion="1.7.4", friendlyName="Google Contacts", minMuleVersion="3.5", configElementName="config-with-oauth")
 @OAuth2(
 		authorizationUrl = "https://accounts.google.com/o/oauth2/auth",
 		accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
