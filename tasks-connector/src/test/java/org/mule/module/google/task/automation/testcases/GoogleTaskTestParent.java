@@ -25,7 +25,7 @@ import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.module.google.task.model.Task;
 import org.mule.module.google.task.model.TaskList;
-import org.mule.module.google.task.oauth.GoogleTasksConnectorOAuthState;
+//import org.mule.module.google.task.oauth.GoogleTasksConnectorOAuthState;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -43,8 +43,8 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
 	public void init() throws ObjectStoreException {
-		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-		objectStore.store("accessTokenId", (GoogleTasksConnectorOAuthState)context.getBean("connectorOAuthState"));
+//		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+//		objectStore.store("accessTokenId", (GoogleTasksConnectorOAuthState)context.getBean("connectorOAuthState"));
 	}
 	
 	@Override
@@ -52,10 +52,10 @@ public class GoogleTaskTestParent extends FunctionalTestCase {
 		return "automation-test-flows.xml";
 	}
 
-	protected MessageProcessor lookupFlowConstruct(String name) {
-		return (MessageProcessor) muleContext.getRegistry()
-				.lookupFlowConstruct(name);
-	}
+//	protected MessageProcessor lookupFlowConstruct(String name) {
+//		return (MessageProcessor) muleContext.getRegistry()
+//				.lookupFlowConstruct(name);
+//	}
 
 	@BeforeClass
 	public static void beforeClass() {
