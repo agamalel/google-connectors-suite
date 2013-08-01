@@ -42,29 +42,15 @@ public class GoogleCalendarTestParent extends FunctionalTestCase {
 	protected static ApplicationContext context;
 	protected Map<String, Object> testObjects;
 	
-//	protected Calendar mainCalendar;
-	
 	@Override
 	protected String getConfigResources() {
 		return "automation-test-flows.xml";
-	}
-
-	protected MessageProcessor lookupFlowConstruct(String name) {
-		return (MessageProcessor) muleContext.getRegistry()
-				.lookupFlowConstruct(name);
 	}
 	
 	@Before
 	public void init() throws ObjectStoreException, Exception {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
 		objectStore.store("accessTokenId", (GoogleCalendarConnectorOAuthState)context.getBean("connectorOAuthState"));
-
-//		if (mainCalendar != null) {
-//			// mainCalendar has not been initialised yet - first test
-//			testObjects = (HashMap<String, Object>) context.getBean("mainCalendar");
-//			Calendar calendar = (Calendar) testObjects.get("mainCalendarRef");
-//			mainCalendar = insertCalendar(calendar);
-//		}
 	}
 	
 	@BeforeClass
