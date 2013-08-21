@@ -30,22 +30,24 @@ public class MoveEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("moveEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("moveEvent"));
 			
 			// Insert the source calendar and target calendar
-			Calendar sourceCalendar = insertCalendar((Calendar) testObjects.get("sourceCalendarRef"));
-			Calendar targetCalendar = insertCalendar((Calendar) testObjects.get("targetCalendarRef"));
+			addToMessageTestObject("calendarRef", getValueFromMessageTestObject("sourceCalendarRef"));
+			Calendar sourceCalendar = runFlowAndGetPayload("create-calendar");
+			addToMessageTestObject("calendarRef", getValueFromMessageTestObject("targetCalendarRef"));
+			Calendar targetCalendar = runFlowAndGetPayload("create-calendar");
 			
 			// Place updated calendars and their IDs into testObjects
-			testObjects.put("sourceCalendarRef", sourceCalendar);
-			testObjects.put("sourceCalendarId", sourceCalendar.getId());
-			testObjects.put("targetCalendarRef", targetCalendar);
-			testObjects.put("targetCalendarId", targetCalendar.getId());
+			addToMessageTestObject("sourceCalendarRef", sourceCalendar);
+			addToMessageTestObject("sourceCalendarId", sourceCalendar.getId());
+			addToMessageTestObject("targetCalendarRef", targetCalendar);
+			addToMessageTestObject("targetCalendarId", targetCalendar.getId());
 			
 			// Insert an event into the source calendar
-			Event event = insertEvent(sourceCalendar, (Event) testObjects.get("event"));
-			testObjects.put("event", event);
-			testObjects.put("eventId", event.getId());
+			Event event = insertEvent(sourceCalendar, (Event) getValueFromMessageTestObject("event"));
+			addToMessageTestObject("event", event);
+			addToMessageTestObject("eventId", event.getId());
 						
 		}
 		catch (Exception e) {
@@ -58,13 +60,10 @@ public class MoveEventTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testMoveEvent() {
 		try {
-			Calendar targetCalendar = (Calendar) testObjects.get("targetCalendarRef");
+			Calendar targetCalendar = getValueFromMessageTestObject("targetCalendarRef");
 			
 			// Move the event from the source calendar to the target calendar
-			MessageProcessor flow = lookupFlowConstruct("move-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Event movedEvent = (Event) response.getMessage().getPayload();
+			Event movedEvent = runFlowAndGetPayload("move-event");
 
 			// Perform assertions on the returned event
 			assertTrue(movedEvent.getStatus().equals("cancelled")); // Default return status when moving an event
@@ -81,8 +80,8 @@ public class MoveEventTestCases extends GoogleCalendarTestParent {
 	public void tearDown() {
 		try {
 			// Delete the calendars
-			Calendar sourceCalendar = (Calendar) testObjects.get("sourceCalendarRef");
-			Calendar targetCalendar = (Calendar) testObjects.get("targetCalendarRef");
+			Calendar sourceCalendar = getValueFromMessageTestObject("sourceCalendarRef");
+			Calendar targetCalendar = getValueFromMessageTestObject("targetCalendarRef");
 			
 			deleteCalendar(sourceCalendar);
 			deleteCalendar(targetCalendar);

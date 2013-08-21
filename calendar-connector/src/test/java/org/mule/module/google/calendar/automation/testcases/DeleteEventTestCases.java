@@ -31,22 +31,19 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("deleteEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("deleteEvent"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
-			
-			MessageProcessor flow = lookupFlowConstruct("insert-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 
 			// Place the returned event and its ID into testObjects for later access
-			Event returnedEvent = (Event) response.getMessage().getPayload();
-			testObjects.put("event", returnedEvent);
-			testObjects.put("eventId", returnedEvent.getId());
+			Event returnedEvent = runFlowAndGetPayload("insert-event");
+			addToMessageTestObject("event", returnedEvent);
+			addToMessageTestObject("eventId", returnedEvent.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -59,14 +56,9 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 	public void testDeleteEvent() {
 		try {			
 			// Delete the event
-			MessageProcessor flow = lookupFlowConstruct("delete-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-	
-			// Try and look for the event after cancelling it
-			flow = lookupFlowConstruct("get-event-by-id");
-			response = flow.process(getTestEvent(testObjects));
-			
-			Event returnedEvent = (Event) response.getMessage().getPayload();
+			runFlowAndGetPayload("delete-event");
+			// Try and look for the event after cancelling it	
+			Event returnedEvent = runFlowAndGetPayload("get-event-by-id");
 			assertTrue(returnedEvent.getStatus().equals("cancelled"));
 			
 		}
@@ -78,7 +70,7 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

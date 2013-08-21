@@ -32,9 +32,9 @@ public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testBatchInsertCalendar() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("batchInsertCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("batchInsertCalendar"));
 			
-			int numCalendars = (Integer) testObjects.get("numCalendars");
+			Integer numCalendars = getValueFromMessageTestObject("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();

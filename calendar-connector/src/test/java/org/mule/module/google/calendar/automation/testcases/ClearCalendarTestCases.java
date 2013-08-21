@@ -34,11 +34,11 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("clearCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("clearCalendar"));
 						
-			String primaryCalendarId = testObjects.get("id").toString();
-			Event sampleEvent = (Event) testObjects.get("sampleEvent");
-			int numEvents = (Integer) testObjects.get("numEvents");
+			String primaryCalendarId = getValueFromMessageTestObject("id");
+			Event sampleEvent = getValueFromMessageTestObject("sampleEvent");
+			Integer numEvents = getValueFromMessageTestObject("numEvents");
 
 			// Instantiate the event objects
 			List<Event> events = new ArrayList<Event>();
@@ -50,7 +50,7 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 			BatchResponse<Event> batchResponse = insertEvents(primaryCalendarId, events);
 			List<Event> successfulEvents = batchResponse.getSuccessful();
 			
-			testObjects.put("events", successfulEvents);
+			addToMessageTestObject("events", successfulEvents);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -62,19 +62,16 @@ public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testClearCalendar() {
 		try {
-			String primaryCalendarId = testObjects.get("id").toString();			
+			String primaryCalendarId = getValueFromMessageTestObject("id");			
 			
 			// Clear the calendar
-			MessageProcessor flow = lookupFlowConstruct("clear-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
+			runFlowAndGetPayload("clear-calendar");
+
 			// Get all events
-			testObjects.put("calendarId", primaryCalendarId);
-			flow = lookupFlowConstruct("get-all-events");
-			response = flow.process(getTestEvent(testObjects));
+			addToMessageTestObject("calendarId", primaryCalendarId);
+			List<Event> returnedEvents = runFlowAndGetPayload("get-all-events");
 			
 			// Assert that no events are returned
-			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
 			assertTrue(returnedEvents.isEmpty());
 		}
 		catch (Exception ex) {

@@ -29,14 +29,11 @@ public class GetCalendarByIdTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getCalendarById");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getCalendarById"));
 
-			// Create the calendar
-			MessageProcessor flow = lookupFlowConstruct("create-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Calendar calendar = (Calendar) response.getMessage().getPayload();
-			testObjects.put("id", calendar.getId());
+			// Create the calendar		
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
+			addToMessageTestObject("id", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -49,13 +46,10 @@ public class GetCalendarByIdTestCases extends GoogleCalendarTestParent {
 	public void testGetCalendarById() {
 		try {
 			
-			String createdCalendarId = testObjects.get("id").toString();
-			
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			String createdCalendarId = getValueFromMessageTestObject("id");
 
 			// Assertions on equality
-			Calendar returnedCalendar = (Calendar) response.getMessage().getPayload();
+			Calendar returnedCalendar = runFlowAndGetPayload("get-calendar-by-id");
 			assertTrue(returnedCalendar != null);
 			assertTrue(returnedCalendar.getId().equals(createdCalendarId));
 		}
@@ -69,8 +63,7 @@ public class GetCalendarByIdTestCases extends GoogleCalendarTestParent {
 	public void tearDown() {
 		try {
 			// Delete the calendar
-			MessageProcessor flow = lookupFlowConstruct("delete-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			runFlowAndGetPayload("delete-calendar");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

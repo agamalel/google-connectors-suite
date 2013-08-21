@@ -28,24 +28,21 @@ public class UpdateEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("updateEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("updateEvent"));
 		
 			// Insert the calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Update test objects
-			testObjects.put("calendar", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 		
-			String beforeText = testObjects.get("summaryBefore").toString();
-			testObjects.put("text", beforeText);
-			
-			MessageProcessor flow = lookupFlowConstruct("quick-add-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Event event = (Event) response.getMessage().getPayload();
-			testObjects.put("event", event);
-			testObjects.put("eventId", event.getId());			
+			String beforeText = getValueFromMessageTestObject("summaryBefore");
+			addToMessageTestObject("text", beforeText);
+
+			Event event = runFlowAndGetPayload("quick-add-event");
+			addToMessageTestObject("event", event);
+			addToMessageTestObject("eventId", event.getId());			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -57,16 +54,12 @@ public class UpdateEventTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testUpdateEvent() {
 		try {
-			String summaryAfter = testObjects.get("summaryAfter").toString();
-			Event event = (Event) testObjects.get("event");
+			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
+			Event event = getValueFromMessageTestObject("event");
 			event.setSummary(summaryAfter);
-			testObjects.put("calendarEventRef", event);
-			
-			
-			MessageProcessor flow = lookupFlowConstruct("update-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Event afterEvent = (Event) response.getMessage().getPayload();
+			addToMessageTestObject("calendarEventRef", event);
+	
+			Event afterEvent = runFlowAndGetPayload("update-event");
 			String afterText = afterEvent.getSummary();
 			assertEquals(afterText, summaryAfter);
 		}
@@ -79,7 +72,7 @@ public class UpdateEventTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

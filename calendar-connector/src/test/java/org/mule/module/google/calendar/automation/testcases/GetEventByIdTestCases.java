@@ -30,23 +30,19 @@ public class GetEventByIdTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getEventById");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getEventById"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
-			
-			// Insert the event
-			MessageProcessor flow = lookupFlowConstruct("insert-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 			
 			// Place the returned event and its ID into testObjects for later access
-			Event returnedEvent = (Event) response.getMessage().getPayload();
-			testObjects.put("event", returnedEvent);
-			testObjects.put("eventId", returnedEvent.getId());
+			Event returnedEvent = runFlowAndGetPayload("insert-event");
+			addToMessageTestObject("event", returnedEvent);
+			addToMessageTestObject("eventId", returnedEvent.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -58,15 +54,10 @@ public class GetEventByIdTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testGetEventById() {
 		try {
-			Event originalEvent = (Event) testObjects.get("event");
-			
-			// Find the event based on previously set ID
-			MessageProcessor flow = lookupFlowConstruct("get-event-by-id");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
+			Event originalEvent = getValueFromMessageTestObject("event");
 			// No exceptions thrown means that the event was found
 			// Perform assertions. Check that the returned event has the same id
-			Event returnedEvent = (Event) response.getMessage().getPayload();
+			Event returnedEvent = runFlowAndGetPayload("get-event-by-id");
 			assertTrue(returnedEvent.getId().equals(originalEvent.getId()));		
 		}
 		catch (Exception e) {
@@ -78,7 +69,7 @@ public class GetEventByIdTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

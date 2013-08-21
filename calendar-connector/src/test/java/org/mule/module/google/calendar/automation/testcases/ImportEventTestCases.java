@@ -32,13 +32,13 @@ public class ImportEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("importEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("importEvent"));
 			
 			// Insert the calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
-			testObjects.put("calendar", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 			
 		}
 		catch (Exception e) {
@@ -52,19 +52,16 @@ public class ImportEventTestCases extends GoogleCalendarTestParent {
 	public void testImportEvent() {
 		try {
 			// Get calendar instance
-			Calendar calendar = (Calendar) testObjects.get("calendar");
+			Calendar calendar = getValueFromMessageTestObject("calendar");
 			// Insert the event so that we get ID, and iCalUID
-			Event event = insertEvent(calendar, (Event) testObjects.get("event"));
+			Event event = insertEvent(calendar, (Event) getValueFromMessageTestObject("event"));
 
 			// Place it in testObjects so that we can import it back
-			testObjects.put("calendarEventRef", event);
+			addToMessageTestObject("calendarEventRef", event);
 			
-			// Re-import the event again
-			MessageProcessor flow = lookupFlowConstruct("import-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
+			// Re-import the event again	
 			// Check that the returned event as it was imported is identical to the one which was placed the first time
-			Event returnedEvent = (Event) response.getMessage().getPayload();
+			Event returnedEvent = runFlowAndGetPayload("import-event");
 			assertTrue(EqualsBuilder.reflectionEquals(returnedEvent.getSummary(), event.getSummary()));
 			assertTrue(EqualsBuilder.reflectionEquals(returnedEvent.getStart(), event.getStart()));
 			assertTrue(EqualsBuilder.reflectionEquals(returnedEvent.getEnd(), event.getEnd()));
@@ -80,7 +77,7 @@ public class ImportEventTestCases extends GoogleCalendarTestParent {
 	public void tearDown() {
 		try {
 			// Delete the calendar
-			Calendar calendar = (Calendar) testObjects.get("calendar");
+			Calendar calendar = getValueFromMessageTestObject("calendar");
 			deleteCalendar(calendar);
 		}
 		catch (Exception e) {

@@ -30,14 +30,11 @@ public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("deleteCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("deleteCalendar"));
 
-			// Create the calendar
-			MessageProcessor flow = lookupFlowConstruct("create-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Calendar calendar = (Calendar) response.getMessage().getPayload();
-			testObjects.put("id", calendar.getId());
+			// Create the calendar)
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
+			addToMessageTestObject("id", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -50,8 +47,7 @@ public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
 	public void testDeleteCalendar() {
 		try {
 			// Delete the calendar
-			MessageProcessor flow = lookupFlowConstruct("delete-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			runFlowAndGetPayload("delete-calendar");
 
 		}
 		catch (Exception ex) {
@@ -60,9 +56,8 @@ public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
 		}
 			
 		// Get the calendar, should throw an exception
-		try {
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-by-id");			
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+		try {		
+			runFlowAndGetPayload("get-calendar-by-id");
 		}
 		catch (Exception e) {
 			if (e.getCause() instanceof GoogleJsonResponseException) {

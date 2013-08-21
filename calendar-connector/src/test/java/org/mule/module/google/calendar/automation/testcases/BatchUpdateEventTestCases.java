@@ -35,16 +35,16 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("batchUpdateEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("batchUpdateEvent"));
 			
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
-			testObjects.put("calendar", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 
-			EventDateTime eventTimeStart = (EventDateTime) testObjects.get("eventStart");
-			EventDateTime eventTimeEnd = (EventDateTime) testObjects.get("eventEnd");
-			String summaryBefore = testObjects.get("summaryBefore").toString();
-			int numEvents =(Integer) testObjects.get("numEvents");
+			EventDateTime eventTimeStart = getValueFromMessageTestObject("eventStart");
+			EventDateTime eventTimeEnd = getValueFromMessageTestObject("eventEnd");
+			String summaryBefore = getValueFromMessageTestObject("summaryBefore");
+			Integer numEvents =getValueFromMessageTestObject("numEvents");
 			
 			List<Event> events = new ArrayList<Event>();
 			for (int i = 0; i < numEvents; i++) {
@@ -55,7 +55,7 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 			BatchResponse<Event> batchEvents = insertEvents(calendar, events);
 			List<Event> successfulEvents = batchEvents.getSuccessful();
 			
-			testObjects.put("events", successfulEvents);
+			addToMessageTestObject("events", successfulEvents);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -68,19 +68,15 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 	public void testBatchUpdateEvent() {
 		try {
 			
-			String summaryAfter = testObjects.get("summaryAfter").toString();
-			List<Event> events = (List<Event>) testObjects.get("events");
+			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
+			List<Event> events = (List<Event>) getValueFromMessageTestObject("events");
 			
 			for (Event event : events) {
 				event.setSummary(summaryAfter);
 			}
 			
-			testObjects.put("calendarEventsRef", events);
-			
-			MessageProcessor flow = lookupFlowConstruct("batch-update-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			BatchResponse<Event> returnedEvents = (BatchResponse<Event>) response.getMessage().getPayload();
+			addToMessageTestObject("calendarEventsRef", events);
+			BatchResponse<Event> returnedEvents = runFlowAndGetPayload("batch-update-event");
 			assertTrue(returnedEvents.getErrors() == null || returnedEvents.getErrors().size() == 0);
 			
 			List<Event> successfulEvents = returnedEvents.getSuccessful();
@@ -101,7 +97,7 @@ public class BatchUpdateEventTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			Calendar calendar = (Calendar) testObjects.get("calendar");
+			Calendar calendar = getValueFromMessageTestObject("calendar");
 			deleteCalendar(calendar);
 		}
 		catch (Exception e) {

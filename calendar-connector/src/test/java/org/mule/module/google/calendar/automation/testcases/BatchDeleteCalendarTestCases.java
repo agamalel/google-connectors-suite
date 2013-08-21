@@ -36,9 +36,9 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 	public void setUp() {
 		
 		try {
-			testObjects = (Map<String, Object>) context.getBean("batchDeleteCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("batchDeleteCalendar"));
 			
-			int numCalendars = (Integer) testObjects.get("numCalendars");
+			Integer numCalendars = getValueFromMessageTestObject("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -65,11 +65,8 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 	public void testBatchDeleteCalendar() {
 		try {
 			deleteCalendars(insertedCalendars);
-			
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-list");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<CalendarList> calendarList = (List<CalendarList>)response.getMessage().getPayload();
+
+			List<CalendarList> calendarList = runFlowAndGetPayload("get-calendar-list");
 			for (Calendar calendar : insertedCalendars) {
 				assertFalse(CalendarUtils.isCalendarInList(calendarList, calendar));
 			}

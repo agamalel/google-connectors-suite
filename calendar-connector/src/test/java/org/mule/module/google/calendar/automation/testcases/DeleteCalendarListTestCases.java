@@ -32,20 +32,18 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("deleteCalendarList");
+			addToMessageTestObject((Map<String, Object>) context.getBean("deleteCalendarList"));
 	
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 						
-			testObjects.put("calendar", calendar);
-			testObjects.put("id", calendar.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("id", calendar.getId());
 			
 			//Get Calendar List 
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-list-by-id");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			CalendarList returnedCalendarList = (CalendarList) response.getMessage().getPayload();
+			CalendarList returnedCalendarList = runFlowAndGetPayload("get-calendar-list-by-id");
 			
-			testObjects.put("calendarList", returnedCalendarList);
-			testObjects.put("color", returnedCalendarList.getColorId());
+			addToMessageTestObject("calendarList", returnedCalendarList);
+			addToMessageTestObject("color", returnedCalendarList.getColorId());
 
 		}
 		catch (Exception e) {
@@ -59,10 +57,7 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 	@Test
 	public void testDeleteCalendarList() {
 		try {
-									
-			MessageProcessor flow = lookupFlowConstruct("delete-calendar-list");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
+			runFlowAndGetPayload("delete-calendar-list");
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -71,8 +66,7 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 				
 		// Get the calendar list, should throw an exception
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-list-by-id");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			runFlowAndGetPayload("get-calendar-list-by-id");
 		}
 		catch (Exception e) {
 			if (e.getCause() instanceof GoogleJsonResponseException) {
@@ -88,7 +82,7 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("id").toString();
+			String calendarId = getValueFromMessageTestObject("id");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

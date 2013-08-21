@@ -30,15 +30,15 @@ public class UpdateCalendarTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("updateCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("updateCalendar"));
 		
 			// Insert the calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			
 			// Update test objects
-			testObjects.put("calendar", calendar);
-			testObjects.put("id", calendar.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("id", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -50,16 +50,13 @@ public class UpdateCalendarTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testUpdateCalendar() {
 		try {
-			String summaryAfter = testObjects.get("summaryAfter").toString();
+			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
 		
-			Calendar calendar = (Calendar) testObjects.get("calendar");
+			Calendar calendar = getValueFromMessageTestObject("calendar");
 			calendar.setSummary(summaryAfter);
-			testObjects.put("calendarRef", calendar);
-						
-			MessageProcessor flow = lookupFlowConstruct("update-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			addToMessageTestObject("calendarRef", calendar);
 			
-			Calendar afterUpdate = (Calendar) response.getMessage().getPayload();
+			Calendar afterUpdate = runFlowAndGetPayload("update-calendar");
 			String afterText = afterUpdate.getSummary();
 			assertEquals(afterText, summaryAfter);
 		}
@@ -72,7 +69,7 @@ public class UpdateCalendarTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("id").toString();
+			String calendarId = getValueFromMessageTestObject("id");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

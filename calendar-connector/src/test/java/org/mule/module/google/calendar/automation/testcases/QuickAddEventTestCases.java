@@ -31,14 +31,14 @@ public class QuickAddEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("quickAddEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("quickAddEvent"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -50,26 +50,19 @@ public class QuickAddEventTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testQuickAddEvent() {
 		try {
-			String text = testObjects.get("text").toString();
-			
-			// Quick add the event
-			MessageProcessor flow = lookupFlowConstruct("quick-add-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			String text = getValueFromMessageTestObject("text");
 			
 			// Perform assertions on the event
-			Event createdEvent = (Event) response.getMessage().getPayload();
+			Event createdEvent = runFlowAndGetPayload("quick-add-event");
 			assertNotNull(createdEvent);
 			assertTrue(createdEvent.getSummary().equals(text));
 			assertTrue(createdEvent.getStatus().equals("confirmed"));
 			
-			testObjects.put("event", createdEvent);
-			testObjects.put("eventId", createdEvent.getId());
+			addToMessageTestObject("event", createdEvent);
+			addToMessageTestObject("eventId", createdEvent.getId());
 			
 			// Verify that the event was added on Google Calendars			
-			flow = lookupFlowConstruct("get-event-by-id");
-			response = flow.process(getTestEvent(testObjects));
-			
-			Event returnedEvent = (Event) response.getMessage().getPayload();
+			Event returnedEvent = runFlowAndGetPayload("get-event-by-id");
 			
 			// Assert that the created event and the returned are identical
 			assertTrue(EqualsBuilder.reflectionEquals(createdEvent, returnedEvent));
@@ -84,7 +77,7 @@ public class QuickAddEventTestCases extends GoogleCalendarTestParent {
 	public void tearDown() {
 		try {
 			// Drop the calendar
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

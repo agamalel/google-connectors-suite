@@ -34,24 +34,22 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getAllAclRules");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getAllAclRules"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 
-			MessageProcessor flow = lookupFlowConstruct("insert-acl-rule");
-			List<String> scopes = (List<String>) testObjects.get("scopes");
+			
+			List<String> scopes = (List<String>) getValueFromMessageTestObject("scopes");
 			
 			// Insert the different scopes
 			for (String scope : scopes) {
-				testObjects.put("scope", scope);
-				MuleEvent response = flow.process(getTestEvent(testObjects));
-				
-				AclRule aclRule = (AclRule) response.getMessage().getPayload();
+				addToMessageTestObject("scope", scope);	
+				AclRule aclRule = runFlowAndGetPayload("insert-acl-rule");
 				insertedAclRules.add(aclRule);
 			}
 				
@@ -66,10 +64,8 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testGetAllAclRules() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-all-acl-rules");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			List<AclRule> aclRuleList = (List<AclRule>) response.getMessage().getPayload();
+			List<AclRule> aclRuleList = runFlowAndGetPayload("get-all-acl-rules");
 			
 			for (AclRule insertedAclRule : insertedAclRules) {
 				assertTrue(CalendarUtils.isAclRuleInList(aclRuleList, insertedAclRule));
@@ -85,7 +81,7 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

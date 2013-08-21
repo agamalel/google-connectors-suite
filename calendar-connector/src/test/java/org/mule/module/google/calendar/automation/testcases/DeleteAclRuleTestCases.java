@@ -33,23 +33,20 @@ public class DeleteAclRuleTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("deleteAclRule");
+			addToMessageTestObject((Map<String, Object>) context.getBean("deleteAclRule"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 			
 			// Insert the ACL rule
-			MessageProcessor flow = lookupFlowConstruct("insert-acl-rule");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
-			
-			AclRule aclRule = (AclRule) event.getMessage().getPayload();
+			AclRule aclRule = runFlowAndGetPayload("insert-acl-rule");
 						
-			testObjects.put("aclRule", aclRule);	
-			testObjects.put("ruleId", aclRule.getId());
+			addToMessageTestObject("aclRule", aclRule);	
+			addToMessageTestObject("ruleId", aclRule.getId());
 			
 		}
 		catch (Exception e) {
@@ -63,17 +60,12 @@ public class DeleteAclRuleTestCases extends GoogleCalendarTestParent {
 	public void testDeleteAclRule() {
 		try {
 			
-			MessageProcessor flow = lookupFlowConstruct("delete-acl-rule");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			flow = lookupFlowConstruct("get-acl-rule-by-id");
-			response = flow.process(getTestEvent(testObjects));
-
-			AclRule afterDel = (AclRule) response.getMessage().getPayload();
+			runFlowAndGetPayload("delete-acl-rule");
+			AclRule afterDel = runFlowAndGetPayload("get-acl-rule-by-id");
 			String ruleIdAfter = afterDel.getId();
 			
-			assertEquals(testObjects.get("ruleId").toString(),ruleIdAfter);
-			assertFalse(EqualsBuilder.reflectionEquals(testObjects.get("aclRule"), afterDel));
+			assertEquals(getValueFromMessageTestObject("ruleId").toString(),ruleIdAfter);
+			assertFalse(EqualsBuilder.reflectionEquals(getValueFromMessageTestObject("aclRule"), afterDel));
 			assertTrue(afterDel.getRole().equals("none"));
 				
 		}
@@ -86,7 +78,7 @@ public class DeleteAclRuleTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

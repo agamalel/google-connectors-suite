@@ -31,23 +31,19 @@ public class GetAclRuleByIdTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getAclRuleById");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getAclRuleById"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 			
-			
-			// Insert the ACL rule
-			MessageProcessor flow = lookupFlowConstruct("insert-acl-rule");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
-						
-			AclRule returnedAclRule = (AclRule) event.getMessage().getPayload();
-			testObjects.put("aclRule", returnedAclRule);	
-			testObjects.put("ruleId", returnedAclRule.getId());
+			// Insert the ACL rule				
+			AclRule returnedAclRule = runFlowAndGetPayload("insert-acl-rule");
+			addToMessageTestObject("aclRule", returnedAclRule);	
+			addToMessageTestObject("ruleId", returnedAclRule.getId());
 			
 		}
 		catch (Exception e) {
@@ -60,12 +56,9 @@ public class GetAclRuleByIdTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testGetAclRuleById() {
 		try {
-			String ruleIdBefore = testObjects.get("ruleId").toString();
-			
-			MessageProcessor flow = lookupFlowConstruct("get-acl-rule-by-id");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
-			
-			AclRule afterProc = (AclRule) event.getMessage().getPayload();
+			String ruleIdBefore = getValueFromMessageTestObject("ruleId");
+
+			AclRule afterProc = runFlowAndGetPayload("get-acl-rule-by-id");
 			String ruleIdAfter = afterProc.getId();
 			
 			assertEquals(ruleIdBefore,ruleIdAfter);		
@@ -81,7 +74,7 @@ public class GetAclRuleByIdTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

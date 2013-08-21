@@ -36,9 +36,9 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getCalendarList");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getCalendarList"));
 			
-			int numCalendars = (Integer) testObjects.get("numCalendars");
+			Integer numCalendars = getValueFromMessageTestObject("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -64,10 +64,8 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testGetCalendarList() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-list");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			List<CalendarList> calendarList = (List<CalendarList>) response.getMessage().getPayload();
+			List<CalendarList> calendarList = runFlowAndGetPayload("get-calendar-list");
 			
 			for (Calendar insertedCalendar : insertedCalendars) {
 				assertTrue(CalendarUtils.isCalendarInList(calendarList, insertedCalendar));

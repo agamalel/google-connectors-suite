@@ -30,15 +30,12 @@ public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getCalendarListById");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getCalendarListById"));
 
 			// Create the calendar
-			MessageProcessor flow = lookupFlowConstruct("create-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Calendar calendar = (Calendar) response.getMessage().getPayload();
-			testObjects.put("calendar",calendar);
-			testObjects.put("id", calendar.getId());
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
+			addToMessageTestObject("calendar",calendar);
+			addToMessageTestObject("id", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -51,13 +48,11 @@ public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 	public void testGetCalendarListById() {
 		try {
 			
-			Calendar originalCalendar = (Calendar) testObjects.get("calendar");
+			Calendar originalCalendar = getValueFromMessageTestObject("calendar");
 			
-			String createdCalendarId = testObjects.get("id").toString();
-			
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-list-by-id");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			CalendarList returnedCalendarList = (CalendarList) response.getMessage().getPayload();
+			String createdCalendarId = getValueFromMessageTestObject("id");
+
+			CalendarList returnedCalendarList = runFlowAndGetPayload("get-calendar-list-by-id");
 
 			assertTrue(returnedCalendarList != null);
 			assertTrue(returnedCalendarList.getId().equals(createdCalendarId));
@@ -74,8 +69,7 @@ public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 	public void tearDown() {
 		try {
 			// Delete the calendar
-			MessageProcessor flow = lookupFlowConstruct("delete-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			runFlowAndGetPayload("delete-calendar");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

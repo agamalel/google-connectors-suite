@@ -35,17 +35,17 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getFreeTime");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getFreeTime"));
 			
 			// Insert the calendar and the event
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
-			Event event = insertEvent(calendar, (Event) testObjects.get("event"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
+			Event event = insertEvent(calendar, (Event) getValueFromMessageTestObject("event"));
 			
 			// Replace the existing "event" bean with the updated one
-			testObjects.put("event", event);
-			testObjects.put("eventId", event.getId());
-			testObjects.put("calendar", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("event", event);
+			addToMessageTestObject("eventId", event.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 			
 		}
 		catch (Exception e) {
@@ -58,18 +58,15 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testGetFreeTime() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
-			Event event = (Event) testObjects.get("event");
+			String calendarId = getValueFromMessageTestObject("calendarId");
+			Event event = getValueFromMessageTestObject("event");
 			
 			List<String> calendarIds = new ArrayList<String>();
 			calendarIds.add(calendarId);
 			
-			testObjects.put("ids", calendarIds);
+			addToMessageTestObject("ids", calendarIds);
 			
-			MessageProcessor flow = lookupFlowConstruct("get-free-time");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			FreeBusy freeBusy =(FreeBusy) response.getMessage().getPayload();
+			FreeBusy freeBusy = runFlowAndGetPayload("get-free-time");
 								
 			// We should only be working with the calendar created specifically for this test
 			FreeBusyCalendar freeBusyCalendar = freeBusy.getCalendars().get(calendarId);
@@ -90,7 +87,7 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

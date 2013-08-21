@@ -30,20 +30,17 @@ public class GetInstancesTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getInstances");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getInstances"));
 
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 			
-			// Insert the event
-			MessageProcessor flow = lookupFlowConstruct("insert-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			Event returnedEvent = (Event) response.getMessage().getPayload();
-			testObjects.put("event", returnedEvent);
-			testObjects.put("eventId", returnedEvent.getId());
+			// Insert the event			
+			Event returnedEvent = runFlowAndGetPayload("insert-event");
+			addToMessageTestObject("event", returnedEvent);
+			addToMessageTestObject("eventId", returnedEvent.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -56,11 +53,8 @@ public class GetInstancesTestCases extends GoogleCalendarTestParent {
 	public void testGetInstances() {
 		try {
 			
-			String eventId = testObjects.get("eventId").toString();
-			MessageProcessor flow = lookupFlowConstruct("get-instances");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			List<Event> returnedEvent = (List<Event>) response.getMessage().getPayload();
+			String eventId = getValueFromMessageTestObject("eventId");		
+			List<Event> returnedEvent = runFlowAndGetPayload("get-instances");
 			
 			for (Event event : returnedEvent) {
 				assertEquals(event.getId(), eventId);
@@ -77,7 +71,7 @@ public class GetInstancesTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

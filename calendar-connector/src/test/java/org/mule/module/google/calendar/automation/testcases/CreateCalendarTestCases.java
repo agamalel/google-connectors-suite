@@ -29,7 +29,7 @@ public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("createCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("createCalendar"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -42,25 +42,15 @@ public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 	public void testCreateCalendar() {
 		try {
 			
-			Calendar originalCalendar = (Calendar) testObjects.get("calendarRef");
-			
-			// Create the calendar
-			MessageProcessor flow = lookupFlowConstruct("create-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			// Assertions on the calendar
-			Calendar createdCalendar = (Calendar) response.getMessage().getPayload();
+			Calendar originalCalendar = getValueFromMessageTestObject("calendarRef");
+			Calendar createdCalendar = runFlowAndGetPayload("create-calendar");
+
 			assertTrue(createdCalendar != null);
 			assertTrue(createdCalendar.getSummary().equals(originalCalendar.getSummary()));
 
-			// Store the ID in testObjects 
-			testObjects.put("id", createdCalendar.getId());
-			
-			flow = lookupFlowConstruct("get-calendar-by-id");
-			response = flow.process(getTestEvent(testObjects));
+			addToMessageTestObject("id", createdCalendar.getId());
 
-			// Assertions on equality
-			Calendar returnedCalendar = (Calendar) response.getMessage().getPayload();
+			Calendar returnedCalendar = runFlowAndGetPayload("get-calendar-by-id");
 			assertTrue(returnedCalendar != null);
 			assertTrue(returnedCalendar.getId().equals(createdCalendar.getId()));
 		}
@@ -73,9 +63,7 @@ public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			// Delete the calendar
-			MessageProcessor flow = lookupFlowConstruct("delete-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			runFlowAndGetPayload("delete-calendar");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

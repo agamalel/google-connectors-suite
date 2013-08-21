@@ -33,14 +33,14 @@ public class InsertAclRuleTestCases  extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("insertAclRule");
+			addToMessageTestObject((Map<String, Object>) context.getBean("insertAclRule"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,19 +52,13 @@ public class InsertAclRuleTestCases  extends GoogleCalendarTestParent {
 	@Test
 	public void testInsertAclRule(){
 		try {
-			
-			MessageProcessor flow = lookupFlowConstruct("insert-acl-rule");
-			MuleEvent event = flow.process(getTestEvent(testObjects));
-			
-			AclRule returnedAclRule = (AclRule) event.getMessage().getPayload();
+
+			AclRule returnedAclRule = runFlowAndGetPayload("insert-acl-rule");
 			String ruleId = returnedAclRule.getId();
 		
-			testObjects.put("ruleId", ruleId);
-			
-			flow = lookupFlowConstruct("get-acl-rule-by-id");
-			event = flow.process(getTestEvent(testObjects));
-			
-			AclRule afterProc = (AclRule) event.getMessage().getPayload();
+			addToMessageTestObject("ruleId", ruleId);
+		
+			AclRule afterProc = runFlowAndGetPayload("get-acl-rule-by-id");
 			String ruleIdAfter = afterProc.getId();
 			
 			assertEquals(ruleId,ruleIdAfter);
@@ -79,7 +73,7 @@ public class InsertAclRuleTestCases  extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

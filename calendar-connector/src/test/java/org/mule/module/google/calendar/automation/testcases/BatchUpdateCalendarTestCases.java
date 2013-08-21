@@ -33,10 +33,10 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("batchUpdateCalendar");
+			addToMessageTestObject((Map<String, Object>) context.getBean("batchUpdateCalendar"));
 			
-			int numCalendars =(Integer) testObjects.get("numCalendars");
-			String summaryBefore = testObjects.get("summaryBefore").toString();
+			Integer numCalendars =getValueFromMessageTestObject("numCalendars");
+			String summaryBefore = getValueFromMessageTestObject("summaryBefore");
 			
 			List<Calendar> calendars = new ArrayList<Calendar>();
 			for (int i = 0; i < numCalendars; i++) {
@@ -47,7 +47,7 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 			BatchResponse<Calendar> calendarBatchResponse = insertCalendars(calendars);
 			List<Calendar> insertedCalendars = calendarBatchResponse.getSuccessful();
 			
-			testObjects.put("calendars", insertedCalendars);
+			addToMessageTestObject("calendars", insertedCalendars);
 			
 		}
 		catch (Exception e) {
@@ -60,19 +60,15 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testBatchUpdateCalendar() {
 		try {
-			List<Calendar> calendars = (List<Calendar>) testObjects.get("calendars");
-			String summaryAfter = testObjects.get("summaryAfter").toString();
+			List<Calendar> calendars = getValueFromMessageTestObject("calendars");
+			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
 			
 			for (Calendar calendar : calendars) {
 				calendar.setSummary(summaryAfter);
 			}
 			
-			testObjects.put("calendarsRef", calendars);
-			
-			MessageProcessor flow = lookupFlowConstruct("batch-update-calendar");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			
-			BatchResponse<Calendar> updatedCalendars = (BatchResponse<Calendar>) response.getMessage().getPayload();
+			addToMessageTestObject("calendarsRef", calendars);
+			BatchResponse<Calendar> updatedCalendars = runFlowAndGetPayload("batch-update-calendar");
 			assertTrue(updatedCalendars.getErrors() == null || updatedCalendars.getErrors().size() == 0);
 
 			List<Calendar> successful = updatedCalendars.getSuccessful();
@@ -93,7 +89,7 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			List<Calendar> calendars = (List<Calendar>) testObjects.get("calendarsRef");
+			List<Calendar> calendars = getValueFromMessageTestObject("calendarsRef");
 			deleteCalendars(calendars);
 		}
 		catch (Exception e) {

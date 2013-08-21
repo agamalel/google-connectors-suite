@@ -35,22 +35,22 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("getEvents");
+			addToMessageTestObject((Map<String, Object>) context.getBean("getEvents"));
 			
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
-			testObjects.put("calendar", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 
 			// Get the sample event
-			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			Event sampleEvent = getValueFromMessageTestObject("sampleEvent");
 			
 			// Get start and end time beans.
 			String eventTitle = sampleEvent.getSummary();
 			EventDateTime eventStartTime = sampleEvent.getStart();
 			EventDateTime eventEndTime = sampleEvent.getEnd();
 
-			int numEvents = (Integer) testObjects.get("numEvents");
+			Integer numEvents = getValueFromMessageTestObject("numEvents");
 			
 			// Create the test events
 			List<Event> events = new ArrayList<Event>();			
@@ -62,7 +62,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 			// Batch insert the events and store successfully created events in testObjects
 			BatchResponse<Event> returnedEvents = insertEvents(calendar, events);
 			
-			testObjects.put("events", returnedEvents.getSuccessful());
+			addToMessageTestObject("events", returnedEvents.getSuccessful());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -75,12 +75,10 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testGetEvents_AllEvents() {
 		try {
-			List<Event> insertedEvents = (List<Event>) testObjects.get("events");
+			List<Event> insertedEvents = (List<Event>) getValueFromMessageTestObject("events");
 						
-			// Get the events
-			MessageProcessor flow = lookupFlowConstruct("get-all-events");
-			MuleEvent response = flow.process(getTestEvent(testObjects));			
-			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
+			// Get the events		
+			List<Event> returnedEvents = runFlowAndGetPayload("get-all-events");
 			
 			// Perform assertions on the list
 			boolean listsSame = EqualsBuilder.reflectionEquals(insertedEvents, returnedEvents);
@@ -101,12 +99,10 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_MaxResults() {
 		try {
 
-			int maxResults = (Integer) testObjects.get("maxResults");
+			Integer maxResults = getValueFromMessageTestObject("maxResults");
 						
 			// Get the events
-			MessageProcessor flow = lookupFlowConstruct("get-events");
-			MuleEvent response = flow.process(getTestEvent(testObjects));			
-			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
+			List<Event> returnedEvents = runFlowAndGetPayload("get-events");
 			
 			// Perform assertions on the list
 			assertTrue(returnedEvents.size() == maxResults);
@@ -125,20 +121,18 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 		try {
 
 			// We do not want any limit on the number of results we receive
-			testObjects.put("maxResults", Integer.MAX_VALUE);
+			addToMessageTestObject("maxResults", Integer.MAX_VALUE);
 			// We want to be able to retrieve deleted events
-			testObjects.put("showDeleted", true);
+			addToMessageTestObject("showDeleted", true);
 			
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			
 			// Delete all events which we created in the setUp() method
-			List<Event> events = (List<Event>) testObjects.get("events");
+			List<Event> events = (List<Event>) getValueFromMessageTestObject("events");
 			deleteEvents(calendarId, events);
 						
-			// Get the events
-			MessageProcessor flow = lookupFlowConstruct("get-events");
-			MuleEvent response = flow.process(getTestEvent(testObjects));			
-			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
+			// Get the events			
+			List<Event> returnedEvents = runFlowAndGetPayload("get-events");
 			
 			// Perform assertions on the list
 			// Every event that was inserted should have been retrieved
@@ -162,14 +156,12 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	public void testGetEvents_UsingQuery() {
 		try {
 			
-			Event sampleEvent = (Event) testObjects.get("sampleEvent");
+			Event sampleEvent = getValueFromMessageTestObject("sampleEvent");
 			String eventTitle = sampleEvent.getSummary();
-			List<Event> insertedEvents = (List<Event>) testObjects.get("events");
+			List<Event> insertedEvents = (List<Event>) getValueFromMessageTestObject("events");
 			
-			// Get the events
-			MessageProcessor flow = lookupFlowConstruct("get-events-using-query");
-			MuleEvent response = flow.process(getTestEvent(testObjects));			
-			List<Event> returnedEvents = (List<Event>) response.getMessage().getPayload();
+			// Get the events		
+			List<Event> returnedEvents = runFlowAndGetPayload("get-events-using-query");
 			
 			// Since the query is a substring of the events' names, every created event should have been retrieved
 			// Assert list sizes, assert returned event titles, and assert total equality on the inserted list of events and the retrieved list of events
@@ -189,7 +181,7 @@ public class GetEventsTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			Calendar calendar = (Calendar) testObjects.get("calendar");
+			Calendar calendar = getValueFromMessageTestObject("calendar");
 			deleteCalendar(calendar);
 		}
 		catch (Exception e) {

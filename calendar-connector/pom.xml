@@ -26,7 +26,12 @@
 			<artifactId>google-api-services-calendar</artifactId>
 			<version>v3-rev9-1.7.2-beta</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.mule.modules</groupId>
+    		<artifactId>mule-connector-test</artifactId>
+    		<version>1.0-SNAPSHOT</version>
+    		<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

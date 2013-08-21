@@ -30,19 +30,17 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("updateCalendarList");
+			addToMessageTestObject((Map<String, Object>) context.getBean("updateCalendarList"));
 	
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 						
-			testObjects.put("calendar", calendar);
-			testObjects.put("id", calendar.getId());
+			addToMessageTestObject("calendar", calendar);
+			addToMessageTestObject("id", calendar.getId());
 			
 			//Get Calendar List 
-			MessageProcessor flow = lookupFlowConstruct("get-calendar-list-by-id");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
-			CalendarList returnedCalendarList = (CalendarList) response.getMessage().getPayload();
+			CalendarList returnedCalendarList = runFlowAndGetPayload("get-calendar-list-by-id");
 			
-			testObjects.put("calendarList", returnedCalendarList);
+			addToMessageTestObject("calendarList", returnedCalendarList);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -55,17 +53,14 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 	@Test
 	public void testUpdateCalendarList() {
 		try {
-			String colorAfter = testObjects.get("colorAfter").toString();
+			String colorAfter = runFlowAndGetPayload("colorAfter");
 			
-			CalendarList returnedCalendarList = (CalendarList) testObjects.get("calendarList");
+			CalendarList returnedCalendarList = getValueFromMessageTestObject("calendarList");
 			
 			returnedCalendarList.setColorId(colorAfter);
-			testObjects.put("calendarListRef", returnedCalendarList);
-						
-			MessageProcessor flow = lookupFlowConstruct("update-calendar-list");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			addToMessageTestObject("calendarListRef", returnedCalendarList);
 			
-			CalendarList afterUpdate = (CalendarList) response.getMessage().getPayload();
+			CalendarList afterUpdate = runFlowAndGetPayload("update-calendar-list");
 			String afterColorId = afterUpdate.getColorId();
 			assertEquals(afterColorId, colorAfter);
 		}
@@ -78,7 +73,7 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("id").toString();
+			String calendarId = getValueFromMessageTestObject("id");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {

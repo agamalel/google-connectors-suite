@@ -31,14 +31,14 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("insertEvent");
+			addToMessageTestObject((Map<String, Object>) context.getBean("insertEvent"));
 			
 			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = insertCalendar((Calendar) testObjects.get("calendarRef"));
+			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			testObjects.put("calendarRef", calendar);
-			testObjects.put("calendarId", calendar.getId());
+			addToMessageTestObject("calendarRef", calendar);
+			addToMessageTestObject("calendarId", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -50,19 +50,14 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testInsertEvent() {
 		try {
-			MessageProcessor flow = lookupFlowConstruct("insert-event");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			Event event = (Event) response.getMessage().getPayload();
+			Event event = runFlowAndGetPayload("insert-event");
 			assertNotNull(event);
 			
-			testObjects.put("event", event);
-			testObjects.put("eventId", event.getId());
+			addToMessageTestObject("event", event);
+			addToMessageTestObject("eventId", event.getId());
 			
-			flow = lookupFlowConstruct("get-event-by-id");
-			response = flow.process(getTestEvent(testObjects));
-			
-			Event returnedEvent = (Event) response.getMessage().getPayload();
+			Event returnedEvent = runFlowAndGetPayload("get-event-by-id");
 			
 			assertTrue(event.getId().equals(returnedEvent.getId()));
 			assertTrue(EqualsBuilder.reflectionEquals(event, returnedEvent));
@@ -77,7 +72,7 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 	@After
 	public void tearDown() {
 		try {
-			String calendarId = testObjects.get("calendarId").toString();
+			String calendarId = getValueFromMessageTestObject("calendarId");
 			deleteCalendar(calendarId);
 		}
 		catch (Exception e) {
