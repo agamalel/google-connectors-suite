@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.0"
+	xmlns:google-spreadsheets="http://www.mulesoft.org/schema/mule/google-spreadsheets"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/schema/mule/google-spreadsheets/current/mule-google-spreadsheets.xsd">
+
+	<context:property-placeholder location="automation-credentials.properties" />
+
+	<google-spreadsheets:config-with-oauth applicationName="${google.spreadsheets.application.name}" name="Google_Spreadsheets"
+		consumerKey="${google.spreadsheets.consumer.key}" consumerSecret="${google.spreadsheets.consumer.secret}">
+		<google-spreadsheets:oauth-callback-config domain="${google.spreadsheets.domain}" localPort="${google.spreadsheets.localPort}"
+						remotePort="${google.spreadsheets.remotePort}" path="${google.spreadsheets.path}" />		
+	</google-spreadsheets:config-with-oauth>
+		
+	<flow name="create-spreadsheet">
+		<google-spreadsheets:create-spreadsheet config-ref="Google_Spreadsheets" title="#[payload.title]" accessTokenId="accessTokenId" />
+	</flow>
+
+	<flow name="get-all-spreadsheets">
+		<google-spreadsheets:get-all-spreadsheets config-ref="Google_Spreadsheets" accessTokenId="accessTokenId"  />
+	</flow>
+	
+	<flow name="create-worksheet">
+		<google-spreadsheets:create-worksheet config-ref="Google_Spreadsheets" accessTokenId="accessTokenId"
+			spreadsheet="#[payload.spreadsheet]" title="#[payload.title]" rowCount="#[payload.rowCount]" colCount="#[payload.colCount]" />
+	</flow>
+	
+	<flow name="delete-worksheet">
+		<google-spreadsheets:delete-worksheet 
+			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" spreadsheet="#[payload.spreadsheet]"	worksheet="#[payload.worksheet]" />
+	</flow>
+	
+	<flow name="get-worksheet-by-title">
+		<google-spreadsheets:get-worksheet-by-title 
+			config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" title="#[payload.title]" accessTokenId="accessTokenId" />
+	</flow>
+
+</mule>
