@@ -15,7 +15,7 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.spreadsheet.model.Spreadsheet;
 
-public class GetSpreadsheetsByTitle extends GoogleSpreadsheetsTestParent {
+public class GetSpreadsheetsByTitleTestCases extends GoogleSpreadsheetsTestParent {
 
 	@Before
 	public void setUp() {
