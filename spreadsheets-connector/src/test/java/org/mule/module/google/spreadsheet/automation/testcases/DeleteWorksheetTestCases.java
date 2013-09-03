@@ -60,7 +60,8 @@ public class DeleteWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 	@After
 	public void tearDown() {
 		try {
-			
+			String spreadsheet = (String) testObjects.get("spreadsheet");
+			deleteSpreadsheet(spreadsheet);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

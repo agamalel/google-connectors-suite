@@ -51,5 +51,17 @@ public class CreateSpreadsheetTestCases extends GoogleSpreadsheetsTestParent {
 			fail();
 		}
 	}
+	
+	@After
+	public void tearDown() {
+		try {
+			String title = (String) testObjects.get("title");
+			deleteSpreadsheet(title);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 		
 }
