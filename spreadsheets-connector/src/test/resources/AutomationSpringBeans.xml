@@ -28,7 +28,13 @@
 	</util:map>
 	
 	<util:map id="getAllSpreadsheets" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="title" value="MySpreadsheet" />
+		<entry key="spreadsheets">
+			<list value-type="java.lang.String">
+				<value>FirstSpreadsheet</value>
+				<value>SecondSpreadsheet</value>
+				<value>ThirdSpreadsheet</value>
+			</list>
+		</entry>
 	</util:map>
 	
 	<util:map id="createWorksheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
