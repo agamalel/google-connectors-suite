@@ -91,4 +91,8 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 		return (List<Worksheet>) response.getMessage().getPayload();
 	}
 	
+	public void deleteSpreadsheet(String spreadsheet) throws Exception {
+		// Dummy method. Will be implemented when functionality is provided
+	}
+	
 }
