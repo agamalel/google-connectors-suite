@@ -39,7 +39,7 @@ public class DeleteWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void deleteWorksheet() {
+	public void testDeleteWorksheet() {
 		try {
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			Worksheet worksheet = (Worksheet) testObjects.get("worksheetObject");

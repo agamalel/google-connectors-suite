@@ -32,7 +32,7 @@ public class CreateWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void createWorksheet() {
+	public void testCreateWorksheet() {
 		try {
 			String title = (String) testObjects.get("title");
 			int rowCount = (Integer) testObjects.get("rowCount");

@@ -31,7 +31,7 @@ public class GetAllSpreadsheets extends GoogleSpreadsheetsTestParent {
 	
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testCreateSpreadsheet() {
+	public void testGetAllSpreadsheets() {
 		try {
 			String title = (String) testObjects.get("title");
 
