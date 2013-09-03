@@ -50,5 +50,15 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 	<flow name="get-all-worksheets">
 		<google-spreadsheets:get-all-worksheets config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="purge-worksheet">
+		<google-spreadsheets:purge-worksheet config-ref="Google_Spreadsheets" 
+			spreadsheet="#[payload.spreadsheet]" worksheet="#[payload.worksheet]" accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="get-all-cells">
+		<google-spreadsheets:get-all-cells 
+			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]" spreadsheet="#[payload.worksheet]" />
+	</flow>
 
 </mule>

@@ -12,6 +12,7 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Spreadsheet;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 import org.mule.module.google.spreadsheet.oauth.GoogleSpreadSheetConnectorOAuthState;
@@ -93,6 +94,15 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 	
 	public void deleteSpreadsheet(String spreadsheet) throws Exception {
 		// Dummy method. Will be implemented when functionality is provided
+	}
+	
+	public List<Row> getAllCells(String spreadsheet, String worksheet) throws Exception {
+		testObjects.put("spreadsheet", spreadsheet);
+		testObjects.put("worksheet", worksheet);
+		
+		MessageProcessor flow = lookupFlowConstruct("get-all-cells");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (List<Row>) response.getMessage().getPayload();
 	}
 	
 }
