@@ -109,17 +109,17 @@
 		<entry key="worksheets">
 			<list value-type="java.util.HashMap">
 				<map key-type="java.lang.String" value-type="java.lang.Object">
-					<entry key="title" value="Spreadsheet1" />
+					<entry key="title" value="Worksheet1" />
 					<entry key="rowCount" value="#{100}" />
 					<entry key="colCount" value="#{20}" />
 				</map>
 				<map key-type="java.lang.String" value-type="java.lang.Object">
-					<entry key="title" value="Spreadsheet2" />
+					<entry key="title" value="Worksheet2" />
 					<entry key="rowCount" value="#{100}" />
 					<entry key="colCount" value="#{20}" />
 				</map>
 				<map key-type="java.lang.String" value-type="java.lang.Object">
-					<entry key="title" value="Spreadsheet3" />
+					<entry key="title" value="Worksheet3" />
 					<entry key="rowCount" value="#{100}" />
 					<entry key="colCount" value="#{20}" />
 				</map>
