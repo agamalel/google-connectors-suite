@@ -34,6 +34,10 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" spreadsheet="#[payload.spreadsheet]"	worksheet="#[payload.worksheet]" />
 	</flow>
 	
+	<flow name="get-authors">
+		<google-spreadsheets:get-authors config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" spreadsheet="#[payload.spreadsheet]" />
+	</flow>
+	
 	<flow name="get-worksheet-by-title">
 		<google-spreadsheets:get-worksheet-by-title 
 			config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" title="#[payload.title]" accessTokenId="accessTokenId" />
