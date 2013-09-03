@@ -93,6 +93,17 @@
 		<entry key="colCount" value="#{20}" />
 	</util:map>
 	
+	<util:map id="updateWorksheetMetadata" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MyUpdateMetadataSpreadsheet" />
+		<entry key="title" value="MyWorksheet" />
+		<entry key="rowCount" value="#{100}" />
+		<entry key="colCount" value="#{20}" />
+		
+		<entry key="updatedTitle" value="MyUpdatedWorksheet" />
+		<entry key="updatedRowCount" value="#{50}" />
+		<entry key="updatedColCount" value="#{10}" />
+	</util:map>
+	
 	<util:map id="getAllWorksheets" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="spreadsheet" value="MyGetAllWorksheetsSpreadsheet" />
 		<entry key="worksheets">
