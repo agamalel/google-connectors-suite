@@ -40,4 +40,27 @@
 		<entry key="colCount" value="#{20}" />
 	</util:map>
 	
+	<util:map id="getAllWorksheets" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MyGetAllWorksheetsSpreadsheet" />
+		<entry key="worksheets">
+			<list value-type="java.util.HashMap">
+				<map key-type="java.lang.String" value-type="java.lang.Object">
+					<entry key="title" value="Spreadsheet1" />
+					<entry key="rowCount" value="#{100}" />
+					<entry key="colCount" value="#{20}" />
+				</map>
+				<map key-type="java.lang.String" value-type="java.lang.Object">
+					<entry key="title" value="Spreadsheet2" />
+					<entry key="rowCount" value="#{100}" />
+					<entry key="colCount" value="#{20}" />
+				</map>
+				<map key-type="java.lang.String" value-type="java.lang.Object">
+					<entry key="title" value="Spreadsheet3" />
+					<entry key="rowCount" value="#{100}" />
+					<entry key="colCount" value="#{20}" />
+				</map>
+			</list>
+		</entry>
+	</util:map>
+	
 </beans>

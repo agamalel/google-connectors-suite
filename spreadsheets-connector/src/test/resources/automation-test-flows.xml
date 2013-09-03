@@ -38,5 +38,9 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 		<google-spreadsheets:get-worksheet-by-title 
 			config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" title="#[payload.title]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-all-worksheets">
+		<google-spreadsheets:get-all-worksheets config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" accessTokenId="accessTokenId" />
+	</flow>
 
 </mule>
