@@ -7,27 +7,26 @@
 
 package org.mule.module.gcm;
 
-import java.io.StringReader;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.codehaus.jackson.type.TypeReference;
-import org.dom4j.Document;
-import org.dom4j.io.SAXReader;
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
+import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.PacketExtension;
+import org.jivesoftware.smack.provider.PacketExtensionProvider;
+import org.jivesoftware.smack.provider.ProviderManager;
 import org.mule.api.ConnectionException;
 import org.mule.api.ConnectionExceptionCode;
 import org.mule.api.MuleException;
@@ -49,6 +48,7 @@ import org.mule.module.gcm.model.CcsResponse;
 import org.mule.module.gcm.model.Data;
 import org.mule.util.MapUtils;
 import org.mule.util.StringUtils;
+import org.xmlpull.v1.XmlPullParser;
 
 /**
  * Mule connector for Google Cloud Messaging (HTTP API).
@@ -65,20 +65,28 @@ public class CcsConnector extends AbstractGcmConnector
 
     private static class GcmPacketExtension implements PacketExtension
     {
+        private final String json;
         private final String xml;
 
-        GcmPacketExtension(final String data)
+        GcmPacketExtension(final String json)
         {
+            this.json = json;
+
             final StringBuilder xmlBuilder = new StringBuilder("<").append(getElementName())
-                .append("xmlns='")
+                .append(" xmlns='")
                 .append(getNamespace())
                 .append("'>")
-                .append(StringEscapeUtils.escapeXml(data))
+                .append(StringEscapeUtils.escapeXml(json))
                 .append("</")
                 .append(getElementName())
                 .append(">");
 
             xml = xmlBuilder.toString();
+        }
+
+        String getJson()
+        {
+            return json;
         }
 
         @Override
@@ -97,6 +105,20 @@ public class CcsConnector extends AbstractGcmConnector
         public String toXML()
         {
             return xml;
+        }
+    }
+
+    private static class GcmPacketExtensionProvider implements PacketExtensionProvider
+    {
+        @Override
+        public PacketExtension parseExtension(final XmlPullParser parser) throws Exception
+        {
+            final int tagType = parser.next();
+            if (tagType != XmlPullParser.TEXT)
+            {
+                throw new IllegalStateException("Unexpected tag type: " + XmlPullParser.TYPES[tagType]);
+            }
+            return new GcmPacketExtension(parser.getText());
         }
     }
 
@@ -125,8 +147,6 @@ public class CcsConnector extends AbstractGcmConnector
 
     private String projectId;
     private XMPPConnection xmppConnection;
-    private Chat chat;
-    private volatile SourceCallback sourceCallback;
 
     /**
      * Connect and authenticate to the CSS server.
@@ -139,12 +159,18 @@ public class CcsConnector extends AbstractGcmConnector
     {
         this.projectId = projectId;
 
+        ProviderManager.getInstance().addExtensionProvider(GCM_EXTENSION_ELEMENT_NAME,
+            GCM_EXTENSION_NAMESPACE, new GcmPacketExtensionProvider());
+
         try
         {
             final ConnectionConfiguration config = new ConnectionConfiguration("gcm.googleapis.com", 5235);
-            config.setCompressionEnabled(true);
-            config.setSASLAuthenticationEnabled(true);
+            config.setSecurityMode(SecurityMode.enabled);
+            config.setReconnectionAllowed(true);
+            config.setRosterLoadedAtLogin(false);
+            config.setSendPresence(false);
             config.setSocketFactory(SSLSocketFactory.getDefault());
+
             xmppConnection = new XMPPConnection(config);
             xmppConnection.connect();
 
@@ -165,37 +191,11 @@ public class CcsConnector extends AbstractGcmConnector
         try
         {
             xmppConnection.login(getLoginUser(), getApiKey());
-            xmppConnection.getChatManager().addChatListener(new ChatManagerListener()
-            {
-                @Override
-                public void chatCreated(final Chat chat, final boolean createdLocally)
-                {
-                    if (!createdLocally)
-                    {
-                        CcsConnector.this.chat = chat;
-                        chat.addMessageListener(new MessageListener()
-                        {
-                            @Override
-                            public void processMessage(final Chat chat, final Message message)
-                            {
-                                try
-                                {
-                                    handleInboundMessage(message);
-                                }
-                                catch (final Exception e)
-                                {
-                                    logger.error("Failed to handle inbound message: " + message, e);
-                                }
-                            }
-                        });
-                    }
-                }
-            });
         }
-        catch (final XMPPException xmppe)
+        catch (final XMPPException e)
         {
             throw new ConnectionException(ConnectionExceptionCode.INCORRECT_CREDENTIALS, null,
-                xmppe.getMessage(), xmppe);
+                e.getMessage(), e);
         }
     }
 
@@ -208,8 +208,6 @@ public class CcsConnector extends AbstractGcmConnector
         }
 
         xmppConnection = null;
-        chat = null;
-        sourceCallback = null;
     }
 
     @ConnectionIdentifier
@@ -221,7 +219,7 @@ public class CcsConnector extends AbstractGcmConnector
     @ValidateConnection
     public boolean isConnected()
     {
-        return xmppConnection != null && xmppConnection.isConnected() && chat != null;
+        return xmppConnection != null && xmppConnection.isConnected();
     }
 
     /**
@@ -301,9 +299,29 @@ public class CcsConnector extends AbstractGcmConnector
     @Source
     public void receive(final SourceCallback sourceCallback)
     {
-        Validate.isTrue(this.sourceCallback == null, "This connector supports only a single message source");
+        xmppConnection.addPacketListener(new PacketListener()
+        {
+            @Override
+            public void processPacket(final Packet packet)
+            {
+                try
+                {
+                    handleInboundMessage(sourceCallback, (Message) packet);
+                }
+                catch (final Exception e)
+                {
+                    logger.error("Failed to handle inbound message: " + packet, e);
+                }
 
-        this.sourceCallback = sourceCallback;
+            }
+        }, new PacketFilter()
+        {
+            @Override
+            public boolean accept(final Packet packet)
+            {
+                return packet instanceof Message;
+            }
+        });
     }
 
     private void xmppSend(final CcsRequest ccsRequest) throws MuleException, XMPPException
@@ -311,24 +329,27 @@ public class CcsConnector extends AbstractGcmConnector
         final String jsonRequest = serializeEntityToJson(ccsRequest);
         final Message xmppMessage = new Message();
         xmppMessage.addExtension(new GcmPacketExtension(jsonRequest));
-        chat.sendMessage(xmppMessage);
+        xmppConnection.sendPacket(xmppMessage);
     }
 
-    private void handleInboundMessage(final Message message) throws Exception
+    private void handleInboundMessage(final SourceCallback sourceCallback, final Message message)
+        throws Exception
     {
-        final PacketExtension extension = message.getExtension(GCM_EXTENSION_ELEMENT_NAME,
-            GCM_EXTENSION_NAMESPACE);
-
-        if (extension == null)
+        if (logger.isDebugEnabled())
         {
-            logger.info("Dropping unsupported message: " + message.toXML());
+            logger.debug("Received message w/packet ID: " + message.getPacketID());
         }
 
-        final String gcmXml = extension.toXML();
-        final Document document = new SAXReader().read(new StringReader(gcmXml));
-        final String jsonResponse = document.getRootElement().getTextTrim();
+        final GcmPacketExtension gcmPacketExtension = (GcmPacketExtension) message.getExtension(
+            GCM_EXTENSION_ELEMENT_NAME, GCM_EXTENSION_NAMESPACE);
 
-        final CcsResponse ccsResponse = deserializeJsonToEntity(CCS_RESPONSE_TYPE_REFERENCE, jsonResponse);
+        if (gcmPacketExtension == null)
+        {
+            logger.warn("Dropping unsupported message: " + message.toXML());
+        }
+
+        final CcsResponse ccsResponse = deserializeJsonToEntity(CCS_RESPONSE_TYPE_REFERENCE,
+            gcmPacketExtension.getJson());
 
         if (isAckOrNackMessage(ccsResponse))
         {
@@ -344,11 +365,6 @@ public class CcsConnector extends AbstractGcmConnector
         else if (isAutoAckMessages())
         {
             acknowledgeMessage(ccsResponse.getFrom(), ccsResponse.getMessageId());
-        }
-
-        if (sourceCallback == null)
-        {
-            logger.error("Dropping undeliverable message: " + ccsResponse);
         }
 
         sourceCallback.process(ccsResponse);

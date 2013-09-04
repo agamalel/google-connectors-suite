@@ -5,6 +5,9 @@
     },
     "additionalProperties": false,
     "properties": {
+        "category": {
+          "type": "string"
+        },
         "from": {
           "type": "string"
         },

@@ -8,9 +8,6 @@
         "to": {
           "type": "string"
         },
-        "data": {
-          "$ref": "data.json"
-        },
         "delay_while_idle": {
           "type": "boolean"
         },

@@ -8,6 +8,9 @@
         "message_type": {
           "type": "string",
           "enum": ["ack", "nack"]
+        },
+        "data": {
+          "$ref": "data.json"
         }
     }
 }
