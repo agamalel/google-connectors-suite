@@ -57,25 +57,10 @@ public class GetAllCellsTestCases extends GoogleSpreadsheetsTestParent {
 			
 			for (Row row : inputRows) {
 				assertTrue(allRows.contains(row));
-
 				Row retrievedRow = allRows.get(allRows.indexOf(row));
-				
-				List<Cell> inputCells = row.getCells();
-				List<Cell> retrievedCells = retrievedRow.getCells();
 
-				for (final Cell cell : inputCells) {
-					List<Cell> matchingCells = (List<Cell>) CollectionUtils.select(retrievedCells, new Predicate() {
-						
-						@Override
-						public boolean evaluate(Object object) {
-							Cell cellObject = (Cell) object;
-							return (cell.getColumnNumber() == cellObject.getColumnNumber())
-									&& (cell.getRowNumber() == cellObject.getRowNumber())
-									&& (StringUtils.equals(cell.getValueOrFormula(), cellObject.getValueOrFormula()));
-						}
-					});
-					assertTrue(matchingCells.size() == 1);
-				}
+				boolean equals = isRowEqual(row, retrievedRow);
+				assertTrue(equals);
 			}
 		}
 		catch (Exception e) {
