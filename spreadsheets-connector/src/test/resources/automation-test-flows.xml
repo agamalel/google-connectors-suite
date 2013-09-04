@@ -58,12 +58,41 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 	
 	<flow name="get-all-cells">
 		<google-spreadsheets:get-all-cells 
-			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]" spreadsheet="#[payload.worksheet]" />
+			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" />
+	</flow>
+	
+	<flow name="get-all-cells-as-csv">
+		<google-spreadsheets:get-all-cells-as-csv config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]"
+			spreadsheet="#[payload.spreadsheet]" lineSeparator="#[payload.lineSeparator]" columnSeparator="#[payload.columnSeparator]"/>
+	</flow>
+	
+	<flow name="set-row-values">
+		<google-spreadsheets:set-row-values config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" 
+			worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" purge="#[payload.purge]">
+			<google-spreadsheets:rows ref="#[payload.rowsRef]" />			
+		</google-spreadsheets:set-row-values>
+	</flow>
+	
+	<flow name="set-csv-values">
+		<google-spreadsheets:set-csv-values config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]"
+			spreadsheet="#[payload.spreadsheet]" purge="#[payload.purge]" csv="#[payload.csv]" startingRow="#[payload.startingRow]"
+			startingColumn="#[payload.startingColumn]" lineSeparator="#[payload.lineSeparator]" columnSeparator="#[payload.columnSeparator]" />
+	</flow>
+	
+	<flow name="get-column-headers">
+		<google-spreadsheets:get-column-headers config-ref="Google_Spreadsheets" accessTokenId="accessTokenId"
+			worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" />
 	</flow>
 	
 	<flow name="update-worksheet-metadata">
 		<google-spreadsheets:update-worksheet-metadata config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" spreadsheet="#[payload.spreadsheet]"
 			worksheet="#[payload.worksheet]" rowCount="#[payload.rowCount]" colCount="#[payload.colCount]" title="#[payload.title]" />
+	</flow>
+	
+	<flow name="get-cell-range">
+		<google-spreadsheets:get-cell-range config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" worksheet="#[payload.worksheet]"
+                                minRow="#[payload.minRow]" maxRow="#[payload.maxRow]"
+                                minCol="#[payload.minCol]" maxCol="#[payload.maxCol]" accessTokenId="accessTokenId" />
 	</flow>
 
 </mule>

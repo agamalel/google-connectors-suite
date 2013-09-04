@@ -127,4 +127,15 @@
 		</entry>
 	</util:map>
 	
+	<util:map id="getCellRange" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheetTitle" value="MyGetCellRangeSpreadsheet" />
+		<entry key="minRow" value="#{1}" />
+		<entry key="maxRow" value="#{10}" />
+		<entry key="minCol" value="#{1}" />
+		<entry key="maxCol" value="#{10}" />
+		<entry key="worksheetTitle" value="MyWorksheet" />
+		<entry key="rowCount" value="#{10}" />
+		<entry key="colCount" value="#{10}" />
+	</util:map>
+	
 </beans>
