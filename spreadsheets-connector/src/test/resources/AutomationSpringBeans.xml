@@ -408,7 +408,7 @@
 	</util:map>
 	
 	<util:map id="search" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="spreadsheetTitle" value="MyGetCellRangeAsCsvSpreadsheet" />
+		<entry key="spreadsheetTitle" value="MySearchSpreadsheet" />
 		<entry key="worksheetTitle" value="MyWorksheet" />
 		<entry key="rowCount" value="#{10}" />
 		<entry key="colCount" value="#{10}" />
