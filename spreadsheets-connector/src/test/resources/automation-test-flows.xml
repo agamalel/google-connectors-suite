@@ -68,6 +68,11 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 		</google-spreadsheets:set-row-values>
 	</flow>
 	
+	<flow name="get-column-headers">
+		<google-spreadsheets:get-column-headers config-ref="Google_Spreadsheets" accessTokenId="accessTokenId"
+			worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" />
+	</flow>
+	
 	<flow name="update-worksheet-metadata">
 		<google-spreadsheets:update-worksheet-metadata config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" spreadsheet="#[payload.spreadsheet]"
 			worksheet="#[payload.worksheet]" rowCount="#[payload.rowCount]" colCount="#[payload.colCount]" title="#[payload.title]" />

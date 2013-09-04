@@ -163,6 +163,48 @@
 		</entry>
 	</util:map>
 	
+	<util:map id="getColumnHeaders" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MyGetAllCellsSpreadsheet" />
+		<entry key="title" value="MyWorksheet" />
+		<entry key="rowCount" value="#{20}" />
+		<entry key="colCount" value="#{10}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="rowsRef">
+			<list value-type="org.mule.module.google.spreadsheet.model.Row">
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{1}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Column Header 1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Column Header 2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{2}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Column Value 1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Column Value 2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+	</util:map>
+	
 	<util:map id="deleteWorksheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="spreadsheet" value="MyDeleteSpreadsheet" />
 		<entry key="title" value="MyWorksheet" />
