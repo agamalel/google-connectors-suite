@@ -19,12 +19,12 @@
 	</bean>
 	
 	<util:map id="getAuthors" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="spreadsheet" value="GetAuthorsSpreadsheet" />
+		<entry key="spreadsheet" value="MyGetAuthorsSpreadsheet" />
 		<entry key="expectedAuthorEmail" value="worstsignupever@gmail.com" />
 	</util:map>
 
 	<util:map id="createSpreadsheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="title" value="MySpreadsheet" />
+		<entry key="title" value="MyCreateSpreadsheet" />
 	</util:map>
 	
 	<util:map id="getAllSpreadsheets" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
@@ -49,7 +49,7 @@
 	</util:map>
 	
 	<util:map id="getWorksheetByTitle" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="spreadsheet" value="GetWorksheetByTitleSpreadsheet" />
+		<entry key="spreadsheet" value="MyGetWorksheetByTitleSpreadsheet" />
 		<entry key="worksheets">
 			<list value-type="java.util.HashMap">
 				<map key-type="java.lang.String" value-type="java.lang.Object">
@@ -69,33 +69,223 @@
 				</map>
 			</list>
 		</entry>
-		<entry key="title" value="MyWorksheet" />
+		<entry key="toSearch" value="MyWorksheet" />
 	</util:map>
 	
 	<util:map id="createWorksheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
-		<entry key="spreadsheet" value="MySpreadsheet" />
-		<entry key="title" value="MyWorksheet" />
+		<entry key="spreadsheet" value="MyCreateWorksheetSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
 		<entry key="rowCount" value="#{100}" />
 		<entry key="colCount" value="#{20}" />
 	</util:map>
 	
+	<util:map id="setRowValues" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MySetRowValuesSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
+		<entry key="rowCount" value="#{20}" />
+		<entry key="colCount" value="#{10}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="rowsRef">
+			<list value-type="org.mule.module.google.spreadsheet.model.Row">
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{1}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="valueOfR1C1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="valueOfR1C2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{2}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="valueOfR2C1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="valueOfR2C2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+	</util:map>
+	
+	<util:map id="getAllCellsAsCsv" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MyGetAllCellsSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
+		<entry key="rowCount" value="#{20}" />
+		<entry key="colCount" value="#{10}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="rowsRef">
+			<list value-type="org.mule.module.google.spreadsheet.model.Row">
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{1}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Capital City" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Rome" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{2}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Country" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Italy" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+		<entry key="columnSeparator" value="," />
+		<entry key="lineSeparator" value="\n" />
+	</util:map>
+	
+	<util:map id="getAllCells" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MyGetAllCellsSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
+		<entry key="rowCount" value="#{20}" />
+		<entry key="colCount" value="#{10}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="rowsRef">
+			<list value-type="org.mule.module.google.spreadsheet.model.Row">
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{1}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Cell R1C1 value" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Cell R1C2 value" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{2}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Cell R2C1 value" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Cell R2C2 value" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+	</util:map>
+	
+	<util:map id="getColumnHeaders" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MyGetColumnHeadersSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
+		<entry key="rowCount" value="#{20}" />
+		<entry key="colCount" value="#{10}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="rowsRef">
+			<list value-type="org.mule.module.google.spreadsheet.model.Row">
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{1}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Column Header 1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Column Header 2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{2}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="Column Value 1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="Column Value 2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+	</util:map>
+	
+	<util:map id="setCsvValues" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MySetCsvValuesSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
+		<entry key="rowCount" value="#{100}" />
+		<entry key="colCount" value="#{20}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="csv">
+			<value>FirstName,LastName
+			Mule,Soft
+			Goo,Gle
+			Ya,Hoo
+			App,Le
+			</value>
+		</entry>
+		<entry key="startingRow" value="#{1}" />
+		<entry key="startingColumn" value="#{1}" />
+		<entry key="columnSeparator" value="," />
+		<entry key="lineSeparator" value="\n" />
+	</util:map>
+	
 	<util:map id="deleteWorksheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="spreadsheet" value="MyDeleteSpreadsheet" />
-		<entry key="title" value="MyWorksheet" />
+		<entry key="worksheet" value="MyWorksheet" />
 		<entry key="rowCount" value="#{100}" />
 		<entry key="colCount" value="#{20}" />
 	</util:map>
 	
 	<util:map id="purgeWorksheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="spreadsheet" value="MyPurgeSpreadsheet" />
-		<entry key="title" value="MyWorksheet" />
+		<entry key="worksheet" value="MyWorksheet" />
 		<entry key="rowCount" value="#{100}" />
 		<entry key="colCount" value="#{20}" />
 	</util:map>
 	
 	<util:map id="updateWorksheetMetadata" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="spreadsheet" value="MyUpdateMetadataSpreadsheet" />
-		<entry key="title" value="MyWorksheet" />
+		<entry key="worksheet" value="MyWorksheet" />
 		<entry key="rowCount" value="#{100}" />
 		<entry key="colCount" value="#{20}" />
 		
@@ -125,6 +315,17 @@
 				</map>
 			</list>
 		</entry>
+	</util:map>
+	
+	<util:map id="getCellRange" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheetTitle" value="MyGetCellRangeSpreadsheet" />
+		<entry key="minRow" value="#{1}" />
+		<entry key="maxRow" value="#{10}" />
+		<entry key="minCol" value="#{1}" />
+		<entry key="maxCol" value="#{10}" />
+		<entry key="worksheetTitle" value="MyWorksheet" />
+		<entry key="rowCount" value="#{10}" />
+		<entry key="colCount" value="#{10}" />
 	</util:map>
 	
 </beans>
