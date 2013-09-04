@@ -96,6 +96,20 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 		// Dummy method. Will be implemented when functionality is provided
 	}
 	
+	public void setRowValues(String spreadsheet, String worksheet, List<Row> rows) throws Exception {
+		setRowValues(spreadsheet, worksheet, rows, true);
+	}
+
+	public void setRowValues(String spreadsheet, String worksheet, List<Row> rows, boolean purge) throws Exception {
+		testObjects.put("spreadsheet", spreadsheet);
+		testObjects.put("worksheet", worksheet);
+		testObjects.put("rowsRef", rows);
+		testObjects.put("purge", purge);
+		
+		MessageProcessor flow = lookupFlowConstruct("set-row-values");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+	}
+	
 	public List<Row> getAllCells(String spreadsheet, String worksheet) throws Exception {
 		testObjects.put("spreadsheet", spreadsheet);
 		testObjects.put("worksheet", worksheet);
