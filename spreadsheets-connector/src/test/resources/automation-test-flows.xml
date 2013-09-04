@@ -101,4 +101,9 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
                                 minCol="#[payload.minCol]" maxCol="#[payload.maxCol]" accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="search">
+        <google-spreadsheets:search config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" worksheet="#[payload.worksheet]" query="#[payload.query]"
+            accessTokenId="accessTokenId" />
+	</flow>
+	
 </mule>

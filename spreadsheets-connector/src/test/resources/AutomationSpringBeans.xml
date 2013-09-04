@@ -406,4 +406,46 @@
 			</list>
 		</entry>
 	</util:map>
+	
+	<util:map id="search" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheetTitle" value="MyGetCellRangeAsCsvSpreadsheet" />
+		<entry key="worksheetTitle" value="MyWorksheet" />
+		<entry key="rowCount" value="#{10}" />
+		<entry key="colCount" value="#{10}" />
+		<entry key="query" value="valueOfR1C2" />
+		<entry key="rowsRef">
+			<list value-type="org.mule.module.google.spreadsheet.model.Row">
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{1}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="valueOfR1C1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="valueOfR1C2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.mule.module.google.spreadsheet.model.Row">
+					<property name="rowNumber" value="#{2}" />
+					<property name="cells">
+						<list value-type="org.mule.module.google.spreadsheet.model.Cell">
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{1}" />
+								<property name="valueOrFormula" value="valueOfR2C1" />
+							</bean>
+							<bean class="org.mule.module.google.spreadsheet.model.Cell">
+								<property name="columnNumber" value="#{2}" />
+								<property name="valueOrFormula" value="valueOfR2C2" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+	</util:map>
 </beans>
