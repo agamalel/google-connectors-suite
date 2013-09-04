@@ -94,5 +94,11 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
                                 minRow="#[payload.minRow]" maxRow="#[payload.maxRow]"
                                 minCol="#[payload.minCol]" maxCol="#[payload.maxCol]" accessTokenId="accessTokenId" />
 	</flow>
+	
+	<flow name="get-cell-range-as-csv">
+		<google-spreadsheets:get-cell-range-as-csv config-ref="Google_Spreadsheets" spreadsheet="#[payload.spreadsheet]" worksheet="#[payload.worksheet]"
+                                minRow="#[payload.minRow]" maxRow="#[payload.maxRow]"
+                                minCol="#[payload.minCol]" maxCol="#[payload.maxCol]" accessTokenId="accessTokenId" />
+	</flow>
 
 </mule>

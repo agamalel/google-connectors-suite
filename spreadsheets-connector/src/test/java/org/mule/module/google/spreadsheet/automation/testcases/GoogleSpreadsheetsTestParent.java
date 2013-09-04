@@ -1,7 +1,5 @@
 package org.mule.module.google.spreadsheet.automation.testcases;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 import java.util.Map;
 
@@ -61,9 +59,10 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 	public void createSpreadsheet(String title) throws Exception {
 		testObjects.put("title", title);
 		MessageProcessor flow = lookupFlowConstruct("create-spreadsheet");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
+		flow.process(getTestEvent(testObjects));
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Spreadsheet> getAllSpreadsheets() throws Exception {
 		MessageProcessor flow = lookupFlowConstruct("get-all-spreadsheets");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
@@ -89,6 +88,7 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Worksheet> getWorksheetByTitle(String spreadsheet, String title) throws Exception {
 		testObjects.put("spreadsheet", spreadsheet);
 		testObjects.put("title", title);
@@ -113,9 +113,10 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 		testObjects.put("purge", purge);
 		
 		MessageProcessor flow = lookupFlowConstruct("set-row-values");
-		MuleEvent response = flow.process(getTestEvent(testObjects));
+		flow.process(getTestEvent(testObjects));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Row> getAllCells(String spreadsheet, String worksheet) throws Exception {
 		testObjects.put("spreadsheet", spreadsheet);
 		testObjects.put("worksheet", worksheet);
