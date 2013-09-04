@@ -1,23 +1,17 @@
 package org.mule.module.google.spreadsheet.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
-import org.apache.commons.collections.PredicateUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.module.google.spreadsheet.model.Cell;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 
@@ -31,11 +25,11 @@ public class SetRowValuesTestCases extends GoogleSpreadsheetsTestParent {
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			createSpreadsheet(spreadsheetTitle);
 
-			String title = (String) testObjects.get("title");
+			String worksheetTitle = (String) testObjects.get("worksheet");
 			int rowCount = (Integer) testObjects.get("rowCount");
 			int colCount = (Integer) testObjects.get("colCount");
 			
-			Worksheet worksheet = createWorksheet(spreadsheetTitle, title, rowCount, colCount);
+			Worksheet worksheet = createWorksheet(spreadsheetTitle, worksheetTitle, rowCount, colCount);
 			testObjects.put("worksheetObject", worksheet);			
 		}
 		catch (Exception e) {

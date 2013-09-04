@@ -58,7 +58,7 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 	
 	<flow name="get-all-cells">
 		<google-spreadsheets:get-all-cells 
-			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]" spreadsheet="#[payload.worksheet]" />
+			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" />
 	</flow>
 	
 	<flow name="set-row-values">

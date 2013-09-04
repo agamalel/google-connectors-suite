@@ -24,12 +24,12 @@ public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestPare
 			testObjects = (Map<String, Object>) context.getBean("updateWorksheetMetadata");
 			
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
-			String title = (String) testObjects.get("title");
+			String worksheetTitle = (String) testObjects.get("worksheet");
 			int rowCount = (Integer) testObjects.get("rowCount");
 			int colCount = (Integer) testObjects.get("colCount");
 			
 			createSpreadsheet(spreadsheetTitle);
-			Worksheet worksheet = createWorksheet(spreadsheetTitle, title, rowCount, colCount);
+			Worksheet worksheet = createWorksheet(spreadsheetTitle, worksheetTitle, rowCount, colCount);
 			testObjects.put("worksheetObject", worksheet);			
 		}
 		catch (Exception e) {

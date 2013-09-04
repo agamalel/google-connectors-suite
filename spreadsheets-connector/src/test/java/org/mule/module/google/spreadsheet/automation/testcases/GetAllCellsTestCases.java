@@ -26,11 +26,11 @@ public class GetAllCellsTestCases extends GoogleSpreadsheetsTestParent {
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			createSpreadsheet(spreadsheetTitle);
 
-			String title = (String) testObjects.get("title");
+			String worksheetTitle = (String) testObjects.get("worksheet");
 			int rowCount = (Integer) testObjects.get("rowCount");
 			int colCount = (Integer) testObjects.get("colCount");
 			
-			Worksheet worksheet = createWorksheet(spreadsheetTitle, title, rowCount, colCount);
+			Worksheet worksheet = createWorksheet(spreadsheetTitle, worksheetTitle, rowCount, colCount);
 			testObjects.put("worksheetObject", worksheet);
 			
 			List<Row> rows = (List<Row>) testObjects.get("rowsRef");

@@ -54,14 +54,15 @@ public class GetWorksheetByTitleTestCases extends GoogleSpreadsheetsTestParent {
 	@Test
 	public void testGetWorksheetByTitle_WithResults() {
 		try {
-			String title = (String) testObjects.get("title");
+			String toSearch = (String) testObjects.get("toSearch");
+			testObjects.put("title", toSearch);
 
 			MessageProcessor flow = lookupFlowConstruct("get-worksheet-by-title");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
 			List<Worksheet> worksheets = (List<Worksheet>) response.getMessage().getPayload();
 			
 			for (Worksheet worksheet : worksheets) {
-				assertTrue(worksheet.getTitle().equals(title));
+				assertTrue(worksheet.getTitle().equals(toSearch));
 			}
 		}
 		catch (Exception e) {
