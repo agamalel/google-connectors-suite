@@ -205,6 +205,26 @@
 		</entry>
 	</util:map>
 	
+	<util:map id="setCsvValues" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="spreadsheet" value="MySetCsvValuesSpreadsheet" />
+		<entry key="worksheet" value="MyWorksheet" />
+		<entry key="rowCount" value="#{100}" />
+		<entry key="colCount" value="#{20}" />
+		<entry key="purge" value="#{T(java.lang.Boolean).TRUE}" />
+		<entry key="csv">
+			<value>FirstName,LastName
+			Mule,Soft
+			Goo,Gle
+			Ya,Hoo
+			App,Le
+			</value>
+		</entry>
+		<entry key="startingRow" value="#{1}" />
+		<entry key="startingColumn" value="#{1}" />
+		<entry key="columnSeparator" value="," />
+		<entry key="lineSeparator" value="\n" />
+	</util:map>
+	
 	<util:map id="deleteWorksheet" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="spreadsheet" value="MyDeleteSpreadsheet" />
 		<entry key="title" value="MyWorksheet" />

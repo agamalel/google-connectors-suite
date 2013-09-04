@@ -68,6 +68,12 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 		</google-spreadsheets:set-row-values>
 	</flow>
 	
+	<flow name="set-csv-values">
+		<google-spreadsheets:set-csv-values config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]"
+			spreadsheet="#[payload.spreadsheet]" purge="#[payload.purge]" csv="#[payload.csv]" startingRow="#[payload.startingRow]"
+			startingColumn="#[payload.startingColumn]" lineSeparator="#[payload.lineSeparator]" columnSeparator="#[payload.columnSeparator]" />
+	</flow>
+	
 	<flow name="get-column-headers">
 		<google-spreadsheets:get-column-headers config-ref="Google_Spreadsheets" accessTokenId="accessTokenId"
 			worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" />
