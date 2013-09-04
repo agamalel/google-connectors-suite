@@ -1,6 +1,5 @@
 package org.mule.module.google.spreadsheet.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -13,22 +12,24 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.module.google.spreadsheet.CsvToRowsAdapter;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 
-public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestParent {
+public class SetCsvValuesTestCases extends GoogleSpreadsheetsTestParent {
 
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("updateWorksheetMetadata");
+			testObjects = (Map<String, Object>) context.getBean("setCsvValues");
 			
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
+			createSpreadsheet(spreadsheetTitle);
+
 			String worksheetTitle = (String) testObjects.get("worksheet");
 			int rowCount = (Integer) testObjects.get("rowCount");
 			int colCount = (Integer) testObjects.get("colCount");
 			
-			createSpreadsheet(spreadsheetTitle);
 			Worksheet worksheet = createWorksheet(spreadsheetTitle, worksheetTitle, rowCount, colCount);
 			testObjects.put("worksheetObject", worksheet);			
 		}
@@ -38,33 +39,35 @@ public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestPare
 		}
 	}
 	
-	@Category({RegressionTests.class})
+	@SuppressWarnings("unchecked")
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testUpdateWorksheetMetadata() {
+	public void testSetCsvValues() {
 		try {
-			String updatedTitle = (String) testObjects.get("updatedTitle");
-			int updatedColCount = (Integer) testObjects.get("updatedColCount");
-			int updatedRowCount = (Integer) testObjects.get("updatedRowCount");
+			int startingRow = (Integer) testObjects.get("startingRow");
+			int startingColumn = (Integer) testObjects.get("startingColumn");
+			String columnSeparator = (String) testObjects.get("columnSeparator");
+			String lineSeparator = (String) testObjects.get("lineSeparator");
 			
+			String csv = (String) testObjects.get("csv");
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			Worksheet worksheet = (Worksheet) testObjects.get("worksheetObject");
 			
 			testObjects.put("worksheet", worksheet.getTitle());
-			testObjects.put("title", updatedTitle);
-			testObjects.put("rowCount", updatedRowCount);
-			testObjects.put("colCount", updatedColCount);
+
+			MessageProcessor flow = lookupFlowConstruct("set-csv-values");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
+
+			List<Row> retrievedRows = getAllCells(spreadsheetTitle, worksheet.getTitle());
+			List<Row> csvRows = CsvToRowsAdapter.adapt(csv, startingRow, startingColumn, columnSeparator, lineSeparator);
 			
-			MessageProcessor flow = lookupFlowConstruct("update-worksheet-metadata");
-			flow.process(getTestEvent(testObjects));
-			
-			List<Worksheet> retrievedWorksheets = getWorksheetByTitle(spreadsheetTitle, updatedTitle);
-			
-			// There should only be one worksheet with this name
-			Worksheet updatedWorksheet = retrievedWorksheets.get(0);
-			
-			assertEquals(updatedColCount, updatedWorksheet.getColCount());
-			assertEquals(updatedRowCount, updatedWorksheet.getRowCount());
-			assertEquals(updatedTitle, updatedWorksheet.getTitle());
+			for (Row row : csvRows) {
+				assertTrue(retrievedRows.contains(row));
+				Row retrievedRow = retrievedRows.get(retrievedRows.indexOf(row));
+				
+				boolean equals = isRowEqual(row, retrievedRow);
+				assertTrue(equals);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,5 +86,4 @@ public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestPare
 			fail();
 		}
 	}
-	
 }

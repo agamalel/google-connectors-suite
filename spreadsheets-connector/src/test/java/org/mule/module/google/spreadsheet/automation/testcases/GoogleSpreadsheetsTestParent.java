@@ -1,8 +1,13 @@
 package org.mule.module.google.spreadsheet.automation.testcases;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -12,6 +17,7 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.module.google.spreadsheet.model.Cell;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Spreadsheet;
 import org.mule.module.google.spreadsheet.model.Worksheet;
@@ -96,6 +102,20 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 		// Dummy method. Will be implemented when functionality is provided
 	}
 	
+	public void setRowValues(String spreadsheet, String worksheet, List<Row> rows) throws Exception {
+		setRowValues(spreadsheet, worksheet, rows, true);
+	}
+
+	public void setRowValues(String spreadsheet, String worksheet, List<Row> rows, boolean purge) throws Exception {
+		testObjects.put("spreadsheet", spreadsheet);
+		testObjects.put("worksheet", worksheet);
+		testObjects.put("rowsRef", rows);
+		testObjects.put("purge", purge);
+		
+		MessageProcessor flow = lookupFlowConstruct("set-row-values");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+	}
+	
 	public List<Row> getAllCells(String spreadsheet, String worksheet) throws Exception {
 		testObjects.put("spreadsheet", spreadsheet);
 		testObjects.put("worksheet", worksheet);
@@ -103,6 +123,29 @@ public class GoogleSpreadsheetsTestParent extends FunctionalTestCase {
 		MessageProcessor flow = lookupFlowConstruct("get-all-cells");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (List<Row>) response.getMessage().getPayload();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected boolean isRowEqual(Row row1, Row row2) {
+		List<Cell> inputCells = row1.getCells();
+		List<Cell> retrievedCells = row2.getCells();
+
+		for (final Cell cell : inputCells) {
+			List<Cell> matchingCells = (List<Cell>) CollectionUtils.select(retrievedCells, new Predicate() {
+				
+				@Override
+				public boolean evaluate(Object object) {
+					Cell cellObject = (Cell) object;
+					return (cell.getColumnNumber() == cellObject.getColumnNumber())
+							&& (cell.getRowNumber() == cellObject.getRowNumber())
+							&& (StringUtils.equals(cell.getValueOrFormula(), cellObject.getValueOrFormula()));
+				}
+			});
+			
+			if (matchingCells.size() != 1)
+				return false;
+		}
+		return true;
 	}
 	
 }

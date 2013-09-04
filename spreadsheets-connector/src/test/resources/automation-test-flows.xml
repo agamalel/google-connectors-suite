@@ -61,11 +61,14 @@ http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/
 			config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" />
 	</flow>
 	
+<<<<<<< HEAD
 	<flow name="get-all-cells-as-csv">
 		<google-spreadsheets:get-all-cells-as-csv config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" worksheet="#[payload.worksheet]"
 			spreadsheet="#[payload.spreadsheet]" lineSeparator="#[payload.lineSeparator]" columnSeparator="#[payload.columnSeparator]"/>
 	</flow>
 	
+=======
+>>>>>>> branch '3.4.x' of https://github.com/jsaliba/google-connectors-suite.git
 	<flow name="set-row-values">
 		<google-spreadsheets:set-row-values config-ref="Google_Spreadsheets" accessTokenId="accessTokenId" 
 			worksheet="#[payload.worksheet]" spreadsheet="#[payload.spreadsheet]" purge="#[payload.purge]">

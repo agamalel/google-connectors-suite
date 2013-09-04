@@ -1,6 +1,5 @@
 package org.mule.module.google.spreadsheet.automation.testcases;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -16,19 +15,20 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 
-public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestParent {
+public class SetRowValuesTestCases extends GoogleSpreadsheetsTestParent {
 
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("updateWorksheetMetadata");
+			testObjects = (Map<String, Object>) context.getBean("setRowValues");
 			
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
+			createSpreadsheet(spreadsheetTitle);
+
 			String worksheetTitle = (String) testObjects.get("worksheet");
 			int rowCount = (Integer) testObjects.get("rowCount");
 			int colCount = (Integer) testObjects.get("colCount");
 			
-			createSpreadsheet(spreadsheetTitle);
 			Worksheet worksheet = createWorksheet(spreadsheetTitle, worksheetTitle, rowCount, colCount);
 			testObjects.put("worksheetObject", worksheet);			
 		}
@@ -38,33 +38,31 @@ public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestPare
 		}
 	}
 	
-	@Category({RegressionTests.class})
+	@SuppressWarnings("unchecked")
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testUpdateWorksheetMetadata() {
+	public void testSetRowValues() {
 		try {
-			String updatedTitle = (String) testObjects.get("updatedTitle");
-			int updatedColCount = (Integer) testObjects.get("updatedColCount");
-			int updatedRowCount = (Integer) testObjects.get("updatedRowCount");
-			
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			Worksheet worksheet = (Worksheet) testObjects.get("worksheetObject");
+			List<Row> inputRows = (List<Row>) testObjects.get("rowsRef");
 			
 			testObjects.put("worksheet", worksheet.getTitle());
-			testObjects.put("title", updatedTitle);
-			testObjects.put("rowCount", updatedRowCount);
-			testObjects.put("colCount", updatedColCount);
+
+			MessageProcessor flow = lookupFlowConstruct("set-row-values");
+			MuleEvent response = flow.process(getTestEvent(testObjects));
 			
-			MessageProcessor flow = lookupFlowConstruct("update-worksheet-metadata");
-			flow.process(getTestEvent(testObjects));
+			List<Row> allRows = getAllCells(spreadsheetTitle, worksheet.getTitle());
 			
-			List<Worksheet> retrievedWorksheets = getWorksheetByTitle(spreadsheetTitle, updatedTitle);
+			assertTrue(allRows.size() == inputRows.size());
 			
-			// There should only be one worksheet with this name
-			Worksheet updatedWorksheet = retrievedWorksheets.get(0);
-			
-			assertEquals(updatedColCount, updatedWorksheet.getColCount());
-			assertEquals(updatedRowCount, updatedWorksheet.getRowCount());
-			assertEquals(updatedTitle, updatedWorksheet.getTitle());
+			for (Row row : inputRows) {
+				assertTrue(allRows.contains(row));
+				Row retrievedRow = allRows.get(allRows.indexOf(row));
+				
+				boolean equals = isRowEqual(row, retrievedRow);
+				assertTrue(equals);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,5 +81,4 @@ public class UpdateWorksheetMetadataTestCases extends GoogleSpreadsheetsTestPare
 			fail();
 		}
 	}
-	
 }

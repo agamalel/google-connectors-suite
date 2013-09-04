@@ -6,22 +6,22 @@ import static org.junit.Assert.fail;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
-import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.spreadsheet.model.Cell;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 
-public class PurgeWorksheetTestCases extends GoogleSpreadsheetsTestParent {
-	
+public class GetAllCellsTestCases extends GoogleSpreadsheetsTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("purgeWorksheet");
+			testObjects = (Map<String, Object>) context.getBean("getAllCells");
 			
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			createSpreadsheet(spreadsheetTitle);
@@ -31,7 +31,10 @@ public class PurgeWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 			int colCount = (Integer) testObjects.get("colCount");
 			
 			Worksheet worksheet = createWorksheet(spreadsheetTitle, worksheetTitle, rowCount, colCount);
-			testObjects.put("worksheetObject", worksheet);			
+			testObjects.put("worksheetObject", worksheet);
+			
+			List<Row> rows = (List<Row>) testObjects.get("rowsRef");
+			setRowValues(spreadsheetTitle, worksheet.getTitle(), rows);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -39,19 +42,26 @@ public class PurgeWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 		}
 	}
 	
-	@Category({RegressionTests.class})
+	@SuppressWarnings("unchecked")
+	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testPurgeWorksheet() {
+	public void testGetAllCells() {
 		try {
 			String spreadsheetTitle = (String) testObjects.get("spreadsheet");
 			Worksheet worksheet = (Worksheet) testObjects.get("worksheetObject");
-			testObjects.put("worksheet", worksheet.getTitle());
-			
-			MessageProcessor flow = lookupFlowConstruct("purge-worksheet");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			List<Row> inputRows = (List<Row>) testObjects.get("rowsRef");
 			
 			List<Row> allRows = getAllCells(spreadsheetTitle, worksheet.getTitle());
-			assertTrue(allRows.isEmpty());
+			
+			assertTrue(allRows.size() == inputRows.size());
+			
+			for (Row row : inputRows) {
+				assertTrue(allRows.contains(row));
+				Row retrievedRow = allRows.get(allRows.indexOf(row));
+
+				boolean equals = isRowEqual(row, retrievedRow);
+				assertTrue(equals);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -70,5 +80,4 @@ public class PurgeWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 			fail();
 		}
 	}
-
 }

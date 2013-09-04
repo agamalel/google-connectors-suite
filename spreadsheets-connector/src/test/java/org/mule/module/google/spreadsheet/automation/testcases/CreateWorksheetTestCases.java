@@ -34,9 +34,10 @@ public class CreateWorksheetTestCases extends GoogleSpreadsheetsTestParent {
 	@Test
 	public void testCreateWorksheet() {
 		try {
-			String title = (String) testObjects.get("title");
 			int rowCount = (Integer) testObjects.get("rowCount");
 			int colCount = (Integer) testObjects.get("colCount");
+			String title = (String) testObjects.get("worksheet");
+			testObjects.put("title", title);
 			
 			MessageProcessor flow = lookupFlowConstruct("create-worksheet");
 			MuleEvent response = flow.process(getTestEvent(testObjects));
