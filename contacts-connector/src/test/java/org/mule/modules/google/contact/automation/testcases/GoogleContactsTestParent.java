@@ -1,5 +1,7 @@
 package org.mule.modules.google.contact.automation.testcases;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -11,14 +13,13 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.modules.google.api.domain.BatchResult;
 import org.mule.modules.google.contact.oauth.GoogleContactsConnectorOAuthState;
 import org.mule.modules.google.contact.wrappers.GoogleContactEntry;
 import org.mule.modules.google.contact.wrappers.GoogleContactGroupEntry;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.google.gdata.data.TextConstruct;
 
 public class GoogleContactsTestParent extends FunctionalTestCase {
 	
@@ -116,6 +117,34 @@ public class GoogleContactsTestParent extends FunctionalTestCase {
 		MessageProcessor flow = lookupFlowConstruct("get-group-by-name");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (GoogleContactGroupEntry) response.getMessage().getPayload();
+	}
+
+	public List<BatchResult> insertContacts(String batchId, String operationId, List<GoogleContactEntry> entries) throws Exception {
+		testObjects.put("batchId", batchId);
+		testObjects.put("entriesRef", entries);
+		testObjects.put("operationId", operationId);
+		
+		MessageProcessor flow = lookupFlowConstruct("batch-insert-contacts");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (List<BatchResult>) response.getMessage().getPayload();
+	}
+
+	public List<BatchResult> insertContacts(String batchId, String operationId, GoogleContactEntry... entries) throws Exception {
+		return deleteContacts(batchId, operationId, Arrays.asList(entries));
+	}
+
+	public List<BatchResult> deleteContacts(String batchId, String operationId, List<GoogleContactEntry> entries) throws Exception {
+		testObjects.put("batchId", batchId);
+		testObjects.put("entriesRef", entries);
+		testObjects.put("operationId", operationId);
+		
+		MessageProcessor flow = lookupFlowConstruct("batch-delete-contacts");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (List<BatchResult>) response.getMessage().getPayload();
+	}
+
+	public List<BatchResult> deleteContacts(String batchId, String operationId, GoogleContactEntry... entries) throws Exception {
+		return deleteContacts(batchId, operationId, Arrays.asList(entries));
 	}
 	
 }
