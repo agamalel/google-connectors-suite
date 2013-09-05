@@ -26,7 +26,7 @@ public class BatchInsertContactsTestCases extends GoogleContactsTestParent {
 	@Before
 	public void setUp() {
 		try {
-			testObjects = (Map<String, Object>) context.getBean("batchInsert");
+			testObjects = (Map<String, Object>) context.getBean("batchInsertContacts");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

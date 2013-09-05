@@ -42,6 +42,13 @@ http://www.mulesoft.org/schema/mule/google-contacts http://www.mulesoft.org/sche
 		</google-contacts:batch-contacts>
 	</flow>
 	
+	<flow name="batch-update-contacts">
+		<google-contacts:batch-contacts config-ref="Google_Contacts" batchId="#[payload.batchId]" accessTokenId="accessTokenId">
+			<google-contacts:batch-update config-ref="Google_Contacts" entries-ref="#[payload.entriesRef]" 
+				operationId="#[payload.operationId]" accessTokenId="accessTokenId" />
+		</google-contacts:batch-contacts>
+	</flow>
+	
 	<flow name="create-group">
 		<google-contacts:create-group config-ref="Google_Contacts" group-ref="#[payload.groupRef]" accessTokenId="accessTokenId" />
 	</flow>

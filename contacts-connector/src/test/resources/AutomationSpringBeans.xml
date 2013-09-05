@@ -32,7 +32,7 @@
 		</entry>
 	</util:map>
 	
-	<util:map id="batchInsert" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="batchInsertContacts" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="batchId" value="sample" />
 		<entry key="operationId" value="sample" />
 		<entry key="entriesRef">
@@ -61,7 +61,7 @@
 		</entry>
 	</util:map>
 
-	<util:map id="batchDelete" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+	<util:map id="batchDeleteContacts" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="batchId" value="sampleBatchId" />
 		<entry key="operationId" value="sampleBatchId" />
 		<entry key="entriesRef">
@@ -81,6 +81,60 @@
 								<property name="primary" value="#{T(java.lang.Boolean).TRUE}" />
 								<property name="displayName" value="Mule Soft" />
 								<property name="address" value="mule.soft@someemailwhichdoesnotexist.com" />
+								<property name="rel" value="http://schemas.google.com/g/2005#home" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+	</util:map>
+
+
+	<util:map id="batchUpdateContacts" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="batchId" value="sampleBatchId" />
+		<entry key="operationId" value="sampleBatchId" />
+		<entry key="entries">
+			<list value-type="org.mule.modules.google.contact.wrappers.GoogleContactEntry">
+				<bean class="org.mule.modules.google.contact.wrappers.GoogleContactEntry">
+					<property name="givenName" value="Mule" />
+					<property name="fullName" value="Mule Soft" />
+					<property name="familyName" value="Soft" />
+					<property name="gender">
+						<bean class="com.google.gdata.data.contacts.Gender">
+							<constructor-arg value="MALE" />
+						</bean>
+					</property>
+					<property name="emailAddresses">
+						<list value-type="com.google.gdata.data.extensions.Email">
+							<bean class="com.google.gdata.data.extensions.Email">
+								<property name="primary" value="#{T(java.lang.Boolean).TRUE}" />
+								<property name="displayName" value="Mule Soft" />
+								<property name="address" value="mule.soft@someemailwhichdoesnotexist.com" />
+								<property name="rel" value="http://schemas.google.com/g/2005#home" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</entry>
+		<entry key="updatedEntries">
+			<list value-type="org.mule.modules.google.contact.wrappers.GoogleContactEntry">
+				<bean class="org.mule.modules.google.contact.wrappers.GoogleContactEntry">
+					<property name="givenName" value="Formula" />
+					<property name="fullName" value="Formula One" />
+					<property name="familyName" value="One" />
+					<property name="gender">
+						<bean class="com.google.gdata.data.contacts.Gender">
+							<constructor-arg value="MALE" />
+						</bean>
+					</property>
+					<property name="emailAddresses">
+						<list value-type="com.google.gdata.data.extensions.Email">
+							<bean class="com.google.gdata.data.extensions.Email">
+								<property name="primary" value="#{T(java.lang.Boolean).TRUE}" />
+								<property name="displayName" value="Formula One" />
+								<property name="address" value="formula.one@someemailwhichdoesnotexist.com" />
 								<property name="rel" value="http://schemas.google.com/g/2005#home" />
 							</bean>
 						</list>
