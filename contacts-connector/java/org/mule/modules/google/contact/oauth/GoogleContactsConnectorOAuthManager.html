@@ -819,43 +819,10 @@ org.mule.api.lifecycle.Stoppable
       <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#applicationName">applicationName</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          IdentifierPolicy</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#identifierPolicy">identifierPolicy</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
           static
           
           Logger</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#logger">logger</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#scope">scope</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -939,13 +906,24 @@ org.mule.security.oauth.BaseOAuth2Manager
           private
           
           
+          String</nobr></td>
+          <td class="jd-linkcol">defaultAccessTokenId</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
           OAuth2Adapter</nobr></td>
           <td class="jd-linkcol">defaultUnauthorizedConnector</td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -956,7 +934,7 @@ org.mule.security.oauth.BaseOAuth2Manager
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -967,7 +945,7 @@ org.mule.security.oauth.BaseOAuth2Manager
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -978,7 +956,7 @@ org.mule.security.oauth.BaseOAuth2Manager
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -989,7 +967,7 @@ org.mule.security.oauth.BaseOAuth2Manager
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -1284,14 +1262,12 @@ org.mule.security.oauth.callback.DefaultHttpCallbackAdapter
             
             
             
-            String</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#getScope()">getScope</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#setApplicationName(java.lang.String)">setApplicationName</a></span>(String value)</nobr>
         
-        <div class="jd-descrdiv">Retrieves scope
- 
-</div>
+        <div class="jd-descrdiv">Sets applicationName</div>
   
   </td></tr>
 
@@ -1307,15 +1283,33 @@ org.mule.security.oauth.callback.DefaultHttpCallbackAdapter
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#setApplicationName(java.lang.String)">setApplicationName</a></span>(String value)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#setConsumerKey(java.lang.String)">setConsumerKey</a></span>(String value)</nobr>
         
-        <div class="jd-descrdiv">Sets applicationName</div>
+        <div class="jd-descrdiv">Sets consumerKey</div>
   
   </td></tr>
 
 
 	 
     <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/oauth/GoogleContactsConnectorOAuthManager.html#setConsumerSecret(java.lang.String)">setConsumerSecret</a></span>(String value)</nobr>
+        
+        <div class="jd-descrdiv">Sets consumerSecret</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1333,7 +1327,7 @@ org.mule.security.oauth.callback.DefaultHttpCallbackAdapter
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1349,7 +1343,7 @@ org.mule.security.oauth.callback.DefaultHttpCallbackAdapter
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1705,6 +1699,22 @@ From class
             
             
             
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDefaultAccessTokenId</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             OAuth2Adapter</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1714,7 +1724,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1730,7 +1740,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -1746,7 +1756,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1762,7 +1772,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1778,7 +1788,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1794,7 +1804,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1810,7 +1820,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1826,7 +1836,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1842,7 +1852,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1858,7 +1868,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -1874,7 +1884,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1890,7 +1900,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1906,7 +1916,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1922,7 +1932,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1938,7 +1948,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1954,7 +1964,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1970,7 +1980,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1986,7 +1996,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2002,7 +2012,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2018,7 +2028,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2034,7 +2044,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2050,7 +2060,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -2061,6 +2071,22 @@ From class
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">setCustomProperties</span>(OAuth2Adapter arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setDefaultAccessTokenId</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -3217,6 +3243,22 @@ From interface
             
             
             
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getDefaultAccessTokenId</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
             C</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -3226,7 +3268,7 @@ From interface
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3242,7 +3284,7 @@ From interface
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3258,7 +3300,7 @@ From interface
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3274,7 +3316,7 @@ From interface
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3290,7 +3332,7 @@ From interface
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3306,7 +3348,7 @@ From interface
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3322,7 +3364,7 @@ From interface
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3338,7 +3380,7 @@ From interface
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -3693,7 +3735,7 @@ From interface
         <span class="jd-tagtitle">Constant Value: </span>
         <span>
             
-                "master.1683.96401dc"
+                "UNKNOWN_BUILDNUMBER"
             
         </span>
         </div>
@@ -3732,7 +3774,7 @@ From interface
         <span class="jd-tagtitle">Constant Value: </span>
         <span>
             
-                "3.5.0-andes"
+                "3.5.0-SNAPSHOT"
             
         </span>
         </div>
@@ -3830,66 +3872,6 @@ From interface
 
 
 
-<A NAME="applicationName"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        applicationName
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="identifierPolicy"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        IdentifierPolicy
-      </span>
-        identifierPolicy
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="logger"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -3901,36 +3883,6 @@ From interface
         Logger
       </span>
         logger
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="scope"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        scope
     </h4>
       <div class="api-level">
         
@@ -4195,39 +4147,6 @@ From interface
 </div>
 
 
-<A NAME="getScope()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getScope</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves scope
- 
-</p></div>
-
-    </div>
-</div>
-
-
 <A NAME="setApplicationName(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4259,8 +4178,87 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>value</td>
-          <td>Value to set
-</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setConsumerKey(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setConsumerKey</span>
+      <span class="normal">(String value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets consumerKey</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setConsumerSecret(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setConsumerSecret</span>
+      <span class="normal">(String value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets consumerSecret</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td></td>
         </tr>
       </table>
   </div>
@@ -4300,8 +4298,7 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>value</td>
-          <td>Value to set
-</td>
+          <td></td>
         </tr>
       </table>
   </div>
@@ -4381,8 +4378,7 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>value</td>
-          <td>Value to set
-</td>
+          <td></td>
         </tr>
       </table>
   </div>
