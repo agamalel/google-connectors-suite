@@ -247,6 +247,7 @@
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/AbstractExpressionEvaluator.html">AbstractExpressionEvaluator</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/AbstractListeningMessageProcessor.html">AbstractListeningMessageProcessor</a>&lt;O&gt;</li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/AbstractMessageProcessor.html">AbstractMessageProcessor</a>&lt;O&gt;</li>
+          <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/AbstractPagedConnectedProcessor.html">AbstractPagedConnectedProcessor</a></li>
           <li class="selected api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/AuthorizeMessageProcessor.html">AuthorizeMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/BatchDeleteCalendarMessageProcessor.html">BatchDeleteCalendarMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../../java/org/mule/module/google/calendar/processors/BatchDeleteEventMessageProcessor.html">BatchDeleteEventMessageProcessor</a></li>
@@ -539,7 +540,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="5" class="jd-inheritance-class-cell">org.mule.security.oauth.processor.AbstractExpressionEvaluator</td>
+        <td colspan="5" class="jd-inheritance-class-cell">org.mule.devkit.processor.ExpressionEvaluatorSupport</td>
     </tr>
     
 
@@ -549,7 +550,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="4" class="jd-inheritance-class-cell">org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor</td>
+        <td colspan="4" class="jd-inheritance-class-cell">org.mule.devkit.processor.DevkitBasedMessageProcessor</td>
     </tr>
     
 
@@ -920,13 +921,24 @@ org.mule.security.oauth.processor.AbstractAuthorizeMessageProcessor
           private
           
           
+          HttpCallbackFactory</nobr></td>
+          <td class="jd-linkcol">callbackFactory</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
           MessageProcessor</nobr></td>
           <td class="jd-linkcol">listener</td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -937,7 +949,7 @@ org.mule.security.oauth.processor.AbstractAuthorizeMessageProcessor
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -958,16 +970,16 @@ org.mule.security.oauth.processor.AbstractAuthorizeMessageProcessor
 <tr class="api apilevel-" >
 <td colspan="12">
 
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor" class="jd-expando-trigger closed"
-          ><img id="inherited-fields-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.devkit.processor.DevkitBasedMessageProcessor" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-org.mule.devkit.processor.DevkitBasedMessageProcessor-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>From class
-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor
-<div id="inherited-fields-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor">
-  <div id="inherited-fields-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor-list"
+org.mule.devkit.processor.DevkitBasedMessageProcessor
+<div id="inherited-fields-org.mule.devkit.processor.DevkitBasedMessageProcessor">
+  <div id="inherited-fields-org.mule.devkit.processor.DevkitBasedMessageProcessor-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-fields-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor-summary" style="display: none;">
+  <div id="inherited-fields-org.mule.devkit.processor.DevkitBasedMessageProcessor-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -1303,22 +1315,6 @@ From class
             
             
             
-            List&lt;MessageProcessor&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">buildCallbackProcessorList</span>(MessageProcessor... arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1328,7 +1324,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             abstract
             
@@ -1344,7 +1340,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1360,7 +1356,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1376,7 +1372,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1392,7 +1388,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1408,7 +1404,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1424,7 +1420,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1440,7 +1436,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1451,6 +1447,22 @@ From class
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">setAuthorizationUrl</span>(String arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setCallbackFactory</span>(HttpCallbackFactory arg0)</nobr>
         
   </td></tr>
 
@@ -1514,13 +1526,29 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">startCallback</span>(HttpCallbackAdapter arg0, FetchAccessTokenMessageProcessor arg1)</nobr>
+        <span class="sympad">start</span>()</nobr>
         
   </td></tr>
 
 
 	 
     <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">startCallback</span>(HttpCallbackAdapter arg0, FetchAccessTokenMessageProcessor arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1536,7 +1564,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1560,19 +1588,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.devkit.processor.DevkitBasedMessageProcessor" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.devkit.processor.DevkitBasedMessageProcessor-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From class
 
-  org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor
+  org.mule.devkit.processor.DevkitBasedMessageProcessor
 
-<div id="inherited-methods-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor">
-  <div id="inherited-methods-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor-list"
+<div id="inherited-methods-org.mule.devkit.processor.DevkitBasedMessageProcessor">
+  <div id="inherited-methods-org.mule.devkit.processor.DevkitBasedMessageProcessor-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.security.oauth.processor.AbstractDevkitBasedMessageProcessor-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.devkit.processor.DevkitBasedMessageProcessor-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -1826,19 +1854,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.security.oauth.processor.AbstractExpressionEvaluator" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.security.oauth.processor.AbstractExpressionEvaluator-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.devkit.processor.ExpressionEvaluatorSupport" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.devkit.processor.ExpressionEvaluatorSupport-trigger"
           src="../../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From class
 
-  org.mule.security.oauth.processor.AbstractExpressionEvaluator
+  org.mule.devkit.processor.ExpressionEvaluatorSupport
 
-<div id="inherited-methods-org.mule.security.oauth.processor.AbstractExpressionEvaluator">
-  <div id="inherited-methods-org.mule.security.oauth.processor.AbstractExpressionEvaluator-list"
+<div id="inherited-methods-org.mule.devkit.processor.ExpressionEvaluatorSupport">
+  <div id="inherited-methods-org.mule.devkit.processor.ExpressionEvaluatorSupport-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.security.oauth.processor.AbstractExpressionEvaluator-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.devkit.processor.ExpressionEvaluatorSupport-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
