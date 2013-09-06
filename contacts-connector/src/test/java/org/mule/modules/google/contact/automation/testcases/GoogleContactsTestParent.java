@@ -130,7 +130,7 @@ public class GoogleContactsTestParent extends FunctionalTestCase {
 	}
 
 	public List<BatchResult> insertContacts(String batchId, String operationId, GoogleContactEntry... entries) throws Exception {
-		return deleteContacts(batchId, operationId, Arrays.asList(entries));
+		return insertContacts(batchId, operationId, Arrays.asList(entries));
 	}
 
 	public List<BatchResult> deleteContacts(String batchId, String operationId, List<GoogleContactEntry> entries) throws Exception {
