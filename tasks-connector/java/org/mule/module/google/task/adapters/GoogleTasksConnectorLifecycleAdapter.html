@@ -1029,17 +1029,6 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          IdentifierPolicy</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#identifierPolicy">identifierPolicy</a></td>
-          <td class="jd-descrcol" width="100%">This policy represents which id we want to use to represent each google account.</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#scope">scope</a></td>
           <td class="jd-descrcol" width="100%">The OAuth scopes you want to request
@@ -1472,29 +1461,13 @@ From class
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getAccessTokenId()">getAccessTokenId</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getApplicationName()">getApplicationName</a></span>()</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1510,7 +1483,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1521,22 +1494,6 @@ From class
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getConsumerSecret()">getConsumerSecret</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            IdentifierPolicy</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getIdentifierPolicy()">getIdentifierPolicy</a></span>()</nobr>
         
   </td></tr>
 
@@ -1603,10 +1560,10 @@ From class
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTaskLists(org.mule.api.MuleMessage, long, java.lang.String)">getTaskLists</a></span>(MuleMessage message, long maxResults, String pageToken)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTaskLists(org.mule.streaming.PagingConfiguration)">getTaskLists</a></span>(PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">Returns all the authenticated user's task lists.</div>
   
@@ -1621,10 +1578,10 @@ From class
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/module/google/task/model/Task.html">Task</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/module/google/task/model/Task.html">Task</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTasks(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, boolean, boolean, boolean)">getTasks</a></span>(MuleMessage message, String taskListId, String completedMin, String completedMax, String dueMin, String dueMax, String updatedMin, long maxResults, String pageToken, boolean showDeleted, boolean showHidden, boolean showcompleted)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTasks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, org.mule.streaming.PagingConfiguration)">getTasks</a></span>(String taskListId, String completedMin, String completedMax, String dueMin, String dueMax, String updatedMin, boolean showDeleted, boolean showHidden, boolean showcompleted, PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">Returns all tasks in the specified task list.</div>
   
@@ -1778,29 +1735,13 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#setIdentifierPolicy(org.mule.modules.google.IdentifierPolicy)">setIdentifierPolicy</a></span>(IdentifierPolicy identifierPolicy)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#setScope(java.lang.String)">setScope</a></span>(String scope)</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1818,7 +1759,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             

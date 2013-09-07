@@ -676,17 +676,6 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
           private
           
           
-          IdentifierPolicy</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#identifierPolicy">identifierPolicy</a></td>
-          <td class="jd-descrcol" width="100%">This policy represents which id we want to use to represent each google account.</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#scope">scope</a></td>
           <td class="jd-descrcol" width="100%">The OAuth scopes you want to request
@@ -863,29 +852,13 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getAccessTokenId()">getAccessTokenId</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getApplicationName()">getApplicationName</a></span>()</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -901,7 +874,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -912,22 +885,6 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getConsumerSecret()">getConsumerSecret</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            IdentifierPolicy</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getIdentifierPolicy()">getIdentifierPolicy</a></span>()</nobr>
         
   </td></tr>
 
@@ -994,10 +951,10 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             
             
             
-            List&lt;<a href="../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTaskLists(org.mule.api.MuleMessage, long, java.lang.String)">getTaskLists</a></span>(MuleMessage message, long maxResults, String pageToken)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTaskLists(org.mule.streaming.PagingConfiguration)">getTaskLists</a></span>(PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">Returns all the authenticated user's task lists.</div>
   
@@ -1012,10 +969,10 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             
             
             
-            List&lt;<a href="../../../../../../java/org/mule/module/google/task/model/Task.html">Task</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../java/org/mule/module/google/task/model/Task.html">Task</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTasks(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, boolean, boolean, boolean)">getTasks</a></span>(MuleMessage message, String taskListId, String completedMin, String completedMax, String dueMin, String dueMax, String updatedMin, long maxResults, String pageToken, boolean showDeleted, boolean showHidden, boolean showcompleted)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#getTasks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, org.mule.streaming.PagingConfiguration)">getTasks</a></span>(String taskListId, String completedMin, String completedMax, String dueMin, String dueMax, String updatedMin, boolean showDeleted, boolean showHidden, boolean showcompleted, PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">Returns all tasks in the specified task list.</div>
   
@@ -1169,29 +1126,13 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#setIdentifierPolicy(org.mule.modules.google.IdentifierPolicy)">setIdentifierPolicy</a></span>(IdentifierPolicy identifierPolicy)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/module/google/task/GoogleTasksConnector.html#setScope(java.lang.String)">setScope</a></span>(String scope)</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1209,7 +1150,7 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1748,42 +1689,6 @@ From class
 
 
 
-<A NAME="identifierPolicy"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        IdentifierPolicy
-      </span>
-        identifierPolicy
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>This policy represents which id we want to use to represent each google account.
- 
- PROFILE means that we want the google profile id. That means, the user's primary key in google's DB.
- This is a long number represented as a string.
- 
- EMAIL means you want to use the account's email address
-</p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="scope"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2062,37 +1967,6 @@ From class
 </div>
 
 
-<A NAME="getAccessTokenId()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getAccessTokenId</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
 <A NAME="getApplicationName()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2168,37 +2042,6 @@ From class
         String
       </span>
       <span class="sympad">getConsumerSecret</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getIdentifierPolicy()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        IdentifierPolicy
-      </span>
-      <span class="sympad">getIdentifierPolicy</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2364,7 +2207,7 @@ From class
 </div>
 
 
-<A NAME="getTaskLists(org.mule.api.MuleMessage, long, java.lang.String)"></A>
+<A NAME="getTaskLists(org.mule.streaming.PagingConfiguration)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2374,10 +2217,10 @@ From class
          
          
          
-        List&lt;<a href="../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a>&gt;
+        PagingDelegate&lt;<a href="../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a>&gt;
       </span>
       <span class="sympad">getTaskLists</span>
-      <span class="normal">(MuleMessage message, long maxResults, String pageToken)</span>
+      <span class="normal">(PagingConfiguration pagingConfiguration)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2391,30 +2234,19 @@ From class
       
   <div class="jd-tagdata jd-tagdescr"><p>Returns all the authenticated user's task lists.
  
- For supporting google's paging mechanism, the next page token is store on the message property
- &quot;GoogleTask_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
- 
  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
-          <th>message</td>
-          <td>The current mule message</td>
-        </tr>
-        <tr>
-          <th>maxResults</td>
-          <td>Maximum number of task lists returned on one page</td>
-        </tr>
-        <tr>
-          <th>pageToken</td>
-          <td>Token specifying the result page to return</td>
+          <th>pagingConfiguration</td>
+          <td>The pagingConfiguration object</td>
         </tr>
       </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>a list with instances of <code><a href="../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a></code></li></ul>
+      <ul class="nolist"><li>an auto paginated iterator with instances of <code><a href="../../../../../../java/org/mule/module/google/task/model/TaskList.html">TaskList</a></code></li></ul>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Throws</h5>
@@ -2431,7 +2263,7 @@ From class
 </div>
 
 
-<A NAME="getTasks(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, boolean, boolean, boolean)"></A>
+<A NAME="getTasks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, org.mule.streaming.PagingConfiguration)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2441,10 +2273,10 @@ From class
          
          
          
-        List&lt;<a href="../../../../../../java/org/mule/module/google/task/model/Task.html">Task</a>&gt;
+        PagingDelegate&lt;<a href="../../../../../../java/org/mule/module/google/task/model/Task.html">Task</a>&gt;
       </span>
       <span class="sympad">getTasks</span>
-      <span class="normal">(MuleMessage message, String taskListId, String completedMin, String completedMax, String dueMin, String dueMax, String updatedMin, long maxResults, String pageToken, boolean showDeleted, boolean showHidden, boolean showcompleted)</span>
+      <span class="normal">(String taskListId, String completedMin, String completedMax, String dueMin, String dueMax, String updatedMin, boolean showDeleted, boolean showHidden, boolean showcompleted, PagingConfiguration pagingConfiguration)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2460,17 +2292,10 @@ From class
  of filtering attributes. The one for which no values is specified will not be used
  when filtering
  
- For supporting google's paging mechanism, the next page token is store on the message property
- &quot;GoogleTask_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
- 
  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
-        <tr>
-          <th>message</td>
-          <td>The current mule message</td>
-        </tr>
         <tr>
           <th>taskListId</td>
           <td>Task list identifier</td>
@@ -2496,14 +2321,6 @@ From class
           <td>Lower bound for a task's last modification time (as a RFC 3339 timestamp) to filter by</td>
         </tr>
         <tr>
-          <th>maxResults</td>
-          <td>Maximum number of task lists returned on one page</td>
-        </tr>
-        <tr>
-          <th>pageToken</td>
-          <td>Token specifying the result page to return</td>
-        </tr>
-        <tr>
           <th>showDeleted</td>
           <td>Flag indicating whether deleted tasks are returned in the result</td>
         </tr>
@@ -2514,6 +2331,10 @@ From class
         <tr>
           <th>showcompleted</td>
           <td>Flag indicating whether completed tasks are returned in the result</td>
+        </tr>
+        <tr>
+          <th>pagingConfiguration</td>
+          <td>The paging configuration object</td>
         </tr>
       </table>
   </div>
@@ -2904,46 +2725,6 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>consumerSecret</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setIdentifierPolicy(org.mule.modules.google.IdentifierPolicy)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setIdentifierPolicy</span>
-      <span class="normal">(IdentifierPolicy identifierPolicy)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>identifierPolicy</td>
           <td></td>
         </tr>
       </table>
