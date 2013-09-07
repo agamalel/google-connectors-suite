@@ -310,16 +310,6 @@ Uses OAuth2 for authentication&lt;/xs:documentation&gt;
               &lt;xs:documentation&gt;The OAuth2 scopes you want to request&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:attribute&gt;
-          &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-contacts&quot; name=&quot;identifierPolicy&quot; default=&quot;EMAIL&quot; use=&quot;optional&quot; type=&quot;IdentifierPolicyEnumType&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;This policy represents which id we want to use to represent each google account.
-
-PROFILE means that we want the google profile id. That means, the user's primary key in google's DB.
-This is a long number represented as a string.
-
-EMAIL means you want to use the account's email address&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:attribute&gt;
           &lt;xs:attribute name=&quot;accessTokenUrl&quot; default=&quot;https://accounts.google.com/o/oauth2/token&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;The URL defined by the Service Provider to obtain an access token&lt;/xs:documentation&gt;
@@ -440,16 +430,6 @@ then it's not used in the filtering. Thus, providing no criteria equals getting 
             &lt;xs:documentation&gt;Sets the full text query string that will be used for the query.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-contacts&quot; name=&quot;maxResults&quot; default=&quot;1000&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;Sets the maximum number of results to return for the query.  Note: a GData server may choose to provide fewer results, but will never provide more than the requested maximum.&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-contacts&quot; name=&quot;firstResult&quot; default=&quot;1&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;Sets the start index for query results.  This is a 1-based index.&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
         &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-contacts&quot; name=&quot;sortOrder&quot; default=&quot;NONE&quot; use=&quot;optional&quot; type=&quot;SortOrderEnumType&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;valid values are NONE, ASCENDING and DESCENDING&lt;/xs:documentation&gt;
@@ -473,6 +453,11 @@ then it's not used in the filtering. Thus, providing no criteria equals getting 
         &lt;xs:attribute name=&quot;accessTokenId&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The id of the access token that will be used to authenticate the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-contacts&quot; name=&quot;fetchSize&quot; default=&quot;100&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The amount of items to fetch on each invocation to the data source&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
       &lt;/xs:extension&gt;
@@ -807,6 +792,11 @@ then it's not used in the filtering. Thus, providing no criteria equals getting 
             &lt;xs:documentation&gt;The id of the access token that will be used to authenticate the call&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-contacts&quot; name=&quot;fetchSize&quot; default=&quot;100&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The amount of items to fetch on each invocation to the data source&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
@@ -1130,30 +1120,6 @@ likely to throw a&lt;/xs:documentation&gt;
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
-  &lt;xs:simpleType name=&quot;IdentifierPolicyEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;PROFILE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;EMAIL&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
   &lt;xs:simpleType name=&quot;AccessTypeEnumType&quot;&gt;
     &lt;xs:annotation&gt;
       &lt;xs:documentation&gt;&lt;/xs:documentation&gt;

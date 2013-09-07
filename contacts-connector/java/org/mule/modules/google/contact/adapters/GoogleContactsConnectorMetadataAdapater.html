@@ -915,17 +915,6 @@ org.mule.modules.google.AbstractGoogleOAuthConnector
           private
           
           
-          IdentifierPolicy</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#identifierPolicy">identifierPolicy</a></td>
-          <td class="jd-descrcol" width="100%">This policy represents which id we want to use to represent each google account.</td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#scope">scope</a></td>
           <td class="jd-descrcol" width="100%">The OAuth2 scopes you want to request
@@ -1505,29 +1494,13 @@ From class
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getAccessTokenId()">getAccessTokenId</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getApplicationName()">getApplicationName</a></span>()</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1543,7 +1516,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1559,7 +1532,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1579,17 +1552,17 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getContacts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, int, com.google.gdata.client.contacts.ContactQuery.SortOrder, java.lang.Boolean, com.google.gdata.client.contacts.ContactQuery.OrderBy, java.lang.String)">getContacts</a></span>(String updatedMin, String updatedMax, String datetimeFormat, String fullTextQuery, int maxResults, int firstResult, ContactQuery.SortOrder sortOrder, Boolean showDeleted, ContactQuery.OrderBy orderBy, String groupId)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getContacts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.google.gdata.client.contacts.ContactQuery.SortOrder, java.lang.Boolean, com.google.gdata.client.contacts.ContactQuery.OrderBy, java.lang.String, org.mule.streaming.PagingConfiguration)">getContacts</a></span>(String updatedMin, String updatedMax, String datetimeFormat, String fullTextQuery, ContactQuery.SortOrder sortOrder, Boolean showDeleted, ContactQuery.OrderBy orderBy, String groupId, PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">Retrieves all the contacts matching the given criterias.</div>
   
@@ -1597,7 +1570,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1617,7 +1590,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1637,26 +1610,6 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            List&lt;<a href="../../../../../../../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a>&gt;</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getGroups(java.lang.String, java.lang.String, java.lang.String)">getGroups</a></span>(String updatedMin, String updatedMax, String datetimeFormat)</nobr>
-        
-        <div class="jd-descrdiv">Returns all the groups the authenticated user has access to
- 
- </div>
-  
-  </td></tr>
-
-
-	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -1664,11 +1617,15 @@ From class
             
             
             
-            IdentifierPolicy</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getIdentifierPolicy()">getIdentifierPolicy</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#getGroups(java.lang.String, java.lang.String, java.lang.String, org.mule.streaming.PagingConfiguration)">getGroups</a></span>(String updatedMin, String updatedMax, String datetimeFormat, PagingConfiguration pagingConfiguration)</nobr>
         
+        <div class="jd-descrdiv">Returns all the groups the authenticated user has access to
+ 
+ </div>
+  
   </td></tr>
 
 
@@ -1815,29 +1772,13 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#setIdentifierPolicy(org.mule.modules.google.IdentifierPolicy)">setIdentifierPolicy</a></span>(IdentifierPolicy identifierPolicy)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/modules/google/contact/GoogleContactsConnector.html#setScope(java.lang.String)">setScope</a></span>(String scope)</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1853,7 +1794,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1873,7 +1814,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1893,7 +1834,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
