@@ -19,10 +19,10 @@ import org.junit.rules.Timeout;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
+import org.mule.common.security.oauth.OAuthState;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
-import org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState;
 import org.mule.modules.google.api.client.batch.BatchResponse;
 import org.mule.modules.tests.TestParent;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -37,7 +37,7 @@ public class GoogleCalendarTestParent extends TestParent {
 	@Before
 	public void init() throws ObjectStoreException, Exception {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-		objectStore.store("accessTokenId", (GoogleCalendarConnectorOAuthState)context.getBean("connectorOAuthState"));
+		objectStore.store("accessTokenId", (OAuthState)context.getBean("connectorOAuthState"));
 	}
 	
 	@BeforeClass
