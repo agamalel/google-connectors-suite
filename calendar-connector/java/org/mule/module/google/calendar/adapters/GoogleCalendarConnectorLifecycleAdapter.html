@@ -312,8 +312,6 @@
    
   
   
-   
-  
   
    
   
@@ -743,35 +741,6 @@ Summary:
 
 
 
-<tr class="api apilevel-" >
-<td colspan="12">
-
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-org.mule.module.google.calendar.GoogleCalendarConnector" class="jd-expando-trigger closed"
-          ><img id="inherited-constants-org.mule.module.google.calendar.GoogleCalendarConnector-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>From class
-<a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html">org.mule.module.google.calendar.GoogleCalendarConnector</a>
-<div id="inherited-constants-org.mule.module.google.calendar.GoogleCalendarConnector">
-  <div id="inherited-constants-org.mule.module.google.calendar.GoogleCalendarConnector-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-constants-org.mule.module.google.calendar.GoogleCalendarConnector-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-    
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">String</td>
-        <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#NEXT_PAGE_TOKEN">NEXT_PAGE_TOKEN</a></td>
-        <td class="jd-descrcol" width="100%"></td>
-    </tr>
-    
-    
-</table>
-  </div>
-</div>
-</td></tr>
-
 
 
 <tr class="api apilevel-" >
@@ -1040,17 +1009,6 @@ org.mule.api.lifecycle.Stoppable
       
     
       <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          IdentifierPolicy</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#identifierPolicy">identifierPolicy</a></td>
-          <td class="jd-descrcol" width="100%">This policy represents which id we want to use to represent each google account.</td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -1670,22 +1628,6 @@ From class
             
             
             
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getAccessTokenId()">getAccessTokenId</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             <a href="../../../../../../../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1699,7 +1641,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1719,7 +1661,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1735,7 +1677,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1755,26 +1697,26 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getCalendarList(org.mule.api.MuleMessage, int, java.lang.String, boolean)">getCalendarList</a></span>(MuleMessage message, int maxResults, String pageToken, boolean showHidden)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getCalendarList(boolean, org.mule.streaming.PagingConfiguration)">getCalendarList</a></span>(boolean showHidden, PagingConfiguration pagingConfiguration)</nobr>
         
-        <div class="jd-descrdiv">Returns an instance of <code><a href="../../../../../../../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
+        <div class="jd-descrdiv">Returns a paginated iterator with instances of <code><a href="../../../../../../../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
  calendars of the user that owns the OAuth access token.</div>
   
   </td></tr>
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1792,7 +1734,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1808,7 +1750,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1824,7 +1766,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1840,7 +1782,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1860,17 +1802,17 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getEvents(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">getEvents</a></span>(MuleMessage message, String calendarId, String icalUID, Integer maxAttendees, Integer maxResults, String orderBy, String pageToken, String query, boolean showDeleted, boolean showHiddenInvitations, boolean singleEvents, String timeMin, String timeMax, String datetimeFormat, String timezone, String lastUpdated)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getEvents(java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, boolean, boolean, boolean, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.streaming.PagingConfiguration)">getEvents</a></span>(String calendarId, String icalUID, Integer maxAttendees, String orderBy, String query, boolean showDeleted, boolean showHiddenInvitations, boolean singleEvents, String timeMin, String timeMax, String datetimeFormat, String timezone, String lastUpdated, PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">Searchs and returns events matching the criteria parameters.</div>
   
@@ -1878,7 +1820,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1898,22 +1840,6 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            IdentifierPolicy</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getIdentifierPolicy()">getIdentifierPolicy</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -1921,16 +1847,15 @@ From class
             
             
             
-            List&lt;<a href="../../../../../../../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</nobr>
+            PagingDelegate&lt;<a href="../../../../../../../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getInstances(org.mule.api.MuleMessage, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer, boolean, java.lang.String, java.lang.String)">getInstances</a></span>(MuleMessage message, String calendarId, String eventId, Integer maxAttendess, Integer maxResults, boolean showDeleted, String timezone, String originalStart)</nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#getInstances(java.lang.String, java.lang.String, java.lang.Integer, boolean, java.lang.String, java.lang.String, org.mule.streaming.PagingConfiguration)">getInstances</a></span>(String calendarId, String eventId, Integer maxAttendess, boolean showDeleted, String timezone, String originalStart, PagingConfiguration pagingConfiguration)</nobr>
         
         <div class="jd-descrdiv">For recurring events, it returns one instance of
  <code><a href="../../../../../../../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> for each recurrence instance
  
- For supporting google's paging mechanism, the next page token is store on the message property
- &quot;GoogleCalendar_NEXT_PAGE_TOKEN&quot;.</div>
+ </div>
   
   </td></tr>
 
@@ -2174,29 +2099,13 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#setIdentifierPolicy(org.mule.modules.google.IdentifierPolicy)">setIdentifierPolicy</a></span>(IdentifierPolicy identifierPolicy)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../../org/mule/module/google/calendar/GoogleCalendarConnector.html#setScope(java.lang.String)">setScope</a></span>(String scope)</nobr>
         
   </td></tr>
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2216,7 +2125,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2234,7 +2143,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2252,7 +2161,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             

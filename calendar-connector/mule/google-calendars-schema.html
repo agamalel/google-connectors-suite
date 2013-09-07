@@ -310,16 +310,6 @@ This connector covers almost all the Google Calendar API v3 using OAuth2 for aut
               &lt;xs:documentation&gt;The OAuth scopes you want to request&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:attribute&gt;
-          &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;identifierPolicy&quot; default=&quot;EMAIL&quot; use=&quot;optional&quot; type=&quot;IdentifierPolicyEnumType&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;This policy represents which id we want to use to represent each google account.
-
-PROFILE means that we want the google profile id. That means, the user's primary key in google's DB.
-This is a long number represented as a string.
-
-EMAIL means you want to use the account's email address&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:attribute&gt;
           &lt;xs:attribute name=&quot;clientFactory-ref&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;Factory to instantiate the underlying google client.
@@ -441,13 +431,10 @@ use case of a custom value here is testing.&lt;/xs:documentation&gt;
   &lt;/xs:complexType&gt;
   &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;get-calendar-list&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;GetCalendarListType&quot;&gt;
     &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;Returns an instance of  listing the
+      &lt;xs:documentation&gt;Returns a paginated iterator with instances of  listing the
 calendars of the user that owns the OAuth access token.
 
-Optional parameters are not considered in the search if not specified.
-
-For supporting google's paging mechanism, the next page token is store on the message property
-&amp;amp;quot;GoogleCalendar_NEXT_PAGE_TOKEN&amp;amp;quot;. If there isn't a next page, then the property is removed&lt;/xs:documentation&gt;
+Optional parameters are not considered in the search if not specified.&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
   &lt;/xs:element&gt;
   &lt;xs:complexType name=&quot;GetCalendarListType&quot;&gt;
@@ -458,16 +445,6 @@ For supporting google's paging mechanism, the next page token is store on the me
             &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;maxResults&quot; default=&quot;100&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;the max number of results you want to get&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
-        &lt;xs:attribute name=&quot;pageToken&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;Token specifying which result page to return&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
         &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;showHidden&quot; default=&quot;false&quot; use=&quot;optional&quot; type=&quot;booleanType&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;if true, hidden calendars will be returned&lt;/xs:documentation&gt;
@@ -476,6 +453,11 @@ For supporting google's paging mechanism, the next page token is store on the me
         &lt;xs:attribute name=&quot;accessTokenId&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The id of the access token that will be used to authenticate the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;fetchSize&quot; default=&quot;100&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The amount of items to fetch on each invocation to the data source&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
       &lt;/xs:extension&gt;
@@ -676,10 +658,7 @@ The user owning the OAuth token needs to have permissions for reading that list&
   &lt;/xs:complexType&gt;
   &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;get-events&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;GetEventsType&quot;&gt;
     &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;Searchs and returns events matching the criteria parameters. If a criteria is not specified, then it is not applied
-
-For supporting google's paging mechanism, the next page token is stored on the message property
-&amp;amp;quot;GoogleCalendar_NEXT_PAGE_TOKEN&amp;amp;quot;. If there isn't a next page, then the property is removed&lt;/xs:documentation&gt;
+      &lt;xs:documentation&gt;Searchs and returns events matching the criteria parameters. If a criteria is not specified, then it is not applied&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
   &lt;/xs:element&gt;
   &lt;xs:complexType name=&quot;GetEventsType&quot;&gt;
@@ -705,19 +684,9 @@ For supporting google's paging mechanism, the next page token is stored on the m
             &lt;xs:documentation&gt;The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;maxResults&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;Maximum number of events returned on one result page&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
         &lt;xs:attribute name=&quot;orderBy&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The order of the events returned in the result&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
-        &lt;xs:attribute name=&quot;pageToken&quot; default=&quot;#[flowVars['GoogleCalendar_NEXT_PAGE_TOKEN']]&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;Token specifying which result page to return&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
         &lt;xs:attribute name=&quot;query&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
@@ -768,6 +737,11 @@ For supporting google's paging mechanism, the next page token is stored on the m
         &lt;xs:attribute name=&quot;accessTokenId&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The id of the access token that will be used to authenticate the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;fetchSize&quot; default=&quot;100&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The amount of items to fetch on each invocation to the data source&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
       &lt;/xs:extension&gt;
@@ -1071,10 +1045,7 @@ For supporting google's paging mechanism, the next page token is stored on the m
   &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;get-instances&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;GetInstancesType&quot;&gt;
     &lt;xs:annotation&gt;
       &lt;xs:documentation&gt;For recurring events, it returns one instance of
- for each recurrence instance
-
-For supporting google's paging mechanism, the next page token is store on the message property
-&amp;amp;quot;GoogleCalendar_NEXT_PAGE_TOKEN&amp;amp;quot;. If there isn't a next page, then the property is removed&lt;/xs:documentation&gt;
+ for each recurrence instance&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
   &lt;/xs:element&gt;
   &lt;xs:complexType name=&quot;GetInstancesType&quot;&gt;
@@ -1100,11 +1071,6 @@ For supporting google's paging mechanism, the next page token is store on the me
             &lt;xs:documentation&gt;The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;maxResults&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
-          &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;Maximum number of events returned on one result page&lt;/xs:documentation&gt;
-          &lt;/xs:annotation&gt;
-        &lt;/xs:attribute&gt;
         &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;showDeleted&quot; default=&quot;false&quot; use=&quot;optional&quot; type=&quot;booleanType&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;Whether to include deleted events (with 'eventStatus' equals 'cancelled') in the result.&lt;/xs:documentation&gt;
@@ -1123,6 +1089,11 @@ For supporting google's paging mechanism, the next page token is store on the me
         &lt;xs:attribute name=&quot;accessTokenId&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The id of the access token that will be used to authenticate the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/google-calendars&quot; name=&quot;fetchSize&quot; default=&quot;100&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The amount of items to fetch on each invocation to the data source&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
       &lt;/xs:extension&gt;
@@ -1467,29 +1438,19 @@ For supporting google's paging mechanism, the next page token is store on the me
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
-  &lt;xs:simpleType name=&quot;ScopeTypeEnumType&quot;&gt;
+  &lt;xs:simpleType name=&quot;ForcePromptEnumType&quot;&gt;
     &lt;xs:annotation&gt;
       &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
     &lt;xs:union&gt;
       &lt;xs:simpleType&gt;
         &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
+          &lt;xs:enumeration value=&quot;auto&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;USER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;GROUP&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;DOMAIN&quot;&gt;
+          &lt;xs:enumeration value=&quot;force&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
@@ -1540,43 +1501,29 @@ For supporting google's paging mechanism, the next page token is store on the me
       &lt;/xs:simpleType&gt;
     &lt;/xs:union&gt;
   &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;IdentifierPolicyEnumType&quot;&gt;
+  &lt;xs:simpleType name=&quot;ScopeTypeEnumType&quot;&gt;
     &lt;xs:annotation&gt;
       &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
     &lt;xs:union&gt;
       &lt;xs:simpleType&gt;
         &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;PROFILE&quot;&gt;
+          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;EMAIL&quot;&gt;
+          &lt;xs:enumeration value=&quot;USER&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;ForcePromptEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;auto&quot;&gt;
+          &lt;xs:enumeration value=&quot;GROUP&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;force&quot;&gt;
+          &lt;xs:enumeration value=&quot;DOMAIN&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;

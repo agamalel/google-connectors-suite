@@ -477,7 +477,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/google-calendars-config-with-oauth.html#get-calendar-list">&lt;google-calendars:get-calendar-list&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Returns an instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
+        <div class="jd-descrdiv">Returns a paginated iterator with instances of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
  calendars of the user that owns the OAuth access token.</div>
         
   </td></tr>
@@ -535,8 +535,7 @@ Summary:
         <div class="jd-descrdiv">For recurring events, it returns one instance of
  <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> for each recurrence instance
  
- For supporting google's paging mechanism, the next page token is store on the message property
- &quot;GoogleCalendar_NEXT_PAGE_TOKEN&quot;.</div>
+ </div>
         
   </td></tr>
 
@@ -748,18 +747,6 @@ specify which configuration to use.</p>
     
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
-          </nobr></td>
-          <td class="jd-linkcol"><nobr>identifierPolicy</nobr></td>
-          <td class="jd-descrcol">EMAIL</td>
-          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>This policy represents which id we want to use to represent each google account.</td>
-          <td class="jd-descrcol"></td>
-          <td class="jd-descrcol"></td>
-          <td class="jd-descrcol"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
           xs:string</nobr></td>
           <td class="jd-linkcol"><nobr>scope</nobr></td>
           <td class="jd-descrcol">https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar</td>
@@ -773,14 +760,14 @@ specify which configuration to use.</p>
     
     
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>xs:string</nobr></td>
           <td class="jd-linkcol"><nobr>authorizationUrl</nobr></td>
           <td class="jd-descrcol">https://accounts.google.com/o/oauth2/auth</td>
           <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The URL defined by the Service Provider where the resource owner will be redirected to grant authorization to the connector</td>
       </tr>
       
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>xs:string</nobr></td>
           <td class="jd-linkcol"><nobr>accessTokenUrl</nobr></td>
           <td class="jd-descrcol">https://accounts.google.com/o/oauth2/token</td>
@@ -801,14 +788,10 @@ specify which configuration to use.</p>
 
 
 
-
-
 <!-- ========= OAUTH2 DETAIL ======== -->
 <h2>OAuth2</h2>
-<p>This connector uses OAuth2 as an authorization and authentication mechanism with automatic saving and restoring
-of access tokens. Every message processor in this connector keeps track of an attribute called <i>accessTokenId</i> which
- identifies each of the users that were authorized by the connector. In order to obtain an access token identification you need to
- first call the <i>authorize message processor</i>.</p>
+<p>This connector uses OAuth2 as an authorization and authentication mechanism. All the message processors or sources that require the connector
+to be authorized by the service provider will throw a NotAuthorizedException until the connector is authorized properly.</p>
 <p>Authorizing the connector is a simple process of calling:</p>
 <pre>
     &lt;google-calendars:authorize/&gt;
@@ -821,11 +804,11 @@ of access tokens. Every message processor in this connector keeps track of an at
         &lt;google-calendars:authorize/&gt;
     &lt;/flow&gt;
 </pre>
-<p>If you hit that endpoint via a web-browser it will initiate the OAuth dance, redirecting the user to the service provider page.
-It will also create a callback endpoint so the service provider can redirect the user back once the user has been authenticated and properly authorized.
- Once the callback gets called the connector will automatically issue an access token identifier that will be stored in an ObjectStore.
- By default, this ObjectStore's OauthAccessTokenId will be the connector's config name.</p>
-<p>The authorize message processor also supports the following attributes:</p>
+<p>If you hit that endpoint via a web-browser it will initiate the OAuth dance, redirecting the user to the service provider page
+and creating a callback endpoint so the service provider can call us back once the user has been authenticated. Once the callback
+gets called then the connector will switch to an authorized state and any message processor or source that requires authentication
+can be called.</p>
+<p>The authorize message processor supports the following attributes:</p>
 <table id="lconfig" class="jd-sumtable">
 <tr><th colspan="12">Authorize Attributes</th></tr>
 <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
@@ -860,28 +843,15 @@ It will also create a callback endpoint so the service provider can redirect the
           <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The URL defined by the Service Provider to obtain an access token</td>
       </tr>
       
-      <tr class=" api apilevel-" >
-            <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-            <td class="jd-descrcol">&nbsp;</td>
-            <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The Id with which the obtained access token will be stored. If not provided, then it will be the config name</td>
-      </tr>
-      
+        <tr class=" api apilevel-" >
+          <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+          <td class="jd-descrcol">&nbsp;</td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The Id with which the obtained access token will be stored. If not provided, then it will be the config name</td>
+        </tr>
+        
     
 
 </table>
-
-<p>When dealing with multi-tenant on-premise implementations, leaving the accessTokenId parameter in the authorize message processor to it's
-default value could lead to token overwriting. This is not a problem when running on CloudHub, but can be a serious issue when running on-premise.
-In these cases it is recommended to set the parameter to:</p>
-<pre>
-    &lt;google-calendars:authorize accessTokenId=&quot;#[flowVars['myTenantId']]&quot;/&gt;
-</pre>
-<p>If you do this, keep in mind that message processors will still be searching for the default OauthAccessTokenId unless told differently.
-You must then overwrite this property on message processors as well:</p>
-<pre>
-    &lt;google-calendars:get-events accessTokenId=&quot;[flowVars['myTenantId']]&quot;/&gt;
-</pre>
-
 <h3>After Authorization</h3>
 <p>The <i>authorize</i> message processor is an intercepting one. If something that requires authentication is requested but the connector
 is not authorized yet, the authorize message processor will be triggered. It will redirect the user to the service provider so that he can authorize
@@ -901,27 +871,6 @@ its own internal state to authorized, and then move on to executing anything tha
 the connector is not yet authorized, the execution of the response builder will be delayed until the callback is received.</p>
 <p>On the other hand, if the connector had already been <i>authorized</i> before, then the flow execution will not be delayed; it will
 continue and the <i>http:response-builder</i> will get executed right away rather than after the callback.</p>
-<p>The following is an example of the authorize message processor, after running it will print the access token identifier to the log:</p>
-<pre>
-    &lt;flow name="authorizationAndAuthenticationFlow"&gt;
-        &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
-        &lt;google-calendars:authorize/&gt;
-		&lt;log level="INFO" message="The connector has been properly authorized. The access token identifier is #[flowVars['OAuthAccessTokenId']]"/&gt;
-    &lt;/flow&gt;
-</pre>
-<p>The <i>OAuthAccessTokenId</i> flow variable is stored into an ObjectStore by default. As an alternative, the following snippet shows how you can save it as a HTTP protocol cookie</p>
-<pre>
-    &lt;flow name="authorizationAndAuthenticationFlow"&gt;
-        &lt;http:inbound-endpoint host="localhost" port="8080" path="oauth-authorize"/&gt;
-        &lt;google-calendars:authorize/&gt;
-        &lt;http:response-builder status="200"&gt;
-            &lt;http:set-cookie name="accessTokenId" value="#[flowVars['OAuthAccessTokenId']]"/&gt;
-            &lt;set-payload value="You have successfully authorized the connector. You access token id is #[flowVars['OAuthAccessTokenId']]"/&gt;
-        &lt;/http:response-builder&gt;
-    &lt;/flow&gt;
-</pre>
-<p>The access token identifier is unique per user and therefore the connector can be authorized for many users. If the user authorizes the connector
- twice it will have the same access token identifier both times.</p>
 <h3>Error Handling during Authorization</h3>
 <p>If for any reason, an error occurs while processing the callback, the exception strategy of the flow containing the authorize will be executed.
 So, if the callback sent the wrong information you can handle that situation by setting up an exception strategy as follows:</p>
@@ -950,7 +899,6 @@ So, if the callback sent the wrong information you can handle that situation by 
 <li>STOP_FLOW: acts as a filter and kills the execution of the flow</li>
 <li>EXCEPTION: throws an exception informing that the token is still not acquired</li>
 </ul>
-<p>Keep in mind that after the connector is unauthorized all future calls that attempt to access protected resources will fail until the connector is re-authorized.</p>
 <h3>Unauthorize</h3>
 <p>Once this connector has been authorized further calls to the <i>authorize</i> message processor will be no-ops.
 If you wish to reset the state of the connector back to a non-authorized state you must call:</p>
@@ -966,7 +914,7 @@ the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;google-calendars:config&gt;
-        &lt;google-calendars:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80"/&gt;
+        &lt;google-calendars:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
     &lt;/google-calendars:config&gt;
 </pre>
 <p>The <i>oauth-callback-config</i> element can be used to customize the endpoint that gets created for the callback. It
@@ -1000,6 +948,9 @@ features the following attributes:</p>
 </tr>
 </table>
 <p class="caution">The example shown above is what the configuration would look like if your app would be deployed to CloudHub.</p>
+
+
+
 <h3>Access Token Store</h3>
 <p>This connector has the capability of automatically saving and restoring access tokens. The connector will store in either the default user object store
 or a user-defined one the acquired access tokens, refresh tokens, and any other pertinent information using the access token identifier as the key.</p>
@@ -1011,6 +962,28 @@ or a user-defined one the acquired access tokens, refresh tokens, and any other 
 </pre>
 <p>There is only a single attribute entitled <i>objectStore-ref</i> in the <i>oauth-store-config</i> element that allows the user to specify the name
 of the object store that he wishes to use to save and restore access tokens.</p>
+<p>
+Another important aspect of the token store is the ids. This connector supports multi-tenancy, which means that each instance of this connector
+is capable of supporting multiple concurrent users. Therefore, each access token is given an id to identify the owning tenant.
+</p>
+<p>
+By default, the connector's config name is used the access token id. Also, by default, at the time of using a protected operation,
+it's not mandatory to provide an accessTokenId since the config's name will also be used by default.
+</p>
+<p>
+This defaults are fine for the single-tenant case or for CloudHub enabled multi-tenancy. If you are running on-premise or you are not using Cloudhub's multi-tenancy mode, there are a couple of ways in which you can easily handle your token ids manually.
+</p>
+<p>
+First, you can specify a defaultAccessTokenId on the connector's callback element. Each time a callback is received, that expression will get evaluated and the resulting value will be used as the token id. At the same time, when using a protected operation
+that expression will be evaluated to obtain the id of the access token to fetch.
+</p>
+<p>
+Another option is to use to provide an accessTokenId expression on the authorize processor. If you do so, the expression's result will be used as the token id instead. Notice that if you choose to force the token id like this, then you also need to provide a matching accessTokenId expression on each
+protected operation that uses that token.
+</p>
+
+
+
 
 
 
@@ -1070,16 +1043,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -1161,16 +1124,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -1238,16 +1191,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -1342,16 +1285,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -1432,16 +1365,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -1536,16 +1459,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -1627,16 +1540,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -1705,16 +1608,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -1810,16 +1703,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -1888,16 +1771,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -1965,16 +1838,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -2056,16 +1919,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -2145,16 +1998,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -2237,16 +2080,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -2328,16 +2161,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -2387,13 +2210,10 @@ of the object store that he wishes to use to save and restore access tokens.</p>
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns an instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
+  <div class="jd-tagdata jd-tagdescr"><p>Returns a paginated iterator with instances of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
  calendars of the user that owns the OAuth access token.
  
  Optional parameters are not considered in the search if not specified.
- 
- For supporting google's paging mechanism, the next page token is store on the message property
- &quot;GoogleCalendar_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-list showHidden="true" /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
@@ -2413,42 +2233,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>message</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The current mule message</td>
-                        <td class="jd-descrcol">MuleMessage</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxResults</nobr></td>
-                        <td class="jd-descrcol">100</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The max number of results you want to get</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pageToken</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Token specifying which result page to return</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>showHidden</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, hidden calendars will be returned</td>
@@ -2459,17 +2243,19 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
                 
           
-          
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The paging configuration object</td>
+                        <td class="jd-descrcol">PagingConfiguration</td>
+                        <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol"></td>
                     </tr>
+                
+                
+          
+          
           
         </table>
   </div>
@@ -2483,8 +2269,8 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a>&gt;</td>
-                <td class="jd-descrcol">a list with instances of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code></td>
+                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a>&gt;</td>
+                <td class="jd-descrcol">a paginated iterator with instances of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code></td>
              </tr>
          </table>
   </div>
@@ -2552,16 +2338,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -2656,16 +2432,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -2717,9 +2483,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Searchs and returns events matching the criteria parameters. If a criteria is not specified, then it is not applied
  
- For supporting google's paging mechanism, the next page token is stored on the message property
- &quot;GoogleCalendar_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
- 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-events calendarId="mariano.gonzalez@mulesoft.com" timeMin="2012-01-01T00:00:00Z"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
@@ -2738,18 +2501,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>message</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The current mule message</td>
-                        <td class="jd-descrcol">MuleMessage</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>calendarId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The id of the colendar that contains the events</td>
@@ -2761,7 +2512,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>icalUID</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies iCalendar UID (iCalUID) of events to be included in the response</td>
@@ -2773,23 +2524,11 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>maxAttendees</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The maximum number of attendees to include in the response. If there are more than the
                      specified number of attendees, only the participant is returned.</td>
-                        <td class="jd-descrcol">Integer</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxResults</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Maximum number of events returned on one result page</td>
                         <td class="jd-descrcol">Integer</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol"></td>
@@ -2811,18 +2550,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pageToken</nobr></td>
-                        <td class="jd-descrcol">#[flowVars[\'GoogleCalendar_NEXT_PAGE_TOKEN\']]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Token specifying which result page to return</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>query</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Free text search terms to find events that match these terms in any field, except for
@@ -2835,7 +2562,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include deleted events (with 'eventStatus' equals 'cancelled') in the result.</td>
@@ -2847,7 +2574,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>showHiddenInvitations</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include hidden invitations in the result</td>
@@ -2859,7 +2586,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>singleEvents</nobr></td>
                         <td class="jd-descrcol">true</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to expand recurring events into instances and only return single one-off events and
@@ -2872,7 +2599,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>timeMin</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Lower bound timestamp (inclusive) for an event's end time to filter by </td>
@@ -2884,7 +2611,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>timeMax</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Upper bound timestamp (exclusive) for an event's start time to filter by</td>
@@ -2896,7 +2623,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
                         <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The timestamp format for timeMin, timeMax and lastUpdated. It defaults to RFC 3369 (yyyy-MM-dd'T'HH:mm:ssZ)</td>
@@ -2908,7 +2635,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>timezone</nobr></td>
                         <td class="jd-descrcol">UTC</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Timezone in which timeMin, timeMax and lastUpdated is to be considered on</td>
@@ -2920,7 +2647,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>lastUpdated</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Lower bound timestamp for an event's last modification time to filter by</td>
@@ -2931,17 +2658,19 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
                 
           
-          
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The paging configuration object</td>
+                        <td class="jd-descrcol">PagingConfiguration</td>
+                        <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol"></td>
                     </tr>
+                
+                
+          
+          
           
         </table>
   </div>
@@ -2955,8 +2684,8 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code></td>
+                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                <td class="jd-descrcol">a paginated iterator of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code></td>
              </tr>
          </table>
   </div>
@@ -3074,16 +2803,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -3165,9 +2884,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
   <div class="jd-tagdata jd-tagdescr"><p>For recurring events, it returns one instance of
  <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> for each recurrence instance
  
- For supporting google's paging mechanism, the next page token is store on the message property
- &quot;GoogleCalendar_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
- 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-instances calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
@@ -3186,18 +2902,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>message</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The current mule message</td>
-                        <td class="jd-descrcol">MuleMessage</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>calendarId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The id of the calendar containing the recurrent event</td>
@@ -3209,7 +2913,7 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>eventId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The id of a recurrent event</td>
@@ -3221,23 +2925,11 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>maxAttendess</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The maximum number of attendees to include in the response. If there are more than the
  						specified number of attendees, only the participant is returned.</td>
-                        <td class="jd-descrcol">Integer</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxResults</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Maximum number of events returned on one result page</td>
                         <td class="jd-descrcol">Integer</td>
                         <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol"></td>
@@ -3281,17 +2973,19 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
                 
           
-          
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
+                
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
+                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
                         <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The paging configuration object</td>
+                        <td class="jd-descrcol">PagingConfiguration</td>
+                        <td class="jd-descrcol">*/*</td>
                         <td class="jd-descrcol"></td>
                     </tr>
+                
+                
+          
+          
           
         </table>
   </div>
@@ -3305,8 +2999,8 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                <td class="jd-descrcol">a list with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code></td>
+                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                <td class="jd-descrcol">an auto paginated iterator of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code></td>
              </tr>
          </table>
   </div>
@@ -3385,16 +3079,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -3527,16 +3211,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -3629,16 +3303,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -3745,16 +3409,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -3847,16 +3501,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -3963,16 +3607,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -4066,16 +3700,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
           
           
           
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
-          
         </table>
   </div>
   
@@ -4168,16 +3792,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
@@ -4283,16 +3897,6 @@ of the object store that he wishes to use to save and restore access tokens.</p>
                 
           
           
-          
-              <tr><th colspan="12">OAuth Parameters<br/><span style="font-weight: 200;">The following values are always required when using OAuth as the authentication mechanism.</span></th></tr>
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>accessTokenId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol" width="100%">Access token identifier used to retrieve an access token from the store</td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
           
         </table>
   </div>
