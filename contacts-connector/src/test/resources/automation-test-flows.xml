@@ -77,6 +77,10 @@ http://www.mulesoft.org/schema/mule/google-contacts http://www.mulesoft.org/sche
 		<google-contacts:update-contact-photo config-ref="Google_Contacts" contactId="#[payload.contactId]" in-ref="#[payload.inRef]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="delete-contact-photo">
+		<google-contacts:delete-contact-photo config-ref="Google_Contacts" contact-ref="#[payload.contactRef]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="get-contact-by-id">
 		<google-contacts:get-contact-by-id config-ref="Google_Contacts" id="#[payload.id]" accessTokenId="accessTokenId" />
 	</flow>
