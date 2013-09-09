@@ -147,4 +147,24 @@ public class GoogleContactsTestParent extends FunctionalTestCase {
 		return deleteContacts(batchId, operationId, Arrays.asList(entries));
 	}
 	
+	/*
+	 * This method is used to extract the real ID from the returned ID.
+	 * An example of an ID returned by Google is the following:
+	 * 
+	 * http://www.google.com/m8/feeds/contacts/worstsignupever%40gmail.com/base/6c3356340bebcf96
+	 * 
+	 * However, this results in the following URL request, resulting in an error returned by Google
+	 * 
+	 * https://www.google.com/m8/feeds/contacts/default/full/http://www.google.com/m8/feeds/contacts/worstsignupever%40gmail.com/base/6c3356340bebcf96
+	 * 
+	 * Therefore, we need a method to extract the last value of the URI, so that we can pass it to the connector.
+	 * Doing so will result in the following URL, which is of the correct format:
+	 * 
+	 * https://www.google.com/m8/feeds/contacts/default/full/6c3356340bebcf96
+	 */
+	public static String getRealId(String id) {
+		int lastSlash = id.lastIndexOf("/");
+		return id.substring(lastSlash + 1);
+	}
+	
 }

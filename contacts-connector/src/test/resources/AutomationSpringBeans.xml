@@ -42,6 +42,30 @@
 		</entry>
 	</util:map>
 	
+	<util:map id="getContactById" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="contact">
+			<bean class="org.mule.modules.google.contact.wrappers.GoogleContactEntry">
+				<property name="givenName" value="Mule" />
+				<property name="familyName" value="Soft" />
+				<property name="gender">
+					<bean class="com.google.gdata.data.contacts.Gender">
+						<constructor-arg value="MALE" />
+					</bean>
+				</property>
+				<property name="emailAddresses">
+					<list value-type="com.google.gdata.data.extensions.Email">
+						<bean class="com.google.gdata.data.extensions.Email">
+							<property name="primary" value="#{T(java.lang.Boolean).TRUE}" />
+							<property name="displayName" value="Mule Soft" />
+							<property name="address" value="mule.soft@someemailwhichdoesnotexist.com" />
+							<property name="rel" value="http://schemas.google.com/g/2005#home" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</entry>
+	</util:map>
+	
 	<util:map id="batchInsertContacts" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="batchId" value="sample" />
 		<entry key="operationId" value="sample" />
@@ -153,6 +177,33 @@
 			</list>
 		</entry>
 	</util:map>
+
+	<util:map id="updateContactPhoto" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
+		<entry key="contact">
+			<bean class="org.mule.modules.google.contact.wrappers.GoogleContactEntry">
+				<property name="givenName" value="Mule" />
+				<property name="fullName" value="Mule Soft" />
+				<property name="familyName" value="Soft" />
+				<property name="gender">
+					<bean class="com.google.gdata.data.contacts.Gender">
+						<constructor-arg value="MALE" />
+					</bean>
+				</property>
+				<property name="emailAddresses">
+					<list value-type="com.google.gdata.data.extensions.Email">
+						<bean class="com.google.gdata.data.extensions.Email">
+							<property name="primary" value="#{T(java.lang.Boolean).TRUE}" />
+							<property name="displayName" value="Mule Soft" />
+							<property name="address" value="mule.soft@someemailwhichdoesnotexist.com" />
+							<property name="rel" value="http://schemas.google.com/g/2005#home" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</entry>
+		<entry key="photoPath" value="photo.png" />
+	</util:map>
+	
 
 	<util:map id="createGroup" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 		<entry key="groupRef">
