@@ -69,6 +69,10 @@ http://www.mulesoft.org/schema/mule/google-contacts http://www.mulesoft.org/sche
 		<google-contacts:get-group-by-name config-ref="Google_Contacts" groupName="#[payload.groupName]" accessTokenId="accessTokenId" />
 	</flow>
 	
+	<flow name="download-photo">
+		<google-contacts:download-photo config-ref="Google_Contacts" contact-ref="#[payload.contactRef]" accessTokenId="accessTokenId" />
+	</flow>
+	
 	<flow name="update-contact-photo">
 		<google-contacts:update-contact-photo config-ref="Google_Contacts" contactId="#[payload.contactId]" in-ref="#[payload.inRef]" accessTokenId="accessTokenId" />
 	</flow>

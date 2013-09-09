@@ -1,5 +1,7 @@
 package org.mule.modules.google.contact.automation.testcases;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -145,6 +147,37 @@ public class GoogleContactsTestParent extends FunctionalTestCase {
 
 	public List<BatchResult> deleteContacts(String batchId, String operationId, GoogleContactEntry... entries) throws Exception {
 		return deleteContacts(batchId, operationId, Arrays.asList(entries));
+	}
+	
+	/**
+	 * Updates the contact's photo
+	 * @param contactId
+	 * The REAL id of the contact. You need to use getRealId(...) before passing it to this method
+	 * @param photoPath
+	 * The path of the photo in the classpath
+	 * @throws Exception
+	 * Any exception which occurs is thrown and handled within the test
+	 */
+	public void updateContactPhoto(String contactId, String photoPath) throws Exception {
+		InputStream stream = getClass().getClassLoader().getResourceAsStream(photoPath);
+		updateContactPhoto(contactId, stream);
+	}
+	
+	/**
+	 * Updates the contact's photo
+	 * @param contactId
+	 * The REAL id of the contact. You need to use getRealId(...) before passing it to this method
+	 * @param inRef
+	 * The photo's input stream
+	 * @throws Exception
+	 * Any exception which occurs is thrown and handled within the test
+	 */
+	public void updateContactPhoto(String contactId, InputStream inRef) throws Exception {
+		testObjects.put("contactId", contactId);
+		testObjects.put("inRef", inRef);
+		
+		MessageProcessor flow = lookupFlowConstruct("update-contact-photo");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
 	}
 	
 	/*
