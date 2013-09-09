@@ -74,7 +74,6 @@ public class DeleteContactPhotoTestCases extends GoogleContactsTestParent {
 			
 			// From documentation:
 			// Note: If a contact does not have a photo, then the photo link element has no gd:etag attribute.
-			System.out.println(eTag);
 			assertTrue(eTag == null);
 		}
 		catch (Exception e) {
