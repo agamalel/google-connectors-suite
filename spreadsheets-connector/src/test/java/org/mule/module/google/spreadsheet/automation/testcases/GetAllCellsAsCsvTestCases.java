@@ -9,6 +9,7 @@
 
 package org.mule.module.google.spreadsheet.automation.testcases;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -22,6 +23,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.spreadsheet.CsvToRowsAdapter;
+import org.mule.module.google.spreadsheet.model.Cell;
 import org.mule.module.google.spreadsheet.model.Row;
 import org.mule.module.google.spreadsheet.model.Worksheet;
 
@@ -66,15 +68,26 @@ public class GetAllCellsAsCsvTestCases extends GoogleSpreadsheetsTestParent {
 
 			String csvCells = (String) response.getMessage().getPayload();
 			
-			List<Row> rowsFromCsv = CsvToRowsAdapter.adapt(csvCells, 1, 1, columnSeparator, lineSeparator);
-
-			for (Row row : inputRows) {
-				assertTrue(rowsFromCsv.contains(row));
-				Row retrievedRow = rowsFromCsv.get(rowsFromCsv.indexOf(row));
+			StringBuilder csvBuilder = new StringBuilder();
+			
+			for (int i = 0; i < inputRows.size(); i++) {
+				Row inputRow = inputRows.get(i);
+				List<Cell> cells = inputRow.getCells();
+				for (int j = 0; j < cells.size(); j++) {
+					csvBuilder.append(i + 1);								// Add row number (row number is not 0-based)
+					csvBuilder.append(columnSeparator);						// Add the column separator
+					csvBuilder.append(j + 1);								// Add the column number (column number is not 0-based)
+					csvBuilder.append(columnSeparator);						// Add the column separator
+					csvBuilder.append(cells.get(j).getValueOrFormula());	// Add the value of the cell
+					csvBuilder.append(lineSeparator);						// Add the line separator
+				}
 				
-				boolean equals = isRowEqual(row, retrievedRow);
-				assertTrue(equals);
 			}
+
+			// Remove the last line separator.
+			csvBuilder.delete(csvBuilder.length() - lineSeparator.length(), csvBuilder.length());
+			
+			assertEquals(csvBuilder.toString(), csvCells);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
