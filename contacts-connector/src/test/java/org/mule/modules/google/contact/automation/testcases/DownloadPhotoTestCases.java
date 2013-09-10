@@ -73,7 +73,7 @@ public class DownloadPhotoTestCases extends GoogleContactsTestParent {
 			
 			InputStream downloadedPhoto = (InputStream) response.getMessage().getPayload();			
 			InputStream onDisk = getClass().getClassLoader().getResourceAsStream(photoPath);
-			
+
 			boolean equals = IOUtils.contentEquals(downloadedPhoto, onDisk);
 			assertTrue(equals);
 		}
@@ -86,7 +86,8 @@ public class DownloadPhotoTestCases extends GoogleContactsTestParent {
 	@After
 	public void tearDown() {
 		try {
-			GoogleContactEntry contact = (GoogleContactEntry) testObjects.get("insertedContact");
+			String id = (String) testObjects.get("id");
+			GoogleContactEntry contact = getContact(id);
 			deleteContact(contact);
 		}
 		catch (Exception e) {
