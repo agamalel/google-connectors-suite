@@ -13,15 +13,12 @@ package org.mule.module.google.task;
 import java.io.IOException;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Connector;
+import org.mule.api.annotations.Paged;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.oauth.OAuth2;
 import org.mule.api.annotations.oauth.OAuthAccessToken;
-import org.mule.api.annotations.oauth.OAuthAccessTokenIdentifier;
 import org.mule.api.annotations.oauth.OAuthAuthorizationParameter;
 import org.mule.api.annotations.oauth.OAuthConsumerKey;
 import org.mule.api.annotations.oauth.OAuthConsumerSecret;
@@ -36,10 +33,11 @@ import org.mule.module.google.task.model.TaskList;
 import org.mule.modules.google.AbstractGoogleOAuthConnector;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
-import org.mule.modules.google.IdentifierPolicy;
-import org.mule.modules.google.api.pagination.PaginationUtils;
+import org.mule.modules.google.api.pagination.TokenBasedPagingDelegate;
 import org.mule.modules.google.oauth.invalidation.InvalidationAwareCredential;
 import org.mule.modules.google.oauth.invalidation.OAuthTokenExpiredException;
+import org.mule.streaming.PagingConfiguration;
+import org.mule.streaming.PagingDelegate;
 
 import com.google.api.client.auth.oauth2.BearerToken;
 import com.google.api.client.auth.oauth2.Credential;
@@ -98,19 +96,6 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
     private String scope;
     
     /**
-     * This policy represents which id we want to use to represent each google account.
-     * 
-     * PROFILE means that we want the google profile id. That means, the user's primary key in google's DB.
-     * This is a long number represented as a string.
-     * 
-     * EMAIL means you want to use the account's email address
-     */
-    @Configurable
-    @Optional
-    @Default("EMAIL")
-    private IdentifierPolicy identifierPolicy = IdentifierPolicy.EMAIL;
-    
-    /**
      * Application name registered on Google API console
      */
     @Configurable
@@ -126,11 +111,6 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
 	 */
 	private com.google.api.services.tasks.Tasks client;
 	
-	@OAuthAccessTokenIdentifier
-	public String getAccessTokenId() {
-		return this.identifierPolicy.getId(this);
-	}
-	
 	@OAuthPostAuthorization
 	public void postAuth() {
 		Credential credential = new InvalidationAwareCredential(BearerToken.authorizationHeaderAccessMethod());
@@ -144,33 +124,30 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
     /**
      * Returns all the authenticated user's task lists.
      * 
-     * For supporting google's paging mechanism, the next page token is store on the message property
-     * &quot;GoogleTask_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
-     * 
      * {@sample.xml ../../../doc/GoogleTasksConnector.xml.sample google-tasks:get-task-lists}
      * 
-     * @param message the current mule message
-     * @param maxResults Maximum number of task lists returned on one page
-     * @param pageToken Token specifying the result page to return
-     * @return a list with instances of {@link org.mule.module.google.task.model.TaskList}
+     * @param pagingConfiguration the pagingConfiguration object
+     * @return an auto paginated iterator with instances of {@link org.mule.module.google.task.model.TaskList}
      * @throws IOException if there's an error in the communication
      */
     @Processor
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
-	@Inject
-    public List<TaskList> getTaskLists(
-    		MuleMessage message,
-    		@Optional @Default("100") long maxResults,
-    		@Optional String pageToken) throws IOException {
-    	
-    	TaskLists list = this.client.tasklists().list()
-			    			.setMaxResults(maxResults)
-			    			.setPageToken(pageToken)
-			    			.execute();
-    	
-    	PaginationUtils.savePageToken(NEXT_PAGE_TOKEN, list.getNextPageToken(), message);
-    	return TaskList.valueOf(list.getItems(), TaskList.class);
+    @Paged
+    public PagingDelegate<TaskList> getTaskLists(final PagingConfiguration pagingConfiguration) throws IOException {
+    	return new TokenBasedPagingDelegate<TaskList>() {
+    		
+    		@Override
+    		protected List<TaskList> doGetPage() throws IOException {
+    			TaskLists list = client.tasklists().list()
+    					.setMaxResults(new Long(pagingConfiguration.getFetchSize()))
+    					.setPageToken(this.getPageToken())
+    					.execute();
+    			
+    			this.setPageToken(list.getNextPageToken());
+    			return TaskList.valueOf(list.getItems(), TaskList.class);
+    		}
+		};
     }
     
     /**
@@ -245,60 +222,59 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
      * of filtering attributes. The one for which no values is specified will not be used
      * when filtering
      * 
-     * For supporting google's paging mechanism, the next page token is store on the message property
-     * &quot;GoogleTask_NEXT_PAGE_TOKEN&quot;. If there isn't a next page, then the property is removed
-     * 
      * {@sample.xml ../../../doc/GoogleTasksConnector.xml.sample google-tasks:get-tasks}
      * 
-     * @param message the current mule message
      * @param taskListId Task list identifier
      * @param completedMin Lower bound for a task's completion date (as a RFC 3339 timestamp) to filter by
      * @param completedMax Upper bound for a task's completion date (as a RFC 3339 timestamp) to filter by
      * @param dueMin Lower bound for a task's due date (as a RFC 3339 timestamp) to filter by
      * @param dueMax Upper bound for a task's due date (as a RFC 3339 timestamp) to filter by
      * @param updatedMin Lower bound for a task's last modification time (as a RFC 3339 timestamp) to filter by
-     * @param maxResults Maximum number of task lists returned on one page
-     * @param pageToken Token specifying the result page to return
      * @param showDeleted Flag indicating whether deleted tasks are returned in the result
      * @param showHidden Flag indicating whether hidden tasks are returned in the result
      * @param showcompleted Flag indicating whether completed tasks are returned in the result
+     * @param pagingConfiguration the paging configuration object
      * @return list with instances of {@link org.mule.module.google.task.model.Task}
      * @throws IOException if there's an error in the communication
      */
     @Processor
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
-	@Inject
-    public List<Task> getTasks(
-    					MuleMessage message,
-    					@Optional @Default("@default") String taskListId,
-    					@Optional String completedMin,
-    					@Optional String completedMax,
-    					@Optional String dueMin,
-    					@Optional String dueMax,
-    					@Optional String updatedMin,
-    					@Optional @Default("100") long maxResults,
-    					@Optional String pageToken,
-    					@Optional @Default("false") boolean showDeleted,
-    					@Optional @Default("false") boolean showHidden,
-    					@Optional @Default("false") boolean showcompleted
+    @Paged
+    public PagingDelegate<Task> getTasks(
+    					final @Optional @Default("@default") String taskListId,
+    					final @Optional String completedMin,
+    					final @Optional String completedMax,
+    					final @Optional String dueMin,
+    					final @Optional String dueMax,
+    					final @Optional String updatedMin,
+    					final @Optional @Default("false") boolean showDeleted,
+    					final @Optional @Default("false") boolean showHidden,
+    					final @Optional @Default("false") boolean showcompleted,
+    					final PagingConfiguration pagingConfiguration
     					) throws IOException {
     	
-    	com.google.api.services.tasks.model.Tasks taskList = this.client.tasks().list(taskListId)
-    			.setCompletedMax(completedMax)
-    			.setCompletedMin(completedMin)
-    			.setDueMin(dueMin)
-    			.setDueMax(dueMax)
-    			.setUpdatedMin(updatedMin)
-    			.setMaxResults(maxResults)
-    			.setPageToken(pageToken)
-    			.setShowCompleted(showcompleted)
-    			.setShowHidden(showHidden)
-    			.setShowDeleted(showDeleted)
-    			.execute();
-    	
-    	PaginationUtils.savePageToken(NEXT_PAGE_TOKEN, taskList.getNextPageToken(), message);
-    	return Task.valueOf(taskList.getItems(), Task.class);
+    	return new TokenBasedPagingDelegate<Task>() {
+    		
+    		@Override
+    		protected List<Task> doGetPage() throws IOException {
+    			com.google.api.services.tasks.model.Tasks taskList = client.tasks().list(taskListId)
+    					.setCompletedMax(completedMax)
+    					.setCompletedMin(completedMin)
+    					.setDueMin(dueMin)
+    					.setDueMax(dueMax)
+    					.setUpdatedMin(updatedMin)
+    					.setMaxResults(new Long(pagingConfiguration.getFetchSize()))
+    					.setPageToken(this.getPageToken())
+    					.setShowCompleted(showcompleted)
+    					.setShowHidden(showHidden)
+    					.setShowDeleted(showDeleted)
+    					.execute();
+    			
+    			this.setPageToken(taskList.getNextPageToken());
+    			return Task.valueOf(taskList.getItems(), Task.class);
+    		}
+    	};
     }
     
     /**
@@ -463,12 +439,4 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
 		this.accessToken = accessToken;
 	}
 
-	public IdentifierPolicy getIdentifierPolicy() {
-		return identifierPolicy;
-	}
-
-	public void setIdentifierPolicy(IdentifierPolicy identifierPolicy) {
-		this.identifierPolicy = identifierPolicy;
-	}
-	
 }

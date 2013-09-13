@@ -10,16 +10,12 @@
 
 package org.mule.module.google.calendar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mockito.Mockito;
 
 import com.google.api.services.calendar.Calendar.CalendarList;
 import com.google.api.services.calendar.Calendar.Calendars;
 import com.google.api.services.calendar.Calendar.Calendars.Insert;
 import com.google.api.services.calendar.model.Calendar;
-import com.google.api.services.calendar.model.CalendarListEntry;
 
 
 /**
@@ -33,11 +29,6 @@ public class GoogleCalendarConnectorTestCase extends BaseGoogleConnectorTest<Goo
 	private Calendars calendars;
 	private CalendarList calendarList;
 	private Calendar testCalendar;
-	
-	@Override
-	protected String getNextPageTokenKey() {
-		return GoogleCalendarConnector.NEXT_PAGE_TOKEN;
-	}
 	
 	@Override
 	protected void doSetUp() {
@@ -72,40 +63,6 @@ public class GoogleCalendarConnectorTestCase extends BaseGoogleConnectorTest<Goo
 		
 		org.mule.module.google.calendar.model.Calendar cal = this.connector.createCalendar(new org.mule.module.google.calendar.model.Calendar());
 		assertSame(cal.wrapped(), this.testCalendar);
-	}
-	
-	public void testCreateCalendarList() throws Exception {
-		com.google.api.services.calendar.Calendar.CalendarList.List list = Mockito.mock(com.google.api.services.calendar.Calendar.CalendarList.List.class);
-		List<CalendarListEntry> result = new ArrayList<CalendarListEntry>();
-		result.add(new CalendarListEntry());
-		result.add(new CalendarListEntry());
-		
-		Mockito.when(this.calendarList.list()).thenReturn(list);
-		
-		com.google.api.services.calendar.model.CalendarList responseList = new com.google.api.services.calendar.model.CalendarList();
-		responseList.setItems(result);
-		responseList.setNextPageToken(pageToken);
-		
-		final int maxResults = 10;
-		final boolean showHidden = true;
-				
-		Mockito.when(list.setMaxResults(Mockito.anyInt())).thenReturn(list);
-		Mockito.when(list.setPageToken(Mockito.anyString())).thenReturn(list);
-		Mockito.when(list.setShowHidden(Mockito.anyBoolean())).thenReturn(list);
-		Mockito.when(list.execute()).thenReturn(responseList);
-		
-		List<org.mule.module.google.calendar.model.CalendarList> cl = this.connector.getCalendarList(message, maxResults, pageToken, showHidden);
-    	
-    	this.assertPagination();
-    	Mockito.verify(list, Mockito.times(1)).setMaxResults(Mockito.eq(maxResults));
-    	Mockito.verify(list, Mockito.times(1)).setPageToken(Mockito.eq(pageToken));
-    	Mockito.verify(list, Mockito.times(1)).setShowHidden(Mockito.eq(showHidden));
-    	Mockito.verify(list, Mockito.times(1)).execute();
-    	
-    	assertEquals("list sizes should match", cl.size(), result.size());
-    	for (int i = 0; i < cl.size(); i++) {
-    		assertSame(cl.get(i).wrapped(), result.get(i));
-    	}
 	}
 	
 }

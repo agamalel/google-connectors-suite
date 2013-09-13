@@ -14,7 +14,7 @@
 		</property>  
 	</bean>
 
-	<bean id="connectorOAuthState" class="org.mule.module.google.calendar.oauth.GoogleCalendarConnectorOAuthState">
+	<bean id="connectorOAuthState" class="org.mule.common.security.oauth.OAuthState">
 		<property name="accessToken" value="${google.calendars.accessToken}" />
 	</bean>
 	
