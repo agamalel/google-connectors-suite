@@ -188,8 +188,8 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
    		credential.setAccessToken(this.getAccessToken());
    		
    		ContactsService service = new ContactsService(this.getApplicationName());
+   		service.setProtocolVersion(ContactsService.Versions.V3);
 		service.setOAuth2Credentials(credential);
-		service.setHeader("If-Match", "*");
 
 		this.setService(service);
    	}
