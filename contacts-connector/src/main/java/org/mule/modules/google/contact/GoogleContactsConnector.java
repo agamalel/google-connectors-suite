@@ -713,10 +713,14 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
 	@Inject
-	public void batchInsert(MuleMessage message, String operationId, @Optional @Default("#[payload:]") Collection<GoogleContactEntry> entries) {
+	public void batchInsert(MuleMessage message, String operationId, @Optional @Default("#[payload:]") Collection<GoogleContactBaseEntity<?>> entries) {
 		
-		for (GoogleContactEntry entry : entries) {
-			this.addBatchOperation(GoogleContactBaseEntity.getWrappedEntity(ContactEntry.class, entry), operationId, BatchOperationType.INSERT, message);
+		for (GoogleContactBaseEntity<?> entry : entries) {
+			this.addBatchOperation(
+					GoogleContactBaseEntity.getWrappedEntity((entry instanceof GoogleContactEntry ? ContactEntry.class : ContactGroupEntry.class), entry), 
+					operationId, 
+					BatchOperationType.INSERT, 
+					message);
 		}
 	}
 	
@@ -738,10 +742,14 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
 	@Inject
-	public void batchUpdate(MuleMessage message, String operationId, @Optional @Default("#[payload:]") Collection<GoogleContactEntry> entries) {
+	public void batchUpdate(MuleMessage message, String operationId, @Optional @Default("#[payload:]") Collection<GoogleContactBaseEntity<?>> entries) {
 		
-		for (GoogleContactEntry entry : entries) {
-			this.addBatchOperation(GoogleContactBaseEntity.getWrappedEntity(ContactEntry.class, entry), operationId, BatchOperationType.UPDATE, message);
+		for (GoogleContactBaseEntity<?> entry : entries) {
+			this.addBatchOperation(
+					GoogleContactBaseEntity.getWrappedEntity((entry instanceof GoogleContactEntry ? ContactEntry.class : ContactGroupEntry.class), entry), 
+					operationId, 
+					BatchOperationType.UPDATE, 
+					message);
 		}
 	}
 	
@@ -763,10 +771,14 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
 	@Inject
-	public void batchDelete(MuleMessage message, String operationId, @Optional @Default("#[payload:]") Collection<GoogleContactEntry> entries) {
+	public void batchDelete(MuleMessage message, String operationId, @Optional @Default("#[payload:]") Collection<GoogleContactBaseEntity<?>> entries) {
 		
-		for (GoogleContactEntry entry : entries) {
-			this.addBatchOperation(GoogleContactBaseEntity.getWrappedEntity(ContactEntry.class, entry), operationId, BatchOperationType.DELETE, message);
+		for (GoogleContactBaseEntity<?> entry : entries) {
+			this.addBatchOperation(
+					GoogleContactBaseEntity.getWrappedEntity((entry instanceof GoogleContactEntry ? ContactEntry.class : ContactGroupEntry.class), entry), 
+					operationId, 
+					BatchOperationType.DELETE, 
+					message);
 		}
 	}
 	
