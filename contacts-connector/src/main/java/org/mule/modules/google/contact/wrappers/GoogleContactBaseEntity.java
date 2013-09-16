@@ -11,6 +11,7 @@ package org.mule.modules.google.contact.wrappers;
 
 import com.google.gdata.data.BaseEntry;
 import com.google.gdata.data.DateTime;
+import com.google.gdata.data.Link;
 import com.google.gdata.data.TextConstruct;
 
 abstract public class GoogleContactBaseEntity<W extends BaseEntry<?>> {
@@ -72,6 +73,11 @@ abstract public class GoogleContactBaseEntity<W extends BaseEntry<?>> {
 	
 	public Boolean getCanEdit() {
 		return wrapped.getCanEdit();
+	}
+	
+	// Only getter
+	public Link getEditLink() {
+		return wrapped.getEditLink();
 	}
 	
 	// Only getter
