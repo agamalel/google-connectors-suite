@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -311,12 +312,21 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 	 * @return an instance of {@link com.google.gdata.data.contacts.ContactEntry} representing the contact's updated state
 	 * @throws IOException if there's a communication error with google's servers
 	 * @throws ServiceException if the operation raises an error on google's end
+	 * @throws URISyntaxException If the generation of the URL for the update endpoint fails
+	 * @throws IllegalArgumentException If the generation of the URL for the update endpoint fails
 	 */
 	@Processor
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
-	public GoogleContactEntry updateContact(@Optional @Default("#[payload:]") GoogleContactEntry contact) throws IOException, ServiceException {
-		return new GoogleContactEntry(getService().update(this.contactFeedURL, GoogleContactBaseEntity.getWrappedEntity(ContactEntry.class, contact)));
+	public GoogleContactEntry updateContact(@Optional @Default("#[payload:]") GoogleContactEntry contact) throws IOException, ServiceException, IllegalArgumentException, URISyntaxException {
+		URL updateUrl = new URL(contact.getEditLink().getHref());
+		
+		return new GoogleContactEntry(
+				getService().update(
+						updateUrl, 
+						GoogleContactBaseEntity.getWrappedEntity(ContactEntry.class, contact)));
+		
+		
 	}
 	
 	/**
