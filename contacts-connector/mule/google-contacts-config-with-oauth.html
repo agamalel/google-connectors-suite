@@ -66,6 +66,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -839,7 +882,7 @@ the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;google-contacts:config&gt;
-        &lt;google-contacts:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
+        &lt;google-contacts:oauth-callback-config domain="${fullDomain}" localPort="${http.port}" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
     &lt;/google-contacts:config&gt;
 </pre>
 <p>The <i>oauth-callback-config</i> element can be used to customize the endpoint that gets created for the callback. It
@@ -857,7 +900,7 @@ features the following attributes:</p>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>localPort</nobr></td>
-<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable 10010.</td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable ${http.port}.</td>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>remotePort</nobr></td>
@@ -937,9 +980,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Adds a group to a given contact
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Adds a group to a given contact
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:add-group groupId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:add-group groupId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -956,26 +1003,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contact</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact to be updated</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contact</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact to be updated</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>groupId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the group</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>groupId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the group</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -993,8 +1044,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry representing the contact's updated state</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry representing the contact's updated state</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1034,13 +1088,17 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>This tag encloses a series of nested processors that perform operations on contacts entities 
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        This tag encloses a series of nested processors that perform operations on contacts entities 
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-contacts batchId="sample" config-ref="google-contacts"&gt;
 	&lt;google-contacts:batch-insert operationId="inserts" entries-ref="#[map-payload:inserts]" config-ref="google-contacts" /&gt;
 	&lt;google-contacts:batch-update operationId="updates" entries-ref="#[map-payload:updates]" config-ref="google-contacts" /&gt;
 	&lt;google-contacts:batch-delete operationId="deletes" entries-ref="#[map-payload:deletes]" config-ref="google-contacts" /&gt;
-&lt;/google-contacts:batch-contacts&gt;</pre></div></p></div>
+&lt;/google-contacts:batch-contacts&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1057,14 +1115,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>batchId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An id to identify the batch</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>batchId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An id to identify the batch</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1105,8 +1165,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;BatchResult&gt;</td>
-                <td class="jd-descrcol">a list with instances of org.mule.modules.google.api.domain.BatchResult</td>
+                
+                    <td class="jd-descrcol">List&lt;BatchResult&gt;</td>
+                    <td class="jd-descrcol">a list with instances of org.mule.modules.google.api.domain.BatchResult</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1142,13 +1205,17 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>The function of this sub processor is to add updated operations into the current batch for the given entries
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        The function of this sub processor is to add updated operations into the current batch for the given entries
  
  This processor is intended to be used nested inside batch-contacts or batch-groups, although there's no syntactic
  validation inside the connector's XSD enforcing that. However, if you don't use it that way, then it's most
  likely to throw a java.lang.IllegalStateException
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-delete operationId="deletes" entries-ref="#[map-payload:deletes]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-delete operationId="deletes" entries-ref="#[map-payload:deletes]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1165,38 +1232,44 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>message</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The current mule message</td>
-                        <td class="jd-descrcol">MuleMessage</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>message</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The current mule message</td>
+                            <td class="jd-descrcol">MuleMessage</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>operationId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Id to identify this particular operation inside the batch</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>operationId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">Id to identify this particular operation inside the batch</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>entries</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of com.google.gdata.data.BaseEntry to be batch updated</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>entries</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of com.google.gdata.data.BaseEntry to be batch updated</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactBaseEntity.html">GoogleContactBaseEntity</a>&lt;?&gt;&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1238,7 +1311,9 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>This tag encloses a series of nested processors that perform operations on group entities.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        This tag encloses a series of nested processors that perform operations on group entities.
  According to the API's specification the maximum number of operations allowed in one batch is 100. Thus,
  this processor will automatically group the operations in batches of 100. 
  
@@ -1249,7 +1324,9 @@ protected operation that uses that token.
 	&lt;google-contacts:batch-insert operationId="inserts" entries-ref="#[map-payload:inserts]" config-ref="google-contacts" /&gt;
 	&lt;google-contacts:batch-update operationId="updates" entries-ref="#[map-payload:updates]" config-ref="google-contacts" /&gt;
 	&lt;google-contacts:batch-delete operationId="deletes" entries-ref="#[map-payload:deletes]" config-ref="google-contacts" /&gt;
-&lt;/google-contacts:batch-groups&gt;</pre></div></p></div>
+&lt;/google-contacts:batch-groups&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1266,14 +1343,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>batchId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An id to identify the batch</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>batchId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An id to identify the batch</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1314,8 +1393,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;BatchResult&gt;</td>
-                <td class="jd-descrcol">a list with instances of org.mule.modules.google.api.domain.BatchResult</td>
+                
+                    <td class="jd-descrcol">List&lt;BatchResult&gt;</td>
+                    <td class="jd-descrcol">a list with instances of org.mule.modules.google.api.domain.BatchResult</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1351,13 +1433,17 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>The function of this sub processor is to add insert operations into the current batch for the given entries
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        The function of this sub processor is to add insert operations into the current batch for the given entries
  
  This processor is intended to be used nested inside batch-contacts or batch-groups, although there's no syntactic
  validation inside the connector's XSD enforcing that. However, if you don't use it that way, then it's most
  likely to throw a java.lang.IllegalStateException
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-insert operationId="inserts" entries-ref="#[map-payload:inserts]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-insert operationId="inserts" entries-ref="#[map-payload:inserts]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1374,38 +1460,44 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>message</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The current mule message</td>
-                        <td class="jd-descrcol">MuleMessage</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>message</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The current mule message</td>
+                            <td class="jd-descrcol">MuleMessage</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>operationId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Id to identify this particular operation inside the batch</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>operationId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">Id to identify this particular operation inside the batch</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>entries</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of com.google.gdata.data.BaseEntry to be batch inserted</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>entries</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of com.google.gdata.data.BaseEntry to be batch inserted</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactBaseEntity.html">GoogleContactBaseEntity</a>&lt;?&gt;&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1447,13 +1539,17 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>The function of this sub processor is to add updated operations into the current batch for the given entries
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        The function of this sub processor is to add updated operations into the current batch for the given entries
  
  This processor is intended to be used nested inside batch-contacts or batch-groups, although there's no syntactic
  validation inside the connector's XSD enforcing that. However, if you don't use it that way, then it's most
  likely to throw a java.lang.IllegalStateException
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-update operationId="updates" entries-ref="#[map-payload:updates]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:batch-update operationId="updates" entries-ref="#[map-payload:updates]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1470,38 +1566,44 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>message</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The current mule message</td>
-                        <td class="jd-descrcol">MuleMessage</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>message</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The current mule message</td>
+                            <td class="jd-descrcol">MuleMessage</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>operationId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Id to identify this particular operation inside the batch</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>operationId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">Id to identify this particular operation inside the batch</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>entries</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of com.google.gdata.data.BaseEntry to be batch updated</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>entries</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of com.google.gdata.data.BaseEntry to be batch updated</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactBaseEntity.html">GoogleContactBaseEntity</a>&lt;?&gt;&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1543,9 +1645,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts a new group
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts a new group
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:create-group config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:create-group config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1562,14 +1668,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>group</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactGroupEntry representing the group to be inserted</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>group</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactGroupEntry representing the group to be inserted</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1587,8 +1695,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry representing the newly created group</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry representing the newly created group</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1628,9 +1739,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes a given contact
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes a given contact
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1647,14 +1762,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>entry</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The contact to be deleted</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>entry</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The contact to be deleted</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1700,8 +1817,12 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes a contact signaled by its id
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-by-id contactId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes a contact signaled by its id
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-by-id contactId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1718,14 +1839,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contactId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the contact to be deleted</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contactId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the contact to be deleted</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1771,9 +1894,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes the photo associated to a given contact
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes the photo associated to a given contact
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-photo config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-photo config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1790,14 +1917,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contact</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact whose photo we want deleted</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contact</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact whose photo we want deleted</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1843,9 +1972,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes the photo of a contact signaled by its id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes the photo of a contact signaled by its id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-photo-by-id contactId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-photo-by-id contactId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1862,14 +1995,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contactId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the contact whose photo we want to delete</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contactId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the contact whose photo we want to delete</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1915,9 +2050,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes the given group
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes the given group
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-group config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-group config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1934,14 +2073,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>group</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactGroupEntry representing the group to be deleted</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>group</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactGroupEntry representing the group to be deleted</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1987,9 +2128,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes a group signaled by its id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes a group signaled by its id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-group-by-id groupId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-group-by-id groupId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2006,14 +2151,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>groupId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the group to be deleted</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>groupId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the group to be deleted</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2059,8 +2206,12 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Downloads the photo of a given contact
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:download-photo config-ref="google-contacts" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Downloads the photo of a given contact
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:download-photo config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2077,14 +2228,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contact</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The contact whose photo we want</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contact</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The contact whose photo we want</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2102,8 +2255,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">InputStream</td>
-                <td class="jd-descrcol">an instance of java.io.InputStream</td>
+                
+                    <td class="jd-descrcol">InputStream</td>
+                    <td class="jd-descrcol">an instance of java.io.InputStream</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2143,9 +2299,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Downloads the photo of a contact signaled by its id contact and returns it as an input stream
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Downloads the photo of a contact signaled by its id contact and returns it as an input stream
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:download-photo-by-id id="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:download-photo-by-id id="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2162,14 +2322,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the contact whose photo we want</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the contact whose photo we want</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2187,8 +2349,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">InputStream</td>
-                <td class="jd-descrcol">an instance of java.io.InputStream</td>
+                
+                    <td class="jd-descrcol">InputStream</td>
+                    <td class="jd-descrcol">an instance of java.io.InputStream</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2228,9 +2393,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves a contact by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Retrieves a contact by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-contact-by-id id="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-contact-by-id id="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2247,14 +2416,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the contact</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the contact</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2272,8 +2443,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2313,10 +2487,16 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves all the contacts matching the given criterias. If a criteria is not provided
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Retrieves all the contacts matching the given criterias. If a criteria is not provided
  then it's not used in the filtering. Thus, providing no criteria equals getting all contacts
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-contacts fullTextQuery="Mulesoft" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ 
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-contacts fullTextQuery="Mulesoft" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2333,112 +2513,130 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>updatedMin</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the minimum updated timestamp used for the query.  Only entries with
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>updatedMin</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the minimum updated timestamp used for the query.  Only entries with
  					an updated timestamp equal to or later than the specified timestamp will be returned.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>updatedMax</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the maximum updated timestamp used for the query.  Only entries with
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>updatedMax</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the maximum updated timestamp used for the query.  Only entries with
  					 an updated timestamp earlier than the specified timestamp will be returned.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
-                        <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The pattern to be used for parsing updatedMin and updatedMax</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
+                            <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The pattern to be used for parsing updatedMin and updatedMax</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>fullTextQuery</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the full text query string that will be used for the query.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>fullTextQuery</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the full text query string that will be used for the query.</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>sortOrder</nobr></td>
-                        <td class="jd-descrcol">NONE</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Valid values are NONE, ASCENDING and DESCENDING</td>
-                        <td class="jd-descrcol">ContactQuery.SortOrder</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>sortOrder</nobr></td>
+                            <td class="jd-descrcol">NONE</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Valid values are NONE, ASCENDING and DESCENDING</td>
+                            <td class="jd-descrcol">ContactQuery.SortOrder</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Wether to show deleted entries or not</td>
-                        <td class="jd-descrcol">Boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Wether to show deleted entries or not</td>
+                            <td class="jd-descrcol">Boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>orderBy</nobr></td>
-                        <td class="jd-descrcol">NONE</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The field to be used when sorting. Valid values are NONE, LAST_MODIFIED and EDITED </td>
-                        <td class="jd-descrcol">ContactQuery.OrderBy</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>orderBy</nobr></td>
+                            <td class="jd-descrcol">NONE</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The field to be used when sorting. Valid values are NONE, LAST_MODIFIED and EDITED </td>
+                            <td class="jd-descrcol">ContactQuery.OrderBy</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>groupId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Only show contacts from a given group</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>groupId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Only show contacts from a given group</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The paging configuration object</td>
-                        <td class="jd-descrcol">PagingConfiguration</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>fetchSize</nobr></td>
+                            <td class="jd-descrcol">100</td>
+                            <td class="jd-descrcol">Specify the number of objects that will be returned in each iteration</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                        </tr>
+                    
                 
                 
           
@@ -2456,8 +2654,22 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>&gt;</td>
-                <td class="jd-descrcol">an auto paginated iterator with instances of com.google.gdata.data.contacts.ContactEntry</td>
+                
+                    <td class="jd-descrcol">
+    Iterator
+    
+
+    
+    &lt;
+        
+            <a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a>
+            
+        &gt;
+    
+</td>
+                    <td class="jd-descrcol">A collection: each index contains a list of objects, each object with its own set of properties. It is possible to process it in parts thanks to its pagination.</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2497,9 +2709,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves a group by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Retrieves a group by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-group-by-id id="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-group-by-id id="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2516,14 +2732,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the group to be returned</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the group to be returned</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2541,8 +2759,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2582,9 +2803,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves a group with the given name
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Retrieves a group with the given name
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-group-by-name groupName="my group" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:get-group-by-name groupName="my group" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2601,14 +2826,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>groupName</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The name of the group you want</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>groupName</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The name of the group you want</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2626,8 +2853,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry or <code>null</code> if the group doesn't exist</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry or <code>null</code> if the group doesn't exist</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2667,9 +2897,15 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns all the groups the authenticated user has access to
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns all the groups the authenticated user has access to
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-photo config-ref="google-contacts" /&gt;</pre></div></p></div>
+ 
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:delete-contact-photo config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2686,52 +2922,60 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>updatedMin</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the minimum updated timestamp used for the query.  Only entries with
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>updatedMin</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the minimum updated timestamp used for the query.  Only entries with
  					an updated timestamp equal to or later than the specified timestamp will be returned. </td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>updatedMax</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the maximum updated timestamp used for the query.  Only entries with
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>updatedMax</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Sets the maximum updated timestamp used for the query.  Only entries with
  					  an updated timestamp earlier than the specified timestamp will be returned.</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
-                        <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The date pattern used to parse updatedMin and updatedMax</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
+                            <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The date pattern used to parse updatedMin and updatedMax</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The pagingConfiguration object</td>
-                        <td class="jd-descrcol">PagingConfiguration</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>fetchSize</nobr></td>
+                            <td class="jd-descrcol">100</td>
+                            <td class="jd-descrcol">Specify the number of objects that will be returned in each iteration</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                        </tr>
+                    
                 
                 
           
@@ -2749,8 +2993,22 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a>&gt;</td>
-                <td class="jd-descrcol">an auto paginated iterator with instances of com.google.gdata.data.contacts.ContactGroupEntry</td>
+                
+                    <td class="jd-descrcol">
+    Iterator
+    
+
+    
+    &lt;
+        
+            <a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a>
+            
+        &gt;
+    
+</td>
+                    <td class="jd-descrcol">A collection: each index contains a list of objects, each object with its own set of properties. It is possible to process it in parts thanks to its pagination.</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2790,9 +3048,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts a new contact
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts a new contact
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:insert-contact config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:insert-contact config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2809,14 +3071,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contact</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact to be inserted</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contact</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact to be inserted</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2834,8 +3098,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry representing the newly inserted contact</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry representing the newly inserted contact</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2875,9 +3142,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates a contact entry
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates a contact entry
 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:update-contact config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:update-contact config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2894,14 +3165,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contact</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact to be updated</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contact</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactEntry representing the contact to be updated</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2919,8 +3192,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry representing the contact's updated state</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactEntry.html">GoogleContactEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactEntry representing the contact's updated state</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2937,7 +3213,15 @@ protected operation that uses that token.
         </tr>
         <tr>
             <td>ServiceException</td>
-            <td>if the operation raises an error on google's end
+            <td>if the operation raises an error on google's end</td>
+        </tr>
+        <tr>
+            <td>URISyntaxException</td>
+            <td>If the generation of the URL for the update endpoint fails</td>
+        </tr>
+        <tr>
+            <td>IllegalArgumentException</td>
+            <td>If the generation of the URL for the update endpoint fails
 </td>
         </tr>
       </table>
@@ -2960,9 +3244,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates the photo of a contact signaled by its id taken a java.io.InputStream as an input
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates the photo of a contact signaled by its id taken a java.io.InputStream as an input
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:update-contact-photo contactId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:update-contact-photo contactId="#[map-payload:id]" config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2979,26 +3267,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>contactId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the contact whose photo we want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>contactId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the contact whose photo we want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>in</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A java.io.InputStream with the photo's binary content</td>
-                        <td class="jd-descrcol">InputStream</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>in</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A java.io.InputStream with the photo's binary content</td>
+                            <td class="jd-descrcol">InputStream</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3044,9 +3336,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates the state of a group
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates the state of a group
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:update-group config-ref="google-contacts" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-contacts:update-group config-ref="google-contacts" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3063,14 +3359,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>group</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactGroupEntry with the group's new state</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>group</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of com.google.gdata.data.contacts.ContactGroupEntry with the group's new state</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3088,8 +3386,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
-                <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry reflecting the group's updated state</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/modules/google/contact/wrappers/GoogleContactGroupEntry.html">GoogleContactGroupEntry</a></td>
+                    <td class="jd-descrcol">an instance of com.google.gdata.data.contacts.ContactGroupEntry reflecting the group's updated state</td>
+                
+
              </tr>
          </table>
   </div>
