@@ -66,6 +66,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -914,7 +957,7 @@ the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;google-calendars:config&gt;
-        &lt;google-calendars:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
+        &lt;google-calendars:oauth-callback-config domain="${fullDomain}" localPort="${http.port}" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
     &lt;/google-calendars:config&gt;
 </pre>
 <p>The <i>oauth-callback-config</i> element can be used to customize the endpoint that gets created for the callback. It
@@ -932,7 +975,7 @@ features the following attributes:</p>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>localPort</nobr></td>
-<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable 10010.</td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable ${http.port}.</td>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>remotePort</nobr></td>
@@ -1012,9 +1055,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes many events in a batch
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes many events in a batch
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-delete-calendar /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-delete-calendar /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1031,14 +1078,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendars</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of @{link org.mule.module.google.calendar.model.Calendar} that are to be deleted</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendars</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of @{link org.mule.module.google.calendar.model.Calendar} that are to be deleted</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1080,9 +1129,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes many events in a batch
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes many events in a batch
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-delete-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-delete-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1099,26 +1152,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the events to be deleted</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the events to be deleted</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarEvents</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> that are to be deleted</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarEvents</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> that are to be deleted</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1160,9 +1217,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts many calendars in a batch
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts many calendars in a batch
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-insert-calendar /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-insert-calendar /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1179,14 +1240,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendars</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of @{link org.mule.module.google.calendar.model.Calendar} that are to be inserted</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendars</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of @{link org.mule.module.google.calendar.model.Calendar} that are to be inserted</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1204,8 +1267,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
-                <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Calendar></td>
+                
+                    <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
+                    <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Calendar></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1241,9 +1307,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts many events as a batch
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts many events as a batch
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-insert-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-insert-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1260,26 +1330,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar that's receiving the calendars</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar that's receiving the calendars</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarEvents</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> that are to be inserted</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarEvents</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> that are to be inserted</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1297,8 +1371,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Event></td>
+                
+                    <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                    <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Event></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1334,9 +1411,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates many calendars in a batch
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates many calendars in a batch
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-update-calendar /&gt; </pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-update-calendar /&gt; </pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1353,14 +1434,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendars</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of @{link org.mule.module.google.calendar.model.Calendar} that are to be updated</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendars</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of @{link org.mule.module.google.calendar.model.Calendar} that are to be updated</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1378,8 +1461,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
-                <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Calendar></td>
+                
+                    <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a>&gt;</td>
+                    <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Calendar></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1415,9 +1501,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates many events in a batch
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates many events in a batch
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-update-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:batch-update-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1434,26 +1524,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the events to be updated</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the events to be updated</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarEvents</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> that are to be updated</td>
-                        <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarEvents</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>A collection with instances of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> that are to be updated</td>
+                            <td class="jd-descrcol">Collection&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1471,8 +1565,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Event></td>
+                
+                    <td class="jd-descrcol">BatchResponse&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
+                    <td class="jd-descrcol">an instance of org.mule.modules.google.api.client.batch.BatchResponse<Event></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1508,9 +1605,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Clears all the events on the calendar referenced by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Clears all the events on the calendar referenced by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:clear-calendar id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:clear-calendar id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1527,14 +1628,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar you want to clear</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar you want to clear</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1576,9 +1679,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts a new calendar associated with the user that owns the current OAuth token
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts a new calendar associated with the user that owns the current OAuth token
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:create-calendar /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:create-calendar /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1595,15 +1702,17 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendar</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> with the information
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendar</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> with the information
         of the calendar you want to insert </td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1621,9 +1730,12 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
-                <td class="jd-descrcol">another instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> representing the calendar
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
+                    <td class="jd-descrcol">another instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> representing the calendar
          that was created</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1659,9 +1771,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes an ACL rule on a calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes an ACL rule on a calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-acl-rule calendarId="mariano.gonzalez@mulesoft.com" ruleId="#[map-payload:ruleId]" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-acl-rule calendarId="mariano.gonzalez@mulesoft.com" ruleId="#[map-payload:ruleId]" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1678,26 +1794,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar loosing a rule</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar loosing a rule</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>ruleId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the rule to be deleted</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>ruleId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the rule to be deleted</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1739,9 +1859,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes a particular calendar referenced by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes a particular calendar referenced by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-calendar id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-calendar id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1758,14 +1882,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar you want to delete</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar you want to delete</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1807,9 +1933,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes a calendar list referenced by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes a calendar list referenced by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-calendar-list id="someId"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-calendar-list id="someId"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1826,14 +1956,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar list you want to delete</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar list you want to delete</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1875,9 +2007,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes an event from a specified calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes an event from a specified calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-event calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:delete-event calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1894,26 +2030,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>eventId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The event's id</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>eventId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The event's id</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -1955,9 +2095,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves a Rule by Id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Retrieves a Rule by Id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-acl-rule-by-id calendarId="mariano.gonzalez@mulesoft.com" ruleId="#[map-payload:ruleId]" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-acl-rule-by-id calendarId="mariano.gonzalez@mulesoft.com" ruleId="#[map-payload:ruleId]" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1974,26 +2118,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the rule</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the rule</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>ruleId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the rule</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>ruleId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the rule</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2011,8 +2159,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code></td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2048,9 +2199,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns all the Acl rules for a particular calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns all the Acl rules for a particular calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-all-acl-rules calendarId="mariano.gonzalez@mulesoft.com"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-all-acl-rules calendarId="mariano.gonzalez@mulesoft.com"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2067,14 +2222,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the rules</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the rules</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2092,8 +2249,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a>&gt;</td>
-                <td class="jd-descrcol">a list of instances of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code></td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a>&gt;</td>
+                    <td class="jd-descrcol">a list of instances of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2129,9 +2289,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a particular calendar specified by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a particular calendar specified by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-by-id id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-by-id id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2148,14 +2312,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2173,8 +2339,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code></td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2210,12 +2379,20 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a paginated iterator with instances of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a paginated iterator with instances of 
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> listing the
  calendars of the user that owns the OAuth access token.
  
  Optional parameters are not considered in the search if not specified.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-list showHidden="true" /&gt;</pre></div></p></div>
+ 
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-list showHidden="true" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2232,26 +2409,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>showHidden</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, hidden calendars will be returned</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>showHidden</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, hidden calendars will be returned</td>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The paging configuration object</td>
-                        <td class="jd-descrcol">PagingConfiguration</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>fetchSize</nobr></td>
+                            <td class="jd-descrcol">100</td>
+                            <td class="jd-descrcol">Specify the number of objects that will be returned in each iteration</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                        </tr>
+                    
                 
                 
           
@@ -2269,8 +2450,22 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a>&gt;</td>
-                <td class="jd-descrcol">a paginated iterator with instances of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code></td>
+                
+                    <td class="jd-descrcol">
+    Iterator
+    
+
+    
+    &lt;
+        
+            <a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a>
+            
+        &gt;
+    
+</td>
+                    <td class="jd-descrcol">A collection: each index contains a list of objects, each object with its own set of properties. It is possible to process it in parts thanks to its pagination.</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2306,10 +2501,14 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a particular calendar list identified by id.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a particular calendar list identified by id.
  The user owning the OAuth token needs to have permissions for reading that list
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-list-by-id id="someId" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-calendar-list-by-id id="someId" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2326,14 +2525,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar list you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar list you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2351,8 +2552,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code></td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2388,9 +2592,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves an event by id
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Retrieves an event by id
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-event-by-id calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-event-by-id calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2407,26 +2615,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>eventId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The event's id</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>eventId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The event's id</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2444,8 +2656,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event on google's servers</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event on google's servers</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2481,9 +2696,15 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Searchs and returns events matching the criteria parameters. If a criteria is not specified, then it is not applied
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Searchs and returns events matching the criteria parameters. If a criteria is not specified, then it is not applied
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-events calendarId="mariano.gonzalez@mulesoft.com" timeMin="2012-01-01T00:00:00Z"/&gt;</pre></div></p></div>
+ 
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-events calendarId="mariano.gonzalez@mulesoft.com" timeMin="2012-01-01T00:00:00Z"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2500,173 +2721,201 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the colendar that contains the events</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the colendar that contains the events</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>icalUID</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies iCalendar UID (iCalUID) of events to be included in the response</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>icalUID</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies iCalendar UID (iCalUID) of events to be included in the response</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxAttendees</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The maximum number of attendees to include in the response. If there are more than the
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxAttendees</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The maximum number of attendees to include in the response. If there are more than the
                      specified number of attendees, only the participant is returned.</td>
-                        <td class="jd-descrcol">Integer</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">Integer</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>orderBy</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The order of the events returned in the result</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>orderBy</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The order of the events returned in the result</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>query</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Free text search terms to find events that match these terms in any field, except for
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>query</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Free text search terms to find events that match these terms in any field, except for
                extended properties</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include deleted events (with 'eventStatus' equals 'cancelled') in the result.</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include deleted events (with 'eventStatus' equals 'cancelled') in the result.</td>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>showHiddenInvitations</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include hidden invitations in the result</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>showHiddenInvitations</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include hidden invitations in the result</td>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>singleEvents</nobr></td>
-                        <td class="jd-descrcol">true</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to expand recurring events into instances and only return single one-off events and
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>singleEvents</nobr></td>
+                            <td class="jd-descrcol">true</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to expand recurring events into instances and only return single one-off events and
  			instances of recurring events, but not the underlying recurring events themselves.</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timeMin</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Lower bound timestamp (inclusive) for an event's end time to filter by </td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timeMin</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Lower bound timestamp (inclusive) for an event's end time to filter by </td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timeMax</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Upper bound timestamp (exclusive) for an event's start time to filter by</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timeMax</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Upper bound timestamp (exclusive) for an event's start time to filter by</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
-                        <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The timestamp format for timeMin, timeMax and lastUpdated. It defaults to RFC 3369 (yyyy-MM-dd'T'HH:mm:ssZ)</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
+                            <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The timestamp format for timeMin, timeMax and lastUpdated. It defaults to RFC 3369 (yyyy-MM-dd'T'HH:mm:ssZ)</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timezone</nobr></td>
-                        <td class="jd-descrcol">UTC</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Timezone in which timeMin, timeMax and lastUpdated is to be considered on</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timezone</nobr></td>
+                            <td class="jd-descrcol">UTC</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Timezone in which timeMin, timeMax and lastUpdated is to be considered on</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>lastUpdated</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Lower bound timestamp for an event's last modification time to filter by</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>lastUpdated</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Lower bound timestamp for an event's last modification time to filter by</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The paging configuration object</td>
-                        <td class="jd-descrcol">PagingConfiguration</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>fetchSize</nobr></td>
+                            <td class="jd-descrcol">100</td>
+                            <td class="jd-descrcol">Specify the number of objects that will be returned in each iteration</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                        </tr>
+                    
                 
                 
           
@@ -2684,8 +2933,22 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                <td class="jd-descrcol">a paginated iterator of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code></td>
+                
+                    <td class="jd-descrcol">
+    Iterator
+    
+
+    
+    &lt;
+        
+            <a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>
+            
+        &gt;
+    
+</td>
+                    <td class="jd-descrcol">A collection: each index contains a list of objects, each object with its own set of properties. It is possible to process it in parts thanks to its pagination.</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2721,9 +2984,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns the free time the authenticated user has between two times
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns the free time the authenticated user has between two times
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-free-time timeMin="2012-06-18T00:00:00Z" timeMax="2012-06-19T00:00:00Z"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-free-time timeMin="2012-06-18T00:00:00Z" timeMax="2012-06-19T00:00:00Z"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2740,64 +3007,74 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timeMin</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The start of the interval for the query</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timeMin</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The start of the interval for the query</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timeMax</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The end of the interval for the query</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timeMax</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The end of the interval for the query</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timezone</nobr></td>
-                        <td class="jd-descrcol">UTC</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Time zone used in the response</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timezone</nobr></td>
+                            <td class="jd-descrcol">UTC</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Time zone used in the response</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
-                        <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The format to be used to parse timeMin and timeMax</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>datetimeFormat</nobr></td>
+                            <td class="jd-descrcol">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The format to be used to parse timeMin and timeMax</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxCalendarExpansion</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Maximal number of calendars for which FreeBusy information is to be provided</td>
-                        <td class="jd-descrcol">Integer</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxCalendarExpansion</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Maximal number of calendars for which FreeBusy information is to be provided</td>
+                            <td class="jd-descrcol">Integer</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2844,8 +3121,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/FreeBusy.html">FreeBusy</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/FreeBusy.html">FreeBusy</a></code></td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/FreeBusy.html">FreeBusy</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/FreeBusy.html">FreeBusy</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2881,10 +3161,18 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>For recurring events, it returns one instance of
- <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> for each recurrence instance
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        For recurring events, it returns one instance of
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-instances calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div></p></div>
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> for each recurrence instance
+ 
+ 
+      <p>This operation can potentially return a large amount of records that might exceed memory capacity.</p>
+      <p>To prevent this from being a problem, the output of this operation is automatically paginated into an iterable collection of objects. Regardless of the page-size, the iterator will be pushing out registries one at a time and fetching next pages on demand. If you wish to take advantage of the pagination, you must process the output through elements that can handle collections, such as a ForEach scope or DataMapper. In this way, Mule will execute the entire set of registries one at a time, but processing only a batch at a time and thus keeping memory usage from going over limits.</p><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:get-instances calendarId="#[map-payload:calendarId]" eventId="#[map-payload:eventId]"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2901,87 +3189,101 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the recurrent event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the recurrent event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>eventId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of a recurrent event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>eventId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of a recurrent event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxAttendess</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The maximum number of attendees to include in the response. If there are more than the
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxAttendess</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The maximum number of attendees to include in the response. If there are more than the
  						specified number of attendees, only the participant is returned.</td>
-                        <td class="jd-descrcol">Integer</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">Integer</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include deleted events (with 'eventStatus' equals 'cancelled') in the result.</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>showDeleted</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Whether to include deleted events (with 'eventStatus' equals 'cancelled') in the result.</td>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>timezone</nobr></td>
-                        <td class="jd-descrcol">UTC</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Time zone used in the response</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>timezone</nobr></td>
+                            <td class="jd-descrcol">UTC</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Time zone used in the response</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>originalStart</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The original start time of the instance in the result</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>originalStart</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The original start time of the instance in the result</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>pagingConfiguration</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The paging configuration object</td>
-                        <td class="jd-descrcol">PagingConfiguration</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>fetchSize</nobr></td>
+                            <td class="jd-descrcol">100</td>
+                            <td class="jd-descrcol">Specify the number of objects that will be returned in each iteration</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                            <td class="jd-descrcol">&nbsp;</td>
+                        </tr>
+                    
                 
                 
           
@@ -2999,8 +3301,22 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">PagingDelegate&lt;<a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>&gt;</td>
-                <td class="jd-descrcol">an auto paginated iterator of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code></td>
+                
+                    <td class="jd-descrcol">
+    Iterator
+    
+
+    
+    &lt;
+        
+            <a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a>
+            
+        &gt;
+    
+</td>
+                    <td class="jd-descrcol">A collection: each index contains a list of objects, each object with its own set of properties. It is possible to process it in parts thanks to its pagination.</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3036,9 +3352,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Imports the given event into a calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Imports the given event into a calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:import-event calendarId="mariano.gonzalez@mulesoft.com"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:import-event calendarId="mariano.gonzalez@mulesoft.com"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3055,26 +3375,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the target calendar</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the target calendar</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarEvent</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event to be imported</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarEvent</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event to be imported</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3092,8 +3416,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the imported event on google's servers</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the imported event on google's servers</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3129,9 +3456,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts a new ACL rule in a calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts a new ACL rule in a calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:insert-acl-rule calendarId="mariano.gonzalez@mulesoft.com" role="writer" scope="someuser@gmail.com" scopeType="USER"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:insert-acl-rule calendarId="mariano.gonzalez@mulesoft.com" role="writer" scope="someuser@gmail.com" scopeType="USER"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3148,52 +3479,59 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar affected by the rule</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar affected by the rule</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>scope</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The email address of a user or group, or the name of a domain, depending on the scope type.
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>scope</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The email address of a user or group, or the name of a domain, depending on the scope type.
  				Omitted for type "default".</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>scopeType</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The type of the scope. Possible values are: - "default" - The public scope. This is the default
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>scopeType</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The type of the scope. Possible values are: - "default" - The public scope. This is the default
  			value.
  			"user" - Limits the scope to a single user.
  		   "group" - Limits the scope to a group.
  		   "domain" - Limits the scope to a domain.  Note: The permissions granted to the "default", or
  						public, scope apply to any user, authenticated or not.</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/ScopeType.html">ScopeType</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/ScopeType.html">ScopeType</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>role</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The role assigned to the scope. Possible values are:
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>role</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The role assigned to the scope. Possible values are:
  			"none" - Provides no access.  -
  			"freeBusyReader" Provides read access to free/busy information.
  			"reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event
@@ -3202,10 +3540,11 @@ protected operation that uses that token.
  						and event details will be visible.
  			"owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional
  						ability to see and manipulate ACLs.</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/ScopeRole.html">ScopeRole</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/ScopeRole.html">ScopeRole</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3223,8 +3562,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code> representing the newly created rule</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code> representing the newly created rule</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3260,9 +3602,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Inserts the given event into an specified calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Inserts the given event into an specified calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:insert-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:insert-event calendarId="mariano.gonzalez@mulesoft.com" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3279,26 +3625,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar that's to contain the event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar that's to contain the event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarEvent</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event to be inserted </td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarEvent</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event to be inserted </td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3316,8 +3666,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event inserted on google's servers</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the event inserted on google's servers</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3353,9 +3706,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Moves a calendar form one calendar to another
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Moves a calendar form one calendar to another
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:move-event sourceCalendarId="#[map-payload:source]" eventId="#[map-payload:event]" targetCalendarId="#[map-payload:target]" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:move-event sourceCalendarId="#[map-payload:source]" eventId="#[map-payload:event]" targetCalendarId="#[map-payload:target]" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3372,38 +3729,44 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>sourceCalendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar that currently has the event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>sourceCalendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar that currently has the event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>eventId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the event to be moved</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>eventId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the event to be moved</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>targetCalendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar to receive the event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>targetCalendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar to receive the event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -3421,8 +3784,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the moved event</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the moved event</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3458,9 +3824,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Shortcut method for creating an event with nothing but a description text.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Shortcut method for creating an event with nothing but a description text.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:quick-add-event calendarId="#[map-payload:calendarId]" text="#[map-payload:text]" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:quick-add-event calendarId="#[map-payload:calendarId]" text="#[map-payload:text]" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3477,26 +3847,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar to contain the new event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar to contain the new event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>text</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Description of the new event</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>text</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">Description of the new event</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -3514,8 +3888,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the newly created event</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the newly created event</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3551,9 +3928,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates a rule on a given calendar
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates a rule on a given calendar
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-acl-rule calendarId="mariano.gonzalez@mulesoft.com" ruleId="#[map-payload:ruleId]" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-acl-rule calendarId="mariano.gonzalez@mulesoft.com" ruleId="#[map-payload:ruleId]" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3570,38 +3951,44 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar containing the rule</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar containing the rule</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>ruleId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the rule to be modified</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>ruleId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the rule to be modified</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>aclRule</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code> containing the new state of the rule</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>aclRule</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code> containing the new state of the rule</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3619,8 +4006,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code> representing the new updated state of the rule</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/AclRule.html">AclRule</a></code> representing the new updated state of the rule</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3656,9 +4046,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates a calendar referenced by id with the content of one specified or taken from the message payload.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates a calendar referenced by id with the content of one specified or taken from the message payload.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-calendar id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-calendar id="mariano.gonzalez@mulesoft.com"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3675,26 +4069,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendar</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> with the content you want to have reflected</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendar</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> with the content you want to have reflected</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3712,8 +4110,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> representing the updated calendar's state</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Calendar.html">Calendar</a></code> representing the updated calendar's state</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3749,9 +4150,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates a calendar list referenced by id with the content of one specified or taken from the message payload.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates a calendar list referenced by id with the content of one specified or taken from the message payload.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-calendar-list id="someId"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-calendar-list id="someId"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3768,26 +4173,30 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>id</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar list you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>id</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar list you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarList</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> with the content you want to have reflected</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarList</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> with the content you want to have reflected</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3805,8 +4214,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> with reflecting the calendar's updated state</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/CalendarList.html">CalendarList</a></code> with reflecting the calendar's updated state</td>
+                
+
              </tr>
          </table>
   </div>
@@ -3842,9 +4254,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Updates an event.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Updates an event.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-event calendarId="mariano.gonzalez@mulesoft.com" eventId="someEventId"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-calendars:update-event calendarId="mariano.gonzalez@mulesoft.com" eventId="someEventId"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3861,38 +4277,44 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The id of the calendar that contains the event to be updated</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The id of the calendar that contains the event to be updated</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>eventId</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The if of the event to be updated</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>eventId</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The if of the event to be updated</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>calendarEvent</nobr></td>
-                        <td class="jd-descrcol">#[payload]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> with the event's new state</td>
-                        <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>calendarEvent</nobr></td>
+                            <td class="jd-descrcol">#[payload]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>An instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> with the event's new state</td>
+                            <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3910,8 +4332,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the updated event</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/calendar/model/Event.html">Event</a></code> representing the updated event</td>
+                
+
              </tr>
          </table>
   </div>
