@@ -27,56 +27,51 @@ import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class ClearCalendarTestCases extends GoogleCalendarTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("clearCalendar"));
-						
-			String primaryCalendarId = getValueFromMessageTestObject("id");
-			Event sampleEvent = getValueFromMessageTestObject("sampleEvent");
-			Integer numEvents = getValueFromMessageTestObject("numEvents");
-
-			// Instantiate the event objects
-			List<Event> events = new ArrayList<Event>();
-			for (int i = 0; i < numEvents; i++) {
-				events.add(CalendarUtils.getEvent(sampleEvent.getSummary(), sampleEvent.getStart(), sampleEvent.getEnd()));
-			}
+	public void setUp() throws Exception {
+		
+		loadTestRunMessage("clearCalendar");
 					
-			// Batch insert the events
-			BatchResponse<Event> batchResponse = insertEvents(primaryCalendarId, events);
-			List<Event> successfulEvents = batchResponse.getSuccessful();
-			
-			addToMessageTestObject("events", successfulEvents);
+		String primaryCalendarId = getTestRunMessageValue("id");
+		Event sampleEvent = getTestRunMessageValue("sampleEvent");
+		Integer numEvents = getTestRunMessageValue("numEvents");
+
+		// Instantiate the event objects
+		List<Event> events = new ArrayList<Event>();
+		for (int i = 0; i < numEvents; i++) {
+			events.add(CalendarUtils.getEvent(sampleEvent.getSummary(), sampleEvent.getStart(), sampleEvent.getEnd()));
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+				
+		// Batch insert the events
+		BatchResponse<Event> batchResponse = insertEvents(primaryCalendarId, events);
+		List<Event> successfulEvents = batchResponse.getSuccessful();
+		
+		upsertOnTestRunMessage("events", successfulEvents);
+
 	}
 	
 	@Category({ RegressionTests.class})
 	@Test
 	public void testClearCalendar() {
 		try {
-			String primaryCalendarId = getValueFromMessageTestObject("id");			
+			String primaryCalendarId = getTestRunMessageValue("id");			
 			
 			// Clear the calendar
 			runFlowAndGetPayload("clear-calendar");
 
 			// Get all events
-			addToMessageTestObject("calendarId", primaryCalendarId);
+			upsertOnTestRunMessage("calendarId", primaryCalendarId);
 			List<Event> returnedEvents = runFlowAndGetPayload("get-all-events");
 			
 			// Assert that no events are returned
 			assertTrue(returnedEvents.isEmpty());
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 

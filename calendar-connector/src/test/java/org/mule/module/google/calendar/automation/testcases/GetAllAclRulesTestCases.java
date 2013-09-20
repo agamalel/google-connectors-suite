@@ -26,38 +26,33 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 
 	protected List<AclRule> insertedAclRules = new ArrayList<AclRule>();
 		
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("getAllAclRules"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("getAllAclRules");
 			
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 
 			
-			List<String> scopes = (List<String>) getValueFromMessageTestObject("scopes");
+			List<String> scopes = (List<String>) getTestRunMessageValue("scopes");
 			
 			// Insert the different scopes
 			for (String scope : scopes) {
-				addToMessageTestObject("scope", scope);	
+				upsertOnTestRunMessage("scope", scope);	
 				AclRule aclRule = runFlowAndGetPayload("insert-acl-rule");
 				insertedAclRules.add(aclRule);
 			}
 				
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 	
 	@Category({RegressionTests.class})
@@ -71,25 +66,17 @@ public class GetAllAclRulesTestCases extends GoogleCalendarTestParent {
 				assertTrue(CalendarUtils.isAclRuleInList(aclRuleList, insertedAclRule));
 			}
 			
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}	
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
-	
-	
+
 	
 }

@@ -11,6 +11,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/schema/mule/google-calendars/current/mule-google-calendars.xsd">
 
 	<context:property-placeholder location="${GOOGLE_CALENDAR_CREDENTIALS}" />
+
 	
 	<google-calendars:config-with-oauth	name="Google_Calendars" consumerKey="${google.calendars.consumer.key}"
 		consumerSecret="${google.calendars.consumer.secret}" doc:name="Google Calendars" applicationName="${google.calendars.application.name}">
@@ -128,7 +129,9 @@ http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/sch
 	</flow>
 	
 	<flow name="get-events" doc:name="get-events">
-	    <google-calendars:get-events config-ref="Google_Calendars" maxResults="#[payload.maxResults]" calendarId="#[payload.calendarId]" showDeleted="#[payload.showDeleted]" accessTokenId="accessTokenId" />
+		<google-calendars:get-events config-ref="Google_Calendars"
+			calendarId="#[payload.calendarId]" showDeleted="#[payload.showDeleted]"
+			accessTokenId="accessTokenId" />
 	</flow>
 	
 	<flow name="get-all-acl-rules" doc:name="get-all-acl-rules">

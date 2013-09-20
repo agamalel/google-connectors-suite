@@ -25,25 +25,20 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class InsertEventTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("insertEvent"));
-			
-			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			
-			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+		loadTestRunMessage("insertEvent");
+		
+		// Insert calendar and get reference to retrieved calendar
+		Calendar calendar = runFlowAndGetPayload("create-calendar");
+		
+		// Replace old calendar instance with new instance
+		upsertOnTestRunMessage("calendarRef", calendar);
+		upsertOnTestRunMessage("calendarId", calendar.getId());
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})	
@@ -54,31 +49,25 @@ public class InsertEventTestCases extends GoogleCalendarTestParent {
 			Event event = runFlowAndGetPayload("insert-event");
 			assertNotNull(event);
 			
-			addToMessageTestObject("event", event);
-			addToMessageTestObject("eventId", event.getId());
+			upsertOnTestRunMessage("event", event);
+			upsertOnTestRunMessage("eventId", event.getId());
 			
 			Event returnedEvent = runFlowAndGetPayload("get-event-by-id");
 			
 			assertTrue(event.getId().equals(returnedEvent.getId()));
 			assertTrue(EqualsBuilder.reflectionEquals(event, returnedEvent));
 		
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		
 	}
 	
 	

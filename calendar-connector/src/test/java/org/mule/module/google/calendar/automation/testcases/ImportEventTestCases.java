@@ -25,26 +25,21 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class ImportEventTestCases extends GoogleCalendarTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("importEvent"));
+	public void setUp() throws Exception {
+		loadTestRunMessage("importEvent");
+		
+		// Insert the calendar
+		Calendar calendar = runFlowAndGetPayload("create-calendar");
+		
+		upsertOnTestRunMessage("calendar", calendar);
+		upsertOnTestRunMessage("calendarId", calendar.getId());
 			
-			// Insert the calendar
-			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			
-			addToMessageTestObject("calendar", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 	
 	@Category({RegressionTests.class})
@@ -52,12 +47,12 @@ public class ImportEventTestCases extends GoogleCalendarTestParent {
 	public void testImportEvent() {
 		try {
 			// Get calendar instance
-			Calendar calendar = getValueFromMessageTestObject("calendar");
+			Calendar calendar = getTestRunMessageValue("calendar");
 			// Insert the event so that we get ID, and iCalUID
-			Event event = insertEvent(calendar, (Event) getValueFromMessageTestObject("event"));
+			Event event = insertEvent(calendar, (Event) getTestRunMessageValue("event"));
 
 			// Place it in testObjects so that we can import it back
-			addToMessageTestObject("calendarEventRef", event);
+			upsertOnTestRunMessage("calendarEventRef", event);
 			
 			// Re-import the event again	
 			// Check that the returned event as it was imported is identical to the one which was placed the first time
@@ -66,23 +61,16 @@ public class ImportEventTestCases extends GoogleCalendarTestParent {
 			assertTrue(EqualsBuilder.reflectionEquals(returnedEvent.getStart(), event.getStart()));
 			assertTrue(EqualsBuilder.reflectionEquals(returnedEvent.getEnd(), event.getEnd()));
 			assertTrue(EqualsBuilder.reflectionEquals(returnedEvent.getICalUID(), event.getICalUID()));
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			// Delete the calendar
-			Calendar calendar = getValueFromMessageTestObject("calendar");
+	public void tearDown() throws Exception {
+
+			Calendar calendar = getTestRunMessageValue("calendar");
 			deleteCalendar(calendar);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 }

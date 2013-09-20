@@ -26,6 +26,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.FreeBusy;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.google.api.services.calendar.model.FreeBusyCalendar;
 import com.google.api.services.calendar.model.TimePeriod;
@@ -33,38 +34,32 @@ import com.google.api.services.calendar.model.TimePeriod;
 public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("getFreeTime"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("getFreeTime");
 			
 			// Insert the calendar and the event
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			Event event = insertEvent(calendar, (Event) getValueFromMessageTestObject("event"));
+			Event event = insertEvent(calendar, (Event) getTestRunMessageValue("event"));
 			
 			// Replace the existing "event" bean with the updated one
-			addToMessageTestObject("event", event);
-			addToMessageTestObject("eventId", event.getId());
-			addToMessageTestObject("calendar", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("event", event);
+			upsertOnTestRunMessage("eventId", event.getId());
+			upsertOnTestRunMessage("calendar", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 
 	@Category({RegressionTests.class})	
 	@Test
 	public void testGetFreeTime() {
 		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
-			Event event = getValueFromMessageTestObject("event");
+			String calendarId = getTestRunMessageValue("calendarId");
+			Event event = getTestRunMessageValue("event");
 			
 			List<String> calendarIds = new ArrayList<String>();
 			calendarIds.add(calendarId);
 			
-			addToMessageTestObject("ids", calendarIds);
+			upsertOnTestRunMessage("ids", calendarIds);
 			
 			FreeBusy freeBusy = runFlowAndGetPayload("get-free-time");
 								
@@ -77,23 +72,15 @@ public class GetFreeTimeTestCases extends GoogleCalendarTestParent {
 			TimePeriod busyTimePeriod = busyTimePeriods.get(0);
 			assertTrue(busyTimePeriod.getStart().equals(event.getStart().getDateTime().getWrapped()));
 			assertTrue(busyTimePeriod.getEnd().equals(event.getEnd().getDateTime().getWrapped()));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 	
 }

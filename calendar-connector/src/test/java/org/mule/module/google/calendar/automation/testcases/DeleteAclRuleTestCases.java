@@ -26,33 +26,29 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 
 public class DeleteAclRuleTestCases extends GoogleCalendarTestParent {
 	
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("deleteAclRule"));
+	public void setUp() throws Exception {
+
+			loadTestRunMessage("deleteAclRule");
 			
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 			
 			// Insert the ACL rule
 			AclRule aclRule = runFlowAndGetPayload("insert-acl-rule");
 						
-			addToMessageTestObject("aclRule", aclRule);	
-			addToMessageTestObject("ruleId", aclRule.getId());
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("aclRule", aclRule);	
+			upsertOnTestRunMessage("ruleId", aclRule.getId());
+
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -64,27 +60,21 @@ public class DeleteAclRuleTestCases extends GoogleCalendarTestParent {
 			AclRule afterDel = runFlowAndGetPayload("get-acl-rule-by-id");
 			String ruleIdAfter = afterDel.getId();
 			
-			assertEquals(getValueFromMessageTestObject("ruleId").toString(),ruleIdAfter);
-			assertFalse(EqualsBuilder.reflectionEquals(getValueFromMessageTestObject("aclRule"), afterDel));
+			assertEquals(getTestRunMessageValue("ruleId").toString(),ruleIdAfter);
+			assertFalse(EqualsBuilder.reflectionEquals(getTestRunMessageValue("aclRule"), afterDel));
 			assertTrue(afterDel.getRole().equals("none"));
 				
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 
 }

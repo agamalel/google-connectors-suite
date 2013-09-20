@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -27,6 +28,7 @@ import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 
@@ -34,11 +36,10 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 	
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("getCalendarList"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("getCalendarList");
 			
-			Integer numCalendars = getValueFromMessageTestObject("numCalendars");
+			Integer numCalendars = getTestRunMessageValue("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -52,14 +53,10 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 			for (Calendar calendar : response.getSuccessful()) {
 				insertedCalendars.add(calendar);
 			}					
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 	
+	@Ignore("Needs to be review")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testGetCalendarList() {
@@ -71,22 +68,16 @@ public class GetCalendarListTestCases extends GoogleCalendarTestParent {
 				assertTrue(CalendarUtils.isCalendarInList(calendarList, insertedCalendar));
 			}
 			
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
+	public void tearDown() throws Exception {
+
 			// Delete the calendars
 			deleteCalendars(insertedCalendars);			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 }

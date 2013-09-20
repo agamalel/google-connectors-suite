@@ -24,28 +24,25 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetInstancesTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("getInstances"));
+	public void setUp() throws Exception {
+
+			loadTestRunMessage("getInstances");
 
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 			
 			// Insert the event			
 			Event returnedEvent = runFlowAndGetPayload("insert-event");
-			addToMessageTestObject("event", returnedEvent);
-			addToMessageTestObject("eventId", returnedEvent.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("event", returnedEvent);
+			upsertOnTestRunMessage("eventId", returnedEvent.getId());
+
 	}
 	
 	@Category({RegressionTests.class})	
@@ -53,31 +50,23 @@ public class GetInstancesTestCases extends GoogleCalendarTestParent {
 	public void testGetInstances() {
 		try {
 			
-			String eventId = getValueFromMessageTestObject("eventId");		
+			String eventId = getTestRunMessageValue("eventId");		
 			List<Event> returnedEvent = runFlowAndGetPayload("get-instances");
 			
 			for (Event event : returnedEvent) {
 				assertEquals(event.getId(), eventId);
 			}
 				
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 
 }

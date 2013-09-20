@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -28,46 +29,43 @@ import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class BatchDeleteEventTestCases extends GoogleCalendarTestParent {
 
-
+	@Ignore("Needs to be review")
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("batchDeleteEvent"));
+	public void setUp() throws Exception {
+		
+		loadTestRunMessage("batchDeleteEvent");
 
-			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			
-			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());			
+		// Insert calendar and get reference to retrieved calendar
+		Calendar calendar = runFlowAndGetPayload("create-calendar");
+		
+		// Replace old calendar instance with new instance
+		upsertOnTestRunMessage("calendarRef", calendar);
+		upsertOnTestRunMessage("calendarId", calendar.getId());			
 
-			// Get the sample event
-			Event sampleEvent = getValueFromMessageTestObject("sampleEvent");
-			
-			// Get start and end time beans.
-			EventDateTime eventStartTime = sampleEvent.getStart();
-			EventDateTime eventEndTime = sampleEvent.getEnd();
-			Integer numEvents = getValueFromMessageTestObject("numEvents");
-			
-			// Instantiate the events that we want to batch insert
-			List<Event> events = new ArrayList<Event>();
-			for (int i = 0; i < numEvents; i++) {
-				Event event = CalendarUtils.getEvent("Test Event", eventStartTime, eventEndTime);
-				events.add(event);
-			}
-			
-			// Store the successfully persisted events in testObjects for later access
-			BatchResponse<Event> batchResponse = insertEvents(calendar, events);
-			List<Event> successful = batchResponse.getSuccessful();
-			addToMessageTestObject("calendarEventsRef", successful);
+		// Get the sample event
+		Event sampleEvent = getTestRunMessageValue("sampleEvent");
+		
+		// Get start and end time beans.
+		EventDateTime eventStartTime = sampleEvent.getStart();
+		EventDateTime eventEndTime = sampleEvent.getEnd();
+		Integer numEvents = getTestRunMessageValue("numEvents");
+		
+		// Instantiate the events that we want to batch insert
+		List<Event> events = new ArrayList<Event>();
+		for (int i = 0; i < numEvents; i++) {
+			Event event = CalendarUtils.getEvent("Test Event", eventStartTime, eventEndTime);
+			events.add(event);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		
+		// Store the successfully persisted events in testObjects for later access
+		BatchResponse<Event> batchResponse = insertEvents(calendar, events);
+		List<Event> successful = batchResponse.getSuccessful();
+		upsertOnTestRunMessage("calendarEventsRef", successful);
+		
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -75,30 +73,22 @@ public class BatchDeleteEventTestCases extends GoogleCalendarTestParent {
 	public void testBatchDeleteEvent() {
 		try {			
 						
-			Calendar calendar = getValueFromMessageTestObject("calendarRef");
-			List<Event> succcessful = getValueFromMessageTestObject("calendarEventsRef");
+			Calendar calendar = getTestRunMessageValue("calendarRef");
+			List<Event> succcessful = getTestRunMessageValue("calendarEventsRef");
 			 
 			deleteEvents(calendar, succcessful);
 			
 			List<Event> events = runFlowAndGetPayload("get-all-events");
 			assertTrue(events.isEmpty());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 	
 }

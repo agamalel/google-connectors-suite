@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
@@ -27,39 +28,36 @@ import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 
 	protected List<Calendar> insertedCalendars = new ArrayList<Calendar>();
 
 	@Before
-	public void setUp() {
-		
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("batchDeleteCalendar"));
-			
-			Integer numCalendars = getValueFromMessageTestObject("numCalendars");
-			
-			// Create calendar instances
-			List<Calendar> calendars = new ArrayList<Calendar>();
-			for (int i = 0; i < numCalendars; i++) {
-				calendars.add(CalendarUtils.getCalendar("This is a title"));
-			}
+	public void setUp() throws Exception {
 
-			// Insert calendar
-			BatchResponse<Calendar> response = insertCalendars(calendars);			
-			
-			// Add them to a global variable so that we can drop them in the tearDown method
-			for (Calendar calendar : response.getSuccessful()) {
-				insertedCalendars.add(calendar);
-			}
+		loadTestRunMessage("batchDeleteCalendar");
+		
+		Integer numCalendars = getTestRunMessageValue("numCalendars");
+		
+		// Create calendar instances
+		List<Calendar> calendars = new ArrayList<Calendar>();
+		for (int i = 0; i < numCalendars; i++) {
+			calendars.add(CalendarUtils.getCalendar("This is a title"));
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}		
+
+		// Insert calendar
+		BatchResponse<Calendar> response = insertCalendars(calendars);			
+		
+		// Add them to a global variable so that we can drop them in the tearDown method
+		for (Calendar calendar : response.getSuccessful()) {
+			insertedCalendars.add(calendar);
+		}
+		
 	}
 		
+	@Ignore("Needs to be review")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testBatchDeleteCalendar() {
@@ -70,11 +68,8 @@ public class BatchDeleteCalendarTestCases extends GoogleCalendarTestParent {
 			for (Calendar calendar : insertedCalendars) {
 				assertFalse(CalendarUtils.isCalendarInList(calendarList, calendar));
 			}
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	

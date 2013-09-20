@@ -27,20 +27,21 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class InsertAclRuleTestCases  extends GoogleCalendarTestParent {
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("insertAclRule"));
+			loadTestRunMessage("insertAclRule");
 			
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -56,30 +57,23 @@ public class InsertAclRuleTestCases  extends GoogleCalendarTestParent {
 			AclRule returnedAclRule = runFlowAndGetPayload("insert-acl-rule");
 			String ruleId = returnedAclRule.getId();
 		
-			addToMessageTestObject("ruleId", ruleId);
+			upsertOnTestRunMessage("ruleId", ruleId);
 		
 			AclRule afterProc = runFlowAndGetPayload("get-acl-rule-by-id");
 			String ruleIdAfter = afterProc.getId();
 			
 			assertEquals(ruleId,ruleIdAfter);
 			assertTrue(EqualsBuilder.reflectionEquals(returnedAclRule, afterProc));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}		
 	}
 		
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 
 }

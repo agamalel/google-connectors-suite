@@ -23,29 +23,25 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 	
 	
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("updateCalendarList"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("updateCalendarList");
 	
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 						
-			addToMessageTestObject("calendar", calendar);
-			addToMessageTestObject("id", calendar.getId());
+			upsertOnTestRunMessage("calendar", calendar);
+			upsertOnTestRunMessage("id", calendar.getId());
 			
 			//Get Calendar List 
 			CalendarList returnedCalendarList = runFlowAndGetPayload("get-calendar-list-by-id");
 			
-			addToMessageTestObject("calendarList", returnedCalendarList);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("calendarList", returnedCalendarList);
+
 	}
 	
 	
@@ -55,31 +51,24 @@ public class UpdateCalendarListTestCases extends GoogleCalendarTestParent{
 		try {
 			String colorAfter = runFlowAndGetPayload("colorAfter");
 			
-			CalendarList returnedCalendarList = getValueFromMessageTestObject("calendarList");
+			CalendarList returnedCalendarList = getTestRunMessageValue("calendarList");
 			
 			returnedCalendarList.setColorId(colorAfter);
-			addToMessageTestObject("calendarListRef", returnedCalendarList);
+			upsertOnTestRunMessage("calendarListRef", returnedCalendarList);
 			
 			CalendarList afterUpdate = runFlowAndGetPayload("update-calendar-list");
 			String afterColorId = afterUpdate.getColorId();
 			assertEquals(afterColorId, colorAfter);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("id");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("id");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 	
 

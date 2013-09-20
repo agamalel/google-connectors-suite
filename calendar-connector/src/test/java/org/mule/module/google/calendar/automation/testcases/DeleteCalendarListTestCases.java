@@ -23,6 +23,7 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
@@ -30,20 +31,20 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 	
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("deleteCalendarList"));
+			loadTestRunMessage("deleteCalendarList");
 	
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 						
-			addToMessageTestObject("calendar", calendar);
-			addToMessageTestObject("id", calendar.getId());
+			upsertOnTestRunMessage("calendar", calendar);
+			upsertOnTestRunMessage("id", calendar.getId());
 			
 			//Get Calendar List 
 			CalendarList returnedCalendarList = runFlowAndGetPayload("get-calendar-list-by-id");
 			
-			addToMessageTestObject("calendarList", returnedCalendarList);
-			addToMessageTestObject("color", returnedCalendarList.getColorId());
+			upsertOnTestRunMessage("calendarList", returnedCalendarList);
+			upsertOnTestRunMessage("color", returnedCalendarList.getColorId());
 
 		}
 		catch (Exception e) {
@@ -59,9 +60,8 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 		try {
 			runFlowAndGetPayload("delete-calendar-list");
 		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 				
 		// Get the calendar list, should throw an exception
@@ -80,15 +80,10 @@ public class DeleteCalendarListTestCases extends GoogleCalendarTestParent{
 	}
 		
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("id");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("id");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 
 }

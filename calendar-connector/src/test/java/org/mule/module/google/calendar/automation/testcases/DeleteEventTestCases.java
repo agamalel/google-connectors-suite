@@ -23,32 +23,29 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
 public class DeleteEventTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("deleteEvent"));
-			
-			// Insert calendar and get reference to retrieved calendar
-			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			
-			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+	public void setUp() throws Exception {
 
-			// Place the returned event and its ID into testObjects for later access
-			Event returnedEvent = runFlowAndGetPayload("insert-event");
-			addToMessageTestObject("event", returnedEvent);
-			addToMessageTestObject("eventId", returnedEvent.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		loadTestRunMessage("deleteEvent");
+		
+		// Insert calendar and get reference to retrieved calendar
+		Calendar calendar = runFlowAndGetPayload("create-calendar");
+		
+		// Replace old calendar instance with new instance
+		upsertOnTestRunMessage("calendarRef", calendar);
+		upsertOnTestRunMessage("calendarId", calendar.getId());
+
+		// Place the returned event and its ID into testObjects for later access
+		Event returnedEvent = runFlowAndGetPayload("insert-event");
+		upsertOnTestRunMessage("event", returnedEvent);
+		upsertOnTestRunMessage("eventId", returnedEvent.getId());
+
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})	
@@ -61,21 +58,16 @@ public class DeleteEventTestCases extends GoogleCalendarTestParent {
 			Event returnedEvent = runFlowAndGetPayload("get-event-by-id");
 			assertTrue(returnedEvent.getStatus().equals("cancelled"));
 			
-		}
-		catch (Exception e) {
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 }

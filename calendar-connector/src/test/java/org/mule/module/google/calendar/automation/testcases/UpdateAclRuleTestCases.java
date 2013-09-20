@@ -23,37 +23,29 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class UpdateAclRuleTestCases extends GoogleCalendarTestParent {
-	
 
-	
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("updateAclRule"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("updateAclRule");
 			
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 			
-			String roleBefore = getValueFromMessageTestObject("roleBefore"); 
-			addToMessageTestObject("role", roleBefore);
+			String roleBefore = getTestRunMessageValue("roleBefore"); 
+			upsertOnTestRunMessage("role", roleBefore);
 		
 			// Insert the ACL rule
 						
 			AclRule returnedAclRule = runFlowAndGetPayload("insert-acl-rule");
-			addToMessageTestObject("aclRule", returnedAclRule);	
-			addToMessageTestObject("ruleId", returnedAclRule.getId());
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("aclRule", returnedAclRule);	
+			upsertOnTestRunMessage("ruleId", returnedAclRule.getId());
 	}
 	
 	
@@ -61,33 +53,25 @@ public class UpdateAclRuleTestCases extends GoogleCalendarTestParent {
 	@Test
 	public void testUpdateAclRule() {
 		try {
-			String roleAfter = getValueFromMessageTestObject("roleAfter");
+			String roleAfter = getTestRunMessageValue("roleAfter");
 			
-			AclRule aclRule = getValueFromMessageTestObject("aclRule");
+			AclRule aclRule = getTestRunMessageValue("aclRule");
 			aclRule.setRole(roleAfter);
-			addToMessageTestObject("aclRuleRef", aclRule);			
+			upsertOnTestRunMessage("aclRuleRef", aclRule);			
 			
 			aclRule = runFlowAndGetPayload("update-acl-rule");
 			String roleAfterUpdate = aclRule.getRole();
 			assertEquals(roleAfter, roleAfterUpdate);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 
 	

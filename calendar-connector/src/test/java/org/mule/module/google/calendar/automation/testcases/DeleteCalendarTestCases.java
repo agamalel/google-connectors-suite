@@ -21,6 +21,7 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 
@@ -28,18 +29,14 @@ public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("deleteCalendar"));
+	public void setUp() throws Exception {
+
+			loadTestRunMessage("deleteCalendar");
 
 			// Create the calendar)
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			addToMessageTestObject("id", calendar.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("id", calendar.getId());
+
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -50,9 +47,8 @@ public class DeleteCalendarTestCases extends GoogleCalendarTestParent {
 			runFlowAndGetPayload("delete-calendar");
 
 		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 			
 		// Get the calendar, should throw an exception

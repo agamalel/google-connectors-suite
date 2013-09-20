@@ -24,10 +24,10 @@ import org.mule.module.google.calendar.model.AclRule;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.modules.google.api.client.batch.BatchResponse;
-import org.mule.modules.tests.TestParent;
+import org.mule.modules.tests.ConnectorTestCase;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class GoogleCalendarTestParent extends TestParent {
+public class GoogleCalendarTestParent extends ConnectorTestCase {
 
 	// Set global timeout of tests to 10minutes
     @Rule
@@ -37,12 +37,7 @@ public class GoogleCalendarTestParent extends TestParent {
 	@Before
 	public void init() throws ObjectStoreException, Exception {
 		ObjectStore objectStore = muleContext.getRegistry().lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-		objectStore.store("accessTokenId", (OAuthState)context.getBean("connectorOAuthState"));
-	}
-	
-	@BeforeClass
-	public static void beforeClass() {
-		context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILES);
+		objectStore.store("accessTokenId", (OAuthState) getBeanFromContext("connectorOAuthState"));
 	}
 		
 	/*
@@ -54,7 +49,7 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected Calendar getCalendar(String id) throws Exception {
-		addToMessageTestObject("id", id);
+		upsertOnTestRunMessage("id", id);
 		return runFlowAndGetPayload("get-calendar-by-id");
 	}
 	
@@ -67,12 +62,12 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected void clearCalendar(String id) throws Exception {
-		addToMessageTestObject("id", id);
+		upsertOnTestRunMessage("id", id);
 		runFlowAndGetPayload("clear-calendar");
 	}
 	
 	protected BatchResponse<Calendar> insertCalendars(List<Calendar> calendars) throws Exception {
-		addToMessageTestObject("calendarsRef", calendars);
+		upsertOnTestRunMessage("calendarsRef", calendars);
 		return runFlowAndGetPayload("batch-insert-calendar");
 	}
 		
@@ -81,12 +76,12 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected void deleteCalendar(String id) throws Exception {
-		addToMessageTestObject("id", id);
+		upsertOnTestRunMessage("id", id);
 		runFlowAndGetPayload("delete-calendar");
 	}
 	
 	protected void deleteCalendars(List<Calendar> calendars) throws Exception {
-		addToMessageTestObject("calendarsRef", calendars);
+		upsertOnTestRunMessage("calendarsRef", calendars);
 		runFlowAndGetPayload("batch-delete-calendar");
 	}
 	
@@ -95,8 +90,8 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected Event quickAddEvent(String calendarId, String eventSummary) throws Exception {
-		addToMessageTestObject("calendarId", calendarId);
-		addToMessageTestObject("text", eventSummary);
+		upsertOnTestRunMessage("calendarId", calendarId);
+		upsertOnTestRunMessage("text", eventSummary);
 		return runFlowAndGetPayload("quick-add-event");
 	}
 	
@@ -105,8 +100,8 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected Event insertEvent(String calendarId, Event event) throws Exception {
-		addToMessageTestObject("calendarId", calendarId);
-		addToMessageTestObject("calendarEventRef", event);
+		upsertOnTestRunMessage("calendarId", calendarId);
+		upsertOnTestRunMessage("calendarEventRef", event);
 		return runFlowAndGetPayload("insert-event");
 	}
 	
@@ -115,8 +110,8 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected BatchResponse<Event> insertEvents(String calendarId, List<Event> events) throws Exception {
-		addToMessageTestObject("calendarId", calendarId);
-		addToMessageTestObject("calendarEventsRef", events);
+		upsertOnTestRunMessage("calendarId", calendarId);
+		upsertOnTestRunMessage("calendarEventsRef", events);
 		return runFlowAndGetPayload("batch-insert-event");
 	}
 	
@@ -129,8 +124,8 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected void deleteEvent(String calendarId, String eventId) throws Exception {
-		addToMessageTestObject("calendarId", calendarId);
-		addToMessageTestObject("eventId", eventId);
+		upsertOnTestRunMessage("calendarId", calendarId);
+		upsertOnTestRunMessage("eventId", eventId);
 		runFlowAndGetPayload("delete-event");
 	}
 	
@@ -139,8 +134,8 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected void deleteEvents(String calendarId, List<Event> events) throws Exception {
-		addToMessageTestObject("calendarId", calendarId);
-		addToMessageTestObject("calendarEventsRef", events);
+		upsertOnTestRunMessage("calendarId", calendarId);
+		upsertOnTestRunMessage("calendarEventsRef", events);
 		runFlowAndGetPayload("batch-delete-event");
 	}
 	
@@ -149,8 +144,8 @@ public class GoogleCalendarTestParent extends TestParent {
 	}
 	
 	protected void deleteAclRule(String calendarId, String ruleId) throws Exception {
-		addToMessageTestObject("calendarId", calendarId);
-		addToMessageTestObject("ruleId", ruleId);
+		upsertOnTestRunMessage("calendarId", calendarId);
+		upsertOnTestRunMessage("ruleId", ruleId);
 		runFlowAndGetPayload("delete-acl-rule");
 	}
 	

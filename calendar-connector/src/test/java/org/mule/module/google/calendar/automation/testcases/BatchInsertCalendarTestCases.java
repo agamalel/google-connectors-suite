@@ -18,23 +18,26 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 
 	protected List<Calendar> insertedCalendars = new ArrayList<Calendar>();
 	
+	@Ignore("Needs to be review")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
 	public void testBatchInsertCalendar() {
 		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("batchInsertCalendar"));
+			loadTestRunMessage("batchInsertCalendar");
 			
-			Integer numCalendars = getValueFromMessageTestObject("numCalendars");
+			Integer numCalendars = getTestRunMessageValue("numCalendars");
 			
 			// Create calendar instances
 			List<Calendar> calendars = new ArrayList<Calendar>();
@@ -54,23 +57,14 @@ public class BatchInsertCalendarTestCases extends GoogleCalendarTestParent {
 				insertedCalendars.add(calendar);
 			}
 			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 		
 	@After
-	public void tearDown() {
-		try {
-			// Delete the calendars
-			deleteCalendars(insertedCalendars);			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		deleteCalendars(insertedCalendars);			
 	}
 	
 }

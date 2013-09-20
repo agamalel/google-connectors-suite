@@ -27,16 +27,16 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.automation.CalendarUtils;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("batchUpdateCalendar"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("batchUpdateCalendar");
 			
-			Integer numCalendars =getValueFromMessageTestObject("numCalendars");
-			String summaryBefore = getValueFromMessageTestObject("summaryBefore");
+			Integer numCalendars =getTestRunMessageValue("numCalendars");
+			String summaryBefore = getTestRunMessageValue("summaryBefore");
 			
 			List<Calendar> calendars = new ArrayList<Calendar>();
 			for (int i = 0; i < numCalendars; i++) {
@@ -47,27 +47,21 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 			BatchResponse<Calendar> calendarBatchResponse = insertCalendars(calendars);
 			List<Calendar> insertedCalendars = calendarBatchResponse.getSuccessful();
 			
-			addToMessageTestObject("calendars", insertedCalendars);
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("calendars", insertedCalendars);
 	}
 	
 	@Category({ RegressionTests.class})	
 	@Test
 	public void testBatchUpdateCalendar() {
 		try {
-			List<Calendar> calendars = getValueFromMessageTestObject("calendars");
-			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
+			List<Calendar> calendars = getTestRunMessageValue("calendars");
+			String summaryAfter = getTestRunMessageValue("summaryAfter");
 			
 			for (Calendar calendar : calendars) {
 				calendar.setSummary(summaryAfter);
 			}
 			
-			addToMessageTestObject("calendarsRef", calendars);
+			upsertOnTestRunMessage("calendarsRef", calendars);
 			BatchResponse<Calendar> updatedCalendars = runFlowAndGetPayload("batch-update-calendar");
 			assertTrue(updatedCalendars.getErrors() == null || updatedCalendars.getErrors().size() == 0);
 
@@ -79,22 +73,15 @@ public class BatchUpdateCalendarTestCases extends GoogleCalendarTestParent {
 			
 			assertTrue(EqualsBuilder.reflectionEquals(successful, calendars));
 			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			List<Calendar> calendars = getValueFromMessageTestObject("calendarsRef");
-			deleteCalendars(calendars);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}		
+	public void tearDown() throws Exception {
+		List<Calendar> calendars = getTestRunMessageValue("calendarsRef");
+		deleteCalendars(calendars);
+	
 	}
 }

@@ -24,23 +24,20 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.CalendarList;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("getCalendarListById"));
+	public void setUp() throws Exception {
+
+			loadTestRunMessage("getCalendarListById");
 
 			// Create the calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
-			addToMessageTestObject("calendar",calendar);
-			addToMessageTestObject("id", calendar.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("calendar",calendar);
+			upsertOnTestRunMessage("id", calendar.getId());
+
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -48,9 +45,9 @@ public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 	public void testGetCalendarListById() {
 		try {
 			
-			Calendar originalCalendar = getValueFromMessageTestObject("calendar");
+			Calendar originalCalendar = getTestRunMessageValue("calendar");
 			
-			String createdCalendarId = getValueFromMessageTestObject("id");
+			String createdCalendarId = getTestRunMessageValue("id");
 
 			CalendarList returnedCalendarList = runFlowAndGetPayload("get-calendar-list-by-id");
 
@@ -58,23 +55,16 @@ public class GetCalendarListByIdTestCases extends GoogleCalendarTestParent{
 			assertTrue(returnedCalendarList.getId().equals(createdCalendarId));
 			assertEquals(returnedCalendarList.getSummary(), originalCalendar.getSummary());
 			
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
+	public void tearDown() throws Exception {
 			// Delete the calendar
 			runFlowAndGetPayload("delete-calendar");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 	
 }

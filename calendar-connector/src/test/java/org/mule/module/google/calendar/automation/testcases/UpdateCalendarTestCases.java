@@ -23,59 +23,45 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class UpdateCalendarTestCases extends GoogleCalendarTestParent {
 	
 	
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("updateCalendar"));
+	public void setUp() throws Exception {
+			loadTestRunMessage("updateCalendar");
 		
 			// Insert the calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
-			
 			// Update test objects
-			addToMessageTestObject("calendar", calendar);
-			addToMessageTestObject("id", calendar.getId());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("calendar", calendar);
+			upsertOnTestRunMessage("id", calendar.getId());
 	}
 
 	@Category({RegressionTests.class})
 	@Test
 	public void testUpdateCalendar() {
 		try {
-			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
+			String summaryAfter = getTestRunMessageValue("summaryAfter");
 		
-			Calendar calendar = getValueFromMessageTestObject("calendar");
+			Calendar calendar = getTestRunMessageValue("calendar");
 			calendar.setSummary(summaryAfter);
-			addToMessageTestObject("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarRef", calendar);
 			
 			Calendar afterUpdate = runFlowAndGetPayload("update-calendar");
 			String afterText = afterUpdate.getSummary();
 			assertEquals(afterText, summaryAfter);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("id");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("id");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
 	}
 
 }

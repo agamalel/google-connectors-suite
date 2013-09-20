@@ -15,7 +15,6 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,20 +25,21 @@ import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.module.google.calendar.model.EventDateTime;
 import org.mule.modules.google.api.client.batch.BatchResponse;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("batchInsertEvent"));
+			loadTestRunMessage("batchInsertEvent");
 
 			// Insert calendar and get reference to retrieved calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Replace old calendar instance with new instance
-			addToMessageTestObject("calendarRef", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendarRef", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -48,15 +48,10 @@ public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
-			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+		String calendarId = getTestRunMessageValue("calendarId");
+		deleteCalendar(calendarId);
+
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -64,14 +59,14 @@ public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 	public void testBatchInsertEvent() {
 		try {			
 			
-			Event sampleEvent = getValueFromMessageTestObject("sampleEvent");
+			Event sampleEvent = getTestRunMessageValue("sampleEvent");
 			
 			// Get start and end time beans.
 			String eventSummary = sampleEvent.getSummary();
 			EventDateTime eventStartTime = sampleEvent.getStart();
 			EventDateTime eventEndTime = sampleEvent.getEnd();			
-			Integer numEvents = getValueFromMessageTestObject("numEvents");
-			String calendarId = getValueFromMessageTestObject("calendarId");
+			Integer numEvents = getTestRunMessageValue("numEvents");
+			String calendarId = getTestRunMessageValue("calendarId");
 			
 			// Instantiate the events that we want to batch insert
 			List<Event> events = new ArrayList<Event>();
@@ -84,10 +79,8 @@ public class BatchInsertEventTestCases extends GoogleCalendarTestParent {
 			BatchResponse<Event> batchResponse = insertEvents(calendarId, events);
 			assertTrue(batchResponse.getErrors() == null || batchResponse.getErrors().size() == 0);
 			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	

@@ -22,19 +22,16 @@ import org.junit.experimental.categories.Category;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 
 	@SuppressWarnings("unchecked")
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("createCalendar"));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void setUp() throws Exception {
+
+			loadTestRunMessage("createCalendar");
+
 	}
 	
 	@Category({SmokeTests.class, RegressionTests.class})
@@ -42,33 +39,28 @@ public class CreateCalendarTestCases extends GoogleCalendarTestParent {
 	public void testCreateCalendar() {
 		try {
 			
-			Calendar originalCalendar = getValueFromMessageTestObject("calendarRef");
+			Calendar originalCalendar = getTestRunMessageValue("calendarRef");
 			Calendar createdCalendar = runFlowAndGetPayload("create-calendar");
 
 			assertTrue(createdCalendar != null);
 			assertTrue(createdCalendar.getSummary().equals(originalCalendar.getSummary()));
 
-			addToMessageTestObject("id", createdCalendar.getId());
+			upsertOnTestRunMessage("id", createdCalendar.getId());
 
 			Calendar returnedCalendar = runFlowAndGetPayload("get-calendar-by-id");
 			assertTrue(returnedCalendar != null);
 			assertTrue(returnedCalendar.getId().equals(createdCalendar.getId()));
 		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			fail();
+		catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			runFlowAndGetPayload("delete-calendar");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+	public void tearDown() throws Exception {
+
+		runFlowAndGetPayload("delete-calendar");
+
 	}
 	
 }

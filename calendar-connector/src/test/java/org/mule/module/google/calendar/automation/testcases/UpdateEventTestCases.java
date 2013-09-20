@@ -22,63 +22,53 @@ import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
+import org.mule.modules.tests.ConnectorTestUtils;
 
 public class UpdateEventTestCases extends GoogleCalendarTestParent {
 
 	@Before
-	public void setUp() {
-		try {
-			addToMessageTestObject((Map<String, Object>) context.getBean("updateEvent"));
+	public void setUp() throws Exception {
+		
+			loadTestRunMessage("updateEvent");
 		
 			// Insert the calendar
 			Calendar calendar = runFlowAndGetPayload("create-calendar");
 			
 			// Update test objects
-			addToMessageTestObject("calendar", calendar);
-			addToMessageTestObject("calendarId", calendar.getId());
+			upsertOnTestRunMessage("calendar", calendar);
+			upsertOnTestRunMessage("calendarId", calendar.getId());
 		
-			String beforeText = getValueFromMessageTestObject("summaryBefore");
-			addToMessageTestObject("text", beforeText);
+			String beforeText = getTestRunMessageValue("summaryBefore");
+			upsertOnTestRunMessage("text", beforeText);
 
 			Event event = runFlowAndGetPayload("quick-add-event");
-			addToMessageTestObject("event", event);
-			addToMessageTestObject("eventId", event.getId());			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+			upsertOnTestRunMessage("event", event);
+			upsertOnTestRunMessage("eventId", event.getId());			
+
 	}
 	
 	@Category({RegressionTests.class})
 	@Test
 	public void testUpdateEvent() {
 		try {
-			String summaryAfter = getValueFromMessageTestObject("summaryAfter");
-			Event event = getValueFromMessageTestObject("event");
+			String summaryAfter = getTestRunMessageValue("summaryAfter");
+			Event event = getTestRunMessageValue("event");
 			event.setSummary(summaryAfter);
-			addToMessageTestObject("calendarEventRef", event);
+			upsertOnTestRunMessage("calendarEventRef", event);
 	
 			Event afterEvent = runFlowAndGetPayload("update-event");
 			String afterText = afterEvent.getSummary();
 			assertEquals(afterText, summaryAfter);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (Exception e) {
+			fail(ConnectorTestUtils.getStackTrace(e));
 		}
 	}
 	
 	@After
-	public void tearDown() {
-		try {
-			String calendarId = getValueFromMessageTestObject("calendarId");
+	public void tearDown() throws Exception {
+			String calendarId = getTestRunMessageValue("calendarId");
 			deleteCalendar(calendarId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+
 	}
 	
 }
