@@ -66,6 +66,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -762,7 +805,7 @@ the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;google-spreadsheets:config&gt;
-        &lt;google-spreadsheets:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
+        &lt;google-spreadsheets:oauth-callback-config domain="${fullDomain}" localPort="${http.port}" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
     &lt;/google-spreadsheets:config&gt;
 </pre>
 <p>The <i>oauth-callback-config</i> element can be used to customize the endpoint that gets created for the callback. It
@@ -780,7 +823,7 @@ features the following attributes:</p>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>localPort</nobr></td>
-<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable 10010.</td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable ${http.port}.</td>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>remotePort</nobr></td>
@@ -860,9 +903,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Creates a new spreadsheet using a given title
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Creates a new spreadsheet using a given title
   
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-spreadsheets /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-spreadsheets /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -879,14 +926,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>title</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title you want the new spreadsheet to have</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>title</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title you want the new spreadsheet to have</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -936,10 +985,14 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Creates a new worksheet for an specified spreadsheet
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Creates a new worksheet for an specified spreadsheet
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:create-worksheet spreadsheet="My mule Spreadsheet" title="My mule worksheet"
-					  rowCount="10" colCount="15"/&gt;</pre></div></p></div>
+					  rowCount="10" colCount="15"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -956,64 +1009,74 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet that will contain the new worksheet</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet that will contain the new worksheet</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>title</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title you want the new worksheet to have</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>title</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title you want the new worksheet to have</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>rowCount</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The initial number of rows you want the worksheet to have</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>rowCount</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The initial number of rows you want the worksheet to have</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>colCount</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The initial number of columns you want the worksheet to have</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>colCount</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The initial number of columns you want the worksheet to have</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1031,8 +1094,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></td>
-                <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code> representing the newly created worksheet</td>
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></td>
+                    <td class="jd-descrcol">an instance of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code> representing the newly created worksheet</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1072,9 +1138,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Deletes an specified worksheet
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Deletes an specified worksheet
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:delete-worksheet spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:delete-worksheet spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1091,54 +1161,62 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet that contains the worksheet to be deleted</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet that contains the worksheet to be deleted</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet you want to delete</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet you want to delete</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1184,10 +1262,14 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> in which each
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> in which each
  entry represents one of the initialized cells on a worksheet
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-cells spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-cells spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1204,54 +1286,62 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1269,8 +1359,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Cell.html">Cell</a></code></td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a>&gt;</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Cell.html">Cell</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1310,7 +1403,9 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a CSV file representing all the initialized cells in a worksheet.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a CSV file representing all the initialized cells in a worksheet.
  Athough this method is intended for generating a CSV file, notice that
  the column and line separator are customizable so you could use it
  to generated a text delimited file that is not strictly speaking a CSV.
@@ -1319,7 +1414,9 @@ protected operation that uses that token.
  
  Row Number | Column Number | evaluated Value
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-cells-as-csv spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-cells-as-csv spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1336,78 +1433,90 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>columnSeparator</nobr></td>
-                        <td class="jd-descrcol">,</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a column sperator. Defaults to a comma character</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>columnSeparator</nobr></td>
+                            <td class="jd-descrcol">,</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a column sperator. Defaults to a comma character</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>lineSeparator</nobr></td>
-                        <td class="jd-descrcol">\n</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a line separator. Defaults to the new line <code>\n</code> character</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>lineSeparator</nobr></td>
+                            <td class="jd-descrcol">\n</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a line separator. Defaults to the new line <code>\n</code> character</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1425,8 +1534,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">String</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Cell.html">Cell</a></code></td>
+                
+                    <td class="jd-descrcol">String</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Cell.html">Cell</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1466,9 +1578,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns all the spreadsheets associated with the user's account
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns all the spreadsheets associated with the user's account
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-spreadsheets /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-spreadsheets /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1498,8 +1614,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a>&gt;</td>
-                <td class="jd-descrcol">a list of @{link org.mule.module.google.spreadsheet.model.Spreadsheet}</td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a>&gt;</td>
+                    <td class="jd-descrcol">a list of @{link org.mule.module.google.spreadsheet.model.Spreadsheet}</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1543,9 +1662,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Lists all the worksheets contained in an specified spreadsheet
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Lists all the worksheets contained in an specified spreadsheet
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-worksheets spreadsheet="My mule Spreadsheet"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-all-worksheets spreadsheet="My mule Spreadsheet"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1562,28 +1685,32 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet you want to get the worksheets from</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet you want to get the worksheets from</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1601,8 +1728,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code></td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a>&gt;</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1642,10 +1772,14 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a list of com.google.gdata.data.Person where each entry represent a a contributor
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a list of com.google.gdata.data.Person where each entry represent a a contributor
  on a specified spreadsheet
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-authors spreadsheet="My mule Spreadsheet" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-authors spreadsheet="My mule Spreadsheet" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1662,28 +1796,32 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet from which the info should be taken from</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet from which the info should be taken from</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1701,8 +1839,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;Person&gt;</td>
-                <td class="jd-descrcol">a list of com.google.gdata.data.Person where each entry represent a spreadsheet's contributor</td>
+                
+                    <td class="jd-descrcol">List&lt;Person&gt;</td>
+                    <td class="jd-descrcol">a list of com.google.gdata.data.Person where each entry represent a spreadsheet's contributor</td>
+                
+
              </tr>
          </table>
   </div>
@@ -1742,12 +1883,16 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> containing
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> containing
  the cells contained in a given range
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-cell-range spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet"
 				minRow="1" maxRow="10"
-				minCol="1" maxCol="10" /&gt;</pre></div></p></div>
+				minCol="1" maxCol="10" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1764,102 +1909,118 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are </td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are </td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>minRow</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range starting row. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>minRow</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range starting row. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxRow</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range ending row. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxRow</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range ending row. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>minCol</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range starting column. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>minCol</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range starting column. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxCol</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range ending column. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxCol</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range ending column. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -1877,8 +2038,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code></td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a>&gt;</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -1918,7 +2082,9 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a CSV file representing the requested cell range.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a CSV file representing the requested cell range.
  Athough this method is intended for generating a CSV file, notice that
  the column and line separator are customizable so you could use it
  to generated a text delimited file that is not strictly speaking a CSV.
@@ -1929,7 +2095,9 @@ protected operation that uses that token.
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-cell-range-as-csv spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet"
 				minRow="1" maxRow="10"
-				minCol="1" maxCol="10" /&gt;</pre></div></p></div>
+				minCol="1" maxCol="10" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1946,126 +2114,146 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are </td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are </td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>columnSeparator</nobr></td>
-                        <td class="jd-descrcol">,</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a column sperator. Defaults to a comma character</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>columnSeparator</nobr></td>
+                            <td class="jd-descrcol">,</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a column sperator. Defaults to a comma character</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>lineSeparator</nobr></td>
-                        <td class="jd-descrcol">\n</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a line separator. Defaults to the new line <code>\n</code> character</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>lineSeparator</nobr></td>
+                            <td class="jd-descrcol">\n</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a line separator. Defaults to the new line <code>\n</code> character</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>minRow</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range starting row. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>minRow</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range starting row. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxRow</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range ending row. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxRow</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range ending row. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>minCol</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range starting column. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>minCol</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range starting column. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>maxCol</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The range ending column. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>maxCol</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The range ending column. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2083,8 +2271,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">String</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code></td>
+                
+                    <td class="jd-descrcol">String</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2124,9 +2315,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>This processor returns the a worksheet's first row
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        This processor returns the a worksheet's first row
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-column-headers spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-column-headers spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2143,54 +2338,62 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet from which the info should be taken from</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet from which the info should be taken from</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet from which the info should be taken from</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet from which the info should be taken from</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2208,9 +2411,12 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol"><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></td>
-                <td class="jd-descrcol">an instance of  <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> is the worksheet has a first row
+                
+                    <td class="jd-descrcol"><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></td>
+                    <td class="jd-descrcol">an instance of  <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> is the worksheet has a first row
  			initialized, null otherwise</td>
+                
+
              </tr>
          </table>
   </div>
@@ -2250,10 +2456,14 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a></code> with all the spreadsheets
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a></code> with all the spreadsheets
  associated with the user which title matches the one specified.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-spreadsheets-by-title title="My mule Spreadsheet"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-spreadsheets-by-title title="My mule Spreadsheet"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2270,14 +2480,16 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>title</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title to be used in the search</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>title</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title to be used in the search</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
@@ -2295,8 +2507,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a></code></td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a>&gt;</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Spreadsheet.html">Spreadsheet</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2336,11 +2551,15 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code> 
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code> 
  which title matches the one specified. This is not a global search. Only worksheets
  attached to a specified spreadsheet will be considered
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-worksheet-by-title spreadsheet="My mule Spreadsheet" title="My mule worksheet"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:get-worksheet-by-title spreadsheet="My mule Spreadsheet" title="My mule worksheet"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2357,40 +2576,46 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet in which you want to perform the search</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet in which you want to perform the search</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>title</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title to be used in the search</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>title</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title to be used in the search</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2408,8 +2633,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code> </td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a>&gt;</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Worksheet.html">Worksheet</a></code> </td>
+                
+
              </tr>
          </table>
   </div>
@@ -2449,9 +2677,13 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>This processors deletes all the cell entries of a specified worksheet.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        This processors deletes all the cell entries of a specified worksheet.
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:purge-worksheet spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:purge-worksheet spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" /&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2468,54 +2700,62 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet containing the worksheet to be purged</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet containing the worksheet to be purged</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet to be purged</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet to be purged</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2561,10 +2801,14 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Performs a full-text search on a worksheet and returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> 
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Performs a full-text search on a worksheet and returns a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code> 
  in which each entry represent a cell containing a matching value
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:search spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" query="Mule is Here"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:search spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" query="Mule is Here"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2581,66 +2825,76 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are </td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet containing the worksheet on which the cells are </td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet containing the cells you want to get</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>query</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">A full text search string, with space-separated keywords</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>query</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">A full text search string, with space-separated keywords</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2658,8 +2912,11 @@ protected operation that uses that token.
                 <th>Description</th>
              </tr>
              <tr>
-                <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a>&gt;</td>
-                <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Cell.html">Cell</a></code></td>
+                
+                    <td class="jd-descrcol">List&lt;<a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a>&gt;</td>
+                    <td class="jd-descrcol">a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Cell.html">Cell</a></code></td>
+                
+
              </tr>
          </table>
   </div>
@@ -2699,11 +2956,15 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Performs a batch update of a worksheet's cells taking values from a csv String.
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Performs a batch update of a worksheet's cells taking values from a csv String.
  This csv file can have multiple lines and columns and you get to specify what those separators are. 
  You can manually specify the csv string or else it will automatically taken from the message payload
  
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:set-csv-values spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" purge="true"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:set-csv-values spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" purge="true"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2720,126 +2981,146 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>csv</nobr></td>
-                        <td class="jd-descrcol">#[payload:]</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The csv content to be set on the worksheet. You can manually specify it or else it will be taken from the message payload</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>csv</nobr></td>
+                            <td class="jd-descrcol">#[payload:]</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The csv content to be set on the worksheet. You can manually specify it or else it will be taken from the message payload</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>startingRow</nobr></td>
-                        <td class="jd-descrcol">1</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The number of the row where the first line of the csv will be set into. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>startingRow</nobr></td>
+                            <td class="jd-descrcol">1</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The number of the row where the first line of the csv will be set into. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>startingColumn</nobr></td>
-                        <td class="jd-descrcol">1</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The number of the column where the first value of each line of the csv will be set into. This is a 1-based index</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>startingColumn</nobr></td>
+                            <td class="jd-descrcol">1</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The number of the column where the first value of each line of the csv will be set into. This is a 1-based index</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>lineSeparator</nobr></td>
-                        <td class="jd-descrcol">\n</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a line separator. Defaults to the new line <code>\n</code> character</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>lineSeparator</nobr></td>
+                            <td class="jd-descrcol">\n</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a line separator. Defaults to the new line <code>\n</code> character</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>columnSeparator</nobr></td>
-                        <td class="jd-descrcol">,</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a column sperator. Defaults to a comma character</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>columnSeparator</nobr></td>
+                            <td class="jd-descrcol">,</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Specifies the character to be used as a column sperator. Defaults to a comma character</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>purge</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, the worksheet will be purged before the values are set</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>purge</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, the worksheet will be purged before the values are set</td>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -2881,12 +3162,16 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Performs a batch update of a worksheet's cells taking values from a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code>
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        Performs a batch update of a worksheet's cells taking values from a list of <code><a href="../java/org/mule/module/google/spreadsheet/model/Row.html">Row</a></code>
  taken from the message payload.
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:set-row-values spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" purge="true"&gt;
 	&lt;google-spreadsheets:rows ref="#[payload]"/&gt;
-&lt;/google-spreadsheets:set-row-values&gt;</pre></div></p></div>
+&lt;/google-spreadsheets:set-row-values&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2905,66 +3190,76 @@ protected operation that uses that token.
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>purge</nobr></td>
-                        <td class="jd-descrcol">false</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, the worksheet will be purged before the values are set</td>
-                        <td class="jd-descrcol">boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>purge</nobr></td>
+                            <td class="jd-descrcol">false</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If true, the worksheet will be purged before the values are set</td>
+                            <td class="jd-descrcol">boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
@@ -3035,12 +3330,16 @@ protected operation that uses that token.
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>This processor allows updating a worksheet's metadata, constituted by
+  <div class="jd-tagdata jd-tagdescr"><p>
+      
+        This processor allows updating a worksheet's metadata, constituted by
  its title, dimensions, summary, draft and editability status.
  
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;google-spreadsheets:update-worksheet-metadata spreadsheet="My mule Spreadsheet" worksheet="My mule worksheet" 
 			title="#[map-payload:title]" rowCount="#[map-payload:rowCount]" colCount="#[map-payload:colCount]"
-			summary="#[map-payload:summary]"/&gt;</pre></div></p></div>
+			summary="#[map-payload:summary]"/&gt;</pre></div>
+      
+  </p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -3057,126 +3356,146 @@ protected operation that uses that token.
           
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the spreadsheet you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the spreadsheet you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheet</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The title of the worksheet you want to update</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheet</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol">The title of the worksheet you want to update</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>title</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the title you want to set</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>title</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the title you want to set</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>draft</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the value of the draft property</td>
-                        <td class="jd-descrcol">Boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>draft</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the value of the draft property</td>
+                            <td class="jd-descrcol">Boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>canEdit</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the worksheet's editability</td>
-                        <td class="jd-descrcol">Boolean</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>canEdit</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the worksheet's editability</td>
+                            <td class="jd-descrcol">Boolean</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>summary</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the worksheet's summary</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>summary</nobr></td>
+                            <td class="jd-descrcol"></td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If specified, it changes the worksheet's summary</td>
+                            <td class="jd-descrcol">String</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol">UTF-8</td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>rowCount</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If a value greater than zero is specified, it changes the amount of rows in the worksheet</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>rowCount</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If a value greater than zero is specified, it changes the amount of rows in the worksheet</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>colCount</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>If a value greater than zero is specified, it changes the amount of columns in the worksheet</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>colCount</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>If a value greater than zero is specified, it changes the amount of columns in the worksheet</td>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
+                    
+                        <tr class=" api apilevel-" >
+                            <td class="jd-linkcol"><nobr>spreadsheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several spreadsheet to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
-                        <td class="jd-descrcol">0</td>
-                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
+                    
+                        <tr class="alt-color api apilevel-" >
+                            <td class="jd-linkcol"><nobr>worksheetIndex</nobr></td>
+                            <td class="jd-descrcol">0</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>Google's api allows for several worksheets to have the same name. In this cases
  							it returns a list with all the ones matching the given title. Use this optional
  							attribute to specify the zero-based list index of the want you want to use</td>
-                        <td class="jd-descrcol">int</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol"></td>
-                    </tr>
+                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol">*/*</td>
+                            <td class="jd-descrcol"></td>
+                        </tr>
+                    
                 
                 
           
