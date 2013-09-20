@@ -65,6 +65,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -867,7 +910,7 @@ org.mule.security.oauth.BaseOAuth2Manager
           private
           
           
-          GenericKeyedObjectPool</nobr></td>
+          GenericKeyedObjectPool&lt;String,&nbsp;OAuth2Adapter&gt;</nobr></td>
           <td class="jd-linkcol">accessTokenPool</td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -878,7 +921,7 @@ org.mule.security.oauth.BaseOAuth2Manager
           private
           
           
-          KeyedPoolableObjectFactory</nobr></td>
+          KeyedPoolableObjectFactory&lt;String,&nbsp;OAuth2Adapter&gt;</nobr></td>
           <td class="jd-linkcol">accessTokenPoolFactory</td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -962,6 +1005,17 @@ org.mule.security.oauth.BaseOAuth2Manager
       
     
       <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          RefreshTokenManager</nobr></td>
+          <td class="jd-linkcol">refreshTokenManager</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -1399,6 +1453,22 @@ org.mule.security.oauth.callback.DefaultHttpCallbackAdapter
             
             
             
+            Set&lt;Class&lt;?&nbsp;extends&nbsp;Exception&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../../org/mule/module/google/task/oauth/GoogleTasksConnectorOAuthManager.html#refreshAccessTokenOn()">refreshAccessTokenOn</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1495,7 +1565,7 @@ From class
             
             
             
-            KeyedPoolableObjectFactory</nobr>
+            KeyedPoolableObjectFactory&lt;String,&nbsp;OAuth2Adapter&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">createPoolFactory</span>(OAuth2Manager&lt;OAuth2Adapter&gt; arg0, ObjectStore&lt;Serializable&gt; arg1)</nobr>
@@ -1591,7 +1661,7 @@ From class
             
             
             
-            KeyedPoolableObjectFactory</nobr>
+            KeyedPoolableObjectFactory&lt;String,&nbsp;OAuth2Adapter&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">getAccessTokenPoolFactory</span>()</nobr>
@@ -1860,13 +1930,45 @@ From class
         <td class="jd-typecol"><nobr>
             
             
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">postAuth</span>(OAuth2Adapter arg0, String arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
             final
             
             
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">refreshAccessToken</span>(OAuth2Adapter arg0)</nobr>
+        <span class="sympad">refreshAccessToken</span>(OAuth2Adapter arg0, String arg1)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Set&lt;Class&lt;?&nbsp;extends&nbsp;Exception&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">refreshAccessTokenOn</span>()</nobr>
         
   </td></tr>
 
@@ -1895,10 +1997,10 @@ From class
             
             
             
-            boolean</nobr>
+            MuleEvent</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">restoreAccessToken</span>(OAuth2Adapter arg0)</nobr>
+        <span class="sympad">restoreAuthorizationEvent</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -1911,10 +2013,10 @@ From class
             
             
             
-            MuleEvent</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">restoreAuthorizationEvent</span>(String arg0)</nobr>
+        <span class="sympad">setAccessTokenObjectStore</span>(ObjectStore&lt;Serializable&gt; arg0)</nobr>
         
   </td></tr>
 
@@ -1930,7 +2032,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setAccessTokenObjectStore</span>(ObjectStore&lt;Serializable&gt; arg0)</nobr>
+        <span class="sympad">setAccessTokenPool</span>(GenericKeyedObjectPool&lt;String,&nbsp;OAuth2Adapter&gt; arg0)</nobr>
         
   </td></tr>
 
@@ -2154,38 +2256,6 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthRestoreAccessToken</span>(RestoreAccessTokenCallback arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setOauthSaveAccessToken</span>(SaveAccessTokenCallback arg0)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">setOnNoTokenPolicy</span>(OnNoTokenPolicy arg0)</nobr>
         
   </td></tr>
@@ -2202,7 +2272,7 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">setScope</span>(String arg0)</nobr>
+        <span class="sympad">setRefreshTokenManager</span>(RefreshTokenManager arg0)</nobr>
         
   </td></tr>
 
@@ -2212,13 +2282,13 @@ From class
         <td class="jd-typecol"><nobr>
             
             
-            final
+            
             
             
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">start</span>()</nobr>
+        <span class="sympad">setScope</span>(String arg0)</nobr>
         
   </td></tr>
 
@@ -2234,13 +2304,29 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">stop</span>()</nobr>
+        <span class="sympad">start</span>()</nobr>
         
   </td></tr>
 
 
 	 
     <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">stop</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -3183,7 +3269,7 @@ From interface
             
             
             
-            KeyedPoolableObjectFactory</nobr>
+            KeyedPoolableObjectFactory&lt;String,&nbsp;OAuth2Adapter&gt;</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad">getAccessTokenPoolFactory</span>()</nobr>
@@ -3282,7 +3368,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">refreshAccessToken</span>(OAuth2Adapter arg0)</nobr>
+        <span class="sympad">postAuth</span>(OAuth2Adapter arg0, String arg1)</nobr>
         
   </td></tr>
 
@@ -3298,7 +3384,7 @@ From interface
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">releaseAccessToken</span>(String arg0, C arg1)</nobr>
+        <span class="sympad">refreshAccessToken</span>(OAuth2Adapter arg0, String arg1)</nobr>
         
   </td></tr>
 
@@ -3311,10 +3397,10 @@ From interface
             
             
             
-            boolean</nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">restoreAccessToken</span>(OAuth2Adapter arg0)</nobr>
+        <span class="sympad">releaseAccessToken</span>(String arg0, C arg1)</nobr>
         
   </td></tr>
 
@@ -4411,6 +4497,37 @@ From interface
         OAuth2Adapter
       </span>
       <span class="sympad">instantiateAdapter</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="refreshAccessTokenOn()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        Set&lt;Class&lt;?&nbsp;extends&nbsp;Exception&gt;&gt;
+      </span>
+      <span class="sympad">refreshAccessTokenOn</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
