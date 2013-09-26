@@ -169,7 +169,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
     /**
      * Creates a new spreadsheet using a given title
      *  
-     * {@sample.xml ../../../doc/GoogleSpreadSheets-connector.xml.sample GoogleSpreadSheets:get-all-spreadsheets}
+     * {@sample.xml ../../../doc/GoogleSpreadSheets-connector.xml.sample GoogleSpreadSheets:create-spreadsheet}
      *  
      * @param title the title you want the new spreadsheet to have
      * @throws OAuthException if there's an error authenticating
