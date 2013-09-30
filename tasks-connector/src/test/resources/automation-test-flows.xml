@@ -8,7 +8,7 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/mule/google-tasks/1.0/mule-google-tasks.xsd">
 
-	<context:property-placeholder location="automation-credentials.properties" />
+	<context:property-placeholder location="${GOOGLE_TASKS_CREDENTIALS}" />
 
 	<google-tasks:config-with-oauth name="Google_Tasks"
 		consumerKey="${google.tasks.consumer.key}" consumerSecret="${google.tasks.consumer.secret}"
@@ -18,19 +18,25 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 			remotePort="${google.tasks.remotePort}" />
 	</google-tasks:config-with-oauth>
 
-	<flow name="insert-task">
-		<google-tasks:insert-task accessTokenId="accessTokenId"
-			config-ref="Google_Tasks" task-ref="#[payload.taskRef]" taskListId="#[payload.taskListId]" />
-	</flow>
-
 	<flow name="insert-task-list">
 		<google-tasks:insert-task-list
 			config-ref="Google_Tasks" taskList-ref="#[payload.taskListRef]"
 			accessTokenId="accessTokenId" />
 	</flow>
 
+	<flow name="insert-task">
+		<google-tasks:insert-task accessTokenId="accessTokenId"
+			config-ref="Google_Tasks" task-ref="#[payload.taskRef]" taskListId="#[payload.taskListId]" />
+	</flow>
+
 	<flow name="get-task-list-by-id">
 		<google-tasks:get-task-list-by-id
+			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
+			accessTokenId="accessTokenId" />
+	</flow>
+	
+	<flow name="delete-task-list">
+		<google-tasks:delete-task-list
 			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
 			accessTokenId="accessTokenId" />
 	</flow>
@@ -49,12 +55,6 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 	
 	<flow name="move-task-reorder">
 	    <google-tasks:move config-ref="Google_Tasks" taskListId="#[payload.taskListId]" taskId="#[payload.taskId]" previousId="#[payload.previousId]" accessTokenId="accessTokenId" />
-	</flow>
-
-	<flow name="delete-task-list">
-		<google-tasks:delete-task-list
-			config-ref="Google_Tasks" taskListId="#[payload.taskListId]"
-			accessTokenId="accessTokenId" />
 	</flow>
 
 	<flow name="get-task-lists">
@@ -89,4 +89,6 @@ http://www.mulesoft.org/schema/mule/google-tasks http://www.mulesoft.org/schema/
 		<google-tasks:update-task-list config-ref="Google_Tasks"
 			taskListId="#[payload.taskListId]" taskList-ref="#[payload.taskListRef]" accessTokenId="accessTokenId" />
 	</flow>
+
+
 </mule>

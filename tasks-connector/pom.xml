@@ -25,7 +25,7 @@
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-tasks</artifactId>
 			<version>v1-rev3-1.7.2-beta</version>
-		</dependency>
+		</dependency>		
 	</dependencies>
 
 	<build>

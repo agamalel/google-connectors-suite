@@ -13,7 +13,6 @@ package org.mule.module.google.calendar.automation.testcases;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.mule.api.config.MuleProperties;
@@ -25,7 +24,6 @@ import org.mule.module.google.calendar.model.Calendar;
 import org.mule.module.google.calendar.model.Event;
 import org.mule.modules.google.api.client.batch.BatchResponse;
 import org.mule.modules.tests.ConnectorTestCase;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class GoogleCalendarTestParent extends ConnectorTestCase {
 

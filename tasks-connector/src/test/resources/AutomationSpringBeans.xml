@@ -8,6 +8,16 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>${GOOGLE_TASKS_CREDENTIALS}</value>
+		</property>  
+	</bean>
+	
+	<bean id="connectorOAuthState" class="org.mule.common.security.oauth.OAuthState">
+		<property name="accessToken" value="${google.tasks.accessToken}" />
+	</bean>
+	
 	<util:map id="commonValues" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.Object" scope="prototype">
 	    <entry key="taskList">
@@ -21,16 +31,6 @@
 	    	</bean>
     	</entry>
 	</util:map>
-
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>automation-credentials.properties</value>
-		</property>  
-	</bean>
-
-	<bean id="connectorOAuthState" class="org.mule.module.google.task.oauth.GoogleTasksConnectorOAuthState">
-		<property name="accessToken" value="${google.tasks.accessToken}" />
-	</bean>
 	
 	<!-- insert task list -->
 	<util:map id="insertTaskList" map-class="java.util.HashMap"
