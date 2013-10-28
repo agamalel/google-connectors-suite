@@ -30,12 +30,18 @@ import org.mule.module.google.task.automation.testcases.UpdateTaskTestCases;
 @RunWith(Categories.class)
 @IncludeCategory(RegressionTests.class)
 @SuiteClasses({
-	ClearTasksTestCases.class, DeleteTaskListTestCases.class,
-	DeleteTaskTestCases.class, GetTaskByIdTestCases.class,
-	GetTaskListByIdTestCases.class, GetTasksTestCases.class,
-	GetTaskListsTestCases.class, InsertTaskListTestCases.class,
-	InsertTaskTestCases.class, MoveTaskTestCases.class,
-	UpdateTaskTestCases.class, UpdateTaskListTestCases.class
+	InsertTaskListTestCases.class,
+	InsertTaskTestCases.class,
+	ClearTasksTestCases.class, 
+	DeleteTaskListTestCases.class,
+	DeleteTaskTestCases.class, 
+	GetTaskByIdTestCases.class,
+	GetTaskListByIdTestCases.class, 
+	GetTasksTestCases.class,
+	GetTaskListsTestCases.class, 
+	MoveTaskTestCases.class,
+	UpdateTaskTestCases.class, 
+	UpdateTaskListTestCases.class
 })
 public class RegressionTestSuite {
 
