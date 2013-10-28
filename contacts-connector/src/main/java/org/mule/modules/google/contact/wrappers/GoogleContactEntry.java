@@ -98,6 +98,10 @@ public class GoogleContactEntry extends GoogleContactBaseEntity<ContactEntry> {
 		
 		fName.setValue(fullName);
 	}
+	
+	public String getFullName() {
+		return wrapped.getName() != null && wrapped.getName().getFullName() != null ? wrapped.getName().getFullName().getValue() : null;
+	}
 		
 	// Only getter
 	public String getContactPhotoLink() {
