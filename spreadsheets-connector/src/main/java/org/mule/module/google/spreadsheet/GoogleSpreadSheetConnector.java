@@ -41,6 +41,7 @@ import org.mule.module.google.spreadsheet.model.Worksheet;
 import org.mule.modules.google.AbstractGoogleOAuthConnector;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
+import org.mule.modules.google.GoogleUserIdExtractor;
 import org.mule.modules.google.oauth.invalidation.InvalidationAwareCredential;
 import org.mule.modules.google.oauth.invalidation.OAuthTokenExpiredException;
 
@@ -141,6 +142,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
 		
 		this.docService = new DocsService(this.applicationName);
 		this.docService.setOAuth2Credentials(credential);
+		GoogleUserIdExtractor.fetchAndPublishAsFlowVar(this);
 	}
 
 	private void setHeaderValue(String value) {

@@ -49,6 +49,7 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.modules.google.AbstractGoogleOAuthConnector;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
+import org.mule.modules.google.GoogleUserIdExtractor;
 import org.mule.modules.google.api.domain.BatchResult;
 import org.mule.modules.google.api.util.DateTimeUtils;
 import org.mule.modules.google.contact.transformer.BatchResultToBulkOperationTransformer;
@@ -203,6 +204,7 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 		service.setOAuth2Credentials(credential);
 
 		this.setService(service);
+		GoogleUserIdExtractor.fetchAndPublishAsFlowVar(this);
    	}
 	
 	/**

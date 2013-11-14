@@ -48,6 +48,7 @@ import org.mule.module.google.calendar.transformer.BatchResponseToBulkOperationT
 import org.mule.modules.google.AbstractGoogleOAuthConnector;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
+import org.mule.modules.google.GoogleUserIdExtractor;
 import org.mule.modules.google.api.client.batch.BatchResponse;
 import org.mule.modules.google.api.client.batch.VoidBatchCallback;
 import org.mule.modules.google.api.datetime.DateTimeConstants;
@@ -168,6 +169,7 @@ public class GoogleCalendarConnector extends AbstractGoogleOAuthConnector {
 	@OAuthPostAuthorization
 	public void postAuth() {
 		this.client = this.clientFactory.newClient(this.getAccessToken(), this.getApplicationName());
+		GoogleUserIdExtractor.fetchAndPublishAsFlowVar(this);
 	}
 	
     /**

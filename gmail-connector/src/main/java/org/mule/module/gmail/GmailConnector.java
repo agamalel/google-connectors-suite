@@ -16,16 +16,16 @@ import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.lifecycle.Start;
 import org.mule.api.annotations.oauth.OAuth2;
 import org.mule.api.annotations.oauth.OAuthAccessToken;
-import org.mule.api.annotations.oauth.OAuthAccessTokenIdentifier;
 import org.mule.api.annotations.oauth.OAuthAuthorizationParameter;
 import org.mule.api.annotations.oauth.OAuthConsumerKey;
 import org.mule.api.annotations.oauth.OAuthConsumerSecret;
+import org.mule.api.annotations.oauth.OAuthPostAuthorization;
 import org.mule.api.annotations.oauth.OAuthScope;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
-import org.mule.modules.google.IdentifierPolicy;
+import org.mule.modules.google.GoogleUserIdExtractor;
 import org.mule.modules.google.oauth.invalidation.OAuthTokenExpiredException;
 
 import com.google.code.javax.mail.AuthenticationFailedException;
@@ -89,19 +89,6 @@ public class GmailConnector extends BaseGmailConnector {
     @Default(USER_PROFILE_SCOPE + " https://mail.google.com/")
     private String scope;
     
-    /**
-     * This policy represents which id we want to use to represent each google account.
-     * 
-     * PROFILE means that we want the google profile id. That means, the user's primary key in google's DB.
-     * This is a long number represented as a string.
-     * 
-     * EMAIL means you want to use the account's email address
-     */
-    @Configurable
-    @Optional
-    @Default("EMAIL")
-    private IdentifierPolicy identifierPolicy = IdentifierPolicy.EMAIL;
-    
     @OAuthAccessToken
     private String accessToken;
     
@@ -132,9 +119,9 @@ public class GmailConnector extends BaseGmailConnector {
 		}
 	}
 	
-	@OAuthAccessTokenIdentifier
-	public String getAccessTokenId() {
-		return this.identifierPolicy.getId(this);
+	@OAuthPostAuthorization
+	public void postAuth() {
+		GoogleUserIdExtractor.fetchAndPublishAsFlowVar(this);
 	}
 	
     @Override
@@ -178,13 +165,4 @@ public class GmailConnector extends BaseGmailConnector {
 		this.accessToken = accessToken;
 	}
 
-	public IdentifierPolicy getIdentifierPolicy() {
-		return identifierPolicy;
-	}
-
-	public void setIdentifierPolicy(IdentifierPolicy identifierPolicy) {
-		this.identifierPolicy = identifierPolicy;
-	}
-	
-	
 }

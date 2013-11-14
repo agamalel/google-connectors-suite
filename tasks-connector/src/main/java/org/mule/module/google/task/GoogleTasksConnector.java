@@ -33,6 +33,7 @@ import org.mule.module.google.task.model.TaskList;
 import org.mule.modules.google.AbstractGoogleOAuthConnector;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
+import org.mule.modules.google.GoogleUserIdExtractor;
 import org.mule.modules.google.api.pagination.TokenBasedPagingDelegate;
 import org.mule.modules.google.oauth.invalidation.InvalidationAwareCredential;
 import org.mule.modules.google.oauth.invalidation.OAuthTokenExpiredException;
@@ -117,6 +118,8 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
 		this.client = new com.google.api.services.tasks.Tasks.Builder(new NetHttpTransport(), new JacksonFactory(), credential)
 						.setApplicationName(this.applicationName)
 						.build();
+		
+		GoogleUserIdExtractor.fetchAndPublishAsFlowVar(this);
 	}
 	
     /**
