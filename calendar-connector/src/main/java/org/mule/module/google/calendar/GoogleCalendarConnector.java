@@ -18,11 +18,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.mule.api.MuleException;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Paged;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.lifecycle.Start;
+import org.mule.api.annotations.lifecycle.Stop;
 import org.mule.api.annotations.oauth.OAuth2;
 import org.mule.api.annotations.oauth.OAuthAccessToken;
 import org.mule.api.annotations.oauth.OAuthAuthorizationParameter;
@@ -42,6 +44,7 @@ import org.mule.module.google.calendar.model.FreeBusy;
 import org.mule.module.google.calendar.model.Scope;
 import org.mule.module.google.calendar.model.batch.CalendarBatchCallback;
 import org.mule.module.google.calendar.model.batch.EventBatchCallback;
+import org.mule.module.google.calendar.transformer.BatchResponseToBulkOperationTransformer;
 import org.mule.modules.google.AbstractGoogleOAuthConnector;
 import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
@@ -82,6 +85,9 @@ import com.google.api.services.calendar.model.FreeBusyRequestItem;
 		}
 )
 public class GoogleCalendarConnector extends AbstractGoogleOAuthConnector {
+	
+	private static final Object bulkTransformerMonitor = new Object();
+	private static Boolean bulkTransformerRegistered = false;
 	
 	/**
      * The OAuth2 consumer key 
@@ -141,6 +147,22 @@ public class GoogleCalendarConnector extends AbstractGoogleOAuthConnector {
 		if (this.clientFactory == null) {
 			this.clientFactory = new DefaultGoogleCalendarClientFactory();
 		}
+		
+		synchronized (bulkTransformerMonitor) {
+			if (!bulkTransformerRegistered) {
+				try {
+					this.getMuleContext().getRegistry().registerTransformer(new BatchResponseToBulkOperationTransformer());
+				} catch (MuleException e) {
+					throw new RuntimeException("Found exception trying to register transformer", e);
+				}
+				bulkTransformerRegistered = true;
+			}
+		}
+	}
+	
+	@Stop
+	public void unregisterTransformer() {
+		bulkTransformerRegistered = false;
 	}
 	
 	@OAuthPostAuthorization
