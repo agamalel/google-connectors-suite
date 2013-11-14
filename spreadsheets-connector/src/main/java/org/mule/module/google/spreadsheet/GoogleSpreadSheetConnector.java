@@ -367,7 +367,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
     @OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
     public void setRowValues(
-			@Optional @Default("#[payload:]") List<Row> rows,
+			@Optional @Default("#[payload]") List<Row> rows,
 			String spreadsheet,
     		String worksheet,
     		@Optional @Default("0") int spreadsheetIndex,
@@ -437,7 +437,7 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
     public void setCsvValues(
 			String spreadsheet,
     		String worksheet,
-    		@Optional @Default("#[payload:]") String csv,
+    		@Optional @Default("#[payload]") String csv,
     		@Optional @Default("1") int startingRow,
     		@Optional @Default("1") int startingColumn,
     		@Optional @Default("\n") String lineSeparator,

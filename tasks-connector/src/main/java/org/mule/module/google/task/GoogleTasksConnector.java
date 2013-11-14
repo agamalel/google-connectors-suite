@@ -70,8 +70,6 @@ import com.google.api.services.tasks.model.TaskLists;
 )
 public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
 
-	public static final String NEXT_PAGE_TOKEN = "GoogleTask_NEXT_PAGE_TOKEN";
-	
 	/**
      * The OAuth2 consumer key 
      */
@@ -178,7 +176,7 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
     @Processor
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
-    public TaskList insertTaskList(@Optional @Default("#[payload:]") TaskList taskList) throws IOException {
+    public TaskList insertTaskList(@Optional @Default("#[payload]") TaskList taskList) throws IOException {
     	return new TaskList(this.client.tasklists().insert(taskList.wrapped()).execute());
     }
     
@@ -196,7 +194,7 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
     public TaskList updateTaskList(
-    							   @Optional @Default("#[payload:]") TaskList taskList,
+    							   @Optional @Default("#[payload]") TaskList taskList,
     							   @Optional @Default("@default") String taskListId) throws IOException {
     	
     	return new TaskList(this.client.tasklists().update(taskListId, taskList.wrapped()).execute());
@@ -307,7 +305,7 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
     @Processor
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
-    public Task insertTask(@Optional @Default("@default") String taskListId, @Optional @Default("#[payload:]") Task task) throws IOException {
+    public Task insertTask(@Optional @Default("@default") String taskListId, @Optional @Default("#[payload]") Task task) throws IOException {
     	return new Task(this.client.tasks().insert(taskListId, task.wrapped()).execute());
     }
     
@@ -325,7 +323,7 @@ public class GoogleTasksConnector extends AbstractGoogleOAuthConnector {
     @Processor
 	@OAuthProtected
 	@OAuthInvalidateAccessTokenOn(exception=OAuthTokenExpiredException.class)
-    public Task updateTask(@Optional @Default("@default") String taskListId, String taskId, @Optional @Default("#[payload:]") Task task) throws IOException {
+    public Task updateTask(@Optional @Default("@default") String taskListId, String taskId, @Optional @Default("#[payload]") Task task) throws IOException {
     	return new Task(this.client.tasks().update(taskListId, taskId, task.wrapped()).execute());
     }
     
