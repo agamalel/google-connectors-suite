@@ -11,7 +11,9 @@
 package org.mule.modules.google;
 
 import org.mule.api.MuleContext;
+import org.mule.api.MuleException;
 import org.mule.api.context.MuleContextAware;
+import org.mule.api.transformer.Transformer;
 
 
 /**
@@ -27,6 +29,18 @@ public abstract class AbstractGoogleOAuthConnector implements MuleContextAware {
     private MuleContext muleContext;
     
 	public abstract String getAccessToken();
+	
+	protected void registerTransformer(Transformer t) {
+		synchronized (this.muleContext) {
+			try {
+				if (this.muleContext.getRegistry().lookupObject(t.getClass()) == null) {
+					this.muleContext.getRegistry().registerTransformer(t);
+				}
+			} catch (MuleException e) {
+				throw new RuntimeException("Exception found while trying to register transformer", e);
+			}
+		}
+	}
 
 	public String getUserId() {
 		return this.userId;

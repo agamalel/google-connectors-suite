@@ -34,7 +34,6 @@ import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Paged;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.lifecycle.Start;
-import org.mule.api.annotations.lifecycle.Stop;
 import org.mule.api.annotations.oauth.OAuth2;
 import org.mule.api.annotations.oauth.OAuthAccessToken;
 import org.mule.api.annotations.oauth.OAuthAuthorizationParameter;
@@ -105,9 +104,6 @@ import com.google.gdata.util.ServiceException;
 
 public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 
-	private static final Object bulkTransformerMonitor = new Object();
-	private static Boolean bulkTransformerRegistered = false;
-	
 	private static final String CONTACT_FEED_URL = "https://www.google.com/m8/feeds/contacts/default/full";
 	private static final String GROUP_FEED_URL = "https://www.google.com/m8/feeds/groups/default/full";
 	
@@ -177,21 +173,7 @@ public class GoogleContactsConnector extends AbstractGoogleOAuthConnector {
 	
 	@Start
 	public void init() {
-		synchronized (bulkTransformerMonitor) {
-			if (!bulkTransformerRegistered) {
-				try {
-					this.getMuleContext().getRegistry().registerTransformer(new BatchResultToBulkOperationTransformer());
-				} catch (MuleException e) {
-					throw new RuntimeException("Exception found while trying to register transformer for bulk operations", e);
-				}
-				bulkTransformerRegistered = true;
-			}
-		}
-	}
-	
-	@Stop
-	public void unregisterTransformer() {
-		bulkTransformerRegistered = false;
+		this.registerTransformer(new BatchResultToBulkOperationTransformer());
 	}
 	
    	@OAuthPostAuthorization
