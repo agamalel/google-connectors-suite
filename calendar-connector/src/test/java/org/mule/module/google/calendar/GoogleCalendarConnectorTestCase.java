@@ -10,6 +10,8 @@
 
 package org.mule.module.google.calendar;
 
+import org.junit.Ignore;
+import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.google.api.services.calendar.Calendar.CalendarList;
@@ -49,20 +51,8 @@ public class GoogleCalendarConnectorTestCase extends BaseGoogleConnectorTest<Goo
 			}
 		});
 		
-		this.connector.init();
-		this.connector.postAuth();
-		
+		this.connector.setClientFactory(new DefaultGoogleCalendarClientFactory());
 		this.testCalendar = new Calendar();
 		
 	}
-	
-	public void testCreateCalendar() throws Exception {
-		Insert insert = Mockito.mock(Insert.class);
-		Mockito.when(insert.execute()).thenReturn(this.testCalendar);
-		Mockito.when(calendars.insert(Mockito.any(Calendar.class))).thenReturn(insert);
-		
-		org.mule.module.google.calendar.model.Calendar cal = this.connector.createCalendar(new org.mule.module.google.calendar.model.Calendar());
-		assertSame(cal.wrapped(), this.testCalendar);
-	}
-	
 }
