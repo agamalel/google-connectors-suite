@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" prefix="google-tasks" url="http://www.mulesoft.org/schema/mule/google-tasks">
+  <global-cloud-connector metaData="static" connectivityTesting="disabled" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="" localId="parentConfig" icon="" description="" caption="Google Tasks" versions="[3.5.0,8.0.0]"></global-cloud-connector>
+  <global-cloud-connector metaData="static" connectivityTesting="disabled" extends="http://www.mulesoft.org/schema/mule/google-tasks/parentConfig" abstract="false" image="icons/large/google-tasks-connector-48x32.png" localId="config-with-oauth" icon="icons/small/google-tasks-connector-24x16.png" description="Global Google Tasks configuration information." caption="Google Tasks" versions="[3.5.0,8.0.0]">
+    <attribute-category description="Google-tasks configuration properties." caption="General">
+      <group caption="Generic" id="google-tasksGenericProperties">
+        <name required="true" description="Give a name to this configuration so it can be later referenced by config-ref." caption="Name" name="name"></name>
+      </group>
+      <group caption="General" id="general">
+        <enum allowsCustom="false" defaultValue="EXCEPTION" description="Action to take when no token is found." caption="On No Token" xsdType="string" name="onNoToken">
+          <option value="EXCEPTION"></option>
+          <option value="STOP_FLOW"></option>
+        </enum>
+        <string defaultValue="Mule-GoogleTasksConnector/1.0" javaType="java.lang.String" required="false" description="Application name registered on Google API console." caption="Application Name" name="applicationName"></string>
+        <string javaType="java.lang.String" required="true" description="The OAuth2 consumer key." caption="Consumer Key" name="consumerKey"></string>
+        <string javaType="java.lang.String" required="true" description="The OAuth2 consumer secret." caption="Consumer Secret" name="consumerSecret"></string>
+        <string defaultValue="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/tasks" javaType="java.lang.String" required="false" description="The OAuth scopes you want to request." caption="Scope" name="scope"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="OAuth." caption="Oauth">
+      <group caption="Oauth Callback Config" id="oauthCallbackConfigGroup">
+        <childElement inplace="true" description="" caption="" name="http://www.mulesoft.org/schema/mule/google-tasks/oauth-callback-config"></childElement>
+      </group>
+      <group caption="Oauth Object Store Config" id="oauthStoreConfigGroup">
+        <childElement inplace="true" description="" caption="" name="http://www.mulesoft.org/schema/mule/google-tasks/oauth-store-config"></childElement>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="abstractGoogle-tasksConnectorGeneric" icon="icons/small/google-tasks-connector-24x16.png" description="Interact with Google-tasks." caption="Abstractgoogle-tasksconnectorgeneric">
+    <attribute-category description="General." caption="General">
+      <group caption="Generic" id="abstractGoogle-tasksConnectorGeneric">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/google-tasks/config-with-oauth" required="true" description="Specify which configuration to use for this invocation." caption="Config Reference" name="config-ref"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" image="icons/large/google-tasks-connector-48x32.png" localId="google-tasks-connector" icon="icons/small/google-tasks-connector-24x16.png" description="Google Tasks Cloud connector.
+This connector covers almost all the Google Tasks API v3 using OAuth2 for authentication." caption="Google Tasks" aliasId="org.mule.tooling.ui.modules.core.pattern.google-tasks" versions="[3.5.0,8.0.0]">
+    <attribute-category description="General." caption="General">
+      <group caption="Generic" id="google-tasksConnectorGeneric">
+        <modeSwitch alwaysCombo="true" description="Operation." caption="Operation" name="Google-tasks operations to execute">
+          <mode modeLabel="Authorize" modeId="http://www.mulesoft.org/schema/mule/google-tasks/authorize"></mode>
+          <mode modeLabel="Unauthorize" modeId="http://www.mulesoft.org/schema/mule/google-tasks/unauthorize"></mode>
+          <mode modeLabel="Clear tasks" modeId="http://www.mulesoft.org/schema/mule/google-tasks/clear-tasks"></mode>
+          <mode modeLabel="Delete task" modeId="http://www.mulesoft.org/schema/mule/google-tasks/delete-task"></mode>
+          <mode modeLabel="Delete task list" modeId="http://www.mulesoft.org/schema/mule/google-tasks/delete-task-list"></mode>
+          <mode modeLabel="Get task by id" modeId="http://www.mulesoft.org/schema/mule/google-tasks/get-task-by-id"></mode>
+          <mode modeLabel="Get task list by id" modeId="http://www.mulesoft.org/schema/mule/google-tasks/get-task-list-by-id"></mode>
+          <mode modeLabel="Get task lists" modeId="http://www.mulesoft.org/schema/mule/google-tasks/get-task-lists"></mode>
+          <mode modeLabel="Get tasks" modeId="http://www.mulesoft.org/schema/mule/google-tasks/get-tasks"></mode>
+          <mode modeLabel="Insert task" modeId="http://www.mulesoft.org/schema/mule/google-tasks/insert-task"></mode>
+          <mode modeLabel="Insert task list" modeId="http://www.mulesoft.org/schema/mule/google-tasks/insert-task-list"></mode>
+          <mode modeLabel="Move" modeId="http://www.mulesoft.org/schema/mule/google-tasks/move"></mode>
+          <mode modeLabel="Update task" modeId="http://www.mulesoft.org/schema/mule/google-tasks/update-task"></mode>
+          <mode modeLabel="Update task list" modeId="http://www.mulesoft.org/schema/mule/google-tasks/update-task-list"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="authorize" icon="icons/small/google-tasks-connector-24x16.png" caption="Authorize">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string required="false" description="Any value that you wish to be sent with the callback." caption="State" name="state"></string>
+        <string required="false" description="The URL defined by the Service Provider to obtain an access token." caption="Access Token Url" name="accessTokenUrl"></string>
+        <string required="false" description="The URL defined by the Service Provider where the resource owner will be redirected to grant authorization to the connector." caption="Authorization Url" name="authorizationUrl"></string>
+      </group>
+      <group caption="Additional Authorization Parameters" id="additionalAuthorizationParameters">
+        <enum allowsCustom="true" javaType="org.mule.modules.google.AccessType" required="false" supportsExpressions="true" description="Access_type." caption="Access_type" name="access_type">
+          <option value="offline"></option>
+          <option value="online"></option>
+        </enum>
+        <enum allowsCustom="true" javaType="org.mule.modules.google.ForcePrompt" required="false" supportsExpressions="true" description="Force_prompt." caption="Force_prompt" name="force_prompt">
+          <option value="auto"></option>
+          <option value="force"></option>
+        </enum>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="void" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="clear-tasks" icon="icons/small/google-tasks-connector-24x16.png" caption="Clear Tasks">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="void" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="delete-task" icon="icons/small/google-tasks-connector-24x16.png" caption="Delete Task">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Task identifier." caption="Task Id" name="taskId"></string>
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="void" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="delete-task-list" icon="icons/small/google-tasks-connector-24x16.png" caption="Delete Task List">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.Task" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="get-task-by-id" icon="icons/small/google-tasks-connector-24x16.png" caption="Get Task By Id">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Task identifier." caption="Task Id" name="taskId"></string>
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.TaskList" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="get-task-list-by-id" icon="icons/small/google-tasks-connector-24x16.png" caption="Get Task List By Id">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.List&lt;org.mule.module.google.task.model.TaskList&gt;" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="get-task-lists" icon="icons/small/google-tasks-connector-24x16.png" caption="Get Task Lists">
+    <attribute-category description="General." caption="General">
+      <group caption="Paging" id="paging">
+        <string defaultValue="100" javaType="java.lang.String" required="false" description="The amount of items to fetch on each invocation to the data source." caption="Fetch Size" name="fetchSize"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.List&lt;org.mule.module.google.task.model.Task&gt;" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="get-tasks" icon="icons/small/google-tasks-connector-24x16.png" caption="Get Tasks">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="false" description="Upper bound for a task's completion date (as a RFC 3339 timestamp) to filter by." caption="Completed Max" name="completedMax"></string>
+        <string javaType="java.lang.String" required="false" description="Lower bound for a task's completion date (as a RFC 3339 timestamp) to filter by." caption="Completed Min" name="completedMin"></string>
+        <string javaType="java.lang.String" required="false" description="Upper bound for a task's due date (as a RFC 3339 timestamp) to filter by." caption="Due Max" name="dueMax"></string>
+        <string javaType="java.lang.String" required="false" description="Lower bound for a task's due date (as a RFC 3339 timestamp) to filter by." caption="Due Min" name="dueMin"></string>
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+        <string javaType="java.lang.String" required="false" description="Lower bound for a task's last modification time (as a RFC 3339 timestamp) to filter by." caption="Updated Min" name="updatedMin"></string>
+        <boolean defaultValue="false" javaType="boolean" required="false" supportsExpressions="true" description="Flag indicating whether deleted tasks are returned in the result." caption="Show Deleted" name="showDeleted"></boolean>
+        <boolean defaultValue="false" javaType="boolean" required="false" supportsExpressions="true" description="Flag indicating whether hidden tasks are returned in the result." caption="Show Hidden" name="showHidden"></boolean>
+        <boolean defaultValue="false" javaType="boolean" required="false" supportsExpressions="true" description="Flag indicating whether completed tasks are returned in the result." caption="Showcompleted" name="showcompleted"></boolean>
+      </group>
+      <group caption="Paging" id="paging">
+        <string defaultValue="100" javaType="java.lang.String" required="false" description="The amount of items to fetch on each invocation to the data source." caption="Fetch Size" name="fetchSize"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.Task" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="insert-task" icon="icons/small/google-tasks-connector-24x16.png" caption="Insert Task">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+        <string defaultValue="#[payload]" javaType="org.mule.module.google.task.model.Task" required="false" description="Instance of  containing the state of the task to be inserted." caption="Task Reference" name="task-ref"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.TaskList" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="insert-task-list" icon="icons/small/google-tasks-connector-24x16.png" caption="Insert Task List">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string defaultValue="#[payload]" javaType="org.mule.module.google.task.model.TaskList" required="false" description="The taskList to be inserted." caption="Task List Reference" name="taskList-ref"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.Task" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="move" icon="icons/small/google-tasks-connector-24x16.png" caption="Move">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="false" description="Parent task identifier. If the task is created at the top level, this parameter is omitted." caption="Parent Id" name="parentId"></string>
+        <string javaType="java.lang.String" required="false" description="New previous sibling task identifier. If the task is moved to the first position among its siblings, this parameter is omitted." caption="Previous Id" name="previousId"></string>
+        <string javaType="java.lang.String" required="true" description="Identifier for the task being moved." caption="Task Id" name="taskId"></string>
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="unauthorize" icon="icons/small/google-tasks-connector-24x16.png" caption="Unauthorize">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.Task" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="update-task" icon="icons/small/google-tasks-connector-24x16.png" caption="Update Task">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Task identifier." caption="Task Id" name="taskId"></string>
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+        <string defaultValue="#[payload]" javaType="org.mule.module.google.task.model.Task" required="false" description="Instance of  containing the state we want the updated task to have." caption="Task Reference" name="task-ref"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="org.mule.module.google.task.model.TaskList" metaData="static" extends="http://www.mulesoft.org/schema/mule/google-tasks/abstractGoogle-tasksConnectorGeneric" abstract="true" image="icons/large/google-tasks-connector-48x32.png" localId="update-task-list" icon="icons/small/google-tasks-connector-24x16.png" caption="Update Task List">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string defaultValue="#[payload]" javaType="org.mule.module.google.task.model.TaskList" required="false" description="An instance of  with the task list's new state." caption="Task List Reference" name="taskList-ref"></string>
+        <string defaultValue="@default" javaType="java.lang.String" required="false" description="Task list identifier." caption="Task List Id" name="taskListId"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection" caption="Connection">
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="The id of the access token that will be used to authenticate the call." caption="Access Token Id" name="accessTokenId"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <nested abstract="true" localId="oauth-callback-config" description="" caption="">
+    <string description="The domain name to use when setting up the callback endpoint." caption="Domain" name="domain"></string>
+    <string description="The local port to use when setting up the callback endpoint." caption="Local Port" name="localPort"></string>
+    <string description="The remote port is the port used to build the external callback URL." caption="Remote Port" name="remotePort"></string>
+    <string description="The path to use when setting up the callback endpoint." caption="Path" name="path"></string>
+    <string description="The Http Connector to use when setting up the callback endpoint." caption="Http Connector Reference" name="connector-ref"></string>
+    <string description="A Mule Expression to use as access token id." caption="Default Access Token Id" name="defaultAccessTokenId"></string>
+    <boolean defaultValue="false" fillLine="true" description="Async." caption="Async" name="async"></boolean>
+  </nested>
+  <nested abstract="true" localId="oauth-store-config" description="Configuration element for storage of access tokens" caption="">
+    <string description="Object store reference." caption="Object Store Reference" name="objectStore-ref"></string>
+  </nested>
+</namespace>

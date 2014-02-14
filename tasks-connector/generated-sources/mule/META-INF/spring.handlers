@@ -1,0 +1,1 @@
+http\://www.mulesoft.org/schema/mule/google-tasks=org.mule.module.google.task.config.GoogleTasksNamespaceHandler

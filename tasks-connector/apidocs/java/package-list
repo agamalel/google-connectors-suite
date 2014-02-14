@@ -1,0 +1,12 @@
+org.mule.module.google.task
+org.mule.module.google.task.adapter
+org.mule.module.google.task.adapters
+org.mule.module.google.task.agents
+org.mule.module.google.task.config
+org.mule.module.google.task.connection
+org.mule.module.google.task.devkit
+org.mule.module.google.task.model
+org.mule.module.google.task.oauth
+org.mule.module.google.task.processors
+org.mule.modules.google.transformers
+
