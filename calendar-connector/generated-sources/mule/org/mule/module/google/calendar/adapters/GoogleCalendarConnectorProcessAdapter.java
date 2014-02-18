@@ -17,7 +17,7 @@ import org.mule.security.oauth.callback.ProcessCallback;
  * A <code>GoogleCalendarConnectorProcessAdapter</code> is a wrapper around {@link GoogleCalendarConnector } that enables custom processing strategies.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:45:42-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:26:10-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleCalendarConnectorProcessAdapter
     extends GoogleCalendarConnectorLifecycleAdapter
     implements ProcessAdapter<GoogleCalendarConnectorCapabilitiesAdapter>

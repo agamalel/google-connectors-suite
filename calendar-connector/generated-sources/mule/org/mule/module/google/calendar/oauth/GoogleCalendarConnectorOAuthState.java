@@ -11,7 +11,7 @@ import org.mule.module.google.calendar.GoogleCalendarConnector;
  * 
  */
 @Deprecated
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:45:42-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:26:10-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleCalendarConnectorOAuthState implements Serializable
 {
 
