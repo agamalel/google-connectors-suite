@@ -41,7 +41,7 @@ import org.mule.streaming.PagingDelegate;
  * GetContactsMessageProcessor invokes the {@link org.mule.modules.google.contact.GoogleContactsConnector#getContacts(java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.google.gdata.client.contacts.ContactQuery.SortOrder, java.lang.Boolean, com.google.gdata.client.contacts.ContactQuery.OrderBy, java.lang.String, org.mule.streaming.PagingConfiguration)} method in {@link GoogleContactsConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:46:32-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:27:05-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GetContactsMessageProcessor
     extends AbstractPagedConnectedProcessor
     implements MessageProcessor, OperationMetaDataEnabled

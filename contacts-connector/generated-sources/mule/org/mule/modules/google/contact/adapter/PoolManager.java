@@ -3,7 +3,7 @@ package org.mule.modules.google.contact.adapter;
 
 import javax.annotation.Generated;
 
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:46:32-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:27:05-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public interface PoolManager {
 
     /**

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * A {@code GoogleContactsConnectorOAuthManager} is a wrapper around {@link GoogleContactsConnector } that adds access token management capabilities to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:46:32-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:27:05-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleContactsConnectorOAuthManager
     extends BaseOAuth2Manager<OAuth2Adapter>
 {
