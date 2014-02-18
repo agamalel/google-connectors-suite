@@ -9,7 +9,7 @@ import javax.annotation.Generated;
  *  operation is null.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:47:49-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class UnableToAcquireConnectionException
     extends Exception
 {

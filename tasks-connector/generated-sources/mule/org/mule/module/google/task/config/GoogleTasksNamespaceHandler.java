@@ -13,7 +13,7 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  * Registers bean definitions parsers for handling elements in <code>http://www.mulesoft.org/schema/mule/google-tasks</code>.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:47:49-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleTasksNamespaceHandler
     extends NamespaceHandlerSupport
 {

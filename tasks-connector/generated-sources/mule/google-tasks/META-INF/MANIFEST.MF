@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Google Tasks
 Bundle-SymbolicName: org.mule.tooling.ui.contribution.google-tasks.3.5.0;singleton:=true
-Bundle-Version: 1.2.4.201402141147
+Bundle-Version: 1.2.4.201402181528
 Bundle-Activator: org.mule.tooling.ui.contribution.GoogleTasksActivator
 Bundle-Vendor: MuleSoft, Inc.
 Require-Bundle: org.eclipse.ui,

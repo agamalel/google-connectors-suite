@@ -565,30 +565,6 @@ child task under a new parent and/or move it to a different position among its s
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="ForcePromptEnumType">
-    <xs:annotation>
-      <xs:documentation></xs:documentation>
-    </xs:annotation>
-    <xs:union>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="auto">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="force">
-            <xs:annotation>
-              <xs:documentation></xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-      <xs:simpleType>
-        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
-      </xs:simpleType>
-    </xs:union>
-  </xs:simpleType>
   <xs:simpleType name="AccessTypeEnumType">
     <xs:annotation>
       <xs:documentation></xs:documentation>
@@ -602,6 +578,30 @@ child task under a new parent and/or move it to a different position among its s
             </xs:annotation>
           </xs:enumeration>
           <xs:enumeration value="offline">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:propertyPlaceholderType"></xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="ForcePromptEnumType">
+    <xs:annotation>
+      <xs:documentation></xs:documentation>
+    </xs:annotation>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="auto">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="force">
             <xs:annotation>
               <xs:documentation></xs:documentation>
             </xs:annotation>

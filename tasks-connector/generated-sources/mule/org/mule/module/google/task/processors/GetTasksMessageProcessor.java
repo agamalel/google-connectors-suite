@@ -39,7 +39,7 @@ import org.mule.streaming.PagingDelegate;
  * GetTasksMessageProcessor invokes the {@link org.mule.module.google.task.GoogleTasksConnector#getTasks(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, org.mule.streaming.PagingConfiguration)} method in {@link GoogleTasksConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-14T11:47:49-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GetTasksMessageProcessor
     extends AbstractPagedConnectedProcessor
     implements MessageProcessor, OperationMetaDataEnabled
