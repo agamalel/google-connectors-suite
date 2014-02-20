@@ -17,7 +17,7 @@ import org.mule.security.oauth.callback.ProcessCallback;
  * A <code>GoogleTasksConnectorProcessAdapter</code> is a wrapper around {@link GoogleTasksConnector } that enables custom processing strategies.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:30:03-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleTasksConnectorProcessAdapter
     extends GoogleTasksConnectorLifecycleAdapter
     implements ProcessAdapter<GoogleTasksConnectorCapabilitiesAdapter>

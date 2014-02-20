@@ -11,7 +11,7 @@ import org.mule.module.google.task.GoogleTasksConnector;
  * 
  */
 @Deprecated
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:30:03-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleTasksConnectorOAuthState implements Serializable
 {
 

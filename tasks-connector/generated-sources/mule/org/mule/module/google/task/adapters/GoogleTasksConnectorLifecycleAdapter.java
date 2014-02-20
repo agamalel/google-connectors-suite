@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * A <code>GoogleTasksConnectorLifecycleAdapter</code> is a wrapper around {@link GoogleTasksConnector } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:30:03-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleTasksConnectorLifecycleAdapter
     extends GoogleTasksConnectorMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable

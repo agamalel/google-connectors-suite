@@ -26,7 +26,7 @@ import org.mule.security.oauth.OnNoTokenPolicy;
  * A {@code GoogleTasksConnectorOAuth2Adapter} is a wrapper around {@link GoogleTasksConnector } that adds OAuth capabilites to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:30:03-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleTasksConnectorOAuth2Adapter
     extends GoogleTasksConnectorProcessAdapter
     implements OAuth2Adapter, OAuth2Connector

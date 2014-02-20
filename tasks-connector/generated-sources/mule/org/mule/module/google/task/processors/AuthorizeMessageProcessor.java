@@ -8,7 +8,7 @@ import org.mule.modules.google.AccessType;
 import org.mule.modules.google.ForcePrompt;
 import org.mule.security.oauth.processor.BaseOAuth2AuthorizeMessageProcessor;
 
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:28:27-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:30:03-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class AuthorizeMessageProcessor
     extends BaseOAuth2AuthorizeMessageProcessor<GoogleTasksConnectorOAuthManager>
 {
