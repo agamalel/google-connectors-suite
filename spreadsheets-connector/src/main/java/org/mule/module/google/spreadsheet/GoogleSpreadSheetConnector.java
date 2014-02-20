@@ -729,10 +729,10 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
 			String worksheet,
     		@Optional @Default("0") int spreadsheetIndex,
 			@Optional @Default("0") int worksheetIndex,
-    		int minRow,
-    		int maxRow,
-    		int minCol,
-    		int maxCol) throws IOException, ServiceException {
+    		@Optional Integer minRow,
+    		@Optional Integer maxRow,
+    		@Optional Integer minCol,
+    		@Optional Integer maxCol) throws IOException, ServiceException {
       
     	CellQuery query = new CellQuery(this.getCellFeedUrl(spreadsheet, worksheet, spreadsheetIndex, worksheetIndex));
     	query.setMinimumRow(minRow);
@@ -783,10 +783,10 @@ public class GoogleSpreadSheetConnector extends AbstractGoogleOAuthConnector {
 			@Optional @Default("0") int worksheetIndex,
 			@Optional @Default(",") String columnSeparator,
 			@Optional @Default("\n") String lineSeparator,
-			int minRow,
-			int maxRow,
-			int minCol,
-			int maxCol) throws IOException, ServiceException {
+			@Optional Integer minRow,
+			@Optional Integer maxRow,
+			@Optional Integer minCol,
+			@Optional Integer maxCol) throws IOException, ServiceException {
     	
     	if (StringUtils.isEmpty(lineSeparator)) {
     		lineSeparator = "\n";
