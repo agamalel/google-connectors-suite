@@ -1,0 +1,47 @@
+/**
+ * Mule Google Contacts Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
+package org.mule.modules.google.contact.automation;
+
+import org.junit.experimental.categories.Categories;
+import org.junit.experimental.categories.Categories.IncludeCategory;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite.SuiteClasses;
+import org.mule.modules.google.contact.automation.testcases.BatchDeleteContactsTestCases;
+import org.mule.modules.google.contact.automation.testcases.BatchInsertContactsTestCases;
+import org.mule.modules.google.contact.automation.testcases.BatchUpdateContactsTestCases;
+import org.mule.modules.google.contact.automation.testcases.CreateGroupTestCases;
+import org.mule.modules.google.contact.automation.testcases.DeleteContactByIdTestCases;
+import org.mule.modules.google.contact.automation.testcases.DeleteContactPhotoTestCases;
+import org.mule.modules.google.contact.automation.testcases.DeleteContactTestCases;
+import org.mule.modules.google.contact.automation.testcases.DownloadPhotoTestCases;
+import org.mule.modules.google.contact.automation.testcases.GetContactByIdTestCases;
+import org.mule.modules.google.contact.automation.testcases.InsertContactTestCases;
+import org.mule.modules.google.contact.automation.testcases.RegressionTests;
+import org.mule.modules.google.contact.automation.testcases.UpdateContactPhotoTestCases;
+
+@RunWith(Categories.class)
+@IncludeCategory(RegressionTests.class)
+@SuiteClasses({
+	BatchDeleteContactsTestCases.class,
+	BatchInsertContactsTestCases.class,
+	BatchUpdateContactsTestCases.class,
+	CreateGroupTestCases.class,
+	DeleteContactByIdTestCases.class,
+	DeleteContactPhotoTestCases.class,
+	DeleteContactTestCases.class,
+	DownloadPhotoTestCases.class,
+	GetContactByIdTestCases.class,
+	InsertContactTestCases.class,
+	UpdateContactPhotoTestCases.class
+})
+public class RegressionTestSuite {
+
+}

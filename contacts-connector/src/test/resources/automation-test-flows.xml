@@ -8,8 +8,7 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/google-contacts http://www.mulesoft.org/schema/mule/google-contacts/current/mule-google-contacts.xsd">
 
-	<context:property-placeholder location="automation-credentials.properties" />
-
+	<context:property-placeholder location="${GOOGLE_CONTACTS_CREDENTIALS}" />
 	<google-contacts:config-with-oauth name="Google_Contacts" applicationName="${google.contacts.application.name}" 
 							consumerKey="${google.contacts.consumer.key}" consumerSecret="${google.contacts.consumer.secret}">
         <google-contacts:oauth-callback-config domain="${google.contacts.domain}" localPort="${google.contacts.localPort}" 
