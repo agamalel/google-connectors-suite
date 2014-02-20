@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * A <code>GoogleContactsConnectorLifecycleAdapter</code> is a wrapper around {@link GoogleContactsConnector } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:27:05-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:28:45-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleContactsConnectorLifecycleAdapter
     extends GoogleContactsConnectorMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable
