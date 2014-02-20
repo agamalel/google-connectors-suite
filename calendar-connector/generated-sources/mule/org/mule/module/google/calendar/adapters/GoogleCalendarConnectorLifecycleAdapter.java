@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * A <code>GoogleCalendarConnectorLifecycleAdapter</code> is a wrapper around {@link GoogleCalendarConnector } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:26:10-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:28:00-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class GoogleCalendarConnectorLifecycleAdapter
     extends GoogleCalendarConnectorMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable
