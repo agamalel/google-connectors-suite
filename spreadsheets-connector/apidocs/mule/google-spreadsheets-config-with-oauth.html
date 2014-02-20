@@ -805,7 +805,7 @@ the connector to access his private information.</p>
 <p>The callback can be customized in the config element of the this connector as follows:</p>
 <pre>
     &lt;google-spreadsheets:config&gt;
-        &lt;google-spreadsheets:oauth-callback-config domain="${fullDomain}" localPort="${http.port}" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
+        &lt;google-spreadsheets:oauth-callback-config domain="${fullDomain}" localPort="10010" remotePort="80" defaultAccessTokenId="#[message.inboundProperties['tenantId']]" /&gt;
     &lt;/google-spreadsheets:config&gt;
 </pre>
 <p>The <i>oauth-callback-config</i> element can be used to customize the endpoint that gets created for the callback. It
@@ -823,7 +823,7 @@ features the following attributes:</p>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>localPort</nobr></td>
-<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable ${http.port}.</td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The local port number that the endpoint will listen on. Normally 80, in the case of CloudHub you can use the environment variable 10010.</td>
 </tr>
 <tr class="api" >
 <td class="jd-linkcol"><nobr>remotePort</nobr></td>
@@ -1973,8 +1973,8 @@ protected operation that uses that token.
                         <tr class=" api apilevel-" >
                             <td class="jd-linkcol"><nobr>minRow</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range starting row. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range starting row. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -1987,8 +1987,8 @@ protected operation that uses that token.
                         <tr class="alt-color api apilevel-" >
                             <td class="jd-linkcol"><nobr>maxRow</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range ending row. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range ending row. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -2001,8 +2001,8 @@ protected operation that uses that token.
                         <tr class=" api apilevel-" >
                             <td class="jd-linkcol"><nobr>minCol</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range starting column. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range starting column. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -2015,8 +2015,8 @@ protected operation that uses that token.
                         <tr class="alt-color api apilevel-" >
                             <td class="jd-linkcol"><nobr>maxCol</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range ending column. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range ending column. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -2206,8 +2206,8 @@ protected operation that uses that token.
                         <tr class=" api apilevel-" >
                             <td class="jd-linkcol"><nobr>minRow</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range starting row. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range starting row. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -2220,8 +2220,8 @@ protected operation that uses that token.
                         <tr class="alt-color api apilevel-" >
                             <td class="jd-linkcol"><nobr>maxRow</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range ending row. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range ending row. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -2234,8 +2234,8 @@ protected operation that uses that token.
                         <tr class=" api apilevel-" >
                             <td class="jd-linkcol"><nobr>minCol</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range starting column. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range starting column. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>
@@ -2248,8 +2248,8 @@ protected operation that uses that token.
                         <tr class="alt-color api apilevel-" >
                             <td class="jd-linkcol"><nobr>maxCol</nobr></td>
                             <td class="jd-descrcol"></td>
-                            <td class="jd-descrcol">The range ending column. This is a 1-based index</td>
-                            <td class="jd-descrcol">int</td>
+                            <td class="jd-descrcol"><i>Optional.&nbsp;</i>The range ending column. This is a 1-based index</td>
+                            <td class="jd-descrcol">Integer</td>
                             <td class="jd-descrcol">*/*</td>
                             <td class="jd-descrcol"></td>
                         </tr>

@@ -202,10 +202,10 @@ This connector uses OAuth2 for authentication." caption="Google Spreadsheets" al
       <group caption="General" id="general">
         <string javaType="java.lang.String" required="true" description="The title of the spreadsheet containing the worksheet on which the cells are." caption="Spreadsheet" name="spreadsheet"></string>
         <string javaType="java.lang.String" required="true" description="The title of the worksheet containing the cells you want to get." caption="Worksheet" name="worksheet"></string>
-        <integer step="1" min="0" javaType="int" required="true" description="The range ending column. This is a 1-based index." caption="Max Col" name="maxCol"></integer>
-        <integer step="1" min="0" javaType="int" required="true" description="The range ending row. This is a 1-based index." caption="Max Row" name="maxRow"></integer>
-        <integer step="1" min="0" javaType="int" required="true" description="The range starting column. This is a 1-based index." caption="Min Col" name="minCol"></integer>
-        <integer step="1" min="0" javaType="int" required="true" description="The range starting row. This is a 1-based index." caption="Min Row" name="minRow"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range ending column. This is a 1-based index." caption="Max Col" name="maxCol"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range ending row. This is a 1-based index." caption="Max Row" name="maxRow"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range starting column. This is a 1-based index." caption="Min Col" name="minCol"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range starting row. This is a 1-based index." caption="Min Row" name="minRow"></integer>
         <integer step="1" min="0" defaultValue="0" javaType="int" required="false" description="Google's api allows for several spreadsheet to have the same name. In this cases it returns a list with all the ones matching the given title. Use this optional attribute to specify the zero-based list index of the want you want to use." caption="Spreadsheet Index" name="spreadsheetIndex"></integer>
         <integer step="1" min="0" defaultValue="0" javaType="int" required="false" description="Google's api allows for several worksheets to have the same name. In this cases it returns a list with all the ones matching the given title. Use this optional attribute to specify the zero-based list index of the want you want to use." caption="Worksheet Index" name="worksheetIndex"></integer>
       </group>
@@ -226,10 +226,10 @@ This connector uses OAuth2 for authentication." caption="Google Spreadsheets" al
         <string defaultValue="," javaType="java.lang.String" required="false" description="Specifies the character to be used as a column sperator. Defaults to a comma character." caption="Column Separator" name="columnSeparator"></string>
         <string defaultValue="
 " javaType="java.lang.String" required="false" description="Specifies the character to be used as a line separator. Defaults to the new line \n character." caption="Line Separator" name="lineSeparator"></string>
-        <integer step="1" min="0" javaType="int" required="true" description="The range ending column. This is a 1-based index." caption="Max Col" name="maxCol"></integer>
-        <integer step="1" min="0" javaType="int" required="true" description="The range ending row. This is a 1-based index." caption="Max Row" name="maxRow"></integer>
-        <integer step="1" min="0" javaType="int" required="true" description="The range starting column. This is a 1-based index." caption="Min Col" name="minCol"></integer>
-        <integer step="1" min="0" javaType="int" required="true" description="The range starting row. This is a 1-based index." caption="Min Row" name="minRow"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range ending column. This is a 1-based index." caption="Max Col" name="maxCol"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range ending row. This is a 1-based index." caption="Max Row" name="maxRow"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range starting column. This is a 1-based index." caption="Min Col" name="minCol"></integer>
+        <integer step="1" min="0" javaType="java.lang.Integer" required="false" description="The range starting row. This is a 1-based index." caption="Min Row" name="minRow"></integer>
       </group>
     </attribute-category>
     <attribute-category description="Connection" caption="Connection">

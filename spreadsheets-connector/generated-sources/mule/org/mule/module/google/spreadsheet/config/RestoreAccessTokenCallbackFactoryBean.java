@@ -6,7 +6,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.config.spring.factories.MessageProcessorChainFactoryBean;
 import org.mule.security.oauth.callback.DefaultRestoreAccessTokenCallback;
 
-@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-18T03:27:46-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
+@Generated(value = "Mule DevKit Version 3.5.0-SNAPSHOT", date = "2014-02-20T04:29:29-06:00", comments = "Build UNKNOWN_BUILDNUMBER")
 public class RestoreAccessTokenCallbackFactoryBean
     extends MessageProcessorChainFactoryBean
 {
