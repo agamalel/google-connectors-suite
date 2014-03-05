@@ -8,7 +8,7 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/google-spreadsheets http://www.mulesoft.org/schema/mule/google-spreadsheets/current/mule-google-spreadsheets.xsd">
 
-	<context:property-placeholder location="automation-credentials.properties" />
+	<context:property-placeholder location="${GOOGLE_SPREADSHEETS_CREDENTIALS}" />
 
 	<google-spreadsheets:config-with-oauth applicationName="${google.spreadsheets.application.name}" name="Google_Spreadsheets"
 		consumerKey="${google.spreadsheets.consumer.key}" consumerSecret="${google.spreadsheets.consumer.secret}">

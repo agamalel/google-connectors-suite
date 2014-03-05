@@ -10,7 +10,7 @@
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>google-contacts-automation.properties</value>
+			<value>${GOOGLE_CONTACTS_CREDENTIALS}</value>
 		</property>  
 	</bean>
 
