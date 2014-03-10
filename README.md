@@ -1,14 +1,14 @@
 Mule Google Apps Connector Suite
 =================================
 
-This project contains connectors for the Google Apps API. Each connector targets one specific API while mantaining a common approach to each API.
+IMPORTANT: This repo has been splitted into individual repositories per each connector:
 
-Installation and Usage
-----------------------
-
-Look at each individual project or consult Mule Studio update site
-
-Reporting Issues
-----------------
-
-Please report them in each subproject
+- Google API Commons: https://github.com/mulesoft/google-api-commons
+- Google Calendar: https://github.com/mulesoft/google-calendar-connector
+- Google Contacts: https://github.com/mulesoft/google-contacts-connector
+- Google Cloud Messaging: https://github.com/mulesoft/google-cloud-messaging-connector
+- Google Drive: https://github.com/mulesoft/google-drive-connector
+- Gmail: https://github.com/mulesoft/gmail-connector
+- Google Prediction: https://github.com/mulesoft/google-prediction-connector
+- Google Spreadsheets: https://github.com/mulesoft/google-spreadsheets-connector
+- Google Tasks: https://github.com/mulesoft/google-tasks-connector
